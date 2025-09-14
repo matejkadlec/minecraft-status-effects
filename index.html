@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Minecraft Status Effects</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="img/icon.ico" />
+    <link rel="shortcut icon" href="img/icon.ico" />
+  </head>
+  <body>
+    <aside id="nav">
+      <h1>Available Mods</h1>
+      <nav>
+        <ul id="mod-nav">
+          <!-- Filled dynamically -->
+        </ul>
+      </nav>
+      <hr />
+      <h1>Quick Filters</h1>
+      <div class="quick-filters">
+        <div class="filter-row">
+          <label class="filter"
+            ><input type="checkbox" id="filterVanilla" checked />
+            <span>Vanilla</span></label
+          >
+          <label class="filter"
+            ><input type="checkbox" id="filterScaling" checked />
+            <span>Scaling</span></label
+          >
+          <label class="filter"
+            ><input type="checkbox" id="filterPositive" checked />
+            <span>Positive</span></label
+          >
+          <label class="filter"
+            ><input type="checkbox" id="filterNegative" checked />
+            <span>Negative</span></label
+          >
+        </div>
+      </div>
+      <hr />
+      <div class="theme-toggle">
+        <button id="btn-light" class="active" title="Light Mode">
+          <i class="ri-sun-fill"></i>
+        </button>
+        <button id="btn-dark" title="Dark Mode">
+          <i class="ri-moon-fill"></i>
+        </button>
+      </div>
+    </aside>
+    <main id="content">
+      <section>
+        <h1>Minecraft Status Effects <span>v1.20/1.20.1</span></h1>
+        <div class="intro-bar">
+          <p class="intro-text">
+            Browse vanilla and modded Minecraft <b>status effects</b> with
+            <b>proper descriptions</b>.<br />
+            <span class="note"
+              >This project is very new and WIP, with some effects incomplete,
+              and more effects to be added over time.</span
+            >
+          </p>
+          <div class="search-wrapper">
+            <input
+              id="search"
+              type="text"
+              placeholder="Search effects or mods..."
+            />
+            <button
+              id="search-clear"
+              type="button"
+              aria-label="Clear search"
+              title="Clear search"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+        <div class="table-shell">
+          <div class="table-scroll">
+            <table id="effects-table">
+              <colgroup>
+                <col class="col-mod" />
+                <col class="col-effect" />
+                <col class="col-max" />
+                <col class="col-desc" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Mod</th>
+                  <th>Effect</th>
+                  <th>Max Level*</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Vanilla -->
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-strength"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Strength</td>
+                  <td>III</td>
+                  <td>
+                    <strong>+3 Attack Damage × level</strong>
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-speed"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Speed</td>
+                  <td>III</td>
+                  <td>
+                    <strong>+20% movement speed × level</strong>
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-slowness"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Slowness</td>
+                  <td>III</td>
+                  <td>
+                    <strong>-15% movement speed × level</strong>
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-haste"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Haste</td>
+                  <td>III</td>
+                  <td>
+                    <strong
+                      >+10% attack speed and +20% mining speed × level</strong
+                    >
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-mining-fatigue"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Mining Fatigue</td>
+                  <td>III</td>
+                  <td>
+                    <strong>-10% attack speed × level</strong> and sets
+                    <strong>mining speed to 0.3^level</strong>.
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-jump-boost"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Jump Boost</td>
+                  <td>III</td>
+                  <td>
+                    <strong>+50% jump height × level</strong> and reduces
+                    <strong>fall damage by amount hearts equal to level</strong
+                    >. <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-nausea"
+                  data-type="negative"
+                >
+                  <td>Minecraft</td>
+                  <td>Nausea</td>
+                  <td>I</td>
+                  <td>
+                    Wavy distortion of vision. Can be changed to green screen
+                    overlay instead via settings.
+                    <span class="badge neg">Negative</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-regeneration"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Regeneration</td>
+                  <td>III</td>
+                  <td>
+                    <strong>Heals 0.2 hearts every 2.5s × 2^level</strong> (I
+                    0.2/s, II 0.4/s, III 0.8/s).
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-resistance"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Resistance</td>
+                  <td>III</td>
+                  <td>
+                    <strong>-20% incoming damage × level</strong>
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-fire-resistance"
+                  data-type="positive"
+                >
+                  <td>Minecraft</td>
+                  <td>Fire Resistance</td>
+                  <td>I</td>
+                  <td>
+                    Negates most fire, lava, and blaze projectile damage.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-water-breathing"
+                  data-type="positive"
+                >
+                  <td>Minecraft</td>
+                  <td>Water Breathing</td>
+                  <td>I</td>
+                  <td>
+                    Prevents air loss underwater.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-invisibility"
+                  data-type="positive"
+                >
+                  <td>Minecraft</td>
+                  <td>Invisibility</td>
+                  <td>I</td>
+                  <td>
+                    Makes entity invisible (worn armor and held items remain
+                    visible). <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-blindness"
+                  data-type="negative"
+                >
+                  <td>Minecraft</td>
+                  <td>Blindness</td>
+                  <td>I</td>
+                  <td>
+                    Restricts vision, disables sprinting and critical hits.
+                    <span class="badge neg">Negative</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-night-vision"
+                  data-type="positive"
+                >
+                  <td>Minecraft</td>
+                  <td>Night Vision</td>
+                  <td>I</td>
+                  <td>
+                    Brightens dark areas and underwater vision.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-hunger"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Hunger</td>
+                  <td>III</td>
+                  <td>
+                    Increases exhaustion rate (higher level → faster food
+                    depletion). <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-weakness"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Weakness</td>
+                  <td>III</td>
+                  <td>
+                    <strong>-4 Attack Damage × level</strong>
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-poison"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Poison</td>
+                  <td>II</td>
+                  <td>
+                    Damages over time to 1/2 heart (higher level → faster
+                    ticks). <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-wither"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Wither</td>
+                  <td>II</td>
+                  <td>
+                    Damages over time and darkens hearts (higher level → faster
+                    ticks and more damage).
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-absorption"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Absorption</td>
+                  <td>IV</td>
+                  <td>
+                    <strong>+2 temporary hearts × level</strong>
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-glowing"
+                  data-type="negative"
+                >
+                  <td>Minecraft</td>
+                  <td>Glowing</td>
+                  <td>I</td>
+                  <td>
+                    Entity outlined and visible through blocks.
+                    <span class="badge neg">Negative</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-levitation"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Levitation</td>
+                  <td>IV</td>
+                  <td>
+                    Gradually lifts entity upward (higher level → faster
+                    ascent). <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-luck"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Luck</td>
+                  <td>III</td>
+                  <td>
+                    Improves chest loot and loot-table rolls.
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-bad-luck"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Bad Luck</td>
+                  <td>III</td>
+                  <td>
+                    Worsens chest loot and loot-table rolls.
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-slow-falling"
+                  data-type="positive"
+                >
+                  <td>Minecraft</td>
+                  <td>Slow Falling</td>
+                  <td>I</td>
+                  <td>
+                    Reduces fall speed and negates fall damage.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-conduit-power"
+                  data-type="positive"
+                >
+                  <td>Minecraft</td>
+                  <td>Conduit Power</td>
+                  <td>I</td>
+                  <td>
+                    Combines Water Breathing, Night Vision and Haste
+                    (underwater) effects.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-dolphins-grace"
+                  data-type="positive"
+                >
+                  <td>Minecraft</td>
+                  <td>Dolphin's Grace</td>
+                  <td>I</td>
+                  <td>
+                    Greatly boosts swim speed.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-bad-omen"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Bad Omen</td>
+                  <td>V</td>
+                  <td>
+                    Triggers a village raid when entering a village (higher
+                    level → tougher raid waves).
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-hero-of-the-village"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Minecraft</td>
+                  <td>Hero of the Village</td>
+                  <td>V</td>
+                  <td>
+                    Villagers discount trades and give gifts (higher level →
+                    bigger discounts and more gifts).
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Minecraft"
+                  id="minecraft-darkness"
+                  data-type="negative"
+                >
+                  <td>Minecraft</td>
+                  <td>Darkness</td>
+                  <td>I</td>
+                  <td>
+                    Pulsating darkness overlay reduces visible light radius.
+                    <span class="badge neg">Negative</span>
+                  </td>
+                </tr>
+
+                <!-- Alex's Mobs -->
+                <tr
+                  data-mod="Alex's Mobs"
+                  id="alexs-mobs-bug-pheromones"
+                  data-type="positive"
+                >
+                  <td>Alex's Mobs</td>
+                  <td>Bug Pheromones</td>
+                  <td>I</td>
+                  <td>
+                    Hostile arthropods ignore the affected player.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Alex's Mobs"
+                  id="alexs-mobs-clinging"
+                  data-type="positive"
+                >
+                  <td>Alex's Mobs</td>
+                  <td>Clinging</td>
+                  <td>I</td>
+                  <td>
+                    Allows walking on ceilings after contacting a block
+                    overhead. <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Alex's Mobs"
+                  id="alexs-mobs-knockback-resistance"
+                  data-type="positive"
+                >
+                  <td>Alex's Mobs</td>
+                  <td>Knockback Resistance</td>
+                  <td>I</td>
+                  <td>
+                    Negates incoming knockback.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Alex's Mobs"
+                  id="alexs-mobs-lava-vision"
+                  data-type="positive"
+                >
+                  <td>Alex's Mobs</td>
+                  <td>Lava Vision</td>
+                  <td>I</td>
+                  <td>
+                    Clear vision through lava.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Alex's Mobs"
+                  id="alexs-mobs-poison-resistance"
+                  data-type="positive"
+                >
+                  <td>Alex's Mobs</td>
+                  <td>Poison Resistance</td>
+                  <td>I</td>
+                  <td>
+                    Immediately cures Poison on application.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Alex's Mobs"
+                  id="alexs-mobs-soulsteal"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Alex's Mobs</td>
+                  <td>Soulsteal</td>
+                  <td>III</td>
+                  <td>
+                    Heals user for a portion of melee damage dealt.
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Alex's Mobs"
+                  id="alexs-mobs-exsanguination"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Alex's Mobs</td>
+                  <td>Exsanguination</td>
+                  <td>II</td>
+                  <td>
+                    Bleeding damage over time (higher level → faster ticks).
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+
+                <!-- Ars Nouveau -->
+                <tr
+                  data-mod="Ars Nouveau"
+                  id="ars-nouveau-recovery"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Ars Nouveau</td>
+                  <td>Recovery</td>
+                  <td>III</td>
+                  <td>
+                    Amplifies all healing received.
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Ars Nouveau"
+                  id="ars-nouveau-blasting"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Ars Nouveau</td>
+                  <td>Blasting</td>
+                  <td>V</td>
+                  <td>
+                    Causes entity to explode after delay (higher level →
+                    stronger explosion and shorter fuse).
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Ars Nouveau"
+                  id="ars-nouveau-freezing"
+                  data-type="negative"
+                >
+                  <td>Ars Nouveau</td>
+                  <td>Freezing</td>
+                  <td>I</td>
+                  <td>
+                    Immobilizes and applies slowing/frost effects.
+                    <span class="badge neg">Negative</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Ars Nouveau"
+                  id="ars-nouveau-shielding"
+                  data-type="positive"
+                >
+                  <td>Ars Nouveau</td>
+                  <td>Shielding</td>
+                  <td>I</td>
+                  <td>
+                    Reduces incoming damage by a flat amount per hit.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+
+                <!-- Cataclysm -->
+                <tr
+                  data-mod="Cataclysm"
+                  id="cataclysm-blazing-brand"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Cataclysm</td>
+                  <td>Blazing Brand</td>
+                  <td>III</td>
+                  <td>
+                    <strong>-20% Armor and Armor Toughness × level</strong>.
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Cataclysm"
+                  id="cataclysm-abyssal-curse"
+                  data-type="negative"
+                  data-scaling="1"
+                >
+                  <td>Cataclysm</td>
+                  <td>Abyssal Curse</td>
+                  <td>III</td>
+                  <td>
+                    Deals periodic magic damage (higher level → faster ticks).
+                    <span class="badge neg">Negative</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Cataclysm"
+                  id="cataclysm-monstrous"
+                  data-type="positive"
+                  data-scaling="1"
+                >
+                  <td>Cataclysm</td>
+                  <td>Monstrous</td>
+                  <td>III</td>
+                  <td>
+                    <strong>+3 Armor and +1 Toughness × level</strong> and
+                    <strong> Regeneration equal to level</strong>
+                    <span class="badge pos">Positive</span
+                    ><span class="badge scaling">Scaling</span>
+                  </td>
+                </tr>
+
+                <!-- Eidolon: Repraised -->
+                <tr
+                  data-mod="Eidolon: Repraised"
+                  id="eidolon-vulnerable"
+                  data-type="negative"
+                >
+                  <td>Eidolon: Repraised</td>
+                  <td>Vulnerable</td>
+                  <td>I</td>
+                  <td>
+                    Increases damage taken.
+                    <span class="badge neg">Negative</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Eidolon: Repraised"
+                  id="eidolon-reinforced"
+                  data-type="positive"
+                >
+                  <td>Eidolon: Repraised</td>
+                  <td>Reinforced</td>
+                  <td>I</td>
+                  <td>
+                    Reduces incoming damage.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Eidolon: Repraised"
+                  id="eidolon-anchored"
+                  data-type="positive"
+                >
+                  <td>Eidolon: Repraised</td>
+                  <td>Anchored</td>
+                  <td>I</td>
+                  <td>
+                    Prevents forced movement / knockback.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+
+                <!-- Undergarden -->
+                <tr
+                  data-mod="Undergarden"
+                  id="undergarden-brittleness"
+                  data-type="negative"
+                >
+                  <td>Undergarden</td>
+                  <td>Brittleness</td>
+                  <td>I</td>
+                  <td>
+                    Increases damage taken.
+                    <span class="badge neg">Negative</span>
+                  </td>
+                </tr>
+                <tr
+                  data-mod="Undergarden"
+                  id="undergarden-featherweight"
+                  data-type="positive"
+                >
+                  <td>Undergarden</td>
+                  <td>Featherweight</td>
+                  <td>I</td>
+                  <td>
+                    Reduces fall speed / modifies gravity slightly.
+                    <span class="badge pos">Positive</span>
+                  </td>
+                </tr>
+
+                <tr id="no-results-row" style="display: none">
+                  <td colspan="4" class="no-results">No results found.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note table-note">
+            *max level can differ based on the mods in your modpack
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <aside id="banner">
+      <img src="img/banner.png" alt="Decorative" />
+    </aside>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
