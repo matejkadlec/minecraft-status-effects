@@ -1,4 +1,6 @@
-/* Default (light) blue theme */
+/*----------------------------------*
+ * Theme variables & global reset   *
+ *----------------------------------*/
 :root {
   --bg: #f4f7fb;
   --bg-alt: #ffffff;
@@ -9,9 +11,9 @@
   --header-alt: #1b4f8d;
   --border: #c8d6e5;
   --highlight: #d9e6f3;
+  --row-fade-color: rgba(0, 59, 121, 0.6);
 }
 
-/* Dark theme now opt-in via .dark */
 :root.dark {
   --bg: #1b1d1f;
   --bg-alt: #24272b;
@@ -22,8 +24,12 @@
   --header-alt: #9d7d22;
   --border: #3a3f45;
   --highlight: #2f353c;
+  --row-fade-color: rgba(255, 255, 255, 0.32);
 }
 
+/*-------------------------------*
+ * Element defaults & structure  *
+ *-------------------------------*/
 * {
   box-sizing: border-box;
 }
@@ -32,8 +38,8 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
   background: var(--bg);
   color: var(--text);
 }
@@ -42,14 +48,28 @@ body {
   display: flex;
 }
 
+/* Base color/background transition targets */
 body,
 aside#nav,
 #effects-table,
-#effects-table tbody tr,
 #banner {
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
+#effects-table tbody tr {
+  transition: none;
+}
 
+/* Disable transitions during batch DOM updates */
+.suspend-transitions,
+.suspend-transitions * {
+  transition: none !important;
+  animation: none !important;
+  caret-color: transparent !important;
+}
+
+/*----------------------------*
+ * Layout: left navigation    *
+ *----------------------------*/
 aside#nav {
   width: 260px;
   background: var(--bg-alt);
@@ -62,39 +82,35 @@ aside#nav {
 }
 
 #nav h1 {
-  margin: 0 0 0.5rem;
+  margin: 0;
   font-size: 1.1rem;
   color: var(--header);
   letter-spacing: 0.5px;
 }
+#nav h1:nth-of-type(1) {
+  margin-bottom: 0.5rem;
+}
+#nav h1:nth-of-type(2) {
+  margin-top: 0.85rem;
+}
 
 #nav .quick-filters {
-  margin-top: 1rem;
+  margin-top: 0.85rem;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-#search {
-  padding: 0.55rem 0.7rem;
-  background: var(--bg-accent);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  color: var(--text);
-}
-
-#search:focus {
-  outline: none;
-}
-
+/*----------------------------*
+ * Filter chips               *
+ *----------------------------*/
 .filter-row {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .filter {
   font-size: 0.8rem;
   display: flex;
@@ -104,28 +120,28 @@ aside#nav {
   padding: 0.2rem 0.4rem;
   border: 1px solid var(--border);
   border-radius: 20px;
-  width: 90px;
-  min-width: 90px;
-  max-width: 90px;
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
   justify-content: left;
+  transition: 0.3s;
 }
-
 .filter input {
   accent-color: var(--header);
 }
-
-.filter span {
-  margin-bottom: 2px;
-  margin-right: 2px;
+.filter:hover {
+  background: var(--highlight);
 }
 
 .note {
   font-size: 0.7rem;
   line-height: 1.2;
-  margin-top: 0.5rem;
   color: var(--text-dim);
 }
 
+/*----------------------------*
+ * Mod navigation list        *
+ *----------------------------*/
 #mod-nav {
   list-style: none;
   padding: 0;
@@ -134,108 +150,137 @@ aside#nav {
   flex-direction: column;
   gap: 0.35rem;
 }
-
 #mod-nav li a {
   display: block;
-  padding: 0.35rem 0.6rem 0.4rem; /* uniform vertical rhythm */
+  padding: 0.35rem 0.6rem 0.4rem;
   text-decoration: none;
   color: var(--text-dim);
   border: 1px solid transparent;
   border-radius: 6px;
   font-size: 0.88rem;
-  line-height: 1.05; /* keep text tight */
+  line-height: 1.05;
   position: relative;
+  transition: 0.3s;
+}
+#mod-nav li:last-child a {
+  padding-top: 0.45rem;
+  padding-bottom: 0.3rem;
 }
 #mod-nav li a:focus-visible {
   outline: 2px solid var(--header);
   outline-offset: 2px;
 }
-
 #mod-nav li a:hover {
   background: var(--bg-accent);
   color: var(--header);
   border-color: var(--border);
 }
 
+/*----------------------------*
+ * Main content container     *
+ *----------------------------*/
 main#content {
   flex: 1;
-  padding: 1.5rem 2rem 3rem;
+  padding: 1.5rem;
+  padding-right: 2rem;
   overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+}
+main#content > section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
+/* Title & version */
 main h1 {
   margin-top: 0;
-  font-size: 1.6rem;
+  margin-bottom: 5px;
+  font-size: 1.4rem;
   color: var(--header);
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
-
 main h1 span {
-  font-size: 1rem;
-  font-weight: bold;
+  margin-top: 1.5px;
+  font-size: 0.85rem;
+  font-weight: 700;
   color: var(--text-dim);
   display: flex;
-  align-items: top;
+  align-self: flex-start;
   gap: 0.5rem;
 }
 
-/* Intro bar wrapping intro text and search */
+/* Logo wrapper */
+.heading-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.heading-with-logo img {
+  margin-top: 1px;
+  height: 1.5rem;
+  width: auto;
+  display: flex;
+  align-self: flex-start;
+  object-fit: contain;
+}
+
+/* Intro & search */
 .intro-bar {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1.25rem;
-  margin: 0.6rem 0 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
-
 .intro-bar .intro-text {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.35;
-  max-width: 80rem;
   color: var(--text-dim);
-  flex: 1 1 320px;
 }
-
-.intro-bar #search {
-  flex: 0 0 400px;
-  margin: 0;
-}
-
 .search-wrapper {
+  margin: 15px 0 10px 0;
   position: relative;
-  display: flex;
-  align-self: flex-end;
-  align-items: flex-end;
-  flex: 0 0 400px;
+  width: 280px;
 }
-
 .search-wrapper #search {
-  flex: 1 1 auto;
-  padding-right: 2.9rem; /* extra space for larger X */
+  width: 100%;
+  margin: 0;
+  padding: 0.55rem 6rem 0.55rem 0.7rem;
+  background: var(--bg-accent);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  transition: 0.3s;
 }
-
+#search:focus {
+  outline: none;
+}
 #search-clear {
   position: absolute;
-  right: 0;
   top: 50%;
+  right: 0.4rem;
   transform: translateY(-50%);
-  background: transparent;
+  background: none;
   border: none;
   color: var(--text-dim);
-  font-size: 40px;
+  font-size: 1.9rem;
+  line-height: 1;
   cursor: pointer;
-  padding-right: 5px;
+  padding: 0;
+  display: none;
+  transition: 0.3s;
 }
-
 #search-clear:hover {
   color: var(--header);
   background: transparent;
 }
 
+/*----------------------------*
+ * Table shell & scrolling    *
+ *----------------------------*/
 .table-shell {
   position: relative;
   display: flex;
@@ -244,7 +289,6 @@ main h1 span {
   flex: 1;
   min-height: 0;
 }
-
 .table-scroll {
   flex: 1;
   overflow: auto;
@@ -254,70 +298,26 @@ main h1 span {
   min-height: 0;
   box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.12),
     0 2px 6px -2px rgba(0, 0, 0, 0.08);
+  scrollbar-gutter: stable right-edge;
+  transition: 0.3s;
 }
-
 .table-scroll #effects-table {
   border: 0;
   border-radius: 0;
 }
-
 .table-note {
   margin: 0;
 }
 
-/* Keep header visible inside scroll */
-.table-scroll thead th {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
-/* Reserve space for scrollbar to avoid layout shift */
-.table-scroll {
-  scrollbar-gutter: stable right-edge;
-}
-
-/* Use flex layout for main content so the table fills remaining vertical space */
-main#content {
-  display: flex;
-  flex-direction: column;
-}
-
-main#content > section {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-}
-
-@media (max-width: 720px) {
-  .search-wrapper {
-    flex: 1 1 100%;
-  }
-  .search-wrapper #search {
-    padding-right: 2.3rem;
-  }
-}
-
-@media (max-width: 720px) {
-  .intro-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .intro-bar #search {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-}
-
+/*----------------------------*
+ * Effects table              *
+ *----------------------------*/
 #effects-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   background: var(--bg-alt);
 }
-
-/* Sticky header (single source of truth) */
 #effects-table thead th {
   position: sticky;
   top: 0;
@@ -330,101 +330,81 @@ main#content > section {
   border-bottom: 1px solid var(--border);
   box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.25), 0 1px 0 0 var(--border);
 }
-
 :root #effects-table thead th {
   background: linear-gradient(135deg, #cfdfee 0%, #b9cee6 100%);
   color: var(--header-alt);
 }
-
 :root.dark #effects-table thead th {
   background: linear-gradient(135deg, var(--header) 0%, var(--header-alt) 100%);
   color: #111;
 }
-
 #effects-table tbody td {
   padding: 0.6rem 0.75rem;
   border-bottom: 1px solid var(--border);
   vertical-align: top;
   font-size: 0.9rem;
 }
-#effects-table tbody tr:first-child td {
-  border-top: none;
+#effects-table tbody tr {
+  background: var(--bg-alt);
+  transition: 0.3s;
 }
-
-#effects-table tbody tr:last-child td {
-  border-bottom: none;
-}
-#effects-table tbody tr:nth-child(odd) {
+#effects-table.zebra tbody tr.odd {
   background: var(--bg-accent);
 }
-
+#effects-table.zebra tbody tr.even {
+  background: var(--bg-alt);
+}
 #effects-table tbody tr:hover {
   background: var(--highlight);
 }
-
 #effects-table a {
   color: var(--header);
   text-decoration: none;
+  transition: 0.3s;
 }
-
 #effects-table a:hover {
   text-decoration: underline;
 }
-
-#effects-table tbody td strong {
+#effects-table tbody td b {
   color: var(--header);
   font-weight: 600;
 }
-
 #effects-table tbody td.unverified {
   color: var(--text-dim);
   font-style: italic;
 }
-
 #effects-table tbody tr#no-results-row td.no-results {
   text-align: center;
   font-size: 1rem;
   color: var(--text-dim);
   padding: 0.6rem 0.75rem;
 }
-
 #effects-table tbody tr.integration-note td {
   font-style: italic;
   color: var(--text-dim);
 }
-
 #effects-table tbody tr.integration-note td:first-child {
   font-style: normal;
   color: var(--text);
 }
 
-/* Remove previous fixed width colgroup overrides */
-#effects-table col.col-mod,
-#effects-table col.col-effect {
-  width: auto;
-}
-
-/* Enforce first column 150px content box via min/max */
+/* Column sizing */
 #effects-table thead th:nth-child(1),
 #effects-table tbody td:nth-child(1) {
   box-sizing: content-box;
-  min-width: 150px;
-  max-width: 150px;
-  width: 150px; /* fallback */
+  min-width: 180px;
+  max-width: 180px;
+  width: 180px;
   overflow: hidden;
 }
-
-/* Enforce second column 150px content box via min/max */
 #effects-table thead th:nth-child(2),
 #effects-table tbody td:nth-child(2) {
   box-sizing: content-box;
-  min-width: 150px;
-  max-width: 150px;
-  width: 150px;
+  min-width: 180px;
+  max-width: 180px;
+  width: 180px;
   overflow: hidden;
 }
-
-/* Enforce third column 100px content box via min/max */
 #effects-table thead th:nth-child(3),
 #effects-table tbody td:nth-child(3) {
   box-sizing: content-box;
@@ -432,12 +412,27 @@ main#content > section {
   max-width: 100px;
   width: 100px;
   overflow: hidden;
+  text-align: center;
 }
-
-#effects-table tbody td:nth-child(3) {
+#effects-table thead th:nth-child(4),
+#effects-table tbody td:nth-child(4) {
+  box-sizing: content-box;
+  width: 100%;
+  overflow: hidden;
+}
+#effects-table thead th:nth-child(5),
+#effects-table tbody td:nth-child(5) {
+  box-sizing: content-box;
+  max-width: 140px;
+  min-width: 140px;
+  width: 140px;
+  overflow: hidden;
   text-align: center;
 }
 
+/*----------------------------*
+ * Badges & tags              *
+ *----------------------------*/
 .badge {
   display: inline-block;
   padding: 2px 6px;
@@ -448,45 +443,74 @@ main#content > section {
   background: var(--bg-accent);
   color: var(--text-dim);
   margin-left: 0.4rem;
+  transition: 0.3s;
 }
-
 .badge.pos {
   background: linear-gradient(135deg, #2e5f2e, #1f3d1f);
   color: #c9f7c9;
 }
-
 .badge.neg {
   background: linear-gradient(135deg, #5f2e2e, #3d1f1f);
   color: #f7c9c9;
 }
-
 .badge.util {
   background: linear-gradient(135deg, #2e4c5f, #1f313d);
   color: #c9e8f7;
 }
-
 .badge.scaling {
   background: linear-gradient(135deg, #ff9800, #ffb347);
   color: #2b1a00;
   font-weight: 600;
 }
-
-/* Light theme badge adjustments */
 :root.dark .badge.pos {
   background: linear-gradient(135deg, #2e5f2e, #1f3d1f);
   color: #c9f7c9;
 }
-
 :root.dark .badge.neg {
   background: linear-gradient(135deg, #5f2e2e, #3d1f1f);
   color: #f7c9c9;
 }
-
 :root.dark .badge.scaling {
   background: linear-gradient(135deg, #ff9800, #ffb347);
   color: #2b1a00;
 }
 
+/*----------------------------*
+ * Legend & references        *
+ *----------------------------*/
+.fn-ref {
+  cursor: pointer;
+  color: inherit;
+  font-weight: 600;
+}
+.legend p {
+  width: fit-content;
+  margin: 7px 0;
+}
+.legend #legend-3 {
+  margin-bottom: 0;
+}
+.legend .flash {
+  position: relative;
+}
+.legend .flash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--row-fade-color);
+  margin: -4px;
+  margin-bottom: -2px;
+  padding: 8px;
+  border: 1px solid var(--row-fade-color);
+  border-radius: 4px;
+  animation: row-fade-highlight 1.2s ease-out 1;
+}
+
+/*----------------------------*
+ * Theme toggle               *
+ *----------------------------*/
 .theme-toggle {
   position: fixed;
   bottom: 14px;
@@ -496,7 +520,6 @@ main#content > section {
   gap: 0.6rem;
   z-index: 500;
 }
-
 .theme-toggle button {
   width: 36px;
   height: 36px;
@@ -513,38 +536,36 @@ main#content > section {
   line-height: 1;
   transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
 }
-
-.theme-toggle button:hover {
-  transform: translateY(-2px);
-}
-
 .theme-toggle button.active {
   background: var(--header);
   color: #fff;
   border-color: var(--header-alt);
+  cursor: default;
 }
-
-.theme-toggle button:hover {
+.theme-toggle button:not(.active):hover {
+  transform: translateY(-2px);
   background: var(--header-alt);
   color: #fff;
 }
-
 :root.dark .theme-toggle button.active {
   background: var(--header);
   color: #111;
   border-color: var(--header-alt);
 }
-
-:root.dark .theme-toggle button:hover {
+:root.dark .theme-toggle button:not(.active):hover {
   background: var(--header-alt);
   color: #fff;
 }
+.theme-toggle button.active:hover {
+  transform: none;
+}
 
-/* Subtle fade highlight: darken (light theme) or lighten (dark theme) then fade out */
+/*----------------------------*
+ * Highlight animations       *
+ *----------------------------*/
 .highlight {
   position: relative;
 }
-
 .highlight::after {
   content: "";
   position: absolute;
@@ -554,7 +575,6 @@ main#content > section {
   background: var(--row-fade-color);
   animation: row-fade-highlight 1.2s ease-out 1;
 }
-
 @keyframes row-fade-highlight {
   0% {
     opacity: 0;
@@ -570,15 +590,9 @@ main#content > section {
   }
 }
 
-/* Theme-specific overlay colors */
-:root {
-  --row-fade-color: rgba(0, 59, 121, 0.6);
-}
-
-:root.dark {
-  --row-fade-color: rgba(255, 255, 255, 0.32);
-}
-
+/*----------------------------*
+ * Footer & scrollbars        *
+ *----------------------------*/
 footer {
   margin-top: 2rem;
   font-size: 0.7rem;
@@ -586,88 +600,90 @@ footer {
   text-align: center;
 }
 
-/* Scrollbar styling (WebKit) */
-::-webkit-scrollbar {
-  width: 10px;
+/*----------------------------*
+ * Loading states             *
+ *----------------------------*/
+.hidden {
+  display: none !important;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-alt);
+/* Superscript styling for ^level tokens */
+.lvl-sup {
+  position: relative;
+  font-size: 0.5rem;
+  line-height: 1;
+  font-weight: 600;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--header);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--header-alt);
-}
-
-/* Firefox */
-* {
-  scrollbar-color: var(--header) var(--bg-alt);
-  scrollbar-width: thin;
-}
-
-/* Add side image column */
-#banner {
-  width: 260px;
-  background: var(--bg-alt);
-  padding: 0;
-  border-left: 2px solid var(--border);
-  position: sticky;
-  top: 0;
-  height: 100vh;
+/* Loading placeholders */
+.nav-loading {
+  width: 226px;
+  height: 200.56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  padding: 0;
 }
-
-#banner img {
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
+.nav-loading img {
+  width: 64px;
+  height: 64px;
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
 }
-
-@media (max-width: 1200px) {
-  #banner {
-    display: none;
-  }
+.table-scroll.loading {
+  position: relative;
+  min-height: 682.19px;
 }
-
-/* Responsive fallback (minimal) */
-@media (max-width: 900px) {
-  body {
-    flex-direction: column;
-  }
-
-  aside#nav {
-    position: relative;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 2px solid var(--border);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  #mod-nav {
-    max-height: 180px;
-    overflow: auto;
-    grid-column: span 2;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  main#content {
-    padding: 1rem;
-  }
-
-  #effects-table thead {
-    position: sticky;
-    top: 0;
-  }
+.table-scroll.loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(50, 50, 50, 0.2);
+  z-index: 6;
+}
+:root.dark .table-scroll.loading::before {
+  background: rgba(50, 50, 50, 0.6);
+}
+/* Light theme spinner */
+.table-scroll.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  margin: -68px 0 0 -48px;
+  background: url("../img/loading-light.gif") center/140px 140px no-repeat;
+  image-rendering: auto;
+  z-index: 7;
+}
+/* Dark theme spinner image */
+:root.dark .table-scroll.loading::after {
+  background-image: url("../img/loading-dark.gif");
+}
+/* Keep header visible; hide tbody while loading */
+.table-scroll.loading table thead {
+  visibility: visible;
+}
+.table-scroll.loading table tbody {
+  display: none;
+}
+/* Legacy delayed-reveal overlay removed */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--header);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--header-alt);
+}
+* {
+  scrollbar-color: var(--header) var(--bg-alt);
+  scrollbar-width: thin;
 }

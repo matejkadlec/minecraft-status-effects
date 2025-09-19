@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "effects": [
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-strength",
+      "effect": "Strength",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "<b>+3 attack damage</b> × level"
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-speed",
+      "effect": "Speed",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "<b>+20% movement speed</b> × level"
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-slowness",
+      "effect": "Slowness",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "<b>-15% movement speed</b> × level"
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-haste",
+      "effect": "Haste",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "<b>+10% attack speed</b> and <b>+20% mining speed</b> × level"
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-mining-fatigue",
+      "effect": "Mining Fatigue",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "<b>-10% attack speed</b> × level and sets <b>mining speed to 0.3</b>^level (0.3, 0.09, 0.027)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-jump-boost",
+      "effect": "Jump Boost",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "<b>+50% jump height</b> × level and reduces <b>fall damage by amount hearts</b> equal to level."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-nausea",
+      "effect": "Nausea",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Wavy distortion of vision. Can be changed to green screen overlay instead via settings."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-regeneration",
+      "effect": "Regeneration",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Heals <b>0.2 hearts</b> every <b>0.5s × 2</b>^level (0.2/s, 0.4/s, 0.8/s)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-resistance",
+      "effect": "Resistance",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "<b>-20% incoming damage</b> × level"
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-fire-resistance",
+      "effect": "Fire Resistance",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Negates most fire, lava, and blaze projectile damage."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-water-breathing",
+      "effect": "Water Breathing",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Prevents air loss underwater."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-invisibility",
+      "effect": "Invisibility",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Makes entity invisible (worn armor and held items remain visible)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-blindness",
+      "effect": "Blindness",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Restricts vision, disables sprinting and critical hits."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-night-vision",
+      "effect": "Night Vision",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Brightens dark areas and underwater vision."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-hunger",
+      "effect": "Hunger",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Increases exhaustion rate (higher level → faster food depletion)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-weakness",
+      "effect": "Weakness",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "<b>-4 attack damage</b> × level"
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-poison",
+      "effect": "Poison",
+      "maxLevel": "II",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Damages over time leaving entity alive at half a heart (higher level → faster ticks)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-wither",
+      "effect": "Wither",
+      "maxLevel": "II",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Damages over time and darkens hearts (higher level → faster ticks and more damage)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-absorption",
+      "effect": "Absorption",
+      "maxLevel": "IV",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "<b>+2 temporary hearts</b> × level"
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-glowing",
+      "effect": "Glowing",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Entity outlined and visible through blocks."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-levitation",
+      "effect": "Levitation",
+      "maxLevel": "IV",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Gradually lifts entity upward (higher level → faster ascent)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-luck",
+      "effect": "Luck",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Improves chest loot and loot-table rolls."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-bad-luck",
+      "effect": "Bad Luck",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Worsens chest loot and loot-table rolls."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-slow-falling",
+      "effect": "Slow Falling",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Reduces fall speed and negates fall damage."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-conduit-power",
+      "effect": "Conduit Power",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Combines Water Breathing, Night Vision and Haste (underwater) effects."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-dolphins-grace",
+      "effect": "Dolphin's Grace",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Greatly boosts swim speed."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-bad-omen",
+      "effect": "Bad Omen",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Triggers a village raid when entering a village (higher level → tougher raid waves)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-hero-of-the-village",
+      "effect": "Hero of the Village",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Villagers discount trades and give gifts (higher level → bigger discounts and more gifts)."
+    },
+    {
+      "mod": "Minecraft",
+      "id": "minecraft-darkness",
+      "effect": "Darkness",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Pulsating darkness overlay reduces visible light radius."
+    },
+
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-bug-pheromones",
+      "effect": "Bug Pheromones",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Hostile arthropods ignore the affected player."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-clinging",
+      "effect": "Clinging",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Allows walking on ceilings after contacting a block overhead."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-knockback-resistance",
+      "effect": "Knockback Resistance",
+      "maxLevel": "II",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Grants 50% × level knockback resistance."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-lava-vision",
+      "effect": "Lava Vision",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Clear vision through lava."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-poison-resistance",
+      "effect": "Poison Resistance",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Immediately cures Poison on application."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-soulsteal",
+      "effect": "Soulsteal",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Heals user for a portion of melee damage dealt."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-exsanguination",
+      "effect": "Exsanguination",
+      "maxLevel": "II",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Bleeding damage over time (higher level → faster ticks)."
+    },
+
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-recovery",
+      "effect": "Recovery",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Amplifies all healing received."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-blasting",
+      "effect": "Blasting",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Causes entity to explode after delay (higher level → ber explosion and shorter fuse)."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-freezing",
+      "effect": "Freezing",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Immobilizes and applies slowing/frost effects."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-shielding",
+      "effect": "Shielding",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Reduces incoming damage by a flat amount per hit."
+    },
+
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-blazing-brand",
+      "effect": "Blazing Brand",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "<b>-20% armor</b> and <b>armor toughness</b> × level."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-abyssal-curse",
+      "effect": "Abyssal Curse",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Deals periodic magic damage (higher level → faster ticks)."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-monstrous",
+      "effect": "Monstrous",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "<b>+3 armor</b> and <b>+1 armor toughness</b> × level. Also gains <b>Regeneration</b> equal to level."
+    },
+
+    {
+      "mod": "Eidolon: Repraised",
+      "id": "eidolon-vulnerable",
+      "effect": "Vulnerable",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Increases damage taken."
+    },
+    {
+      "mod": "Eidolon: Repraised",
+      "id": "eidolon-reinforced",
+      "effect": "Reinforced",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Reduces incoming damage."
+    },
+    {
+      "mod": "Eidolon: Repraised",
+      "id": "eidolon-anchored",
+      "effect": "Anchored",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Prevents forced movement and knockback."
+    },
+
+    {
+      "mod": "The Undergarden",
+      "id": "the-undergarden-brittleness",
+      "effect": "Brittleness",
+      "maxLevel": "II",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Increases damage taken."
+    },
+    {
+      "mod": "The Undergarden",
+      "id": "the-undergarden-featherweight",
+      "effect": "Featherweight",
+      "maxLevel": "II",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "No description provided."
+    }
+  ]
+}
