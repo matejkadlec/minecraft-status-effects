@@ -4,7 +4,7 @@
 ![Stack HTML | CSS | JS](https://img.shields.io/badge/Stack-HTML/CSS/JS-red)
 ![Python | 3.12.3](https://img.shields.io/badge/Python-3.12.3-blue)
 ![Bottle | 0.13.4](https://img.shields.io/badge/Bottle-0.13.4-blueviolet)
-![Docker](https://img.shields.io/badge/Docker-Supported-blue)
+![Docker](https://img.shields.io/badge/Docker-Supported-yellow)
 
 A comprehensive list of vanilla and modded Minecraft status effects with proper descriptions.<br>
 Includes basic QoL functionality and features. Using python's framework Bottle for local development.

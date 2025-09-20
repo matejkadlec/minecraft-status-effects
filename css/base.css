@@ -48,6 +48,22 @@ body {
   display: flex;
 }
 
+hr {
+  width: 100%;
+  margin: 0;
+}
+
+a {
+  color: var(--header);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: var(--header-alt);
+  transition: 0.3s;
+}
+
 /* Base color/background transition targets */
 body,
 aside#nav,
@@ -57,6 +73,14 @@ aside#nav,
 }
 #effects-table tbody tr {
   transition: none;
+}
+
+#footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
 }
 
 /* Disable transitions during batch DOM updates */
@@ -71,9 +95,11 @@ aside#nav,
  * Layout: left navigation    *
  *----------------------------*/
 aside#nav {
+  display: flex;
+  flex-direction: column;
   width: 260px;
   background: var(--bg-alt);
-  padding: 1rem 1rem 2rem;
+  padding: 1rem;
   border-right: 2px solid var(--border);
   position: sticky;
   top: 0;
@@ -139,6 +165,36 @@ aside#nav {
   color: var(--text-dim);
 }
 
+#contribution {
+  margin-top: 1rem;
+}
+#contribution a {
+  color: #8093d6;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+#contribution a:hover {
+  color: #333333;
+  transition: 0.3s;
+}
+:root.dark #contribution a:hover {
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+#copyright {
+  width: 100%;
+  height: 36px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  justify-self: flex-end;
+}
+
 /*----------------------------*
  * Mod navigation list        *
  *----------------------------*/
@@ -146,9 +202,9 @@ aside#nav {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
 }
 #mod-nav li a {
   display: block;
@@ -181,8 +237,7 @@ aside#nav {
  *----------------------------*/
 main#content {
   flex: 1;
-  padding: 1.5rem;
-  padding-right: 2rem;
+  padding: 1.5rem 2rem 1rem 1.5rem;
   overflow-x: auto;
   display: flex;
   flex-direction: column;
@@ -485,10 +540,7 @@ main h1 span {
 }
 .legend p {
   width: fit-content;
-  margin: 7px 0;
-}
-.legend #legend-3 {
-  margin-bottom: 0;
+  margin: 2px 0;
 }
 .legend .flash {
   position: relative;
@@ -500,9 +552,7 @@ main h1 span {
   pointer-events: none;
   opacity: 0;
   background: var(--row-fade-color);
-  margin: -4px;
-  margin-bottom: -2px;
-  padding: 8px;
+  margin: -1.5px -3.5px -0.5px -4px;
   border: 1px solid var(--row-fade-color);
   border-radius: 4px;
   animation: row-fade-highlight 1.2s ease-out 1;
@@ -512,9 +562,6 @@ main h1 span {
  * Theme toggle               *
  *----------------------------*/
 .theme-toggle {
-  position: fixed;
-  bottom: 14px;
-  left: 14px;
   display: flex;
   flex-direction: row;
   gap: 0.6rem;
@@ -588,16 +635,6 @@ main h1 span {
   100% {
     opacity: 0;
   }
-}
-
-/*----------------------------*
- * Footer & scrollbars        *
- *----------------------------*/
-footer {
-  margin-top: 2rem;
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  text-align: center;
 }
 
 /*----------------------------*
