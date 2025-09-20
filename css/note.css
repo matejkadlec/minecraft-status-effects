@@ -1,0 +1,48 @@
+/*---------------------------*
+ * Notes & legal link blocks *
+ *---------------------------*/
+.note {
+  font-size: 0.7rem;
+  line-height: 1.2;
+  color: var(--text-dim);
+}
+.table-note {
+  margin: 0;
+}
+#contribution {
+  margin-top: 1rem;
+}
+#contribution a {
+  color: #8093d6;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+#contribution a:hover {
+  color: #333333;
+  transition: 0.3s;
+}
+:root.dark #contribution a:hover {
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+/* Copyright block */
+#copyright {
+  width: 100%;
+  height: 36px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  justify-self: flex-end;
+  line-height: 1.25;
+}
+#copyright .legal-links {
+  white-space: nowrap;
+}
+#copyright a {
+  display: inline;
+}

@@ -1,0 +1,131 @@
+/*----------------------*
+ * Navigation & filters *
+ *----------------------*/
+aside#nav {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  background: var(--bg-alt);
+  padding: 1rem;
+  border-right: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+#nav h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--header);
+  letter-spacing: 0.5px;
+}
+#nav h1:nth-of-type(1) {
+  margin-bottom: 0.5rem;
+}
+#nav h1:nth-of-type(2) {
+  margin-top: 0.85rem;
+}
+#nav .quick-filters {
+  margin-top: 0.85rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Filter chips */
+.filter-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  background: var(--bg-accent);
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  justify-content: left;
+  transition: 0.3s;
+}
+.filter input {
+  accent-color: var(--header);
+}
+.filter:hover {
+  background: var(--highlight);
+}
+
+/* Mod navigation list */
+#mod-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+}
+#mod-nav li a {
+  display: block;
+  padding: 0.35rem 0.6rem 0.4rem;
+  text-decoration: none;
+  color: var(--text-dim);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  line-height: 1.05;
+  position: relative;
+  transition: 0.3s;
+}
+#mod-nav li:last-child a {
+  padding-top: 0.45rem;
+  padding-bottom: 0.3rem;
+}
+#mod-nav li a:focus-visible {
+  outline: 2px solid var(--header);
+  outline-offset: 2px;
+}
+#mod-nav li a:hover {
+  background: var(--bg-accent);
+  color: var(--header);
+  border-color: var(--border);
+}
+
+/* Loading placeholder inside nav */
+.nav-loading {
+  width: 226px;
+  height: 188.59px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.nav-loading img {
+  width: 64px;
+  height: 64px;
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+.nav-loading .spinner-dark {
+  display: none;
+}
+:root.dark .nav-loading .spinner-light {
+  display: none;
+}
+:root.dark .nav-loading .spinner-dark {
+  display: block;
+}
+
+/* Footer (layout portion only) */
+#footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+}

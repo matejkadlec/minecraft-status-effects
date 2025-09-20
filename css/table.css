@@ -1,0 +1,347 @@
+/*-------------------------*
+ * Table shell & scrolling *
+ *-------------------------*/
+/* Search bar */
+.search-wrapper {
+  margin: 15px 0 10px 0;
+  position: relative;
+  width: 280px;
+}
+.search-wrapper #search {
+  width: 100%;
+  margin: 0;
+  padding: 0.55rem 6rem 0.55rem 0.7rem;
+  background: var(--bg-accent);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  transition: 0.3s;
+}
+#search:focus {
+  outline: none;
+}
+#search-clear {
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  display: none;
+  transition: 0.3s;
+}
+#search-clear:hover {
+  color: var(--header);
+  background: transparent;
+}
+.table-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-height: 0;
+}
+.table-scroll {
+  flex: 1;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--bg-alt);
+  min-height: 0;
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.12),
+    0 2px 6px -2px rgba(0, 0, 0, 0.08);
+  scrollbar-gutter: stable right-edge;
+  transition: 0.3s;
+}
+.table-scroll #effects-table {
+  border: 0;
+  border-radius: 0;
+}
+
+/*--------------------*
+ * Effects table core *
+ *--------------------*/
+#effects-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-alt);
+}
+#effects-table thead th {
+  position: sticky;
+  top: 0;
+  text-align: left;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  z-index: 5;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.25), 0 1px 0 0 var(--border);
+}
+:root #effects-table thead th {
+  background: linear-gradient(135deg, #cfdfee 0%, #b9cee6 100%);
+  color: var(--header-alt);
+}
+:root.dark #effects-table thead th {
+  background: linear-gradient(135deg, var(--header) 0%, var(--header-alt) 100%);
+  color: #111;
+}
+#effects-table tbody td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 0.9rem;
+}
+#effects-table tbody tr {
+  background: var(--bg-alt);
+  transition: 0.3s;
+}
+#effects-table.zebra tbody tr.odd {
+  background: var(--bg-accent);
+}
+#effects-table.zebra tbody tr.even {
+  background: var(--bg-alt);
+}
+#effects-table tbody tr:hover {
+  background: var(--highlight);
+}
+#effects-table a {
+  color: var(--header);
+  text-decoration: none;
+  transition: 0.3s;
+}
+#effects-table a:hover {
+  text-decoration: underline;
+}
+#effects-table tbody td b {
+  color: var(--header);
+  font-weight: 600;
+}
+#effects-table tbody td.unverified {
+  color: var(--text-dim);
+  font-style: italic;
+}
+#effects-table tbody tr#no-results-row td.no-results {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-dim);
+  padding: 0.6rem 0.75rem;
+}
+#effects-table tbody tr.integration-note td {
+  font-style: italic;
+  color: var(--text-dim);
+}
+#effects-table tbody tr.integration-note td:first-child {
+  font-style: normal;
+  color: var(--text);
+}
+
+/* Column sizing */
+#effects-table thead th:nth-child(1),
+#effects-table tbody td:nth-child(1) {
+  box-sizing: content-box;
+  min-width: 180px;
+  max-width: 180px;
+  width: 180px;
+  overflow: hidden;
+}
+#effects-table thead th:nth-child(2),
+#effects-table tbody td:nth-child(2) {
+  box-sizing: content-box;
+  min-width: 180px;
+  max-width: 180px;
+  width: 180px;
+  overflow: hidden;
+}
+#effects-table thead th:nth-child(3),
+#effects-table tbody td:nth-child(3) {
+  box-sizing: content-box;
+  min-width: 100px;
+  max-width: 100px;
+  width: 100px;
+  overflow: hidden;
+  text-align: center;
+}
+#effects-table thead th:nth-child(4),
+#effects-table tbody td:nth-child(4) {
+  box-sizing: content-box;
+  width: 100%;
+  overflow: hidden;
+}
+#effects-table thead th:nth-child(5),
+#effects-table tbody td:nth-child(5) {
+  box-sizing: content-box;
+  max-width: 140px;
+  min-width: 140px;
+  width: 140px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/*---------------*
+ * Badges & tags *
+ *---------------*/
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.6rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: var(--bg-accent);
+  color: var(--text-dim);
+  margin-left: 0.4rem;
+  transition: 0.3s;
+}
+.badge.pos {
+  background: linear-gradient(135deg, #2e5f2e, #1f3d1f);
+  color: #c9f7c9;
+}
+.badge.neg {
+  background: linear-gradient(135deg, #5f2e2e, #3d1f1f);
+  color: #f7c9c9;
+}
+.badge.util {
+  background: linear-gradient(135deg, #2e4c5f, #1f313d);
+  color: #c9e8f7;
+}
+.badge.scaling {
+  background: linear-gradient(135deg, #ff9800, #ffb347);
+  color: #2b1a00;
+  font-weight: 600;
+}
+:root.dark .badge.pos {
+  background: linear-gradient(135deg, #2e5f2e, #1f3d1f);
+  color: #c9f7c9;
+}
+:root.dark .badge.neg {
+  background: linear-gradient(135deg, #5f2e2e, #3d1f1f);
+  color: #f7c9c9;
+}
+:root.dark .badge.scaling {
+  background: linear-gradient(135deg, #ff9800, #ffb347);
+  color: #2b1a00;
+}
+
+/*---------------------*
+ * Legend & references *
+ *---------------------*/
+.fn-ref {
+  cursor: pointer;
+  color: inherit;
+  font-weight: 600;
+}
+.legend p {
+  width: fit-content;
+  margin: 2px 0;
+}
+.legend .flash {
+  position: relative;
+}
+.legend .flash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--row-fade-color);
+  margin: -1.5px -3.5px -0.5px -4px;
+  border: 1px solid var(--row-fade-color);
+  border-radius: 4px;
+  animation: row-fade-highlight 1.2s ease-out 1;
+}
+
+/*----------------------*
+ * Highlight animations *
+ *----------------------*/
+.highlight {
+  position: relative;
+}
+.highlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--row-fade-color);
+  animation: row-fade-highlight 1.2s ease-out 1;
+}
+@keyframes row-fade-highlight {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  55% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/*-----------------------*
+ * Superscripts & arrows *
+ *-----------------------*/
+.lvl-sup {
+  position: relative;
+  font-size: 0.5rem;
+  line-height: 1;
+  font-weight: 600;
+}
+td .arrow {
+  display: inline-block;
+  line-height: 1;
+  font-variant-ligatures: none;
+  vertical-align: middle;
+  transform: translateY(-1px);
+  font-size: 0.95em;
+  overflow: visible;
+}
+
+/*----------------------------------*
+ * Loading overlay states           *
+ *----------------------------------*/
+.table-scroll.loading {
+  position: relative;
+  min-height: 682.19px;
+}
+.table-scroll.loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(50, 50, 50, 0.2);
+  z-index: 6;
+}
+:root.dark .table-scroll.loading::before {
+  background: rgba(50, 50, 50, 0.6);
+}
+.table-scroll.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  margin: -68px 0 0 -48px;
+  background: url("../img/loading-light.gif") center/140px 140px no-repeat;
+  image-rendering: auto;
+  z-index: 7;
+}
+:root.dark .table-scroll.loading::after {
+  background-image: url("../img/loading-dark.gif");
+}
+.table-scroll.loading table thead {
+  visibility: visible;
+}
+.table-scroll.loading table tbody {
+  display: none;
+}

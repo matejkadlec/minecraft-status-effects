@@ -1,0 +1,99 @@
+/*---------------------------------*
+ * Theme variables & dark variants *
+ *---------------------------------*/
+:root {
+  --bg: #f4f7fb;
+  --bg-alt: #ffffff;
+  --bg-accent: #e6edf5;
+  --text: #1d2530;
+  --text-dim: #4d5a67;
+  --header: #2366b8;
+  --header-alt: #1b4f8d;
+  --border: #c8d6e5;
+  --highlight: #d9e6f3;
+  --row-fade-color: rgba(0, 59, 121, 0.6);
+}
+
+:root.dark {
+  --bg: #1b1d1f;
+  --bg-alt: #24272b;
+  --bg-accent: #2d3035;
+  --text: #ffffff;
+  --text-dim: #a8adb5;
+  --header: #cfa93a;
+  --header-alt: #9d7d22;
+  --border: #3a3f45;
+  --highlight: #2f353c;
+  --row-fade-color: rgba(255, 255, 255, 0.32);
+}
+
+/*--------------*
+ * Theme toggle *
+ *--------------*/
+.theme-toggle {
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+  z-index: 500;
+}
+.theme-toggle button {
+  width: 36px;
+  height: 36px;
+  background: var(--bg-accent);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+}
+.theme-toggle button.active {
+  background: var(--header);
+  color: #fff;
+  border-color: var(--header-alt);
+  cursor: default;
+}
+.theme-toggle button:not(.active):hover {
+  transform: translateY(-2px);
+  background: var(--header-alt);
+  color: #fff;
+}
+:root.dark .theme-toggle button.active {
+  background: var(--header);
+  color: #111;
+  border-color: var(--header-alt);
+}
+:root.dark .theme-toggle button:not(.active):hover {
+  background: var(--header-alt);
+  color: #fff;
+}
+.theme-toggle button.active:hover {
+  transform: none;
+}
+
+/*--------------------------*
+ * Scrollbars (theme aware) *
+ *--------------------------*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--header);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--header-alt);
+}
+* {
+  scrollbar-color: var(--header) var(--bg-alt);
+  scrollbar-width: thin;
+}
