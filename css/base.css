@@ -736,7 +736,6 @@ td .arrow {
 .table-scroll.loading table tbody {
   display: none;
 }
-/* Legacy delayed-reveal overlay removed */
 ::-webkit-scrollbar {
   width: 10px;
 }

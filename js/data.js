@@ -3,7 +3,7 @@
  *------------------------------*/
 (function (MCSE) {
   MCSE.loadEffectsData = async function loadEffectsData() {
-    const jsonUrl = `data/effects.json?v=${Date.now()}`; // cache-bust
+    const jsonUrl = `data/effects.json?v=${Date.now()}`;
     try {
       const res = await fetch(jsonUrl, { cache: "no-store" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -14,22 +14,6 @@
       return [];
     }
   };
-
-  // Inline bootstrap if embedded JSON present
-  (function inlineBootstrap() {
-    const inline = document.getElementById("effects-data");
-    if (!inline) return;
-    try {
-      const json = JSON.parse(inline.textContent || "{}");
-      const initial = json.effects || [];
-      if (initial.length) {
-        MCSE.effects = initial;
-        MCSE.renderTable(MCSE.effects);
-        MCSE.applyTypeFilters();
-        MCSE.updateNoResults();
-      }
-    } catch (_) {}
-  })();
 
   (async function initAsync() {
     const fresh = await MCSE.loadEffectsData();
