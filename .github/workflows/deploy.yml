@@ -1,0 +1,94 @@
+name: Deploy to Raspberry Pi
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to RPI5 8GB
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup local repository
+        run: |
+          # Copy checked-out code to deployment directory
+          echo "🔄 Setting up deployment directory..."
+          rm -rf /home/pi/matej/minecraft-status-effects
+          mkdir -p /home/pi/matej
+          cp -r /home/pi/actions-runner/_work/minecraft-status-effects/minecraft-status-effects /home/pi/matej/minecraft-status-effects
+          echo "✅ Repository copied to /home/pi/matej/minecraft-status-effects"
+
+      - name: Build Docker image
+        run: |
+          cd /home/pi/matej/minecraft-status-effects
+          echo "📦 Building Docker image..."
+          docker build -t minecraft-status-effects:latest .
+          echo "✅ Docker image built successfully"
+
+      - name: Stop existing container
+        run: |
+          echo "🛑 Stopping existing container..."
+          docker stop minecraft-status-effects || true
+          docker rm minecraft-status-effects || true
+          echo "✅ Existing container stopped and removed"
+
+      - name: Deploy new container
+        run: |
+          cd /home/pi/matej/minecraft-status-effects
+          echo "🚀 Starting new container..."
+          docker run -d \
+            --name minecraft-status-effects \
+            --restart unless-stopped \
+            -p 8000:8000 \
+            minecraft-status-effects:latest
+          echo "✅ Container started successfully"
+
+      - name: Wait for service to start
+        run: |
+          echo "⏳ Waiting for service to start..."
+          sleep 15
+
+      - name: Verify deployment
+        run: |
+          echo "📊 Container status:"
+          docker ps | grep minecraft-status-effects
+
+          if docker ps | grep -q minecraft-status-effects; then
+            echo "✅ Minecraft Status Effects container is running"
+          else
+            echo "❌ Minecraft Status Effects container failed to start"
+            docker logs minecraft-status-effects
+            exit 1
+          fi
+
+          # Test application endpoint
+          echo "🔍 Testing application endpoint..."
+          if curl -f -s http://localhost:8000 > /dev/null; then
+            echo "✅ Application is accessible on port 8000"
+          else
+            echo "❌ Application is not accessible"
+            docker logs minecraft-status-effects
+            exit 1
+          fi
+
+          echo "🎉 Deployment successful!"
+
+      - name: Show deployment info
+        run: |
+          echo "🌐 Minecraft Status Effects is now deployed:"
+          echo "   URL: http://localhost:8000"
+          echo "   Status: Container running on RPI5 8GB"
+
+      - name: Clean up old images
+        run: |
+          docker image prune -f
