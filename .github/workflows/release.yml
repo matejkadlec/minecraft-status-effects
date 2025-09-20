@@ -1,0 +1,50 @@
+name: Deploy to Raspberry Pi
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to Raspberry Pi
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy to Raspberry Pi
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.RASPBERRY_PI_HOST }}
+        username: ${{ secrets.RASPBERRY_PI_USER }}
+        key: ${{ secrets.RASPBERRY_PI_SSH_KEY }}
+        port: ${{ secrets.RASPBERRY_PI_PORT }}
+        script: |
+          cd /home/${{ secrets.RASPBERRY_PI_USER }}/minecraft-status-effects
+          git pull origin master
+          pip install -r requirements.txt
+          systemctl --user restart minecraft-status-effects
+
+    - name: Notify deployment status
+      if: always()
+      run: |
+        if [ "${{ job.status }}" == "success" ]; then
+          echo "✅ Deployment to Raspberry Pi completed successfully"
+        else
+          echo "❌ Deployment to Raspberry Pi failed"
+          exit 1
+        fi
