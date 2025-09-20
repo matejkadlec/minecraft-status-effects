@@ -27,9 +27,16 @@
       tdMax.textContent = item.maxLevel ?? "";
       const tdDesc = document.createElement("td");
       let rawDesc = item.descriptionHtml || item.description || "";
-      // Remove occurrences of ^level with just level and class "lvl-sup" to make it look like an exponent.
-      // Handles cases like 2^level or ^level alone. We avoid double replacing by using regex.
+      // Replace ^level with exponent looking sup tag
       rawDesc = rawDesc.replace(/\^level/g, '<sup class="lvl-sup">level</sup>');
+      // Normalize arrow glyphs to avoid row height expansion due to font metrics
+      // Wrap any standalone right arrow U+2192 or the ascii sequence '->' in a span.arrow
+      rawDesc = rawDesc
+        .replace(/→/g, '<span class="arrow" aria-hidden="true">→</span>')
+        .replace(
+          /-&gt;|->/g,
+          '<span class="arrow" aria-hidden="true">→</span>'
+        );
       tdDesc.innerHTML = rawDesc;
       const tdTags = document.createElement("td");
       (item.tags || []).forEach((t) => {

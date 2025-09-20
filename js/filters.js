@@ -9,6 +9,41 @@
   MCSE.filterVanilla = document.getElementById("filterVanilla");
   MCSE.clearBtn = document.getElementById("search-clear");
 
+  /*----------------------------*
+   * Persist quick filter state *
+   *----------------------------*/
+  const FILTER_STORAGE_KEY = "mcse-filters";
+  function loadStoredFilters() {
+    try {
+      const raw = localStorage.getItem(FILTER_STORAGE_KEY);
+      if (!raw) return;
+      const obj = JSON.parse(raw);
+      [
+        ["filterPositive", MCSE.filterPositive],
+        ["filterNegative", MCSE.filterNegative],
+        ["filterScaling", MCSE.filterScaling],
+        ["filterVanilla", MCSE.filterVanilla],
+      ].forEach(([key, el]) => {
+        if (!el) return;
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          el.checked = !!obj[key];
+        }
+      });
+    } catch (e) {}
+  }
+  function saveFilters() {
+    try {
+      const payload = {
+        filterPositive: !!MCSE.filterPositive?.checked,
+        filterNegative: !!MCSE.filterNegative?.checked,
+        filterScaling: !!MCSE.filterScaling?.checked,
+        filterVanilla: !!MCSE.filterVanilla?.checked,
+      };
+      localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(payload));
+    } catch (e) {}
+  }
+  loadStoredFilters();
+
   MCSE.getNoResultsRow = () => document.getElementById("no-results-row");
 
   MCSE.updateNoResults = function updateNoResults() {
@@ -83,7 +118,17 @@
     MCSE.filterNegative,
     MCSE.filterScaling,
     MCSE.filterVanilla,
-  ].forEach((cb) => cb && cb.addEventListener("change", MCSE.applyTypeFilters));
+  ].forEach(
+    (cb) =>
+      cb &&
+      cb.addEventListener("change", () => {
+        MCSE.applyTypeFilters();
+        saveFilters();
+      })
+  );
+
+  // Apply filters once after potential load from storage
+  MCSE.applyTypeFilters();
 
   if (MCSE.clearBtn && MCSE.searchInput) {
     function syncClearVisibility() {

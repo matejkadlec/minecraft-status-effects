@@ -5,6 +5,83 @@
     <title>Minecraft Status Effects</title>
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/components.css" />
+    <!-- Primary SEO Meta Tags -->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+    />
+    <meta name="author" content="Matěj Kadlec" />
+    <link rel="author" href="https://matejkadlec.cz" />
+    <meta name="robots" content="index,follow" />
+    <meta name="application-name" content="Minecraft Status Effects" />
+    <meta
+      name="keywords"
+      content="Minecraft,status effects,potion effects,mods,Iron Spells'n'Spellbooks,1.20,1.20.1"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://minecraftstatuseffects.com" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Minecraft Status Effects" />
+    <meta
+      property="og:description"
+      content="Interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://minecraftstatuseffects.com" />
+    <meta
+      property="og:image"
+      content="https://minecraftstatuseffects.com/img/logo.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Minecraft Status Effects Logo" />
+    <meta property="og:locale" content="en" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:title" content="Minecraft Status Effects" />
+    <meta
+      name="twitter:description"
+      content="Interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+    />
+    <meta
+      name="twitter:image"
+      content="https://minecraftstatuseffects.com/img/logo.png"
+    />
+    <meta name="twitter:image:alt" content="Minecraft Status Effects Logo" />
+
+    <!-- Theming -->
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1b1d1f"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Minecraft Status Effects",
+        "url": "https://minecraftstatuseffects.com",
+        "description": "Interactive list of vanilla and modded Minecraft status effects with proper descriptions.",
+        "creator": {
+          "@type": "Person",
+          "name": "Matěj Kadlec",
+          "url": "https://matejkadlec.cz"
+        },
+        "inLanguage": "en",
+        "license": "https://minecraftstatuseffects.com/license/"
+      }
+    </script>
     <script>
       (function () {
         try {
@@ -34,6 +111,13 @@
     />
     <link rel="icon" type="image/x-icon" href="img/icon.ico" />
     <link rel="shortcut icon" href="img/icon.ico" />
+    <!-- Preload dark spinner to prevent flash when user prefers dark theme -->
+    <link
+      rel="preload"
+      href="img/loading-dark.gif"
+      as="image"
+      media="(prefers-color-scheme: dark)"
+    />
   </head>
   <body>
     <aside id="nav">
@@ -46,10 +130,18 @@
           aria-label="Loading mods"
           aria-busy="true"
         >
+          <!-- Dual spinners eliminate light->dark asset swap flash -->
           <img
-            id="nav-spinner"
+            class="spinner-light"
             src="img/loading-light.gif"
             alt="Loading mods"
+            decoding="async"
+          />
+          <img
+            class="spinner-dark"
+            src="img/loading-dark.gif"
+            alt="Loading mods"
+            decoding="async"
           />
         </div>
         <ul id="mod-nav" class="hidden"></ul>
@@ -85,7 +177,8 @@
       </p>
       <div id="footer">
         <div class="theme-toggle">
-          <button id="btn-light" class="active" title="Light Mode">
+          <!-- No initial active class to avoid incorrect flash before JS applies stored theme -->
+          <button id="btn-light" title="Light Mode">
             <i class="ri-sun-fill"></i>
           </button>
           <button id="btn-dark" title="Dark Mode">
@@ -93,8 +186,10 @@
           </button>
         </div>
         <p id="copyright" class="note">
-          © 2025 Matěj Kadlec.<br />
-          All rights reserved.
+          © 2025 Matěj Kadlec.<br /><span class="legal-links"
+            ><a href="/license/">License</a> |
+            <a href="/privacy-policy/">Privacy Policy</a></span
+          >
         </p>
       </div>
     </aside>
@@ -106,9 +201,9 @@
         </div>
         <div class="intro-bar">
           <p class="intro-text">
-            Browse vanilla and modded Minecraft <b>status effects</b> with
-            proper descriptions. Includes spell status effects from
-            <b>Iron Spells'n'Spellbooks</b> mod.
+            Interactive list of vanilla and modded Minecraft
+            <b>status effects</b> with proper descriptions. Includes spell
+            status effects from <b>Iron Spells'n'Spellbooks</b> mod.
           </p>
           <div class="search-wrapper">
             <input

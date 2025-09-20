@@ -6,8 +6,7 @@
 ![Bottle | 0.13.4](https://img.shields.io/badge/Bottle-0.13.4-blueviolet)
 ![Docker](https://img.shields.io/badge/Docker-Supported-yellow)
 
-A comprehensive list of vanilla and modded Minecraft status effects with proper descriptions.<br>
-Includes basic QoL functionality and features. Using python's framework Bottle for local development.
+Interactive list of vanilla and modded Minecraft status effects with proper descriptions.
 
 ## Run Local Server 💻
 
@@ -36,7 +35,7 @@ Open http://localhost:8000 in your browser.
    - `source venv/bin/activate`
    - `pip install -r requirements.txt`
 
-3. Start the dev server
+3. Start the server
    - `python run.py`
 
-Open http://127.0.0.1:8000 in your browser.
+Open http://localhost:8000 in your browser.
