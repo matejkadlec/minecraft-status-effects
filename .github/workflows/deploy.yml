@@ -2,21 +2,72 @@ name: Deploy to Raspberry Pi
 
 on:
   push:
-    branches:
-      - master
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    name: Deploy to Raspberry Pi
+    name: Deploy to RPI5 8GB
     runs-on: self-hosted
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Deploy application
-      run: |
-        cd /home/pi/minecraft-status-effects
-        git pull origin master
-        pip install -r requirements.txt
-        systemctl --user restart minecraft-status-effects
-        echo "✅ Minecraft Status Effects deployed successfully"
+      - name: Setup local repository
+        run: |
+          # Copy checked-out code to deployment directory
+          echo "🔄 Setting up deployment directory..."
+          rm -rf /home/pi/minecraft-status-effects
+          mkdir -p /home/pi
+          cp -r /home/pi/actions-runner/_work/minecraft-status-effects/minecraft-status-effects /home/pi/minecraft-status-effects
+          echo "✅ Repository copied to /home/pi/minecraft-status-effects"
+
+      - name: Install dependencies
+        run: |
+          cd /home/pi/minecraft-status-effects
+          echo "📦 Installing Python dependencies..."
+          pip install -r requirements.txt
+          echo "✅ Dependencies installed successfully"
+
+      - name: Stop existing service
+        run: |
+          systemctl --user stop minecraft-status-effects || true
+          echo "✅ Stopped existing service"
+
+      - name: Deploy application
+        run: |
+          cd /home/pi/minecraft-status-effects
+          systemctl --user start minecraft-status-effects
+          echo "✅ Minecraft Status Effects service started"
+
+      - name: Wait for service to start
+        run: |
+          echo "⏳ Waiting for service to start..."
+          sleep 10
+
+      - name: Verify deployment
+        run: |
+          cd /home/pi/minecraft-status-effects
+          echo "📊 Service status:"
+          systemctl --user status minecraft-status-effects --no-pager
+
+          if systemctl --user is-active --quiet minecraft-status-effects; then
+            echo "✅ Minecraft Status Effects service is running"
+          else
+            echo "❌ Minecraft Status Effects service failed to start"
+            systemctl --user status minecraft-status-effects
+            exit 1
+          fi
+
+          echo "🎉 Deployment successful!"
+
+      - name: Show deployment info
+        run: |
+          echo "🌐 Minecraft Status Effects is now deployed:"
+          echo "   Status: Service running on RPI5 8GB"
