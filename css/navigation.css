@@ -22,7 +22,7 @@ aside#nav {
 #nav h1:nth-of-type(1) {
   margin-bottom: 0.5rem;
 }
-#nav h1:nth-of-type(2) {
+#nav h1:not(:first-of-type) {
   margin-top: 0.85rem;
 }
 #nav .quick-filters {
@@ -72,19 +72,15 @@ aside#nav {
 }
 #mod-nav li a {
   display: block;
-  padding: 0.35rem 0.6rem 0.4rem;
+  padding: 0.25rem;
   text-decoration: none;
   color: var(--text-dim);
   border: 1px solid transparent;
   border-radius: 6px;
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   line-height: 1.05;
   position: relative;
   transition: 0.3s;
-}
-#mod-nav li:last-child a {
-  padding-top: 0.45rem;
-  padding-bottom: 0.3rem;
 }
 #mod-nav li a:focus-visible {
   outline: 2px solid var(--header);
@@ -99,7 +95,7 @@ aside#nav {
 /* Loading placeholder inside nav */
 .nav-loading {
   width: 226px;
-  height: 188.59px;
+  height: 367.33px;
   display: flex;
   align-items: center;
   justify-content: center;
