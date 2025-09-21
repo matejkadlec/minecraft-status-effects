@@ -3,7 +3,7 @@
 ## General
 
 - You are in WSL 2.3.26.0 Linux subsystem (Ubuntu 24.04.1), with access to all files in this project.
-- If you are going to work with cmd, start with simple `activate` to activate the Python venv.
+- If you are going to work with cmd, start with simple `source venv/bin/activate` to activate the Python venv.
 - No need to put `home/matej/projects/minecraft-status-effects/` before paths, you are already (and always) in the project root.
 - Note that you are not able to delete files (LLMs are not allowed to do that on their own), only edit existing ones or create new ones.
   - So if there is a file/folder that is not needed anymore, tell me to delete it, do not mislead me by saying "I deleted ...".
@@ -29,40 +29,47 @@ Update this section when adding new files or folders.
 
 minecraft-status-effects/
 ├── .github/
-│ └── copilot-instructions.md
+│   └── workflows/
+│       ├── validate-effects.yml
+│       └── deploy.yml
+│   └── copilot-instructions.md
 ├── .gitignore
 ├── Dockerfile
 ├── LICENSE.md
 ├── README.md
 ├── css/
-│ ├── legal.css
-│ ├── navigation.css
-│ ├── note.css
-│ ├── styles.css
-│ ├── table.css
-│ └── theme.css
+│   ├── legal.css
+│   ├── navigation.css
+│   ├── note.css
+│   ├── styles.css
+│   ├── table.css
+│   └── theme.css
 ├── data/
-│ ├── effects.json
-│ └── links.json
+│   ├── effects.json
+│   └── links.json
 ├── img/
-│ ├── icon.ico
-│ ├── loading-dark.gif
-│ ├── loading-light.gif
-│ └── logo.png
+│   ├── icon.ico
+│   ├── loading-dark.gif
+│   ├── loading-light.gif
+│   └── logo.png
 ├── index.html
 ├── js/
-│ ├── core.js
-│ ├── data.js
-│ ├── filters.js
-│ ├── navigation.js
-│ ├── render.js
-│ └── theme.js
+│   ├── core.js
+│   ├── data.js
+│   ├── filters.js
+│   ├── navigation.js
+│   ├── render.js
+│   └── theme.js
 ├── license/
-│ └── index.html
+│   └── index.html
 ├── privacy-policy/
-│ └── index.html
+│   └── index.html
 ├── requirements.txt
-└── run.py
+├── run.py
+├── test/
+│   └── validate_effects.py
+├── logs/
+│   └── .gitkeep
 
 ## Forbidden files/extensions
 
@@ -112,15 +119,17 @@ minecraft-status-effects/
   - Minecraft - EffectZ will be before Mod1 - EffectA.
   - Mod1 - EffectA will be before Mod1 - EffectB.
   - Mod1 - EffectZ will be before Mod2 - EffectA.
-- Do not add effects or mods already present, we don't want duplicates, nor mods or effects.
+- Do not add effects or mods already present; effect names must be globally unique across all mods.
 - If I prompt you to add effect which's mod is already present, put it under the existing mod, in the exact spot so the order described above is preserved.
 - Each effect has: name, mod, maxLevel, type (positive/negative), tags (always the type, optionally scaling), description.
 - Descriptions use `<b>` tag to wrap exact formulas (almost always containing word "level"), important terms, or another effect name.
 - Don't change the structure unless prompted to do so.
+- If you change existing effect name or description, inform me about it in chat, and provide a reason why you changed it.
 
 ## README.md
 
 - Keep it updated, but simple, note that this is a private repo, not a public one.
+- Do NOT change the order of sections if I manually change them after you.
 - Do NOT put the info about what you've changed in the README.md, this is not a changelog.
 - Only put there the actual changes (if they are significant enough).
 

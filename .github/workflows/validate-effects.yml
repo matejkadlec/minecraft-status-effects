@@ -1,0 +1,58 @@
+name: Validate Effects JSON
+
+on:
+  push:
+    paths:
+      - "data/effects.json"
+      - "test/validate_effects.py"
+      - ".github/workflows/validate-effects.yml"
+  pull_request:
+    paths:
+      - "data/effects.json"
+      - "test/validate_effects.py"
+      - ".github/workflows/validate-effects.yml"
+
+jobs:
+  order-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run effects validation
+        id: validate
+        run: |
+          echo "🔎 Running effects JSON validation"
+          set -e
+          mkdir -p logs
+          python test/validate_effects.py | tee logs/validation.log
+          echo "validation-log<<EOF" >> $GITHUB_OUTPUT
+          sed 's/^/| /' logs/validation.log >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Publish summary
+        if: success()
+        run: |
+          echo "## ✅ Effects JSON Validation Passed" >> $GITHUB_STEP_SUMMARY
+          echo "All ordering and uniqueness checks succeeded." >> $GITHUB_STEP_SUMMARY
+          echo "### Log Excerpt" >> $GITHUB_STEP_SUMMARY
+          echo '\n\n' >> $GITHUB_STEP_SUMMARY
+          sed 's/^/`/; s/$/`/' logs/validation.log | head -n 30 >> $GITHUB_STEP_SUMMARY
+
+      - name: Publish failure summary
+        if: failure()
+        run: |
+          echo "## ❌ Effects JSON Validation Failed" >> $GITHUB_STEP_SUMMARY
+          echo "Check the step logs above for the first failing rule." >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload full validation log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: effects-validation-log
+          path: logs/validation.log

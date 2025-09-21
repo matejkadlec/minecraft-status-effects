@@ -71,7 +71,7 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Negates most fire, lava, and blaze projectile damage."
+      "description": "Grants fire immunity."
     },
     {
       "mod": "Minecraft",
