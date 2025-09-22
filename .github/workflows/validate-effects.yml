@@ -22,7 +22,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Run effects validation
         id: validate
@@ -39,7 +39,7 @@ jobs:
         if: success()
         run: |
           echo "## ✅ Effects JSON Validation Passed" >> $GITHUB_STEP_SUMMARY
-          echo "All ordering and uniqueness checks succeeded." >> $GITHUB_STEP_SUMMARY
+          echo "All 4 checks passed: ordering, duplicates, formula formatting, description length." >> $GITHUB_STEP_SUMMARY
           echo "### Log Excerpt" >> $GITHUB_STEP_SUMMARY
           echo '\n\n' >> $GITHUB_STEP_SUMMARY
           sed 's/^/`/; s/$/`/' logs/validation.log | head -n 30 >> $GITHUB_STEP_SUMMARY

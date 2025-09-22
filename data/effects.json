@@ -265,12 +265,75 @@
 
     {
       "mod": "Alex's Caves",
+      "id": "alexs-caves-bubbled",
+      "effect": "Bubbled",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Slows movement and inflicts periodic drowning damage."
+    },
+    {
+      "mod": "Alex's Caves",
+      "id": "alexs-caves-darkness-incarnate",
+      "effect": "Darkness Incarnate",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants fast creative-style flight while in darkness."
+    },
+    {
+      "mod": "Alex's Caves",
+      "id": "alexs-caves-deepsight",
+      "effect": "Deepsight",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Removes underwater fog."
+    },
+    {
+      "mod": "Alex's Caves",
       "id": "alexs-caves-irradiated",
       "effect": "Irradiated",
       "maxLevel": "IV",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Prevents natural regeneration. Level II+ additionally deals periodic damage (higher level → more damage)."
+      "description": "Prevents natural regeneration. <b>Level II+</b> additionally deals periodic damage (higher level → more damage)."
+    },
+    {
+      "mod": "Alex's Caves",
+      "id": "alexs-caves-magnetizing",
+      "effect": "Magnetizing",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Allows interaction with Neodymium blocks without metal armor."
+    },
+    {
+      "mod": "Alex's Caves",
+      "id": "alexs-caves-rage",
+      "effect": "Rage",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Increases attack damage at low health; affected mobs attack any nearby mobs."
+    },
+    {
+      "mod": "Alex's Caves",
+      "id": "alexs-caves-stunned",
+      "effect": "Stunned",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents movement and attacks."
+    },
+    {
+      "mod": "Alex's Caves",
+      "id": "alexs-caves-sugar-rush",
+      "effect": "Sugar Rush",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "<b>+125% movement speed × level</b> for first 3/4 duration then <b>-50% movement speed × level</b> for final 1/4."
     },
     {
       "mod": "Alex's Mobs",
@@ -292,12 +355,48 @@
     },
     {
       "mod": "Alex's Mobs",
+      "id": "alexs-mobs-debilitating-sting",
+      "effect": "Debilitating Sting",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Paralyzes arthropods; non-arthropods take damage until half health."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-earthquake",
+      "effect": "Earthquake",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Violently shakes screen obstructing vision."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-ender-flu",
+      "effect": "Ender Flu",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Causes shaking; spawns an Enderiophage and deals heavy damage when it ends."
+    },
+    {
+      "mod": "Alex's Mobs",
       "id": "alexs-mobs-exsanguination",
       "effect": "Exsanguination",
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
       "description": "Bleeding damage over time (higher level → faster ticks)."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-fleet-footed",
+      "effect": "Fleet-Footed",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Increases movement speed while jumping."
     },
     {
       "mod": "Alex's Mobs",
@@ -319,6 +418,33 @@
     },
     {
       "mod": "Alex's Mobs",
+      "id": "alexs-mobs-mosquito-repellent",
+      "effect": "Mosquito Repellent",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Crimson Mosquitoes ignore the affected entity."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-oiled",
+      "effect": "Oiled",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Floats to water surface and levitates in rain."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-orcas-might",
+      "effect": "Orca's Might",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Shortens attack cooldown."
+    },
+    {
+      "mod": "Alex's Mobs",
       "id": "alexs-mobs-poison-resistance",
       "effect": "Poison Resistance",
       "maxLevel": "I",
@@ -328,12 +454,48 @@
     },
     {
       "mod": "Alex's Mobs",
+      "id": "alexs-mobs-power-outage",
+      "effect": "Power Outage",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Inflicts severe slowness and near blindness."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-scared-still",
+      "effect": "Scared Still",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents movement; can only move slowly by jumping."
+    },
+    {
+      "mod": "Alex's Mobs",
       "id": "alexs-mobs-soulsteal",
       "effect": "Soulsteal",
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
       "description": "Heals user for a portion of melee damage dealt."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-sunbirds-blessing",
+      "effect": "Sunbird's Blessing",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Slows fall speed and extends Elytra flight duration."
+    },
+    {
+      "mod": "Alex's Mobs",
+      "id": "alexs-mobs-sunbirds-curse",
+      "effect": "Sunbird's Curse",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Greatly increases fall speed hindering control."
     },
     {
       "mod": "Alex's Mobs",

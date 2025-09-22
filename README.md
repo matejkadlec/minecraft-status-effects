@@ -50,7 +50,7 @@ Open http://localhost:8000 in your browser.
 
 ## Data Integrity Test ✅
 
-Three automated validations run against `data/effects.json`.
+Four automated validations run against `data/effects.json`.
 
 ### 1. Ordering
 
@@ -70,10 +70,14 @@ Any description containing scaling patterns must format them consistently:
 - The bold span must END with that substring (e.g. `<b>0.3^level</b>`, `<b>5 × level</b>`).
 - These substrings must never appear outside bold formatting.
 
+### 4. Description Length (max 120 chars)
+
+This is primarily to keep descriptions on a single line on FHD full-screen browser window size (120 characters), but also ensures every description stays concise and easy to read.
+
 ### Run Locally
 
 ```bash
 python test/validate_effects.py
 ```
 
-GitHub Actions runs all three on every push / PR that touches `effects.json`.
+GitHub Actions runs all four on every push / PR that touches `effects.json`.

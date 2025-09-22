@@ -78,7 +78,7 @@ def main():
     effects = load_effects()
 
     # Ordering validation section
-    print(f"{PREFIX}: 1/3 Ordering checks started...")
+    print(f"{PREFIX}: 1/4 Ordering checks started...")
 
     if not effects:
         fail("No effects present (empty list)")
@@ -142,7 +142,7 @@ def main():
     print(f"{PREFIX}: ✅ Effect ordering checks passed.")
 
     # Duplication validation section
-    print(f"{PREFIX}: 2/3 Duplicate name check started...")
+    print(f"{PREFIX}: 2/4 Duplicate name check started...")
     # Check duplicate effect names globally
     seen_names = set()
     for e in effects:
@@ -154,10 +154,20 @@ def main():
     print(f"{PREFIX}: ✅ Effect duplicate name check passed.")
 
     # Formula / bold formatting validation section
-    print(f"{PREFIX}: 3/3 Formula formatting check started...")
+    print(f"{PREFIX}: 3/4 Formula formatting check started...")
     validate_formula_wrapping(effects)
     print(f"{PREFIX}: ✅ Formula formatting check passed.")
-    print(f"{PREFIX}: ✨ All 3/3 checks passed.")
+
+    # Description length validation
+    print(f"{PREFIX}: 4/4 Description length check started...")
+    for eff in effects:
+        desc = (eff.get("description") or "").strip()
+        if len(desc) > 120:
+            fail(
+                f"Description too long (>120 chars) in effect '{eff.get('effect')}': {len(desc)} chars"
+            )
+    print(f"{PREFIX}: ✅ Description length check passed.")
+    print(f"{PREFIX}: ✨ All 4/4 checks passed.")
 
 
 if __name__ == "__main__":
