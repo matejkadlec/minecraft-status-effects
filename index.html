@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+      content="Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions."
     />
     <meta name="author" content="Matěj Kadlec" />
     <link rel="author" href="https://matejkadlec.cz" />
@@ -30,13 +30,13 @@
     <meta property="og:title" content="Minecraft Status Effects" />
     <meta
       property="og:description"
-      content="Interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+      content="Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://minecraftstatuseffects.com" />
     <meta
       property="og:image"
-      content="https://minecraftstatuseffects.com/img/logo.png"
+      content="https://minecraftstatuseffects.com/img/logo-light.png"
     />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:alt" content="Minecraft Status Effects Logo" />
@@ -48,11 +48,11 @@
     <meta name="twitter:title" content="Minecraft Status Effects" />
     <meta
       name="twitter:description"
-      content="Interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+      content="Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions."
     />
     <meta
       name="twitter:image"
-      content="https://minecraftstatuseffects.com/img/logo.png"
+      content="https://minecraftstatuseffects.com/img/logo-light.png"
     />
     <meta name="twitter:image:alt" content="Minecraft Status Effects Logo" />
 
@@ -75,7 +75,7 @@
         "@type": "WebSite",
         "name": "Minecraft Status Effects",
         "url": "https://minecraftstatuseffects.com",
-        "description": "Interactive list of vanilla and modded Minecraft status effects with proper descriptions.",
+        "description": "Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions.",
         "creator": {
           "@type": "Person",
           "name": "Matěj Kadlec",
@@ -114,6 +114,8 @@
     />
     <link rel="icon" type="image/x-icon" href="img/icon.ico" />
     <link rel="shortcut icon" href="img/icon.ico" />
+    <link rel="preload" href="img/logo-light.png" as="image" />
+    <link rel="preload" href="img/logo-dark.png" as="image" />
     <!-- Preload dark spinner to prevent flash when user prefers dark theme -->
     <link
       rel="preload"
@@ -124,6 +126,14 @@
   </head>
   <body>
     <aside id="nav">
+      <img
+        id="nav-logo"
+        src="img/logo-light.png"
+        data-light="img/logo-light.png"
+        data-dark="img/logo-dark.png"
+        alt="Minecraft Status Effects logo"
+      />
+      <hr />
       <h1>Available Mods</h1>
       <nav>
         <div
@@ -198,15 +208,10 @@
     </aside>
     <main id="content">
       <section>
-        <div class="heading-with-logo">
-          <img src="img/logo.png" alt="Minecraft Status Effects logo" />
-          <h1>Minecraft Status Effects <span>v1.20/1.20.1</span></h1>
-        </div>
         <div class="intro-bar">
           <p class="intro-text">
-            Interactive list of vanilla and modded Minecraft
-            <b>status effects</b> with proper descriptions. Includes spell
-            status effects from <b>Iron Spells'n'Spellbooks</b> mod.
+            Browse interactive list of vanilla and modded Minecraft status
+            effects with proper descriptions.
           </p>
           <div class="search-wrapper">
             <input
@@ -269,6 +274,23 @@
               couldn't find the formula anywhere.
             </p>
           </div>
+          <div class="table-footer" id="table-footer">
+            <div id="table-info" class="table-info" aria-live="polite"></div>
+            <nav
+              id="pagination"
+              class="pagination"
+              aria-label="Table pagination"
+            ></nav>
+            <div class="table-length">
+              <label for="page-length">Rows per page:</label>
+              <select id="page-length">
+                <option value="25" selected>25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -277,7 +299,7 @@
     <script src="js/filters.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/navigation.js"></script>
-    <script src="js/links.js"></script>
+    <script src="js/pagination.js"></script>
     <script src="js/data.js"></script>
   </body>
 </html>

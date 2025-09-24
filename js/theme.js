@@ -12,6 +12,21 @@
     MCSE.btnDark.classList.toggle("active", isDark);
     MCSE.btnLight.classList.toggle("active", !isDark);
     localStorage.setItem("mcse-theme", isDark ? "dark" : "light");
+    const logo = document.getElementById("nav-logo");
+    if (logo) {
+      const targetSrc = isDark
+        ? logo.getAttribute("data-dark")
+        : logo.getAttribute("data-light");
+      if (targetSrc && logo.src.indexOf(targetSrc) === -1) {
+        logo.style.opacity = 0;
+        requestAnimationFrame(() => {
+          logo.src = targetSrc;
+          logo.onload = () => (logo.style.opacity = 1);
+          // Fallback in case onload doesn't fire (cached)
+          setTimeout(() => (logo.style.opacity = 1), 50);
+        });
+      }
+    }
   };
 
   // Apply stored theme (defaults to light) without causing flicker

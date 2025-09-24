@@ -3,13 +3,12 @@
  *-------------------------*/
 /* Search bar */
 .search-wrapper {
-  margin: 15px 0 10px 0;
+  margin: 16px 0 12px 0;
   position: relative;
   width: 280px;
 }
 .search-wrapper #search {
   width: 100%;
-  margin: 0;
   padding: 0.55rem 6rem 0.55rem 0.7rem;
   background: var(--bg-accent);
   border: 1px solid var(--border);
@@ -109,9 +108,6 @@
 #effects-table.zebra tbody tr.even {
   background: var(--bg-alt);
 }
-#effects-table tbody tr:hover {
-  background: var(--highlight);
-}
 #effects-table a {
   color: var(--header);
   text-decoration: none;
@@ -163,9 +159,9 @@
 #effects-table thead th:nth-child(3),
 #effects-table tbody td:nth-child(3) {
   box-sizing: content-box;
-  min-width: 60px;
-  max-width: 60px;
-  width: 60px;
+  min-width: 50px;
+  max-width: 50px;
+  width: 50px;
   overflow: hidden;
   text-align: center;
 }
@@ -178,9 +174,10 @@
 #effects-table thead th:nth-child(5),
 #effects-table tbody td:nth-child(5) {
   box-sizing: content-box;
-  max-width: 140px;
-  min-width: 140px;
-  width: 140px;
+  padding: 0.6rem 0.6rem;
+  max-width: 145px;
+  min-width: 145px;
+  width: 145px;
   overflow: hidden;
   text-align: center;
 }
@@ -190,9 +187,9 @@
  *---------------*/
 .badge {
   display: inline-block;
-  padding: 2px 6px;
+  padding: 3px 6px;
   border-radius: 12px;
-  font-size: 0.6rem;
+  font-size: 0.7em;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   background: var(--bg-accent);
@@ -329,10 +326,10 @@ td .arrow {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   margin: -68px 0 0 -48px;
-  background: url("../img/loading-light.gif") center/140px 140px no-repeat;
+  background: url("../img/loading-light.gif") center/120px 120px no-repeat;
   image-rendering: auto;
   z-index: 7;
 }
@@ -344,4 +341,128 @@ td .arrow {
 }
 .table-scroll.loading table tbody {
   display: none;
+}
+
+/*------------------*
+ * Pagination footer *
+ *------------------*/
+.table-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 28px;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  flex-wrap: nowrap;
+}
+.table-footer .table-info {
+  flex: 0 0 300px; /* Fixed width to prevent pagination shifting */
+  text-align: left;
+  color: var(--text-dim);
+  width: 300px;
+}
+.pagination {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto; /* Takes remaining space and stays centered */
+}
+.table-footer .table-length {
+  flex: 0 0 300px; /* Fixed width to match table-info */
+  text-align: right;
+  width: 300px;
+  color: var(--text-dim);
+}
+.table-footer .table-length select {
+  background: var(--bg-accent);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+}
+.pagination button,
+.pagination .page-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-accent);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0;
+  width: 32px;
+  height: 28px;
+  font-size: 0.8rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: 0.3s;
+  opacity: 1;
+}
+.pagination button[disabled]:not(.arrow-btn) {
+  opacity: 1;
+  cursor: default;
+}
+.pagination button:not([disabled]):not(.current):hover,
+.pagination .page-num:not(.current):hover {
+  background: var(--highlight);
+  transition: 0.3s;
+}
+.pagination .current {
+  cursor: default;
+}
+:root .pagination .page-num.current {
+  background: #007acc;
+  color: #fff;
+  border-color: #005fa3;
+}
+:root.dark .pagination .page-num.current {
+  background: var(--header);
+  color: #111;
+  border-color: var(--header-alt);
+}
+:root.dark .pagination button,
+:root.dark .pagination .page-num {
+  background: var(--bg-accent);
+  color: var(--text);
+}
+.pagination .ellipsis {
+  padding: 0 2px;
+  color: var(--text-dim);
+  user-select: none;
+}
+
+/* Arrow buttons: no background box */
+.pagination .arrow-btn {
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-dim);
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 0.9rem;
+}
+.pagination .arrow-btn[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.pagination .arrow-btn:not([disabled]):hover {
+  color: var(--header);
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Hide legend + footnote refs while pagination design is refined */
+.fn-ref,
+.table-note {
+  display: none !important;
+}
+
+/* Smooth logo swap */
+#nav-logo {
+  transition: opacity 0.25s ease;
 }

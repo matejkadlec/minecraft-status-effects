@@ -13,6 +13,9 @@ aside#nav {
   height: 100vh;
   overflow-y: auto;
 }
+#nav #nav-logo {
+  padding-bottom: 1rem;
+}
 #nav h1 {
   margin: 0;
   font-size: 1.1rem;
@@ -22,7 +25,7 @@ aside#nav {
 #nav h1:nth-of-type(1) {
   margin-bottom: 0.5rem;
 }
-#nav h1:not(:first-of-type) {
+#nav h1 {
   margin-top: 0.85rem;
 }
 #nav .quick-filters {
@@ -59,6 +62,8 @@ aside#nav {
   accent-color: var(--header);
 }
 .filter:hover {
+  cursor: pointer;
+  transition: 0.3s;
   background: var(--highlight);
 }
 
@@ -77,7 +82,8 @@ aside#nav {
   color: var(--text-dim);
   border: 1px solid transparent;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
   line-height: 1.05;
   position: relative;
   transition: 0.3s;
@@ -95,7 +101,7 @@ aside#nav {
 /* Loading placeholder inside nav */
 .nav-loading {
   width: 226px;
-  height: 367.33px;
+  height: 379.98px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -14,33 +14,6 @@
   - You don't need to tell me about small changes, but if you make significant changes, inform me.
   - If it's extremely significant, prompt me for permission first.
 
-## About me
-- Years of coding experience: **4+**.
-- Primary: Python (backend) — prefer Django for web apps.
-- Secondary: SQL (mainly PostgreSQL), JavaScript, HTML/CSS.
-- Other skills: ETL, web scraping, Linux (WSL).
-- Roles I do/did in the past: backend/SW engineer, ETL developer, web developer, QA engineer.
-- Tools: Git, GitHub, VS Code, JIRA, Confluence, Copilot.
-- Coding preferences:
-  - Always use case that the language/framework is intended for (snake_case for Python, camelCase for JavaScript, ...).
-  - Do not declare variables that are used only once, unless it improves readability.
-  - Use list/dict/set comprehensions where appropriate.
-  - Avoid unnecessary complexity; prefer simple and clear solutions.
-    - This doesn't mean you should create a new function for everything, too many functions is not good either, find some middleground.
-- Interaction rules:
-  - IMPORTANT: Use lists for steps and short examples; important for me, I read from lists much better and faster than from paragraphs.
-    - So instead of "You should do A, then B, and finally C.", write:
-      1. Do A.
-      2. Do B.
-      3. Finally, do C.
-  - Explain terms that I might not know (e.g., "idempotent", "decorator", "closure", ...).
-    - When explaining, use simple language, as if you were explaining to a beginner.
-    - Use comparisons and analogies whenever possible to make it easier to understand.
-  - Use warm, conversational English with contractions.
-  - Assume sensible defaults (don’t ask unnecessary confirmation)
-  - Avoid face emojis, use symbols like ✅/❌/⚠️/ℹ️.
-- When recommending stacks/tools, list tradeoffs (pros, cons, cost, privacy).
-
 ## About this project
 
 - Website listing Minecraft status effects from vanilla and mods.
@@ -134,18 +107,9 @@ minecraft-status-effects/
   - `/` is only used at the start and end of the whole comment block.
   - You can also use CSS one-liners, like `/* Subsection header */` for subsections.
 - Other than that, use simple `//` for JS and `#` for Python.
-- Note that I prefer one-liner comments, but multi-liners are allowed when necessary.
-- Do not create insanely long and complex Python docstrings, keep them simple and to the point.
-  - Again, ideally one-liners, but multi-liners are allowed when necessary.
 
-## links.json
 
-- JSON file with list of mod names and URLs of their status effects lists.
-  - Link can be to mod's wiki, GitHub, CurseForge, Modrinth, and so on.
-- Ignore for now, since it's too long to be put on the main page.
-- Will be most likely used in future on a different (new) page.
-
-## effects.json
+## data/effects.json
 
 - JSON file with list of effects; main data source.
 - Order of the effects is important:
@@ -219,7 +183,30 @@ Example of summary (please keep it as a list > list > list, not paragraph(s)):
   - If I send you a link to a status effects on that website, give me the most precise English translation of all fields
   - If you aren't sure about something regarding the translation, ask me in chat.
 
-## Automated "Add <mcmod.cn URL>" Flow
+### Examples covering most cases (directly from effects.json):
+- "Grants fire immunity."
+- "Damages over time leaving entity alive at half a heart (higher level → faster ticks)."
+- "Increases movement speed by <b>10% × level</b>."
+- "<b>+50% jump height × level</b> and reduces <b>fall damage by level hearts</b>."
+- "<b>-10% attack speed × level</b> and sets <b>mining speed to 0.3^level</b> (0.3 / 0.09 / 0.027)."
+- "Combines <b>Water Breathing</b>, <b>Night Vision</b> and <b>Haste</b> effects."
+- "<b>+3 armor</b> and <b>+1 armor toughness × level</b>. Also gains <b>Regeneration</b> equal to level."
+
+### Corrections (examples of the descripnstions you created and how I modified them; learn from this):
+Your initial version → My corrected version
+1. "Deals armor-ignoring damage every 2 seconds." → "Deals periodic damage that ignores armor every 2 seconds."
+2. "On end, if still burning, deals damage (higher level → more damage)." → "If the entity is on fire when the effect expires, deals damage based on remaining fire ticks (higher level → more damage).
+3. "Reduces incoming damage by <b>level</b> (half hearts)." → "Reduces incoming damage by <b>0.5 × level</b> hearts."
+4. "Negates fall damage and bounces entity upward (higher level → more horizontal push)." → "Negates fall damage and bounces entity upward upon landing (higher level → more momentum upon landing)."
+5. "Increases lightning and shock damage by <b>3 × level</b> (stacks to III)." -> "Increases lightning and shock damage by <b>3 × level</b>."
+
+### Tags rules
+- Each effect must have exactly one of these tags: "positive" or "negative".
+- It's up to you to decide if the effect is positive or negative, based on the description.
+- If the effect can have level >=2 (some cause has Potency II+), add the "scaling" tag as well.
+- Different lengths of the effect at the same level are not considered as scaling, only the power of the effect is.
+
+### Automated "Add <mcmod.cn URL>" Flow
 
 Trigger conditions (case-insensitive):
 1. User prompt contains the word "add" (variants like `Add`, `add:`, `add effects`, `Add:` are all valid) AND
@@ -290,30 +277,16 @@ If the user sends an "Add" prompt for completely different website/source, it's 
 
 Never fabricate effect data; if unsure about translation or potency, ask the user.
 
-### Examples covering most cases (directly from effects.json):
-- "Grants fire immunity."
-- "Damages over time leaving entity alive at half a heart (higher level → faster ticks)."
-- "Increases movement speed by <b>10% × level</b>."
-- "<b>+50% jump height × level</b> and reduces <b>fall damage by level hearts</b>."
-- "<b>-10% attack speed × level</b> and sets <b>mining speed to 0.3^level</b> (0.3 / 0.09 / 0.027)."
-- "Combines <b>Water Breathing</b>, <b>Night Vision</b> and <b>Haste</b> effects."
-- "<b>+3 armor</b> and <b>+1 armor toughness × level</b>. Also gains <b>Regeneration</b> equal to level."
+## data/links.json
 
-### Corrections (examples of the descripnstions you created and how I modified them; learn from this):
-Your initial version → My corrected version
-1. "Deals armor-ignoring damage every 2 seconds." → "Deals periodic damage that ignores armor every 2 seconds."
-2. "On end, if still burning, deals damage (higher level → more damage)." → "If the entity is on fire when the effect expires, deals damage based on remaining fire ticks (higher level → more damage).
-3. "Reduces incoming damage by <b>level</b> (half hearts)." → "Reduces incoming damage by <b>0.5 × level</b> hearts."
-4. "Negates fall damage and bounces entity upward (higher level → more horizontal push)." → "Negates fall damage and bounces entity upward upon landing (higher level → more momentum upon landing)."
-5. "Increases lightning and shock damage by <b>3 × level</b> (stacks to III)." -> "Increases lightning and shock damage by <b>3 × level</b>."
+- JSON file with list of mod names and URLs of their status effects lists.
+  - Link can be to mod's wiki, mcmod.cn, GitHub, CurseForge, Modrinth, and so on.
+  - We will call those pages "effects sitemap"
+- If we add new mod, add it with it's effects sitemap to this file.
+  - Keep the same ordering rules as for the effects.json (Minecraft first; then alphabetically by mod name).
+- Update links in this file to the latest "effects sitemap" page that you updated effects based on.
 
-### Tags rules
-- Each effect must have exactly one of these tags: "positive" or "negative".
-- It's up to you to decide if the effect is positive or negative, based on the description.
-- If the effect can have level >=2 (some cause has Potency II+), add the "scaling" tag as well.
-- Different lengths of the effect at the same level are not considered as scaling, only the power of the effect is.
-
-## validate_effects.py (now in scripts/)
+## scripts/validate_effects.py
 - Python script that validates `effects.json` for:
   1. Correct ordering
   2. Duplicate effect names

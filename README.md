@@ -6,7 +6,7 @@
 ![Bottle | 0.13.4](https://img.shields.io/badge/Bottle-0.13.4-blueviolet)
 ![Docker](https://img.shields.io/badge/Docker-Supported-yellow)
 
-Interactive list of vanilla and modded Minecraft status effects with proper descriptions.
+Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions.
 
 ## Run Local Server 💻
 
