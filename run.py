@@ -6,16 +6,15 @@ app = Bottle()
 ROOT_DIR = "."  # Public web root (keep sensitive files outside this if possible)
 
 # Files in the root directory we explicitly never want to serve
-SENSITIVE_ROOT_FILES = {
-    "Dockerfile",
-    "docker-compose.yml",
-    "requirements.txt",
-    "LICENSE",
-    "README.md",
-}
+SENSITIVE_ROOT_FILES = {"Dockerfile", "docker-compose.yml", "requirements.txt"}
 
 # Forbidden extensions anywhere
-FORBIDDEN_EXTS = {".md", ".markdown", ".py"}
+FORBIDDEN_EXTS = {
+    ".md",
+    ".markdown",
+    ".py",
+    ".sh",
+}
 
 
 def is_forbidden_path(requested: str) -> bool:
@@ -58,6 +57,18 @@ def is_forbidden_path(requested: str) -> bool:
 @app.route("/")
 def root():
     return static_file("index.html", root=ROOT_DIR)
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    """Serve sitemap with proper content type."""
+    return static_file("sitemap.xml", root=ROOT_DIR, mimetype="application/xml")
+
+
+@app.route("/robots.txt")
+def robots():
+    """Serve robots.txt with proper content type."""
+    return static_file("robots.txt", root=ROOT_DIR, mimetype="text/plain")
 
 
 @app.route("/index.html")

@@ -1,6 +1,8 @@
 name: Deploy to Raspberry Pi
 
 on:
+  push:
+    branches: [master]
   workflow_run:
     workflows: ["Validate Effects JSON"]
     types: [completed]
@@ -11,10 +13,75 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  check-validation:
+    name: Check if validation is needed
+    runs-on: ubuntu-latest
+    outputs:
+      should-wait: ${{ steps.check.outputs.should-wait }}
+      validation-passed: ${{ steps.check.outputs.validation-passed }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if validation workflow should run
+        id: check
+        run: |
+          # Check if this is a workflow_run event (validation completed)
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "should-wait=false" >> $GITHUB_OUTPUT
+            echo "validation-passed=${{ github.event.workflow_run.conclusion == 'success' }}" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Check if this is manual dispatch
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should-wait=false" >> $GITHUB_OUTPUT
+            echo "validation-passed=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # For push events, check if files that trigger validation were changed
+          if git diff --name-only HEAD~1 HEAD | grep -E "(data/effects\.json|scripts/validate_effects\.py|\.github/workflows/validate-effects\.yml)" > /dev/null; then
+            echo "should-wait=true" >> $GITHUB_OUTPUT
+            echo "validation-passed=false" >> $GITHUB_OUTPUT
+          else
+            echo "should-wait=false" >> $GITHUB_OUTPUT
+            echo "validation-passed=true" >> $GITHUB_OUTPUT
+          fi
+
+  wait-for-validation:
+    name: Wait for validation to complete
+    runs-on: ubuntu-latest
+    needs: check-validation
+    if: needs.check-validation.outputs.should-wait == 'true'
+    steps:
+      - name: Wait for validation workflow
+        uses: fountainhead/action-wait-for-check@v1.1.0
+        id: wait-for-validation
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: order-check
+          ref: ${{ github.sha }}
+          timeoutSeconds: 600
+
+      - name: Check validation result
+        if: steps.wait-for-validation.outputs.conclusion != 'success'
+        run: |
+          echo "Validation workflow failed or was cancelled"
+          exit 1
+
   deploy:
     name: Deploy to RPI5 8GB
-    if: >-
-      ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    needs: [check-validation, wait-for-validation]
+    if: |
+      always() && 
+      (needs.check-validation.outputs.should-wait == 'false' || 
+       (needs.check-validation.outputs.should-wait == 'true' && needs.wait-for-validation.result == 'success')) &&
+      (github.event_name == 'workflow_dispatch' || 
+       github.event_name == 'push' || 
+       (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'))
     runs-on: self-hosted
     steps:
       - name: Checkout code

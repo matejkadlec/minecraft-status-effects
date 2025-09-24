@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all CSS, JS, and image files
+Allow: /css/
+Allow: /js/
+Allow: /img/
+
+# Block access to server files and development files  
+Disallow: *.py
+Disallow: *.md
+Disallow: /logs/
+Disallow: /scrape/
+Disallow: /scripts/
+Disallow: /venv/
+Disallow: Dockerfile
+Disallow: requirements.txt
+Disallow: run_tests.sh
+
+# Sitemap location
+Sitemap: https://minecraftstatuseffects.com/sitemap.xml

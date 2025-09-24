@@ -205,10 +205,6 @@
   background: linear-gradient(135deg, #5f2e2e, #3d1f1f);
   color: #f7c9c9;
 }
-.badge.util {
-  background: linear-gradient(135deg, #2e4c5f, #1f313d);
-  color: #c9e8f7;
-}
 .badge.scaling {
   background: linear-gradient(135deg, #ff9800, #ffb347);
   color: #2b1a00;
@@ -231,6 +227,7 @@
  * Legend & references *
  *---------------------*/
 .fn-ref {
+  display: none !important;
   cursor: pointer;
   color: inherit;
   font-weight: 600;
@@ -454,12 +451,6 @@ td .arrow {
   color: var(--header);
   background: transparent !important;
   border: none !important;
-}
-
-/* Hide legend + footnote refs while pagination design is refined */
-.fn-ref,
-.table-note {
-  display: none !important;
 }
 
 /* Smooth logo swap */

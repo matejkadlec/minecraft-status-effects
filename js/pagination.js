@@ -40,7 +40,6 @@
       r.dataset.baseDisplay = r.style.display || "";
     });
   }
-  MCSE._storeBaseVisibility = storeBaseVisibility; // exposed for debug if needed
 
   function restoreBaseVisibility() {
     MCSE.rows.forEach((r) => {

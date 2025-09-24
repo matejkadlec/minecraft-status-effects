@@ -16,8 +16,7 @@
       tr.id = item.id;
       tr.setAttribute("data-mod", item.mod);
       if (item.type) tr.setAttribute("data-type", item.type);
-      if (item.tags?.includes("scaling") || item.scaling)
-        tr.setAttribute("data-scaling", "1");
+      if (item.tags?.includes("scaling")) tr.setAttribute("data-scaling", "1");
 
       const tdMod = document.createElement("td");
       tdMod.textContent = item.mod;
@@ -26,7 +25,7 @@
       const tdMax = document.createElement("td");
       tdMax.textContent = item.maxLevel ?? "";
       const tdDesc = document.createElement("td");
-      let rawDesc = item.descriptionHtml || item.description || "";
+      let rawDesc = item.description || "";
       // Replace ^level with exponent looking sup tag
       rawDesc = rawDesc.replace(/\^level/g, '<sup class="lvl-sup">level</sup>');
       // Normalize arrow glyphs to avoid row height expansion due to font metrics
@@ -42,13 +41,7 @@
       (item.tags || []).forEach((t) => {
         const span = document.createElement("span");
         span.className = `badge ${
-          t === "positive"
-            ? "pos"
-            : t === "negative"
-            ? "neg"
-            : t === "utility"
-            ? "util"
-            : t
+          t === "positive" ? "pos" : t === "negative" ? "neg" : t
         }`;
         span.textContent = t.charAt(0).toUpperCase() + t.slice(1);
         tdTags.appendChild(span);
