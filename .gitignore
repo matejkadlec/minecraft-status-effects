@@ -21,3 +21,6 @@ logs/
 
 # Untracked
 untracked/
+
+# Scraping results
+scrape/*.txt

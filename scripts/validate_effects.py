@@ -162,9 +162,9 @@ def main():
     print(f"{PREFIX}: 4/4 Description length check started...")
     for eff in effects:
         desc = (eff.get("description") or "").strip()
-        if len(desc) > 120:
+        if len(desc) > 125:
             fail(
-                f"Description too long (>120 chars) in effect '{eff.get('effect')}': {len(desc)} chars"
+                f"Description too long (>125 chars) in effect '{eff.get('effect')}': {len(desc)} chars"
             )
     print(f"{PREFIX}: ✅ Description length check passed.")
     print(f"{PREFIX}: ✨ All 4/4 checks passed.")

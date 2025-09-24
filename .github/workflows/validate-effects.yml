@@ -4,12 +4,12 @@ on:
   push:
     paths:
       - "data/effects.json"
-      - "test/validate_effects.py"
+      - "scripts/validate_effects.py"
       - ".github/workflows/validate-effects.yml"
   pull_request:
     paths:
       - "data/effects.json"
-      - "test/validate_effects.py"
+      - "scripts/validate_effects.py"
       - ".github/workflows/validate-effects.yml"
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
           echo "🔎 Running effects JSON validation"
           set -e
           mkdir -p logs
-          python test/validate_effects.py | tee logs/validation.log
+          python scripts/validate_effects.py | tee logs/validation.log
           echo "validation-log<<EOF" >> $GITHUB_OUTPUT
           sed 's/^/| /' logs/validation.log >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

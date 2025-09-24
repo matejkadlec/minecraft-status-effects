@@ -48,18 +48,38 @@ Open http://localhost:8000 in your browser.
 
 Open http://localhost:8000 in your browser.
 
+## Automated Effect Ingestion (mcmod.cn) ⬇️
+
+You can trigger an automated scrape + insert flow by issuing a prompt that contains the word `add` and at least one `mcmod.cn` list URL (e.g. `Add https://www.mcmod.cn/item/list/3468-6.html`).
+
+Flow summary:
+1. Scrapes list page(s) with `python scrape/mcmod.py <url>` producing `scrape/<mod>.txt` of item detail URLs.
+2. Fetch each effect page, extract English name (in parentheses), potency (max level), description (compressed), formulas, type and tags.
+3. Build `id` (`mod-name-effect-name` lowercase, hyphen separated) and enforce description length ≤125 chars.
+4. Insert (or update) effects in `data/effects.json` maintaining ordering rules and uniqueness.
+5. Run `python scripts/validate_effects.py` once; if errors, attempt up to 2 auto-fix iterations.
+6. Output Added / Updated / Skipped summary (for changed effects only).
+
+Edge handling:
+- Duplicate effect name across mods → skip.
+- Missing English name → manual intervention required.
+- Network/parse failure for a page → skipped with reason.
+- Max level absent → defaults to I (no scaling tag).
+
+This logic is documented in more detail in `.github/copilot-instructions.md`.
+
 ## Data Integrity Test ✅
 
 Four automated validations run against `data/effects.json`.
 
-### 1. Ordering
+### 1. Effects Order
 
 Enforces deterministic ordering for readability and minimal diff noise.
 - All `Minecraft` effects first (one contiguous block), alphabetically by effect name.
 - Then each mod section ordered by mod name (A → Z).
 - Inside every mod, effects ordered alphabetically by effect name.
 
-### 2. Duplicate Effect Names
+### 2. Duplicate Effects
 
 Effect names must be globally unique across ALL mods (not just within a mod). Adding an effect whose name already exists anywhere fails the check.
 
@@ -70,14 +90,34 @@ Any description containing scaling patterns must format them consistently:
 - The bold span must END with that substring (e.g. `<b>0.3^level</b>`, `<b>5 × level</b>`).
 - These substrings must never appear outside bold formatting.
 
-### 4. Description Length (max 120 chars)
+### 4. Description Length
 
-This is primarily to keep descriptions on a single line on FHD full-screen browser window size (120 characters), but also ensures every description stays concise and easy to read.
+This is primarily to keep descriptions on a single line on FHD full-screen browser window size (125 characters), but also ensures every description stays concise and easy to read.
 
 ### Run Locally
 
 ```bash
-python test/validate_effects.py
+python scripts/validate_effects.py
 ```
 
-GitHub Actions runs all four on every push / PR that touches `effects.json`.
+- Or, to run all available tests:
+
+```bash
+./run_tests.sh
+```
+
+- You might need to run `chmod +x run_tests.sh` first.
+
+GitHub Actions runs the integration test on every push / PR that touches `effects.json`.
+
+## Additional Python scripts 🐍
+
+### Fix effects.js order
+
+If an ordering slip occurs during manual edits you can re-normalize ordering:
+
+```bash
+python scripts/sort_effects.py --check    # Verify
+python scripts/sort_effects.py            # Rewrite in-place
+python scripts/validate_effects.py        # Final confirmation
+```

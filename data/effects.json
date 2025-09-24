@@ -279,7 +279,7 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Grants fast creative-style flight while in darkness."
+      "description": "Allows flying similar to creative flight, but at much faster speed."
     },
     {
       "mod": "Alex's Caves",
@@ -360,7 +360,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Paralyzes arthropods; non-arthropods take damage until half health."
+      "description": "Paralyzes arthropods; non-arthropods take damage until they are on a half of their max health."
     },
     {
       "mod": "Alex's Mobs",
@@ -369,7 +369,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Violently shakes screen obstructing vision."
+      "description": "Violently shakes screen, obstructing vision."
     },
     {
       "mod": "Alex's Mobs",
@@ -378,7 +378,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Causes shaking; spawns an Enderiophage and deals heavy damage when it ends."
+      "description": "Causes shaking; spawns an Enderiophage and deals heavy damage when effect expires."
     },
     {
       "mod": "Alex's Mobs",
@@ -531,7 +531,7 @@
       "maxLevel": "II",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Increases experience gained from kills and mining by <b>4^level</b> (4× / 16×)."
+      "description": "Increases experience gained by <b>4^level</b> (4× / 16×)."
     },
     {
       "mod": "Apotheosis",
@@ -544,21 +544,93 @@
     },
     {
       "mod": "Apotheosis",
+      "id": "apotheosis-bleeding",
+      "effect": "Bleeding",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Deals periodic damage that ignores armor every 2 seconds."
+    },
+    {
+      "mod": "Apotheosis",
+      "id": "apotheosis-bursting-vitality",
+      "effect": "Bursting Vitality",
+      "maxLevel": "II",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases healing received by <b>20% × level</b>."
+    },
+    {
+      "mod": "Apotheosis",
+      "id": "apotheosis-flaming-detonation",
+      "effect": "Flaming Detonation",
+      "maxLevel": "II",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "If the entity is on fire when the effect expires, deals damage based on remaining fire ticks (higher level → more damage)."
+    },
+    {
+      "mod": "Apotheosis",
       "id": "apotheosis-flying",
       "effect": "Flying",
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Grants creative-style flight for the duration."
+      "description": "Grants creative flight for the duration."
+    },
+    {
+      "mod": "Apotheosis",
+      "id": "apotheosis-grievous-wounds",
+      "effect": "Grievous Wounds",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Reduces healing received by <b>40% × level</b>. Level III blocks healing completely."
+    },
+    {
+      "mod": "Apotheosis",
+      "id": "apotheosis-sundering",
+      "effect": "Sundering",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "<b>+20% damage taken × level</b>"
     },
     {
       "mod": "Ars Nouveau",
       "id": "ars-nouveau-blasting",
       "effect": "Blasting",
-      "maxLevel": "V",
+      "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Causes entity to explode after delay (higher level → bigger explosion and shorter fuse)."
+      "description": "Explodes after delay (higher level → bigger damage and radius)."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-bounce",
+      "effect": "Bounce",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Negates fall damage and bounces entity upward upon landing (higher level → more momentum upon landing)."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-familiar-sickness",
+      "effect": "Familiar Sickness",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents casting summoning spells."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-flight",
+      "effect": "Flight",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants creative flight and prevents fall damage."
     },
     {
       "mod": "Ars Nouveau",
@@ -571,21 +643,93 @@
     },
     {
       "mod": "Ars Nouveau",
-      "id": "ars-nouveau-recovery",
-      "effect": "Recovery",
+      "id": "ars-nouveau-glide",
+      "effect": "Glide",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Allows Elytra-like gliding."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-gravity",
+      "effect": "Gravity",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Greatly increases fall speed, doubles fall damage, limits flight height."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-magic-find",
+      "effect": "Magic Find",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Highlights nearby magic mobs with a glowing outline."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-mana-regen",
+      "effect": "Mana Regen",
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Amplifies all healing received."
+      "description": "Increases mana regeneration rate by <b>10 × level</b>."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-recovery",
+      "effect": "Recovery",
+      "maxLevel": "II",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Adds <b>0.5 × level</b> hearts to each instance of healing."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-scrying",
+      "effect": "Scrying",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Highlights vertical position of nearby budding amethyst."
     },
     {
       "mod": "Ars Nouveau",
       "id": "ars-nouveau-shielding",
       "effect": "Shielding",
-      "maxLevel": "I",
+      "maxLevel": "II",
       "type": "positive",
-      "tags": ["positive"],
-      "description": "Reduces incoming damage by a flat amount per hit."
+      "tags": ["positive", "scaling"],
+      "description": "Reduces incoming damage by <b>0.5 × level</b> hearts."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-shocked",
+      "effect": "Shocked",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Increases lightning and shock damage by <b>3 × level</b>."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-snared",
+      "effect": "Snared",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Severely restricts movement and jumping."
+    },
+    {
+      "mod": "Ars Nouveau",
+      "id": "ars-nouveau-spell-damage",
+      "effect": "Spell Damage",
+      "maxLevel": "III",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases spell damage by <b>1.5 × level</b>."
     },
 
     {
