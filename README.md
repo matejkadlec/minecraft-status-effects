@@ -70,7 +70,7 @@ This logic is documented in more detail in `.github/copilot-instructions.md`.
 
 ## Data Integrity Test ✅
 
-Four automated validations run against `data/effects.json`.
+Five automated validations run against `data/effects.json`.
 
 ### 1. Effects Order
 
@@ -89,10 +89,18 @@ Any description containing scaling patterns must format them consistently:
 - The substrings `^level` and `× level` (including the multiplication sign, not a plain 'x') must appear only inside a `<b>...</b>` span.
 - The bold span must END with that substring (e.g. `<b>0.3^level</b>`, `<b>5 × level</b>`).
 - These substrings must never appear outside bold formatting.
+- Time units like "second", "seconds", and "second(s)" must always be wrapped in `<b>` tags.
 
 ### 4. Description Length
 
 This is primarily to keep descriptions on a single line on FHD full-screen browser window size (125 characters), but also ensures every description stays concise and easy to read.
+
+### 5. Tags Validation
+
+Ensures proper tag structure for every effect:
+- Each effect must have exactly one of either "positive" or "negative" tag (not both, not neither)
+- The "scaling" tag must be present when maxLevel > 1 (i.e., effects that can have multiple levels)
+- Tags must be properly formatted as an array of strings
 
 ### Run Locally
 

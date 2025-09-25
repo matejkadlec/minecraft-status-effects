@@ -7,15 +7,19 @@ Rules:
 3. Remaining entries grouped by `mod`, groups ordered alphabetically by mod.
 4. Each group's effects sorted alphabetically by `effect`.
 5. No duplicate effect names globally (effect name must be unique across all mods).
+6. Formula formatting: '^level' and '× level' must be in <b> tags and properly positioned.
+7. Time units: All "second", "seconds", "second(s)" must be in <b> tags.
+8. Description length must be ≤125 chars (excluding HTML tags).
+
 Exit code 0 if valid, else >0 with human-readable diagnostics to stderr.
 """
 from __future__ import annotations
 import json
 import sys
+import re
 from pathlib import Path
 
 PREFIX = "[Effects Validation]"
-import re
 
 EFFECTS_PATH = Path(__file__).resolve().parent.parent / "data" / "effects.json"
 
@@ -39,38 +43,68 @@ def fail(msg: str, code: int = 1):
     sys.exit(code)
 
 
-def validate_formula_wrapping(effects):
-    """Ensure '^level' and '× level' appear only inside <b>...</b> and terminate the bold span.
+def strip_html_tags(text: str) -> str:
+    """Remove HTML tags from text for length calculation."""
+    return re.sub(r"<[^>]+>", "", text)
+
+
+def validate_formula_and_time_wrapping(effects):
+    """Ensure formulas and time units are properly wrapped in <b> tags.
 
     Rules:
-    - Any occurrence of '^level' must be inside a <b>...</b> whose content ends with '^level'.
-    - Any occurrence of '× level' must be inside a <b>...</b> whose content ends with '× level'.
-    - These substrings must not appear outside bold tags.
+    - '^level' and '× level' must be inside <b> tags and either be at the end
+      or followed by "second", "seconds", or "second(s)"
+    - Every instance of "second", "seconds", or "second(s)" must be wrapped in <b> tags
     """
+    # Terms that must be in bold
+    time_terms = ["second", "seconds", "second(s)"]
+    formula_terms = ["^level", "× level"]
+
     for eff in effects:
         desc = eff.get("description") or ""
-        name = eff.get("effect")
-        if "^level" not in desc and "× level" not in desc:
-            continue
+        name = eff.get("effect") or "Unknown"
+
+        # Extract bold content and content outside bold
         bold_spans = re.findall(r"<b>(.*?)</b>", desc)
         outside = re.sub(r"<b>.*?</b>", "", desc)
-        if "^level" in outside:
-            fail(f"Formula '^level' outside <b> in effect '{name}'")
-        if "× level" in outside:
-            fail(f"Formula '× level' outside <b> in effect '{name}'")
+
+        # Check for formula terms outside bold
+        for term in formula_terms:
+            if term in outside:
+                fail(f"Formula '{term}' must be in <b> tags in effect '{name}'")
+
+        # Check for time terms outside bold
+        for term in time_terms:
+            if term in outside:
+                fail(f"Time unit '{term}' must be in <b> tags in effect '{name}'")
+
+        # Check formula placement within bold spans
         for span in bold_spans:
-            if "^level" in span and not span.endswith("^level"):
-                fail(
-                    f"'^level' not at end of bold span in effect '{name}' -> <b>{span}</b>"
-                )
-            if (
-                "× level" in span
-                and not span.endswith("× level")
-                and "^level" not in span
-            ):
-                fail(
-                    f"'× level' not at end of bold span in effect '{name}' -> <b>{span}</b>"
-                )
+            # For ^level
+            if "^level" in span:
+                valid_endings = [
+                    "^level",
+                    "^level second",
+                    "^level seconds",
+                    "^level second(s)",
+                ]
+                if not any(span.endswith(end) for end in valid_endings):
+                    fail(
+                        f"'^level' incorrectly positioned in bold span in effect '{name}' -> <b>{span}</b>"
+                    )
+
+            # For × level (when not in a span with ^level)
+            if "× level" in span and "^level" not in span:
+                valid_endings = [
+                    "× level",
+                    "× level second",
+                    "× level seconds",
+                    "× level second(s)",
+                ]
+                if not any(span.endswith(end) for end in valid_endings):
+                    fail(
+                        f"'× level' incorrectly positioned in bold span in effect '{name}' -> <b>{span}</b>"
+                    )
 
 
 def main():
@@ -78,7 +112,7 @@ def main():
     effects = load_effects()
 
     # Ordering validation section
-    print(f"{PREFIX}: 1/4 Ordering checks started...")
+    print(f"{PREFIX}: 1/5 Ordering checks started...")
 
     if not effects:
         fail("No effects present (empty list)")
@@ -142,7 +176,7 @@ def main():
     print(f"{PREFIX}: ✅ Effect ordering checks passed.")
 
     # Duplication validation section
-    print(f"{PREFIX}: 2/4 Duplicate name check started...")
+    print(f"{PREFIX}: 2/5 Duplicate name check started...")
     # Check duplicate effect names globally
     seen_names = set()
     for e in effects:
@@ -153,21 +187,54 @@ def main():
 
     print(f"{PREFIX}: ✅ Effect duplicate name check passed.")
 
-    # Formula / bold formatting validation section
-    print(f"{PREFIX}: 3/4 Formula formatting check started...")
-    validate_formula_wrapping(effects)
-    print(f"{PREFIX}: ✅ Formula formatting check passed.")
+    # Formula and time wrapping validation section
+    print(f"{PREFIX}: 3/5 Formula and time formatting check started...")
+    validate_formula_and_time_wrapping(effects)
+    print(f"{PREFIX}: ✅ Formula and time formatting check passed.")
 
     # Description length validation
-    print(f"{PREFIX}: 4/4 Description length check started...")
+    print(f"{PREFIX}: 4/5 Description length check started...")
     for eff in effects:
         desc = (eff.get("description") or "").strip()
-        if len(desc) > 125:
+        desc_without_html = strip_html_tags(desc)
+        if len(desc_without_html) > 125:
             fail(
-                f"Description too long (>125 chars) in effect '{eff.get('effect')}': {len(desc)} chars"
+                f"Description too long (>125 chars) in effect '{eff.get('effect')}': {len(desc_without_html)} chars (without HTML tags)"
             )
     print(f"{PREFIX}: ✅ Description length check passed.")
-    print(f"{PREFIX}: ✨ All 4/4 checks passed.")
+
+    # Tags validation
+    print(f"{PREFIX}: 5/5 Tags validation check started...")
+    for eff in effects:
+        tags = eff.get("tags", [])
+        if not isinstance(tags, list):
+            fail(f"Tags must be a list for effect '{eff.get('effect')}'")
+
+        if "positive" not in tags and "negative" not in tags:
+            fail(
+                f"Effect '{eff.get('effect')}' must have either 'positive' or 'negative' tag"
+            )
+
+        if "positive" in tags and "negative" in tags:
+            fail(
+                f"Effect '{eff.get('effect')}' cannot have both 'positive' and 'negative' tags"
+            )
+
+        # Check if scaling tag is present when maxLevel > 1
+        max_level = eff.get("maxLevel")
+        if isinstance(max_level, str) and max_level not in ("I", "1", 1):
+            if "scaling" not in tags:
+                fail(
+                    f"Effect '{eff.get('effect')}' with maxLevel '{max_level}' should have 'scaling' tag"
+                )
+        elif isinstance(max_level, int) and max_level > 1:
+            if "scaling" not in tags:
+                fail(
+                    f"Effect '{eff.get('effect')}' with maxLevel {max_level} should have 'scaling' tag"
+                )
+
+    print(f"{PREFIX}: ✅ Tags validation check passed.")
+    print(f"{PREFIX}: ✨ All 5/5 checks passed.")
 
 
 if __name__ == "__main__":

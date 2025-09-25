@@ -125,7 +125,7 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>+50% jump height × level</b> and reduces <b>fall damage by level hearts</b>."
+      "description": "<b>+50% jump height × level</b> and reduces fall damage by amount of hearts equal to level."
     },
     {
       "mod": "Minecraft",
@@ -161,7 +161,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Wavy distortion of vision. Can be changed to green screen overlay instead via settings."
+      "description": "Wavy distortion of vision."
     },
     {
       "mod": "Minecraft",
@@ -188,7 +188,7 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Heals <b>0.2 hearts</b> every <b>0.5 × 2^level</b> seconds (0.2 / 0.4 / 0.8)."
+      "description": "Heals <b>0.2 hearts</b> every <b>0.5 × 2^level seconds</b> (0.2 / 0.4 / 0.8)."
     },
     {
       "mod": "Minecraft",
@@ -540,7 +540,7 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Deals <b>2 × level</b> magic damage per second."
+      "description": "Deals <b>2 × level</b> magic damage every <b>second</b>."
     },
     {
       "mod": "Apotheosis",
@@ -549,7 +549,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Deals periodic damage that ignores armor every 2 seconds."
+      "description": "Deals periodic damage that ignores armor every <b>2 seconds</b>."
     },
     {
       "mod": "Apotheosis",
@@ -585,7 +585,7 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Reduces healing received by <b>40% × level</b>. Level III blocks healing completely."
+      "description": "Reduces healing received by <b>40% × level</b>. <b>Level III</b> blocks all healing received, including instant health and life steal."
     },
     {
       "mod": "Apotheosis",
@@ -731,7 +731,15 @@
       "tags": ["positive", "scaling"],
       "description": "Increases spell damage by <b>1.5 × level</b>."
     },
-
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-abyssal-burn",
+      "effect": "Abyssal Burn",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Deals <b>1 magic damage</b> every <b>2 seconds</b>. Higher level reduces the interval and may cause teleportation."
+    },
     {
       "mod": "Cataclysm",
       "id": "cataclysm-abyssal-curse",
@@ -739,7 +747,16 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Deals periodic magic damage (higher level → faster ticks)."
+      "description": "Deals <b>1 magic damage</b> every <b>3/1/0.75 second(s)</b>, based on level."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-abyssal-fear",
+      "effect": "Abyssal Fear",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Blocks all healing received, including instant health and life steal."
     },
     {
       "mod": "Cataclysm",
@@ -748,7 +765,52 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "<b>-20% armor</b> and <b>armor toughness × level</b>."
+      "description": "<b>-20% armor × level</b> and <b>-20% armor toughness × level</b>."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-blessing-of-amethyst",
+      "effect": "Blessing of Amethyst",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants immunity to <b>Darkness</b>, <b>Abyssal Fear</b> and <b>Abyssal Burn</b>."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-bone-fracture",
+      "effect": "Bone Fracture",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "<b>-20% movement speed</b> and <b>-0.15 attack speed</b>."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-curse-of-desert",
+      "effect": "Curse of Desert",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Reverses movement controls (forward becomes backward, left becomes right). Increases sneak movement speed."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-ghost-form",
+      "effect": "Ghost Form",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "<b>+40% movement speed</b> and grants invincibility."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-ghost-sickness",
+      "effect": "Ghost Sickness",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents triggering the resurrection effect of the Cursed Soul Breastplate."
     },
     {
       "mod": "Cataclysm",
@@ -757,9 +819,26 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>+3 armor</b> and <b>+1 armor toughness × level</b>. Also gains <b>Regeneration</b> equal to level."
+      "description": "Each level grants <b>+3 armor</b>, <b>+1 armor toughness</b>, <b>+0.5 knockback resistance</b> and <b>Regeneration</b> equal to level."
     },
-
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-stun",
+      "effect": "Stun",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents movement and attacks. Reduces FOV and causes camera shakes for players, removes AI from non-player entities."
+    },
+    {
+      "mod": "Cataclysm",
+      "id": "cataclysm-wetness",
+      "effect": "Wetness",
+      "maxLevel": "III",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "<b>-5% movement speed × level</b> and increases lightning damage taken by <b>20% × level</b>."
+    },
     {
       "mod": "Eidolon: Repraised",
       "id": "eidolon-anchored",
@@ -839,8 +918,8 @@
       "effect": "Brittleness",
       "maxLevel": "II",
       "type": "negative",
-      "tags": ["negative"],
-      "description": "Increases damage taken."
+      "tags": ["negative", "scaling"],
+      "description": "Increases damage taken (higher level → more damage)."
     },
     {
       "mod": "The Undergarden",
@@ -848,8 +927,8 @@
       "effect": "Featherweight",
       "maxLevel": "II",
       "type": "negative",
-      "tags": ["negative"],
-      "description": "No description provided."
+      "tags": ["negative", "scaling"],
+      "description": "Missing."
     },
     {
       "mod": "Twilight's Flavors & Delight",
