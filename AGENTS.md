@@ -165,17 +165,27 @@ Your initial → Corrected version
 
 **Process:**
 1. Extract mcmod.cn list URLs
-2. Run `python scrape/mcmod.py <url>` for each
-3. Process each effect detail page:
-   - Extract English name from parentheses: `中文名 (English Name)`
-   - Determine maxLevel from potency indicators (I/II/III)
+2. Run `python scrape/mcmod_effect_list.py <url>` for each list page to extract individual effect URLs
+3. Run `python scrape/mcmod_effect.py <effect_url>` for each individual effect page to extract:
+   - English name from parentheses: `中文名 (English Name)`
+   - Effect description from item-text section
+   - Command information and mod namespace
+   - Table data for level information
+   - User comments for additional context
+   - Determine maxLevel from potency indicators (I/II/III) or table data
+   - Determine effect type (positive/negative) from classification or description analysis
+4. Process extracted data:
    - Create compressed description following rules above
    - Set type (positive/negative) and tags
    - Build ID: `mod-name-effect-name` (lowercase, hyphens)
-4. Check for duplicates (skip if effect name exists)
-5. Insert maintaining alphabetical order
-6. Run validator once at end
-7. Provide exact summary format
+5. Check for duplicates (skip if effect name exists)
+6. Insert maintaining alphabetical order
+7. Run validator once at end
+8. Provide exact summary format
+
+**Scraping Scripts:**
+- `scrape/mcmod_effect_list.py`: Extracts individual effect URLs from mcmod.cn list pages
+- `scrape/mcmod_effect.py`: Scrapes detailed effect information from individual effect pages
 
 **Quality checks before summary:**
 - Ordering preserved

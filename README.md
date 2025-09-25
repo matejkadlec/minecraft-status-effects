@@ -53,12 +53,13 @@ Open http://localhost:8000 in your browser.
 You can trigger an automated scrape + insert flow by issuing a prompt that contains the word `add` and at least one `mcmod.cn` list URL (e.g. `Add https://www.mcmod.cn/item/list/3468-6.html`).
 
 Flow summary:
-1. Scrapes list page(s) with `python scrape/mcmod.py <url>` producing `scrape/<mod>.txt` of item detail URLs.
-2. Fetch each effect page, extract English name (in parentheses), potency (max level), description (compressed), formulas, type and tags.
-3. Build `id` (`mod-name-effect-name` lowercase, hyphen separated) and enforce description length ≤125 chars.
-4. Insert (or update) effects in `data/effects.json` maintaining ordering rules and uniqueness.
-5. Run `python scripts/validate_effects.py` once; if errors, attempt up to 2 auto-fix iterations.
-6. Output Added / Updated / Skipped summary (for changed effects only).
+1. Scrapes list page(s) with `python scrape/mcmod_effect_list.py <url>` producing `scrape/<mod>.txt` of item detail URLs.
+2. Scrapes each individual effect page with `python scrape/mcmod_effect.py <effect_url>` to extract detailed information.
+3. Fetch each effect page, extract English name (in parentheses), potency (max level), description (compressed), formulas, type and tags.
+4. Build `id` (`mod-name-effect-name` lowercase, hyphen separated) and enforce description length ≤125 chars.
+5. Insert (or update) effects in `data/effects.json` maintaining ordering rules and uniqueness.
+6. Run `python scripts/validate_effects.py` once; if errors, attempt up to 2 auto-fix iterations.
+7. Output Added / Updated / Skipped summary (for changed effects only).
 
 Edge handling:
 - Duplicate effect name across mods → skip.
