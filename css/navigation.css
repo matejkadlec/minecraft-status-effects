@@ -45,6 +45,23 @@ aside#nav {
   background-clip: text;
   color: transparent;
 }
+/* Logo and divider theme switching */
+.nav-logo {
+  transition: opacity 0.3s ease;
+}
+.logo-dark,
+.divider-dark {
+  display: none;
+}
+:root.dark .logo-light,
+:root.dark .divider-light {
+  display: none;
+}
+:root.dark .logo-dark,
+:root.dark .divider-dark {
+  display: block;
+}
+
 .nav-divider {
   margin: 0.85rem 0;
   transition: opacity 0.3s ease;
@@ -124,7 +141,7 @@ hr {
   border: 1px solid transparent;
   border-radius: 6px;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.05;
   position: relative;
   transition: 0.3s;
@@ -142,7 +159,7 @@ hr {
 /* Loading placeholder inside nav */
 .nav-loading {
   width: 226px;
-  height: 367.19px;
+  height: 363.98px;
   display: flex;
   align-items: center;
   justify-content: center;

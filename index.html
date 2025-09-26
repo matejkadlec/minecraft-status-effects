@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+      content="Interactive list of vanilla and modded Minecraft status effects with precise descriptions. Includes spell status effects and Apotheosis affixes."
     />
     <meta name="author" content="Matěj Kadlec" />
     <link rel="author" href="https://matejkadlec.cz" />
@@ -30,10 +30,11 @@
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Minecraft Status Effects" />
     <meta property="og:title" content="Minecraft Status Effects" />
     <meta
       property="og:description"
-      content="Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+      content="Interactive list of vanilla and modded Minecraft status effects with precise descriptions. Includes spell status effects and Apotheosis affixes."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://minecraftstatuseffects.com" />
@@ -51,7 +52,7 @@
     <meta name="twitter:title" content="Minecraft Status Effects" />
     <meta
       name="twitter:description"
-      content="Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions."
+      content="Interactive list of vanilla and modded Minecraft status effects with precise descriptions. Includes spell status effects and Apotheosis affixes."
     />
     <meta
       name="twitter:image"
@@ -78,7 +79,7 @@
         "@type": "WebSite",
         "name": "Minecraft Status Effects",
         "url": "https://minecraftstatuseffects.com",
-        "description": "Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions.",
+        "description": "Interactive list of vanilla and modded Minecraft status effects with precise descriptions. Includes spell status effects and Apotheosis affixes.",
         "creator": {
           "@type": "Person",
           "name": "Matěj Kadlec",
@@ -131,18 +132,29 @@
   </head>
   <body>
     <aside id="nav" class="bg-gradient">
+      <!-- Dual logos eliminate light->dark asset swap flash -->
       <img
-        id="nav-logo"
+        id="nav-logo-light"
+        class="nav-logo logo-light"
         src="img/logo-light.png"
-        data-light="img/logo-light.png"
-        data-dark="img/logo-dark.png"
         alt="Minecraft Status Effects logo"
       />
       <img
-        class="nav-divider"
+        id="nav-logo-dark"
+        class="nav-logo logo-dark"
+        src="img/logo-dark.png"
+        alt="Minecraft Status Effects logo"
+      />
+      <!-- Dual dividers eliminate light->dark asset swap flash -->
+      <img
+        class="nav-divider divider-light"
         src="img/divider-light.png"
-        data-light="img/divider-light.png"
-        data-dark="img/divider-dark.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <img
+        class="nav-divider divider-dark"
+        src="img/divider-dark.png"
         alt=""
         aria-hidden="true"
       />
@@ -171,11 +183,16 @@
         </div>
         <ul id="mod-nav" class="hidden"></ul>
       </nav>
+      <!-- Dual dividers eliminate light->dark asset swap flash -->
       <img
-        class="nav-divider"
+        class="nav-divider divider-light"
         src="img/divider-light.png"
-        data-light="img/divider-light.png"
-        data-dark="img/divider-dark.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <img
+        class="nav-divider divider-dark"
+        src="img/divider-dark.png"
         alt=""
         aria-hidden="true"
       />
@@ -201,10 +218,14 @@
         </div>
       </div>
       <img
-        class="nav-divider"
+        class="nav-divider divider-light"
         src="img/divider-light.png"
-        data-light="img/divider-light.png"
-        data-dark="img/divider-dark.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <img
+        class="nav-divider divider-dark"
+        src="img/divider-dark.png"
         alt=""
         aria-hidden="true"
       />
@@ -236,8 +257,9 @@
       <section>
         <div class="intro-bar">
           <p class="intro-text">
-            Browse interactive list of vanilla and modded Minecraft status
-            effects with proper descriptions.
+            Interactive list of vanilla and modded Minecraft status effects with
+            precise descriptions. Includes spell status effects and Apotheosis
+            affixes.
           </p>
           <div class="search-wrapper">
             <input
