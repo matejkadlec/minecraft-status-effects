@@ -1,4 +1,4 @@
-# Copilot Instructions
+# AGENT INSTRUCTIONS
 
 ## ⚠️ CRITICAL RULES - NEVER IGNORE THESE ⚠️
 
@@ -32,7 +32,7 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 - Working directory: `/home/matej/projects/minecraft-status-effects/` (project root)
 - Python: Use `python` or `python3` after `source venv/bin/activate`
 - Never use full paths like `/home/matej/projects/minecraft-status-effects/venv/bin/python`
-- Cannot delete files - tell user to delete instead
+- Use `rm` to delete files that are no longer needed
 
 ---
 

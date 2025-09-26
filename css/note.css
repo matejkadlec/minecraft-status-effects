@@ -11,25 +11,26 @@
   margin: 0;
 }
 #contribution {
-  margin-top: 1rem;
+  margin: 0;
+  font-weight: 500;
 }
 #contribution a {
-  color: #8093d6;
-  font-weight: 600;
-  text-decoration: none;
   transition: 0.3s;
+  color: var(--header);
+  text-decoration: none;
 }
 #contribution a:hover {
-  color: #333333;
   transition: 0.3s;
+  color: var(--header-alt);
 }
 :root.dark #contribution a:hover {
-  color: #ffffff;
-  transition: 0.3s;
+  color: #e4c969;
 }
 
 /* Copyright block */
 #copyright {
+  transition: 0.3s;
+  font-weight: 500;
   width: 100%;
   height: 36px;
   margin: 0;
@@ -41,9 +42,17 @@
   justify-self: flex-end;
   line-height: 1.25;
 }
+:root.dark #copyright {
+  font-weight: 400;
+}
 #copyright .legal-links {
   white-space: nowrap;
 }
 #copyright a {
+  transition: 0.3s;
   display: inline;
+}
+:root.dark #copyright a:hover {
+  transition: 0.3s;
+  color: #e4c969;
 }

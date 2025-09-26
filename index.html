@@ -119,6 +119,8 @@
     <link rel="shortcut icon" href="img/icon.ico" />
     <link rel="preload" href="img/logo-light.png" as="image" />
     <link rel="preload" href="img/logo-dark.png" as="image" />
+    <link rel="preload" href="img/divider-light.png" as="image" />
+    <link rel="preload" href="img/divider-dark.png" as="image" />
     <!-- Preload dark spinner to prevent flash when user prefers dark theme -->
     <link
       rel="preload"
@@ -128,7 +130,7 @@
     />
   </head>
   <body>
-    <aside id="nav">
+    <aside id="nav" class="bg-gradient">
       <img
         id="nav-logo"
         src="img/logo-light.png"
@@ -136,8 +138,15 @@
         data-dark="img/logo-dark.png"
         alt="Minecraft Status Effects logo"
       />
-      <hr />
-      <h1>Available Mods</h1>
+      <img
+        class="nav-divider"
+        src="img/divider-light.png"
+        data-light="img/divider-light.png"
+        data-dark="img/divider-dark.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <h1 class="nav-title">Available Mods</h1>
       <nav>
         <div
           id="nav-loading"
@@ -162,8 +171,15 @@
         </div>
         <ul id="mod-nav" class="hidden"></ul>
       </nav>
-      <hr />
-      <h1>Quick Filters</h1>
+      <img
+        class="nav-divider"
+        src="img/divider-light.png"
+        data-light="img/divider-light.png"
+        data-dark="img/divider-dark.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <h1 class="nav-title">Quick Filters</h1>
       <div class="quick-filters">
         <div class="filter-row">
           <label class="filter"
@@ -184,7 +200,14 @@
           >
         </div>
       </div>
-      <hr />
+      <img
+        class="nav-divider"
+        src="img/divider-light.png"
+        data-light="img/divider-light.png"
+        data-dark="img/divider-dark.png"
+        alt=""
+        aria-hidden="true"
+      />
       <p id="contribution" class="note">
         Found an inaccuracy or just want to contribute? Contact me on
         <a href="https://discord.com/users/jimmorioriarty" target="_blank"
@@ -209,7 +232,7 @@
         </p>
       </div>
     </aside>
-    <main id="content">
+    <main id="content" class="bg-image bg-overlay">
       <section>
         <div class="intro-bar">
           <p class="intro-text">

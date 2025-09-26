@@ -13,27 +13,67 @@ aside#nav {
   height: 100vh;
   overflow-y: auto;
 }
-#nav #nav-logo {
-  padding-bottom: 1rem;
+:root.dark aside#nav {
+  border-color: var(--border);
+}
+
+/* Nav background gradient */
+#nav.bg-gradient {
+  background: var(--bg-nav-gradient);
+}
+
+/* Nav title gradient text */
+:root #nav .nav-title {
+  background-image: linear-gradient(
+    180deg,
+    var(--blue-1) 0%,
+    var(--blue-2) 40%,
+    var(--blue-3) 80%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:root.dark #nav .nav-title {
+  background-image: linear-gradient(
+    180deg,
+    var(--gold-1) 0%,
+    var(--gold-2) 60%,
+    var(--gold-3) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.nav-divider {
+  margin: 0.85rem 0;
+  transition: opacity 0.3s ease;
 }
 #nav h1 {
   margin: 0;
   font-size: 1.1rem;
   color: var(--header);
   letter-spacing: 0.5px;
+  margin-bottom: 0.85rem;
 }
 #nav h1:nth-of-type(1) {
-  margin-bottom: 0.5rem;
-}
-#nav h1 {
-  margin-top: 0.85rem;
+  margin-bottom: calc(0.6rem - 1.111px);
 }
 #nav .quick-filters {
-  margin-top: 0.85rem;
-  margin-bottom: 1rem;
+  margin-bottom: calc(0.25rem + 1.111px);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+hr {
+  color: transparent;
+  border-color: #999999;
+}
+
+:root.dark hr {
+  color: transparent;
+  border-color: var(--white);
 }
 
 /* Filter chips */
@@ -45,6 +85,7 @@ aside#nav {
 }
 .filter {
   font-size: 0.8rem;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 0.1rem;
@@ -69,9 +110,9 @@ aside#nav {
 
 /* Mod navigation list */
 #mod-nav {
+  margin: 0;
   list-style: none;
   padding: 0;
-  margin: 0 0 1rem 0;
   display: flex;
   flex-direction: column;
 }
@@ -83,7 +124,7 @@ aside#nav {
   border: 1px solid transparent;
   border-radius: 6px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.05;
   position: relative;
   transition: 0.3s;
@@ -101,7 +142,7 @@ aside#nav {
 /* Loading placeholder inside nav */
 .nav-loading {
   width: 226px;
-  height: 379.98px;
+  height: 367.19px;
   display: flex;
   align-items: center;
   justify-content: center;

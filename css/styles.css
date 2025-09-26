@@ -11,7 +11,6 @@ body {
   margin: 0;
   font-family: "Montserrat", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
     "Open Sans", "Helvetica Neue", sans-serif;
-  background: var(--bg);
   color: var(--text);
 }
 
@@ -71,6 +70,29 @@ main#content > section {
   min-height: 0;
 }
 
+/* Background image styles */
+#content.bg-image {
+  background-image: url("../img/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#content.bg-overlay {
+  transition: 0.3s;
+  position: relative;
+}
+#content.bg-overlay::before {
+  transition: 0.3s;
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--bg-overlay-main);
+}
+#content.bg-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* Title & version */
 main h1 {
   margin: 0;
@@ -98,11 +120,11 @@ main h1 span {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.35;
-  color: var(--text-dim);
+  color: var(--white);
 }
 
 :root.dark .intro-bar .intro-text {
-  color: #f2f2f2;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Utility */

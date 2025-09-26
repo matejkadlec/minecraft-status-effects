@@ -49,7 +49,6 @@
 .table-scroll {
   flex: 1;
   overflow: auto;
-  border: 1px solid var(--border);
   border-radius: 2px;
   background: var(--bg-alt);
   min-height: 0;
@@ -81,16 +80,25 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   z-index: 5;
-  border-bottom: 1px solid var(--border);
   box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.25), 0 1px 0 0 var(--border);
 }
 :root #effects-table thead th {
-  background: linear-gradient(135deg, #cfdfee 0%, #b9cee6 100%);
-  color: var(--header-alt);
+  background: linear-gradient(
+    105deg,
+    var(--blue-1) 0%,
+    var(--blue-2) 10%,
+    var(--blue-3) 90%
+  );
+  color: var(--white);
 }
 :root.dark #effects-table thead th {
-  background: linear-gradient(135deg, var(--header) 0%, var(--header-alt) 100%);
-  color: #111;
+  background: linear-gradient(
+    105deg,
+    var(--gold-1) 0%,
+    var(--gold-2) 10%,
+    var(--gold-3) 90%
+  );
+  color: var(--black);
 }
 #effects-table tbody td {
   padding: 0.6rem 0.75rem;
@@ -129,14 +137,6 @@
   font-size: 1rem;
   color: var(--text-dim);
   padding: 0.6rem 0.75rem;
-}
-#effects-table tbody tr.integration-note td {
-  font-style: italic;
-  color: var(--text-dim);
-}
-#effects-table tbody tr.integration-note td:first-child {
-  font-style: normal;
-  color: var(--text);
 }
 
 /* Column sizing */
@@ -209,18 +209,6 @@
   background: linear-gradient(135deg, #ff9800, #ffb347);
   color: #2b1a00;
   font-weight: 600;
-}
-:root.dark .badge.pos {
-  background: linear-gradient(135deg, #2e5f2e, #1f3d1f);
-  color: #c9f7c9;
-}
-:root.dark .badge.neg {
-  background: linear-gradient(135deg, #5f2e2e, #3d1f1f);
-  color: #f7c9c9;
-}
-:root.dark .badge.scaling {
-  background: linear-gradient(135deg, #ff9800, #ffb347);
-  color: #2b1a00;
 }
 
 /*---------------------*
@@ -357,8 +345,11 @@ td .arrow {
 .table-footer .table-info {
   flex: 0 0 300px; /* Fixed width to prevent pagination shifting */
   text-align: left;
-  color: var(--text-dim);
+  color: var(--white);
   width: 300px;
+}
+:root.dark .table-footer .table-info {
+  color: rgba(255, 255, 255, 0.6);
 }
 .pagination {
   display: flex;
@@ -371,7 +362,10 @@ td .arrow {
   flex: 0 0 300px; /* Fixed width to match table-info */
   text-align: right;
   width: 300px;
-  color: var(--text-dim);
+  color: var(--white);
+}
+:root.dark .table-footer .table-length {
+  color: rgba(255, 255, 255, 0.6);
 }
 .table-footer .table-length select {
   background: var(--bg-accent);
@@ -386,7 +380,7 @@ td .arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-accent);
+  background: #c9dbf0;
   color: var(--text);
   border: 1px solid var(--border);
   padding: 0;
@@ -406,7 +400,7 @@ td .arrow {
 }
 .pagination button:not([disabled]):not(.current):hover,
 .pagination .page-num:not(.current):hover {
-  background: var(--highlight);
+  background: var(--white);
   transition: 0.3s;
 }
 .pagination .current {
@@ -414,18 +408,22 @@ td .arrow {
 }
 :root .pagination .page-num.current {
   background: #007acc;
-  color: #fff;
+  color: var(--white);
   border-color: #005fa3;
 }
 :root.dark .pagination .page-num.current {
   background: var(--header);
-  color: #111;
+  color: var(--black);
   border-color: var(--header-alt);
 }
 :root.dark .pagination button,
 :root.dark .pagination .page-num {
   background: var(--bg-accent);
   color: var(--text);
+}
+:root.dark .pagination button:not([disabled]):not(.current):hover,
+:root.dark .pagination .page-num:not(.current):hover {
+  background: var(--highlight);
 }
 .pagination .ellipsis {
   padding: 0 2px;
@@ -437,23 +435,23 @@ td .arrow {
 .pagination .arrow-btn {
   background: transparent !important;
   border: none !important;
-  color: var(--text-dim);
+  color: var(--white);
   width: 28px;
   height: 28px;
   padding: 0;
   font-size: 0.9rem;
 }
 .pagination .arrow-btn[disabled] {
-  opacity: 0.3;
-  cursor: not-allowed;
+  opacity: 0.4;
+  cursor: default;
 }
 .pagination .arrow-btn:not([disabled]):hover {
-  color: var(--header);
+  color: var(--highlight);
   background: transparent !important;
   border: none !important;
 }
 
 /* Smooth logo swap */
 #nav-logo {
-  transition: opacity 0.25s ease;
+  transition: opacity 0.3s ease;
 }
