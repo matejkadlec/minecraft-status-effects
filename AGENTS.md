@@ -32,7 +32,23 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 - Working directory: `/home/matej/projects/minecraft-status-effects/` (project root)
 - Python: Use `python` or `python3` after `source venv/bin/activate`
 - Never use full paths like `/home/matej/projects/minecraft-status-effects/venv/bin/python`
+- **Server port**: Do NOT use port 8000 for testing - it's usually occupied. Use different ports starting with 8: 8001, 8080, etc. Any port 8xxx should be free except 8000
 - Use `rm` to delete files that are no longer needed
+
+### 6. COMPONENT INTEGRATION - CRITICAL FOR UI CHANGES
+- **Test cross-component compatibility**: When modifying navigation, filters, search, or pagination, verify all components work together seamlessly
+- **Example lesson**: Navigation links initially failed when target effects were on different table pages - always test pagination integration
+- **Update interconnected systems**: Changes to filtering must update navigation availability, pagination must rebuild nav links, search must work with both
+
+### 7. ASSET PRELOADING - PREVENT THEME FLASHING  
+- **Preload theme-specific assets**: All images/gifs must be properly preloaded to prevent light→dark mode flashing on page load
+- **CSS-based theme switching**: Use CSS show/hide patterns (like loading spinners) rather than JavaScript asset swapping when possible
+- **Test theme consistency**: Always verify assets load correctly in both light and dark modes without visual flashing
+
+### 8. DUAL-THEME VISUAL DESIGN
+- **Test both themes**: Ensure new UI elements look good in both light and dark modes
+- **Avoid theme blending**: Don't use the same CSS variable for both themes if it causes elements to blend into backgrounds
+- **Theme-specific values**: Use different colors/opacities per theme when needed for proper contrast and visibility
 
 ---
 
@@ -220,7 +236,7 @@ Your initial → Corrected version
   - README.md
 
 ### sitemap.xml - SEO MAINTENANCE
-- **ALWAYS update lastmod date** when making significant content changes
+- **ALWAYS update lastmod date** when making changes that affects the main page
 - Update to current date format: `YYYY-MM-DD` (e.g., `2025-09-25`)
 - Update when:
   - Adding new pages to the website
@@ -228,9 +244,12 @@ Your initial → Corrected version
   - Updating effects.json with substantial additions
 - Current structure includes: main page, license, privacy-policy
 - If adding new routes/pages, add them to sitemap with appropriate priority:
-  - Main page: priority="1.0", changefreq="weekly"
+  - Main page: priority="1.0", changefreq="daily"
   - Legal pages: priority="0.3", changefreq="yearly"
   - Other content pages: priority="0.7", changefreq="monthly"
+- Our current pace is 1-2 commit&push/day, and each push is automatically deployed, so main page is currently set to changefreq="daily"
+  - Keep track og this once a day, the first time each day you are reading this, check the lastmod of the main page
+  - If it's older than 3 days, change it to "weekly" and delete this text (lines 250-252)
 
 ### CSS Comments Format
 ```css

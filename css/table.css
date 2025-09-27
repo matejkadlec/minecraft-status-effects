@@ -48,13 +48,13 @@
 }
 .table-scroll {
   flex: 1;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: scroll; /* Always reserve space for vertical scrollbar */
   border-radius: 2px;
   background: var(--bg-alt);
   min-height: 0;
   box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.12),
     0 2px 6px -2px rgba(0, 0, 0, 0.08);
-  scrollbar-gutter: stable right-edge;
   transition: 0.3s;
 }
 .table-scroll #effects-table {
@@ -75,7 +75,7 @@
   position: sticky;
   top: 0;
   text-align: left;
-  padding: 0.75rem 0.9rem;
+  padding: 0.6rem 0.9rem;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -98,6 +98,75 @@
     var(--gold-2) 10%,
     var(--gold-3) 90%
   );
+  color: var(--black);
+}
+
+/*-----------------*
+ * Sorting arrows  *
+ *-----------------*/
+.sort-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Center content for MAX and TAGS columns while keeping arrows on the right */
+#effects-table thead th:nth-child(5) .sort-header {
+  justify-content: space-between;
+  position: relative;
+}
+
+#effects-table thead th:nth-child(5) .sort-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+#effects-table thead th:nth-child(5) .sort-arrows {
+  position: relative;
+  margin-left: auto;
+}
+
+.sort-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1;
+}
+
+.sort-arrow {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+/* Arrows are inactive by default (before sorting is enabled) */
+:root .sort-arrow {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+:root.dark .sort-arrow {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* Arrows become functional when sorting is enabled */
+:root .sorting-enabled .sort-arrow {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:root.dark .sorting-enabled .sort-arrow {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+:root .sorting-enabled .sort-arrow.active {
+  color: var(--white);
+}
+
+:root.dark .sorting-enabled .sort-arrow.active {
   color: var(--black);
 }
 #effects-table tbody td {

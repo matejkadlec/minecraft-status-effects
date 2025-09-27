@@ -1,10 +1,10 @@
 # TODO - Minecraft Status Effects Website
 
-This file tracks upcoming features and improvements for the Minecraft Status Effects website. These are written in JIRA ticket format for clear task definition and progress tracking. While working on task in this file, mark it as [WIP], after finishing the task completely, mark it as done with this emoji: ✅.
+This file tracks upcoming features and improvements for the Minecraft Status Effects website. These are written in JIRA ticket format for clear task definition and progress tracking. While working on task in this file, mark it as [WIP], after finishing the task completely, and geeting my confirmation after I test it, mark it as done with this emoji: ✅.
 
 ## Table Functionality & UI Improvements
 
-### MSE-001: Multi-Column Sorting
+### MSE-001: Multi-Column Sorting ✅
 **Priority:** High  
 **Labels:** table, sorting, ui  
 **Story:** As a user, I want to sort the effects table by any column in ascending or descending order, with support for multi-column sorting using Shift+click, so I can organize data according to my needs.
@@ -174,19 +174,3 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 - Set up test data fixtures
 - Integrate with existing GitHub Actions workflow
 - Add pre-commit hooks for critical tests
-
----
-
-## Development Notes
-
-**Framework Decision Required:** Before implementing table features (MSE-001, MSE-002), evaluate whether to:
-1. Continue with pure JavaScript implementation
-2. Adopt a lightweight table library (DataTables, Tabulator, etc.)
-3. Introduce a frontend framework (React, Vue, etc.)
-
-Current codebase is well-structured vanilla JS with modular architecture. Consider maintenance overhead, bundle size, and learning curve when making this decision.
-
-**Update Instructions:**
-- When working on these tickets, update AGENTS.md with any new patterns or conventions
-- Add completed features to this file's completion log
-- Update sitemap.xml lastmod date when deploying user-facing changes

@@ -19,9 +19,15 @@
     const fresh = await MCSE.loadEffectsData();
     if (MCSE.rows.length && fresh.length === MCSE.effects.length) return; // unchanged
     MCSE.effects = fresh;
-    MCSE.renderTable(MCSE.effects);
-    MCSE.applyTypeFilters();
-    MCSE.updateNoResults();
+
+    // Apply initial sorting if sorting is available
+    if (typeof MCSE.applySorting === "function") {
+      MCSE.applySorting();
+    } else {
+      MCSE.renderTable(MCSE.effects);
+      MCSE.applyTypeFilters();
+      MCSE.updateNoResults();
+    }
   })();
 
   // Scroll state decoration for shadow under header etc.

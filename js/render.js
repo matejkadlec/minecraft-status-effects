@@ -54,6 +54,13 @@
     tbody.appendChild(placeholder);
     MCSE.recomputeZebra();
     MCSE.buildNav();
+
+    // Initialize sorting if not already initialized
+    if (typeof MCSE.initSorting === "function" && !MCSE.sortingInitialized) {
+      MCSE.initSorting();
+      MCSE.sortingInitialized = true;
+    }
+
     // Minimum spinner visibility for perceived stability
     const MIN_MS = 500;
     const elapsed = performance.now() - (MCSE.loadStart || 0);
