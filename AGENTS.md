@@ -47,6 +47,7 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 - `data/effects.json` - effects database (CRITICAL FILE)
 - `data/links.json` - mod links/sources
 - `scripts/validate_effects.py` - validation script (RUN AFTER CHANGES)
+- `TODO.md` - feature requests and development roadmap (JIRA-style tickets)
 - `.github/workflows/` - CI/CD workflows
 
 **Legal pages:** `license/index.html`, `privacy-policy/index.html` (separate, no JS)
@@ -148,7 +149,7 @@ minecraft-status-effects/
 Examples of descriptions that needed correction (learning from past mistakes):
 
 Your initial → Corrected version
-1. "Deals armor-ignoring damage every 2 seconds." → "Deals periodic damage that ignores armor every 2 seconds."
+1. "Deals armor-ignoring damage every 2 seconds." → "Deals periodic damage that ignores armor every <b>2 seconds</b>."
 2. "On end, if still burning, deals damage (higher level → more damage)." → "If the entity is on fire when the effect expires, deals damage based on remaining fire ticks (higher level → more damage)."
 3. "Reduces incoming damage by <b>level</b> (half hearts)." → "Reduces incoming damage by <b>0.5 × level</b> hearts."
 4. "Negates fall damage and bounces entity upward (higher level → more horizontal push)." → "Negates fall damage and bounces entity upward upon landing (higher level → more momentum upon landing)."

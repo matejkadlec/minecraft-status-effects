@@ -89,6 +89,7 @@
       });
       MCSE.updateNoResults();
       MCSE.recomputeZebra();
+      if (MCSE.buildNav) MCSE.buildNav();
     });
   };
 
@@ -108,6 +109,7 @@
       MCSE.applyTypeFilters();
       MCSE.updateNoResults();
       MCSE.recomputeZebra();
+      if (MCSE.buildNav) MCSE.buildNav();
     });
   };
 

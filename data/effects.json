@@ -269,7 +269,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Slows movement and inflicts periodic drowning damage."
+      "description": "Slows movement and drowns entity. <b>Water Breathing</b> prevents the drowning damage."
     },
     {
       "mod": "Alex's Caves",
@@ -377,7 +377,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Causes shaking; spawns an Enderiophage and deals heavy damage when effect expires."
+      "description": "Causes shaking to the inflicted entity, spawns an Enderiophage and deals heavy damage when effect expires."
     },
     {
       "mod": "Alex's Mobs",
@@ -440,7 +440,7 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Shortens attack cooldown."
+      "description": "Increases attack speed."
     },
     {
       "mod": "Alex's Mobs",
@@ -449,7 +449,7 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Immediately cures Poison on application."
+      "description": "Prevents the user from getting <b>Poisoned</b> and removes existing <b>Poison</b> effect."
     },
     {
       "mod": "Alex's Mobs",
@@ -458,7 +458,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Inflicts severe slowness and near blindness."
+      "description": "Causes extreme slowness and blindness. Can be only obtained on April 1st while getting close to a Grizzly Bear."
     },
     {
       "mod": "Alex's Mobs",

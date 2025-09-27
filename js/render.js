@@ -78,14 +78,59 @@
 
   MCSE.buildNav = function buildNav() {
     const navList = MCSE.navList;
-    navList.innerHTML = "";
-    const seen = new Set();
+
+    // Get all unique mods from all rows (always show all mods)
+    const allMods = [];
+    const seenMods = new Set();
+
     MCSE.rows.forEach((r) => {
+      if (r.id === "no-results-row") return;
       const mod = r.getAttribute("data-mod");
-      if (!mod || seen.has(mod)) return;
-      seen.add(mod);
+      if (!mod || seenMods.has(mod)) return;
+      seenMods.add(mod);
+      allMods.push({ mod, id: r.id });
+    });
+
+    // Get currently visible mods (considering filters and search)
+    const visibleRows = MCSE.rows.filter((r) => {
+      if (r.id === "no-results-row") return false;
+      if (r.hasAttribute("data-hidden-search")) return false;
+      return r.dataset.baseDisplay !== "none";
+    });
+
+    const availableMods = new Set();
+    visibleRows.forEach((r) => {
+      const mod = r.getAttribute("data-mod");
+      if (mod) availableMods.add(mod);
+    });
+
+    // Helper function to determine mod order (Minecraft first, then alphabetical)
+    const shouldComeBefore = (modA, modB) => {
+      if (modA === "Minecraft" && modB !== "Minecraft") return true;
+      if (modA !== "Minecraft" && modB === "Minecraft") return false;
+      return modA < modB;
+    };
+
+    // Sort all mods
+    allMods.sort((a, b) => (shouldComeBefore(a.mod, b.mod) ? -1 : 1));
+
+    // Clear and rebuild navigation
+    navList.innerHTML = "";
+
+    allMods.forEach(({ mod, id }) => {
       const li = document.createElement("li");
-      li.innerHTML = `<a href="#${r.id}">${mod}</a>`;
+      const isAvailable = availableMods.has(mod);
+
+      // Find first visible effect for this mod to link to
+      let targetId = id;
+      if (isAvailable) {
+        const firstVisibleEffect = visibleRows.find(
+          (r) => r.getAttribute("data-mod") === mod
+        );
+        if (firstVisibleEffect) targetId = firstVisibleEffect.id;
+      }
+
+      li.innerHTML = `<a href="#${targetId}" data-mod="${mod}" data-available="${isAvailable}">${mod}</a>`;
       navList.appendChild(li);
     });
   };

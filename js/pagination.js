@@ -97,6 +97,9 @@
 
     // Build pagination controls
     buildPagination(current, totalPages);
+
+    // Rebuild navigation to reflect which mods are visible
+    if (MCSE.buildNav) MCSE.buildNav();
   };
 
   function buildPagination(current, totalPages) {
