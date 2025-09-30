@@ -6,7 +6,17 @@
 ![Bottle | 0.13.4](https://img.shields.io/badge/Bottle-0.13.4-blueviolet)
 ![Docker](https://img.shields.io/badge/Docker-Supported-yellow)
 
-Browse interactive list of vanilla and modded Minecraft status effects with proper descriptions.
+Interactive website for browsing vanilla and modded Minecraft status effects with detailed descriptions, multi-column sorting, filtering, and pagination.
+
+## ✨ Features
+
+- 📊 **Multi-column Sorting**: Sort by any column (Shift+click for multi-column)
+- 📱 **Horizontal Scrolling**: Wide tables scroll smoothly on narrow screens  
+- 🔍 **Advanced Filtering**: Filter by type, mod, scaling effects
+- 📖 **Pagination**: Customizable page sizes (25/50/75/100 rows)
+- 🌓 **Theme Switching**: Light and dark modes
+- 🎯 **Quick Navigation**: Jump to specific mods/effects
+- 🔎 **Real-time Search**: Search effects and mods instantly
 
 ## Run Local Server 💻
 
@@ -56,7 +66,7 @@ Flow summary:
 1. Scrapes list page(s) with `python scrape/mcmod_effect_list.py <url>` producing `scrape/<mod>.txt` of item detail URLs.
 2. Scrapes each individual effect page with `python scrape/mcmod_effect.py <effect_url>` to extract detailed information.
 3. Fetch each effect page, extract English name (in parentheses), potency (max level), description (compressed), formulas, type and tags.
-4. Build `id` (`mod-name-effect-name` lowercase, hyphen separated) and enforce description length ≤125 chars.
+4. Build `id` (`mod-name-effect-name` lowercase, hyphen separated) and enforce description length ≤200 chars.
 5. Insert (or update) effects in `data/effects.json` maintaining ordering rules and uniqueness.
 6. Run `python scripts/validate_effects.py` once; if errors, attempt up to 2 auto-fix iterations.
 7. Output Added / Updated / Skipped summary (for changed effects only).
@@ -94,7 +104,7 @@ Any description containing scaling patterns must format them consistently:
 
 ### 4. Description Length
 
-This is primarily to keep descriptions on a single line on FHD full-screen browser window size (125 characters), but also ensures every description stays concise and easy to read.
+Descriptions are limited to 200 characters (excluding HTML tags) to ensure readability while allowing sufficient detail for complex effects. The table uses horizontal scrolling when needed to prevent text wrapping.
 
 ### 5. Tags Validation
 

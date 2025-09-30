@@ -9,7 +9,7 @@
     const placeholder = document.createElement("tr");
     placeholder.id = "no-results-row";
     placeholder.style.display = "none";
-    placeholder.innerHTML = `<td colspan="5" class="no-results">No results found.</td>`;
+    placeholder.innerHTML = `<td colspan="6" class="no-results">No results found.</td>`;
 
     data.forEach((item) => {
       const tr = document.createElement("tr");
@@ -46,7 +46,11 @@
         span.textContent = t.charAt(0).toUpperCase() + t.slice(1);
         tdTags.appendChild(span);
       });
-      tr.append(tdMod, tdEffect, tdMax, tdDesc, tdTags);
+      const tdSource = document.createElement("td");
+      tdSource.textContent = item.source || "";
+      tdSource.className = "source-column";
+      tdSource.style.display = "none"; // Hidden by default - TO UNHIDE SOURCE COLUMN: Remove this line
+      tr.append(tdMod, tdEffect, tdMax, tdDesc, tdTags, tdSource);
       tbody.appendChild(tr);
       MCSE.rows.push(tr);
     });

@@ -23,20 +23,30 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-002: Horizontal Scrolling
+### MSE-002: Horizontal Scrolling ✅
 **Priority:** High  
-**Labels:** table, ui, responsive  
-**Story:** As a user, I want the table to support horizontal scrolling so I can see all columns including new ones (Source, Notes) without truncated descriptions.
+**Labels:** table, ui  
+**Story:** As a user, I want the table to support horizontal scrolling so I can see all columns including new one (Source) without truncated descriptions or generally anything breaking into two lines.
 
 **Acceptance Criteria:**
+- Horizontal scroll is only enabled and horizontal scrollbar only appears if the table doesn't fit onto the screen
+    - With our current setting, the horizontal scroll and scrollbar shouldn't appear on FHD maximized browser window, since it fits without breaking text into 2 lines
+    - But it should appear i.e. on 1680x1050 resolution, since that would break a lot of descriptions into 2 lines as of now, but after this implementation, the horizontal scroll and scrollbar should appear instead
 - Table container allows horizontal scrolling when content exceeds viewport width
+    - Important note: the scroll must be within the table, not within the whole page
 - Headers remain aligned with data columns during horizontal scroll
-- Responsive design maintains usability on mobile devices
+- Don't care about responsiveness for now, but the table should be scrollable on phones in the future
+    - The table size won't be much smaller on phones, that's also reason why we need to horizontal scroll
 - Smooth scrolling experience across browsers
 
 **Implementation Notes:**
-- Update CSS table layout to support wider content
+- Increase "Descriptipn" character limit to 200.
+- As mentioned, add new column "Source":
+    - Add "source" to effects.json after "description", and make it empty string for every existing effect
+    - Create new table column "Source", but keep it hidden for now and tell me how to un-hide it in chat and also write it somewhere in comment
+    - If the column couldn't be hidden from the table for any reason, do not add it then, and only add the "source" key to effects.json
 - Ensure proper header/body alignment during horizontal scroll
+    - Must also work properly with sticky header, or generally vertical and horizontal scroll must work together perfectly, vertical scroll must not break the horizontal scroll and vice versa
 - Test across different viewport sizes
 
 ---

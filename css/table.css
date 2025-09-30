@@ -67,6 +67,7 @@
  *--------------------*/
 #effects-table {
   width: 100%;
+  min-width: 1594px; /* Minimum width to trigger horizontal scroll on smaller screens */
   border-collapse: separate;
   border-spacing: 0;
   background: var(--bg-alt);
@@ -111,24 +112,7 @@
   width: 100%;
 }
 
-/* Center content for MAX and TAGS columns while keeping arrows on the right */
-#effects-table thead th:nth-child(5) .sort-header {
-  justify-content: space-between;
-  position: relative;
-}
-
-#effects-table thead th:nth-child(5) .sort-text {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  text-align: center;
-}
-
-#effects-table thead th:nth-child(5) .sort-arrows {
-  position: relative;
-  margin-left: auto;
-}
+/* All headers use default left alignment for consistency and proper arrow spacing */
 
 .sort-arrows {
   display: flex;
@@ -240,15 +224,25 @@
   width: 100%;
   overflow: hidden;
 }
+/* Tags column (5th column) */
 #effects-table thead th:nth-child(5),
 #effects-table tbody td:nth-child(5) {
   box-sizing: content-box;
-  padding: 0.6rem 0.6rem;
   max-width: 145px;
   min-width: 145px;
   width: 145px;
   overflow: hidden;
   text-align: center;
+}
+/* Source column (6th column, currently hidden) */
+#effects-table thead th:nth-child(6),
+#effects-table tbody td:nth-child(6) {
+  box-sizing: content-box;
+  min-width: 120px;
+  max-width: 120px;
+  width: 120px;
+  overflow: hidden;
+  display: none; /* Currently hidden */
 }
 
 /*---------------*

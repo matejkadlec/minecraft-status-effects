@@ -1,6 +1,14 @@
 # AGENT INSTRUCTIONS
 
-## ⚠️ CRITICAL RULES - NEVER IGNORE THESE ⚠️
+## ⚠### 6. NO CHANGE COMMENTS
+- NEVER add comments like "Changed...", "Added...", "Removed..." to code files
+- Only add production-quality comments that help understand the code
+
+### 💡 **CRITICAL: DOCUMENTATION MAINTENANCE**
+- **ALWAYS update both AGENTS.md and README.md when adding new features**
+- This includes: new functionality, API changes, column additions, validation rules
+- Keep feature lists, tech descriptions, and usage instructions current
+- Update project structure diagrams when files/folders changeRITICAL RULES - NEVER IGNORE THESE ⚠️
 
 ### 1. PROMPT PRIORITY
 - **User prompts ALWAYS override these instructions**
@@ -54,7 +62,15 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 
 ## PROJECT OVERVIEW
 
-**What this is:** Minecraft status effects website - vanilla + modded effects database
+**What this is:** Minecraft status effects website - vanilla + modded effects database with interactive features
+
+**Current Features:**
+- 📊 **Multi-column sorting** (single/multi-column with Shift+click)
+- 📱 **Horizontal scrolling** for wide tables
+- 🔍 **Advanced filtering** (type, mod, scaling effects)
+- 📖 **Pagination** with customizable page sizes
+- 🌓 **Theme switching** (light/dark modes)
+- 🎯 **Navigation** (jump to specific mods/effects)
 
 **Tech stack:** HTML, CSS, JavaScript, Python (Bottle framework), Docker (production only)
 
@@ -133,14 +149,15 @@ minecraft-status-effects/
   "maxLevel": 1,
   "type": "positive",
   "tags": ["positive"],
-  "description": "Short description ≤125 chars"
+  "description": "Short description ≤200 chars",
+  "source": ""
 }
 ```
 
 ### DESCRIPTION RULES - FOLLOW EXACTLY
 
-**Length:** ≤ 125 characters (enforced by validator)
-- HTML tags like `<b>` do NOT count toward the 125-character limit
+**Length:** ≤ 200 characters (enforced by validator)
+- HTML tags like `<b>` do NOT count toward the 200-character limit
 - Example: `<b>Wither</b>` counts as 6 characters, not 10
 
 **Formatting:**
@@ -207,7 +224,7 @@ Your initial → Corrected version
 **Quality checks before summary:**
 - Ordering preserved
 - No duplicate effect names  
-- Descriptions formatted correctly and ≤125 chars
+- Descriptions formatted correctly and ≤200 chars
 - Tags include type + optional scaling
 - Summary uses exact format
 
@@ -314,7 +331,7 @@ Your initial → Corrected version
 Before completing any effects.json modification:
 - [ ] Alphabetical ordering maintained
 - [ ] No duplicate effect names globally
-- [ ] All descriptions ≤125 characters
+- [ ] All descriptions ≤200 characters
 - [ ] Formulas, effect names and ticking speed properly wrapped in `<b>`
 - [ ] Tags include exactly one type + optional scaling
 - [ ] Validation script executed successfully

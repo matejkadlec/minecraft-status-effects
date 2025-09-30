@@ -8,7 +8,8 @@
       "maxLevel": "IV",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>+2 temporary hearts × level</b>"
+      "description": "<b>+2 temporary hearts × level</b>",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -17,7 +18,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Worsens chest loot and loot-table rolls."
+      "description": "Worsens chest loot and loot-table rolls.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -26,7 +28,8 @@
       "maxLevel": "V",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Triggers a village raid when entering a village (higher level → tougher raid waves)."
+      "description": "Triggers a village raid when entering a village (higher level → tougher raid waves).",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -35,7 +38,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Restricts vision, disables sprinting and critical hits."
+      "description": "Restricts vision, disables sprinting and critical hits.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -44,7 +48,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Combines <b>Water Breathing</b>, <b>Night Vision</b> and <b>Haste</b> effects."
+      "description": "Combines <b>Water Breathing</b>, <b>Night Vision</b> and <b>Haste</b> effects.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -53,7 +58,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Pulsating darkness overlay reduces visible light radius."
+      "description": "Pulsating darkness overlay reduces visible light radius.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -62,7 +68,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Causes the player to swim significantly faster (~9.8 m/s) and lose speed more slowly; turning is slightly reduced."
+      "description": "Causes the player to swim significantly faster (~9.8 m/s) and lose speed more slowly; turning is slightly reduced.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -71,7 +78,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Grants fire immunity."
+      "description": "Grants fire immunity.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -80,7 +88,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Entity outlined and visible through blocks."
+      "description": "Entity outlined and visible through blocks.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -89,7 +98,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>+10% attack speed</b> and <b>+20% mining speed × level</b>"
+      "description": "<b>+10% attack speed</b> and <b>+20% mining speed × level</b>",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -98,7 +108,8 @@
       "maxLevel": "V",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Villagers discount trades and give gifts (higher level → bigger discounts and more gifts)."
+      "description": "Villagers discount trades and give gifts (higher level → bigger discounts and more gifts).",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -107,7 +118,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Increases exhaustion rate (higher level → faster food depletion)."
+      "description": "Increases exhaustion rate (higher level → faster food depletion).",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -116,7 +128,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Makes entity invisible (worn armor and held items remain visible)."
+      "description": "Makes entity invisible (worn armor and held items remain visible).",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -125,7 +138,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>+50% jump height × level</b> and reduces fall damage by amount of hearts equal to level."
+      "description": "<b>+50% jump height × level</b> and reduces fall damage by amount of hearts equal to level.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -134,7 +148,8 @@
       "maxLevel": "IV",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Gradually lifts entity upward (higher level → faster ascent)."
+      "description": "Gradually lifts entity upward (higher level → faster ascent).",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -143,7 +158,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Improves chest loot and loot-table rolls."
+      "description": "Improves chest loot and loot-table rolls.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -152,7 +168,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "<b>-10% attack speed × level</b> and sets <b>mining speed to 0.3^level</b> (0.3 / 0.09 / 0.027)."
+      "description": "<b>-10% attack speed × level</b> and sets <b>mining speed to 0.3^level</b> (0.3 / 0.09 / 0.027).",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -161,7 +178,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Wavy distortion of vision."
+      "description": "Wavy distortion of vision.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -170,7 +188,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Brightens dark areas and underwater vision."
+      "description": "Brightens dark areas and underwater vision.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -179,7 +198,8 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Damages over time leaving entity alive at half a heart (higher level → faster ticks)."
+      "description": "Damages over time leaving entity alive at half a heart (higher level → faster ticks).",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -188,7 +208,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Heals <b>0.2 hearts</b> every <b>0.5 × 2^level seconds</b> (0.2 / 0.4 / 0.8)."
+      "description": "Heals <b>0.2 hearts</b> every <b>0.5 × 2^level seconds</b> (0.2 / 0.4 / 0.8).",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -197,7 +218,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>-20% incoming damage × level</b>"
+      "description": "<b>-20% incoming damage × level</b>",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -206,7 +228,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Reduces fall speed and negates fall damage."
+      "description": "Reduces fall speed and negates fall damage.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -215,7 +238,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "<b>-15% movement speed × level</b>"
+      "description": "<b>-15% movement speed × level</b>",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -224,7 +248,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>+20% movement speed × level</b>"
+      "description": "<b>+20% movement speed × level</b>",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -233,7 +258,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>+3 attack damage × level</b>"
+      "description": "<b>+3 attack damage × level</b>",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -242,7 +268,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Prevents air loss underwater."
+      "description": "Prevents air loss underwater.",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -251,7 +278,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "<b>-4 attack damage × level</b>"
+      "description": "<b>-4 attack damage × level</b>",
+      "source": ""
     },
     {
       "mod": "Minecraft",
@@ -260,7 +288,8 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Damages over time and darkens hearts (higher level → faster ticks and more damage)."
+      "description": "Damages over time and darkens hearts (higher level → faster ticks and more damage).",
+      "source": ""
     },
     {
       "mod": "Alex's Caves",
@@ -269,7 +298,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Slows movement and drowns entity. <b>Water Breathing</b> prevents the drowning damage."
+      "description": "Slows movement and drowns entity. <b>Water Breathing</b> prevents the drowning damage.",
+      "source": ""
     },
     {
       "mod": "Alex's Caves",
@@ -278,7 +308,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Allows flying similar to creative flight, but at much faster speed."
+      "description": "Allows flying similar to creative flight, but at much faster speed.",
+      "source": ""
     },
     {
       "mod": "Alex's Caves",
@@ -287,7 +318,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Removes underwater fog."
+      "description": "Removes underwater fog.",
+      "source": ""
     },
     {
       "mod": "Alex's Caves",
@@ -296,7 +328,8 @@
       "maxLevel": "IV",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Prevents natural regeneration. <b>Level II+</b> additionally deals periodic damage (higher level → more damage)."
+      "description": "Prevents natural regeneration. <b>Level II+</b> additionally deals periodic damage (higher level → more damage).",
+      "source": ""
     },
     {
       "mod": "Alex's Caves",
@@ -305,7 +338,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Allows interaction with Neodymium blocks without metal armor."
+      "description": "Allows interaction with Neodymium blocks without metal armor.",
+      "source": ""
     },
     {
       "mod": "Alex's Caves",
@@ -314,7 +348,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Increases attack damage at low health; affected mobs attack any nearby mobs."
+      "description": "Increases attack damage at low health; affected mobs attack any nearby mobs.",
+      "source": ""
     },
     {
       "mod": "Alex's Caves",
@@ -323,7 +358,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Prevents movement and attacks."
+      "description": "Prevents movement and attacks.",
+      "source": ""
     },
     {
       "mod": "Alex's Caves",
@@ -332,7 +368,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "<b>+125% movement speed × level</b> for first 3/4 duration then <b>-50% movement speed × level</b> for final 1/4."
+      "description": "<b>+125% movement speed × level</b> for first 3/4 duration then <b>-50% movement speed × level</b> for final 1/4.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -341,7 +378,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Hostile arthropods ignore the affected player."
+      "description": "Hostile arthropods ignore the affected player.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -350,7 +388,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Allows walking on ceilings after contacting a block overhead."
+      "description": "Allows walking on ceilings after contacting a block overhead.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -359,7 +398,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Paralyzes arthropods; non-arthropods take damage until they are on a half of their max health."
+      "description": "Paralyzes arthropods; non-arthropods take damage until they are on a half of their max health.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -368,7 +408,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Violently shakes screen, obstructing vision."
+      "description": "Violently shakes screen, obstructing vision.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -377,7 +418,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Causes shaking to the inflicted entity, spawns an Enderiophage and deals heavy damage when effect expires."
+      "description": "Causes shaking to the inflicted entity, spawns an Enderiophage and deals heavy damage when effect expires.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -386,7 +428,8 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Bleeding damage over time (higher level → faster ticks)."
+      "description": "Bleeding damage over time (higher level → faster ticks).",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -395,7 +438,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Increases movement speed while jumping."
+      "description": "Increases movement speed while jumping.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -404,7 +448,8 @@
       "maxLevel": "II",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Grants <b>50% × level</b> knockback resistance."
+      "description": "Grants <b>50% × level</b> knockback resistance.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -413,7 +458,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Clear vision through lava."
+      "description": "Clear vision through lava.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -422,7 +468,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Crimson Mosquitoes ignore the affected entity."
+      "description": "Crimson Mosquitoes ignore the affected entity.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -431,7 +478,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Floats to water surface and levitates in rain."
+      "description": "Floats to water surface and levitates in rain.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -440,7 +488,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Increases attack speed."
+      "description": "Increases attack speed.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -449,7 +498,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Prevents the user from getting <b>Poisoned</b> and removes existing <b>Poison</b> effect."
+      "description": "Prevents the user from getting <b>Poisoned</b> and removes existing <b>Poison</b> effect.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -458,7 +508,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Causes extreme slowness and blindness. Can be only obtained on April 1st while getting close to a Grizzly Bear."
+      "description": "Causes extreme slowness and blindness. Can be only obtained on April 1st while getting close to a Grizzly Bear.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -467,7 +518,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Prevents movement; can only move slowly by jumping."
+      "description": "Prevents movement; can only move slowly by jumping.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -476,7 +528,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Heals user for a portion of melee damage dealt."
+      "description": "Heals user for a portion of melee damage dealt.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -485,7 +538,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Slows fall speed and extends Elytra flight duration."
+      "description": "Slows fall speed and extends Elytra flight duration.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -494,7 +548,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Greatly increases fall speed hindering control."
+      "description": "Greatly increases fall speed hindering control.",
+      "source": ""
     },
     {
       "mod": "Alex's Mobs",
@@ -503,7 +558,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Tigers become friendly, assist the player in combat, and are breedable; ends early if the player attacks a tiger."
+      "description": "Tigers become friendly, assist the player in combat, and are breedable; ends early if the player attacks a tiger.",
+      "source": ""
     },
     {
       "mod": "Ancient Aether",
@@ -512,7 +568,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Grants <b>+3 armor toughness</b>. Gained when using Divine tools on effective blocks; time stacks up to 15 min."
+      "description": "Grants <b>+3 armor toughness</b>. Gained when using Divine tools on effective blocks; time stacks up to 15 min.",
+      "source": ""
     },
     {
       "mod": "Ancient Aether",
@@ -521,7 +578,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Applies bonemeal effect to blocks beneath the player periodically."
+      "description": "Applies bonemeal effect to blocks beneath the player periodically.",
+      "source": ""
     },
     {
       "mod": "Apotheosis",
@@ -530,16 +588,18 @@
       "maxLevel": "II",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Increases experience gained by <b>4^level</b> (4× / 16×)."
+      "description": "Increases experience gained by <b>4^level</b> (4× / 16×).",
+      "source": ""
     },
     {
       "mod": "Apotheosis",
       "id": "apotheosis-bad-voodoo",
       "effect": "Bad Voodoo",
-      "maxLevel": "II",
+      "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Deals <b>2 × level</b> magic damage every <b>second</b>."
+      "description": "Deals <b>2 × level</b> magic damage every <b>second</b>.",
+      "source": ""
     },
     {
       "mod": "Apotheosis",
@@ -548,7 +608,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Deals periodic damage that ignores armor every <b>2 seconds</b>."
+      "description": "Deals periodic damage that ignores armor every <b>2 seconds</b>.",
+      "source": ""
     },
     {
       "mod": "Apotheosis",
@@ -557,7 +618,8 @@
       "maxLevel": "II",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Increases healing received by <b>20% × level</b>."
+      "description": "Increases healing received by <b>20% × level</b>.",
+      "source": ""
     },
     {
       "mod": "Apotheosis",
@@ -566,7 +628,8 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "If the entity is on fire when the effect expires, deals damage based on remaining fire ticks (higher level → more damage)."
+      "description": "If the entity is on fire when the effect expires, deals damage based on remaining fire ticks (higher level → more damage).",
+      "source": ""
     },
     {
       "mod": "Apotheosis",
@@ -575,7 +638,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Grants creative flight for the duration."
+      "description": "Grants creative flight for the duration.",
+      "source": ""
     },
     {
       "mod": "Apotheosis",
@@ -584,7 +648,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Reduces healing received by <b>40% × level</b>. <b>Level III</b> prevents health regeneration from all sources."
+      "description": "Reduces healing received by <b>40% × level</b>. <b>Level III</b> prevents health regeneration from all sources.",
+      "source": ""
     },
     {
       "mod": "Apotheosis",
@@ -593,7 +658,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "<b>+20% damage taken × level</b>"
+      "description": "<b>+20% damage taken × level</b>",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -602,7 +668,8 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Explodes after delay (higher level → bigger damage and radius)."
+      "description": "Explodes after delay (higher level → bigger damage and radius).",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -611,7 +678,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Negates fall damage and bounces entity upward upon landing (higher level → more momentum upon landing)."
+      "description": "Negates fall damage and bounces entity upward upon landing (higher level → more momentum upon landing).",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -620,7 +688,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Prevents casting summoning spells."
+      "description": "Prevents casting summoning spells.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -629,7 +698,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Grants creative flight and prevents fall damage."
+      "description": "Grants creative flight and prevents fall damage.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -638,7 +708,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Immobilizes and applies slowing/frost effects."
+      "description": "Immobilizes and applies slowing/frost effects.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -647,7 +718,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Allows Elytra-like gliding."
+      "description": "Allows Elytra-like gliding.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -656,7 +728,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Greatly increases fall speed, doubles fall damage, limits flight height."
+      "description": "Greatly increases fall speed, doubles fall damage, limits flight height.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -665,7 +738,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Highlights nearby magic mobs with a glowing outline."
+      "description": "Highlights nearby magic mobs with a glowing outline.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -674,7 +748,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Increases mana regeneration rate by <b>10 × level</b>."
+      "description": "Increases mana regeneration rate by <b>10 × level</b>.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -683,7 +758,8 @@
       "maxLevel": "II",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Adds <b>0.5 × level</b> hearts to each instance of healing."
+      "description": "Adds <b>0.5 × level</b> hearts to each instance of healing.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -692,7 +768,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Highlights vertical position of nearby budding amethyst."
+      "description": "Highlights vertical position of nearby budding amethyst.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -701,7 +778,8 @@
       "maxLevel": "II",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Reduces incoming damage by <b>0.5 × level</b> hearts."
+      "description": "Reduces incoming damage by <b>0.5 × level</b> hearts.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -710,7 +788,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Increases lightning and shock damage by <b>3 × level</b>."
+      "description": "Increases lightning and shock damage by <b>3 × level</b>.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -719,7 +798,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Severely restricts movement and jumping."
+      "description": "Severely restricts movement and jumping.",
+      "source": ""
     },
     {
       "mod": "Ars Nouveau",
@@ -728,7 +808,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Increases spell damage by <b>1.5 × level</b>."
+      "description": "Increases spell damage by <b>1.5 × level</b>.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -737,7 +818,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Deals <b>1 magic damage</b> every <b>2 seconds</b>. Higher level reduces the interval and may cause teleportation."
+      "description": "Deals <b>1 magic damage</b> every <b>2 seconds</b>. Higher level reduces the interval and may cause teleportation.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -746,7 +828,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Deals <b>1 magic damage</b> every <b>3/1/0.75 second(s)</b>, based on level."
+      "description": "Deals <b>1 magic damage</b> every <b>3/1/0.75 second(s)</b>, based on level.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -755,7 +838,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Prevents health regeneration from all sources."
+      "description": "Prevents health regeneration from all sources.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -764,7 +848,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "<b>-20% armor × level</b> and <b>-20% armor toughness × level</b>."
+      "description": "<b>-20% armor × level</b> and <b>-20% armor toughness × level</b>.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -773,7 +858,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Grants immunity to <b>Darkness</b>, <b>Abyssal Fear</b> and <b>Abyssal Burn</b>."
+      "description": "Grants immunity to <b>Darkness</b>, <b>Abyssal Fear</b> and <b>Abyssal Burn</b>.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -782,7 +868,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "<b>-20% movement speed</b> and <b>-0.15 attack speed</b>."
+      "description": "<b>-20% movement speed</b> and <b>-0.15 attack speed</b>.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -791,7 +878,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Reverses movement controls (forward becomes backward, left becomes right). Increases sneak movement speed."
+      "description": "Reverses movement controls (forward becomes backward, left becomes right). Increases sneak movement speed.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -800,7 +888,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "<b>+40% movement speed</b> and grants invincibility."
+      "description": "<b>+40% movement speed</b> and grants invincibility.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -809,7 +898,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Prevents triggering the resurrection effect of the Cursed Soul Breastplate."
+      "description": "Prevents triggering the resurrection effect of the Cursed Soul Breastplate.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -818,7 +908,8 @@
       "maxLevel": "III",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Each level grants <b>+3 armor</b>, <b>+1 armor toughness</b>, <b>+0.5 knockback resistance</b> and <b>Regeneration</b> equal to level."
+      "description": "Each level grants <b>+3 armor</b>, <b>+1 armor toughness</b>, <b>+0.5 knockback resistance</b> and <b>Regeneration</b> equal to level.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -827,7 +918,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Prevents movement and attacks. Reduces FOV and causes camera shakes for players, removes AI from non-player entities."
+      "description": "Prevents movement and attacks. Reduces FOV and causes camera shakes for players, removes AI from non-player entities.",
+      "source": ""
     },
     {
       "mod": "Cataclysm",
@@ -836,7 +928,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "<b>-5% movement speed × level</b> and increases lightning damage taken by <b>20% × level</b>."
+      "description": "<b>-5% movement speed × level</b> and increases lightning damage taken by <b>20% × level</b>.",
+      "source": ""
     },
     {
       "mod": "Eidolon: Repraised",
@@ -845,7 +938,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Prevents teleportation."
+      "description": "Prevents teleportation.",
+      "source": ""
     },
     {
       "mod": "Eidolon: Repraised",
@@ -854,7 +948,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Prevents health regeneration from all sources."
+      "description": "Prevents health regeneration from all sources.",
+      "source": ""
     },
     {
       "mod": "Eidolon: Repraised",
@@ -863,7 +958,8 @@
       "maxLevel": "II",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Increases armor by <b>25% × level</b>."
+      "description": "Increases armor by <b>25% × level</b>.",
+      "source": ""
     },
     {
       "mod": "Eidolon: Repraised",
@@ -872,7 +968,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Treats entity as undead mob, which will burn in sunlight, can only eat rotten flesh, and is immune to the <b>Hunger</b> effect."
+      "description": "Treats entity as undead mob, which will burn in sunlight, can only eat rotten flesh, and is immune to the <b>Hunger</b> effect.",
+      "source": ""
     },
     {
       "mod": "Eidolon: Repraised",
@@ -881,7 +978,8 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Reduces armor by <b>25% × level</b>."
+      "description": "Reduces armor by <b>25% × level</b>.",
+      "source": ""
     },
     {
       "mod": "Farmer's Delight",
@@ -890,7 +988,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Prevents hunger loss from exhausting actions."
+      "description": "Prevents hunger loss from exhausting actions.",
+      "source": ""
     },
     {
       "mod": "Iron Spells'n'Spellbooks",
@@ -899,7 +998,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Gain wings of holy energy, acting like an Elytra for the duration."
+      "description": "Gain wings of holy energy, acting like an Elytra for the duration.",
+      "source": ""
     },
     {
       "mod": "T.O Magic 'n Extras",
@@ -908,7 +1008,8 @@
       "maxLevel": "VI",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Reduces frost spell resistance by <b>2.5% × level</b> and lightning spell resistance by <b>5% × level</b>."
+      "description": "Reduces frost spell resistance by <b>2.5% × level</b> and lightning spell resistance by <b>5% × level</b>.",
+      "source": ""
     },
     {
       "mod": "The Aether: Redux",
@@ -917,7 +1018,8 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Deals light periodic damage and causes random movement inputs."
+      "description": "Deals light periodic damage and causes random movement inputs.",
+      "source": ""
     },
     {
       "mod": "The Twilight Forest",
@@ -926,7 +1028,8 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Slows movement and renders small ice chunks; higher levels intensify the slow."
+      "description": "Slows movement and renders small ice chunks; higher levels intensify the slow.",
+      "source": ""
     },
     {
       "mod": "The Undergarden",
@@ -935,7 +1038,8 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Increases damage taken (higher level → more damage)."
+      "description": "Increases damage taken (higher level → more damage).",
+      "source": ""
     },
     {
       "mod": "The Undergarden",
@@ -944,7 +1048,8 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Missing."
+      "description": "Missing.",
+      "source": ""
     },
     {
       "mod": "Twilight's Flavors & Delight",
@@ -953,7 +1058,8 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Applies a rainbow glowing outline to all entities in sight through walls."
+      "description": "Applies a rainbow glowing outline to all entities in sight through walls.",
+      "source": ""
     }
   ]
 }

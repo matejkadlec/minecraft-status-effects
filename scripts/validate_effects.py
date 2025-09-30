@@ -9,7 +9,7 @@ Rules:
 5. No duplicate effect names globally (effect name must be unique across all mods).
 6. Formula formatting: '^level' and '× level' must be in <b> tags and properly positioned.
 7. Time units: All "second", "seconds", "second(s)" must be in <b> tags.
-8. Description length must be ≤125 chars (excluding HTML tags).
+8. Description length must be ≤200 chars (excluding HTML tags).
 
 Exit code 0 if valid, else >0 with human-readable diagnostics to stderr.
 """
@@ -197,9 +197,9 @@ def main():
     for eff in effects:
         desc = (eff.get("description") or "").strip()
         desc_without_html = strip_html_tags(desc)
-        if len(desc_without_html) > 125:
+        if len(desc_without_html) > 200:
             fail(
-                f"Description too long (>125 chars) in effect '{eff.get('effect')}': {len(desc_without_html)} chars (without HTML tags)"
+                f"Description too long (>200 chars) in effect '{eff.get('effect')}': {len(desc_without_html)} chars (without HTML tags)"
             )
     print(f"{PREFIX}: ✅ Description length check passed.")
 

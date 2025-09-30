@@ -287,6 +287,7 @@
                 <col class="col-max" />
                 <col class="col-desc" />
                 <col class="col-tags" />
+                <col class="col-source" />
               </colgroup>
               <thead>
                 <tr>
@@ -357,6 +358,20 @@
                   <th>
                     <div class="sort-header">
                       <span class="sort-text">Tags</span>
+                      <div class="sort-arrows">
+                        <span class="sort-arrow sort-up" data-direction="asc"
+                          >▲</span
+                        >
+                        <span class="sort-arrow sort-down" data-direction="desc"
+                          >▼</span
+                        >
+                      </div>
+                    </div>
+                  </th>
+                  <!-- TO DISPLAY SOURCE COLUMN: Remove style="display: none;" below and in table.css + render.js -->
+                  <th class="source-column" style="display: none">
+                    <div class="sort-header">
+                      <span class="sort-text">Source</span>
                       <div class="sort-arrows">
                         <span class="sort-arrow sort-up" data-direction="asc"
                           >▲</span

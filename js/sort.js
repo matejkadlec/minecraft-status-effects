@@ -3,11 +3,10 @@
  *--------------------------*/
 (function (MCSE) {
   // Default sort order: [[columnIndex, direction], ...]
-  // 0: Mod, 1: Effect, 2: Max, 3: Description, 4: Tags
+  // 0: Mod, 1: Effect, 2: Max, 3: Description, 4: Tags, 5: Source
   MCSE.sortState = [
     [0, "asc"], // Mod A-Z
     [1, "asc"], // Effect A-Z
-    [4, "asc"], // Tags (positive first)
   ];
 
   /**
@@ -142,6 +141,10 @@
       case 4: // Tags
         valA = MCSE.getTagsSortValue(a.tags);
         valB = MCSE.getTagsSortValue(b.tags);
+        break;
+      case 5: // Source
+        valA = (a.source || "").toLowerCase();
+        valB = (b.source || "").toLowerCase();
         break;
       default:
         return 0;
