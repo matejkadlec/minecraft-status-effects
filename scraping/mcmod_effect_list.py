@@ -2,7 +2,7 @@
 """Scrapes mcmod.cn list page for item detail links and write them to a mod-specific file.
 
 Usage:
-    python scrape/mcmod_effect_list.py https://www.mcmod.cn/item/list/3468-6.html
+    python scraping/mcmod_effect_list.py https://www.mcmod.cn/item/list/3468-6.html
 
 Behavior:
     1. Fetch the provided list URL.
@@ -16,7 +16,7 @@ Behavior:
        - Replace 'n' (quote n quote) with _n_
        - Lowercase everything
        Example: "Eidolon: Repraised" -> eidolon_repraised.txt
-    6. Save one URL per line to scrape/<mod_name>.txt.
+    6. Save one URL per line to scraping/<mod_name>.txt.
 """
 from __future__ import annotations
 
@@ -174,7 +174,7 @@ def scrape(url: str) -> tuple[str, list[str]]:
 
 
 def write_output(mod_name: str, links: Iterable[str]) -> pathlib.Path:
-    folder = pathlib.Path("scrape")
+    folder = pathlib.Path("scraping")
     folder.mkdir(exist_ok=True)
     filename = sanitize_filename(mod_name)
     path = folder / filename
@@ -186,7 +186,7 @@ def write_output(mod_name: str, links: Iterable[str]) -> pathlib.Path:
 
 def main(argv: list[str]) -> int:
     if len(argv) != 2:
-        print("Usage: python scrape/mcmod_effect_list.py <list_url>", file=sys.stderr)
+        print("Usage: python scraping/mcmod_effect_list.py <list_url>", file=sys.stderr)
         return 1
     url = argv[1].strip()
     try:

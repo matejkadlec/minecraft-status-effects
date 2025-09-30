@@ -3,7 +3,6 @@
  *-------------------------*/
 /* Search bar */
 .search-wrapper {
-  margin: 16px 0 12px 0;
   position: relative;
   width: 280px;
 }
@@ -38,6 +37,65 @@
   color: var(--header);
   background: transparent;
 }
+
+/* Search and export row */
+.search-export-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 16px 0 12px 0;
+  gap: 20px;
+}
+
+.search-wrapper {
+  margin: 0;
+}
+
+/* Export controls */
+.export-controls {
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  margin: 0;
+}
+.export-wrapper {
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.export-wrapper label {
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.export-wrapper input[type="checkbox"] {
+  accent-color: var(--header);
+  margin: 0;
+}
+#export-format {
+  padding: 0.2rem 0.3rem;
+  background: var(--bg-accent);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 0.8rem;
+  cursor: pointer;
+  min-width: 140px;
+  transition: 0.3s;
+}
+#export-format:hover {
+  border-color: var(--header);
+}
+#export-format:focus {
+  outline: none;
+  border-color: var(--header);
+}
+
 .table-shell {
   position: relative;
   display: flex;

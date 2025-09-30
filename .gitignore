@@ -14,13 +14,11 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Logs
-*.log
-logs/
-!logs/.gitkeep
-
-# Untracked
-untracked/
+# Export files
+export/files/
 
 # Scraping results
-scrape/*.txt
+scraping/*.txt
+
+# Untracked files
+untracked/

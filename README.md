@@ -60,11 +60,11 @@ Open http://localhost:8000 in your browser.
 
 ## Automated Effect Ingestion (mcmod.cn) ⬇️
 
-You can trigger an automated scrape + insert flow by issuing a prompt that contains the word `add` and at least one `mcmod.cn` list URL (e.g. `Add https://www.mcmod.cn/item/list/3468-6.html`).
+You can trigger an automated scraping + insert flow by issuing a prompt that contains the word `add` and at least one `mcmod.cn` list URL (e.g. `Add https://www.mcmod.cn/item/list/3468-6.html`).
 
 Flow summary:
-1. Scrapes list page(s) with `python scrape/mcmod_effect_list.py <url>` producing `scrape/<mod>.txt` of item detail URLs.
-2. Scrapes each individual effect page with `python scrape/mcmod_effect.py <effect_url>` to extract detailed information.
+1. Scrapes list page(s) with `python scraping/mcmod_effect_list.py <url>` producing `scraping/<mod>.txt` of item detail URLs.
+2. Scrapes each individual effect page with `python scraping/mcmod_effect.py <effect_url>` to extract detailed information.
 3. Fetch each effect page, extract English name (in parentheses), potency (max level), description (compressed), formulas, type and tags.
 4. Build `id` (`mod-name-effect-name` lowercase, hyphen separated) and enforce description length ≤200 chars.
 5. Insert (or update) effects in `data/effects.json` maintaining ordering rules and uniqueness.
@@ -89,6 +89,14 @@ Enforces deterministic ordering for readability and minimal diff noise.
 - All `Minecraft` effects first (one contiguous block), alphabetically by effect name.
 - Then each mod section ordered by mod name (A → Z).
 - Inside every mod, effects ordered alphabetically by effect name.
+
+If an ordering slip occurs during manual edits you can re-normalize ordering:
+
+```bash
+python scripts/sort_effects.py --check    # Verify
+python scripts/sort_effects.py            # Rewrite in-place
+python scripts/validate_effects.py        # Final confirmation
+```
 
 ### 2. Duplicate Effects
 
@@ -125,18 +133,29 @@ python scripts/validate_effects.py
 ./run_tests.sh
 ```
 
-- You might need to run `chmod +x run_tests.sh` first.
+- You will most likely need to run `chmod +x run_tests.sh` first.
 
 GitHub Actions runs the integration test on every push / PR that touches `effects.json`.
 
-## Additional Python scripts 🐍
 
-### Fix effects.js order
+## Table Export 📤
 
-If an ordering slip occurs during manual edits you can re-normalize ordering:
+Export effects data in multiple formats with theme-aware styling. Supports exporting complete dataset or filtered results based on current table state.
 
-```bash
-python scripts/sort_effects.py --check    # Verify
-python scripts/sort_effects.py            # Rewrite in-place
-python scripts/validate_effects.py        # Final confirmation
-```
+**Available Formats:**
+- **CSV** - Plain text format for spreadsheets and data analysis
+- **Excel (XLSX)** - Styled format with theme colors, borders, and formatting
+- **JSON** - Structured data format preserving all original information
+
+**Export Process:**
+1. "Export as..." dropdown located next to search bar
+2. "Ignore filters" checkbox controls whether current filters apply
+3. Format selection triggers immediate download with timestamp filename
+
+**Export Features:**
+- 📊 **Theme-aware Excel styling** - Blue headers (light mode), gold headers (dark mode)
+- 🔍 **Filter integration** - Respects current search, type, and mod filters
+- ⚡ **Pre-generated files** - Instant downloads for complete dataset
+- 🎯 **Dynamic generation** - On-demand creation for filtered results
+
+Exported files contain: Mod, Effect Name, Level, Description, and Tags. All formats strip HTML from descriptions except Excel which preserves formatting structure.

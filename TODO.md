@@ -51,22 +51,50 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-003: Export Functionality
+### MSE-003: Theme-aware Export Functionality ✅
 **Priority:** Medium  
 **Labels:** export, data, ui  
 **Story:** As a user, I want to export the effects table data as CSV, Excel, or JSON files so I can use the data in other applications or for offline reference.
 
 **Acceptance Criteria:**
 - Dropdown menu positioned at top-right of table area (opposite corner from search)
+    - Will have background and text color theme-aware, same as the "page-length" dropdown
 - Export options: CSV, Excel (.xlsx), JSON
-- Files are pre-generated server-side and ready for download
-- Export includes currently applied filters (optional: checkbox to export all data)
-- Filename format: `minecraft-effects-{timestamp}.{extension}`
+- All export related files/folders will be in ./export/ folder that will be in root
+- Export includes currently applied filters (quick filters, search)
+- Next to the dropdown (left side) will be text "Ignore filters" with checkbox, default will be not checked
+    - If checked, it will download everything, no matter the filters.
+    - State of this checkbox will be cached using localStorage.
+- We can have pre-generated files with all results to be ready to download instantly, but filtered result must be generated via Python and then downloaded, as we can't have pre-generated every filter scenario
+    - If you think have pre-generated full results is worth it, make a Python script that creates those file
+    - Store them into ./export/files/ or similar, including the JSON file, even though it will be the same as ./data/effect.json
+- Use appropriate, modern Python libraries, ideally one that can handle both XLSX and CSV (maybe OpenPYXL)
+- The XLSX/CSV files will be stylized in Python, theme-aware (**use hexes from theme.css**)
+    - If user downloads while on light-mode (it's exactly like on the web table): 
+        - Header will have blue background and header text will be white
+        - Data rows will switch between white and light blue background and data text will be black
+        - Bold text in Description will be bold in the file too, and will be colored blue
+    - If user downloads while on dark-mode (it's exactly like on the web table):
+        - Header will have gold background and header text will be dark grey
+        - Data rows will switch between grey and darker grey background and data text will be white
+        - Bold text in Description will be bold in the file too, and will be colored gold
+- For both themes (again XLSX/CSV only): 
+    - Column widths should be equal or slightly bigger than the fixed width set in table.css (description column has width 100%; that is ~914px on FHD)
+    - Rows height should be a bit bigger than default, ut not as big as in the web table
+    - Header text will be uppercase and bold, there will be 1px border between header cells, and 2px between header row and data
+    - Also there will be 2px border on the right and bottom edge (so it's like outlined by the border)
+    - Data rows will also have 1px border between them (note combining 1px border-bottom with 1px border-top will create 2px, which we don't want)
+- I believe this styling shouldn't be a performance issue, but if it is, we can get rid of some styles
+- Filename format: `status-effects-{timestamp}.{extension}`
+    - This also applies to the pre-generated files (if we will have them), they will be saved as `status-effects.{extension}`, but timestamp will be added to them during export, so the final filename will be different
+- Do not put everything into one .py file, unless it's really short and sepearting doesn't make sense, otherwise separate it into 2+ files
 
 **Implementation Notes:**
-- Add Python scripts to generate export files from effects.json
+- Create Python scripts for the export
+- (optional) Create script that will pre-generate full results from ./data/effects.json
 - Create download endpoint in Bottle server
 - Add UI dropdown component matching current design theme
+- Style XLSX/CSV output files matching current design them
 
 ---
 

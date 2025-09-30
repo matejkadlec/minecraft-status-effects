@@ -66,11 +66,12 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 
 **Current Features:**
 - 📊 **Multi-column sorting** (single/multi-column with Shift+click)
-- 📱 **Horizontal scrolling** for wide tables
+- 📱 **Horizontal scrolling** for smaller screens
 - 🔍 **Advanced filtering** (type, mod, scaling effects)
 - 📖 **Pagination** with customizable page sizes
 - 🌓 **Theme switching** (light/dark modes)
 - 🎯 **Navigation** (jump to specific mods/effects)
+- 📤 **Data export** (CSV, Excel, JSON with theme-aware styling)
 
 **Tech stack:** HTML, CSS, JavaScript, Python (Bottle framework), Docker (production only)
 
@@ -99,11 +100,15 @@ minecraft-status-effects/
 ├── data/
 │   ├── effects.json ⚠️ CRITICAL
 │   └── links.json
+├── export/ (theme-aware export functionality)
+│   ├── export_handler.py
+│   ├── export_formatter.py
+│   ├── generate_static.py
+│   └── files/ (pre-generated export files)
 ├── img/ (icons, logos, loading gifs)
 ├── js/ (modular JavaScript files)
 ├── license/ & privacy-policy/ (legal pages)
-├── logs/ (runtime logs)
-├── scrape/ (mcmod.cn scraping tools)
+├── scraping/ (mcmod.cn scraping tools)
 ├── scripts/
 │   ├── sort_effects.py
 │   └── validate_effects.py ⚠️ CRITICAL
@@ -199,8 +204,8 @@ Your initial → Corrected version
 
 **Process:**
 1. Extract mcmod.cn list URLs
-2. Run `python scrape/mcmod_effect_list.py <url>` for each list page to extract individual effect URLs
-3. Run `python scrape/mcmod_effect.py <effect_url>` for each individual effect page to extract:
+2. Run `python scraping/mcmod_effect_list.py <url>` for each list page to extract individual effect URLs
+3. Run `python scraping/mcmod_effect.py <effect_url>` for each individual effect page to extract:
    - English name from parentheses: `中文名 (English Name)`
    - Effect description from item-text section
    - Command information and mod namespace
@@ -218,8 +223,8 @@ Your initial → Corrected version
 8. Provide exact summary format
 
 **Scraping Scripts:**
-- `scrape/mcmod_effect_list.py`: Extracts individual effect URLs from mcmod.cn list pages
-- `scrape/mcmod_effect.py`: Scrapes detailed effect information from individual effect pages
+- `scraping/mcmod_effect_list.py`: Extracts individual effect URLs from mcmod.cn list pages
+- `scraping/mcmod_effect.py`: Scrapes detailed effect information from individual effect pages
 
 **Quality checks before summary:**
 - Ordering preserved
@@ -230,7 +235,7 @@ Your initial → Corrected version
 
 **Edge Cases:**
 - If page lacks English parentheses name: ask user for clarification
-- If scrape result is empty: report and stop
+- If scraping result is empty: report and stop
 - For network/parse failure: skip that page and report in summary
 - Never fabricate effect data - if translation is uncertain, ask the user
 

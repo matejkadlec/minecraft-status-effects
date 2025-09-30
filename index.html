@@ -247,7 +247,7 @@
           </button>
         </div>
         <p id="copyright" class="note">
-          © 2025 Matěj Kadlec.<br /><span class="legal-links"
+          © 2025 Matěj Kadlec<br /><span class="legal-links"
             ><a href="/license/">License</a> |
             <a href="/privacy-policy/">Privacy Policy</a></span
           >
@@ -262,20 +262,36 @@
             precise descriptions. Includes spell status effects and Apotheosis
             affixes.
           </p>
-          <div class="search-wrapper">
-            <input
-              id="search"
-              type="text"
-              placeholder="Search effects or mods..."
-            />
-            <button
-              id="search-clear"
-              type="button"
-              aria-label="Clear search"
-              title="Clear search"
-            >
-              ×
-            </button>
+          <div class="search-export-row">
+            <div class="search-wrapper">
+              <input
+                id="search"
+                type="text"
+                placeholder="Search effects or mods..."
+              />
+              <button
+                id="search-clear"
+                type="button"
+                aria-label="Clear search"
+                title="Clear search"
+              >
+                ×
+              </button>
+            </div>
+            <div class="export-controls">
+              <div class="export-wrapper">
+                <label>
+                  <input type="checkbox" id="ignore-filters" />
+                  Ignore filters
+                </label>
+                <select id="export-format">
+                  <option value="" disabled selected>Export as...</option>
+                  <option value="csv">CSV</option>
+                  <option value="xlsx">Excel (XLSX)</option>
+                  <option value="json">JSON</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
         <div class="table-shell">
@@ -428,6 +444,7 @@
     <script src="js/sort.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="js/exports.js"></script>
     <script src="js/pagination.js"></script>
     <script src="js/data.js"></script>
   </body>

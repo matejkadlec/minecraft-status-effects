@@ -10,9 +10,8 @@ Allow: /img/
 Disallow: *.py
 Disallow: *.md
 Disallow: /logs/
-Disallow: /scrape/
+Disallow: /scraping/
 Disallow: /scripts/
-Disallow: /venv/
 Disallow: Dockerfile
 Disallow: requirements.txt
 Disallow: run_tests.sh

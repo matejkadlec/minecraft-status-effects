@@ -585,10 +585,10 @@
       "mod": "Apotheosis",
       "id": "apotheosis-ancient-knowledge",
       "effect": "Ancient Knowledge",
-      "maxLevel": "II",
+      "maxLevel": "IV",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Increases experience gained by <b>4^level</b> (4× / 16×).",
+      "description": "Increases experience gained by <b>4^level</b> (4× / 16× / 64× / 256×).",
       "source": ""
     },
     {

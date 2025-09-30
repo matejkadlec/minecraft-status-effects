@@ -1,5 +1,7 @@
 import os
-from bottle import Bottle, static_file, run, HTTPError, redirect, request
+import json
+from bottle import Bottle, static_file, run, HTTPError, redirect, request, response
+from export.export_handler import ExportHandler
 
 app = Bottle()
 
@@ -79,6 +81,71 @@ def redirect_index_html():
     if qs:
         target += f"?{qs}"
     redirect(target, 301)
+
+
+@app.route("/export/<format_type>")
+def export_effects(format_type):
+    """Export effects data in specified format with current filters."""
+    try:
+        # Get request parameters
+        theme = request.query.get("theme", "light")
+        ignore_filters = request.query.get("ignore_filters", "false").lower() == "true"
+
+        # Parse filters from request
+        filters = {}
+        if not ignore_filters:
+            # Search filter
+            if search := request.query.get("search", "").strip():
+                filters["search"] = search
+
+            # Type filters
+            type_filters = {}
+            type_filters["positive"] = (
+                request.query.get("positive", "true").lower() == "true"
+            )
+            type_filters["negative"] = (
+                request.query.get("negative", "true").lower() == "true"
+            )
+            type_filters["scaling"] = (
+                request.query.get("scaling", "true").lower() == "true"
+            )
+            filters["type_filters"] = type_filters
+
+            # Vanilla filter
+            vanilla_filter = request.query.get("vanilla", "true").lower() == "true"
+            filters["vanilla_filter"] = vanilla_filter
+
+        # Generate export
+        handler = ExportHandler()
+        content, filename = handler.export_data(
+            format_type, theme, filters, ignore_filters
+        )
+
+        # Set appropriate headers
+        if format_type.lower() == "json":
+            response.content_type = "application/json"
+        elif format_type.lower() == "csv":
+            response.content_type = "text/csv"
+        elif format_type.lower() == "xlsx":
+            response.content_type = (
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+
+        response.headers["Content-Disposition"] = f'attachment; filename="{filename}"'
+
+        return content
+
+    except Exception as e:
+        return HTTPError(500, f"Export failed: {str(e)}")
+
+
+@app.route("/export/static/<filename>")
+def serve_static_export(filename):
+    """Serve pre-generated export files."""
+    try:
+        return static_file(filename, root="export/files")
+    except:
+        return HTTPError(404, "Export file not found")
 
 
 @app.route("/<requested:path>")
