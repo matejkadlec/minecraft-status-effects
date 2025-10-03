@@ -38,10 +38,12 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 
 ### 5. ENVIRONMENT SETUP
 - Working directory: `/home/matej/projects/minecraft-status-effects/` (project root)
-- Python: Use `python` or `python3` after `source venv/bin/activate`
-- Never use full paths like `/home/matej/projects/minecraft-status-effects/venv/bin/python`
-- **Server port**: Do NOT use port 8000 for testing - it's usually occupied. Use different ports starting with 8: 8001, 8080, etc. Any port 8xxx should be free except 8000
+- Before running other commands, use `source venv/bin/activate` to activate venv.
+- To run local sever for testing, user `python run.py 8001` (do not use just `python run.py`, that will use port 8000, which is used by me)
+- A new terminal always opens in the root, so you don't need to use full path like `/home/matej/projects/minecraft-status-effects/venv/bin/python`
 - Use `rm` to delete files that are no longer needed
+- Stop the local server after done with testing, so the port is freed.
+- **Development workflow**: When making changes to JS/CSS/HTML files, user can simply refresh the browser (Ctrl+F5 for hard refresh) without stopping/restarting the server. The server serves static files directly, so changes are immediately visible on refresh.
 
 ### 6. COMPONENT INTEGRATION - CRITICAL FOR UI CHANGES
 - **Test cross-component compatibility**: When modifying navigation, filters, search, or pagination, verify all components work together seamlessly
@@ -140,7 +142,7 @@ minecraft-status-effects/
    - Mod1 - EffectZ will be before Mod2 - EffectA
    
 2. **GLOBAL UNIQUENESS**: Effect names must be unique across ALL mods
-   - If duplicate found, SKIP and report in summary
+   - If duplicate found, SKIP and report in summary, with the exception for Apotheosis mod, in that case, remove the Apotheosis record and put the effect under the new mod group
    - Can update existing effects with better data
 
 3. **MANDATORY VALIDATION**: Run `python scripts/validate_effects.py` after ANY change
@@ -154,8 +156,8 @@ minecraft-status-effects/
   "maxLevel": 1,
   "type": "positive",
   "tags": ["positive"],
-  "description": "Short description ≤200 chars",
-  "source": ""
+  "description": "As short as possible but also clear description ≤200 chars (for complex effects find some middleground between length and readibility).",
+  "source": "Source of any kind, i.e. potion, being hit by some mob, wearing some armor set. Supports HTML tags like <b>, <i>, <u>, <br>."
 }
 ```
 
@@ -166,22 +168,26 @@ minecraft-status-effects/
 - Example: `<b>Wither</b>` counts as 6 characters, not 10
 
 **Formatting:**
+- Supports HTML formatting: `<b>` (bold), `<i>` (italic), `<u>` (underline), `<br>` (line break)
 - Use `<b>` for: exact formulas, effect names, important terms
+- Use `<i>` for: mod names
 - Always wrap time intervals in `<b>`, e.g., "every <b>2 seconds</b>" or "every <b>second</b>"
 - Formulas: `<b>2 × level</b>` (linear) or `<b>2^level</b>` (exponential)
   - If the multiplier is 1, write simply as `level`, not `1 × level`
 - For exponential, add actual values: `<b>2^level</b> (2 / 4 / 8)`
 - Multiple benefits: separate with " and " (not bold)
+- Avoid using "You"; "You move faster" -> "Causes [entity, player, mob] to move faster"
+  - Use entity if both player and mobs can be affected, use player if only players can be affected, and use mob if only mobs can be affected
 
 **Content rules:**
-- Ignore effect causes/triggers (not in scope)
 - Use "damage"/"hearts" not "health" 
 - Convert to whole hearts, not "half hearts"
 - No "(stacks to X)" due to Apotheosis compatibility
-- Add "(higher level → more damage/effect)" for scaling effects
+- Add "(higher level → more damage/effect)" for scaling effects, but ONLY if we don't have exact formula/numbers, in that case, use the formula and don't add "(higher level → more damage/effect)".
 - Don't use hyphens unless necessary (creative-like flight → creative flight)
-- Never use phrases like "similar to X" or "like X" where X is another effect
+- Avoid using phrases like "similar to X" or "like X" where X is another effect
   - Example: avoid "similar to Wither" or "like Wither" as it's unnecessary
+  - Exceptions for special cases exists, i.e. if the effect is changing the color of your hearts, or i.e. is cancelled by touching water (like fire), using comparison is valid
 
 ### CORRECTIONS EXAMPLES
 Examples of descriptions that needed correction (learning from past mistakes):
@@ -189,14 +195,28 @@ Examples of descriptions that needed correction (learning from past mistakes):
 Your initial → Corrected version
 1. "Deals armor-ignoring damage every 2 seconds." → "Deals periodic damage that ignores armor every <b>2 seconds</b>."
 2. "On end, if still burning, deals damage (higher level → more damage)." → "If the entity is on fire when the effect expires, deals damage based on remaining fire ticks (higher level → more damage)."
-3. "Reduces incoming damage by <b>level</b> (half hearts)." → "Reduces incoming damage by <b>0.5 × level</b> hearts."
+3. "Reduces incoming damage by <b>level</b> (half hearts)." → "Reduces incoming damage by <b>0.5 × level</b>."
 4. "Negates fall damage and bounces entity upward (higher level → more horizontal push)." → "Negates fall damage and bounces entity upward upon landing (higher level → more momentum upon landing)."
 5. "Increases lightning and shock damage by <b>3 × level</b> (stacks to III)." → "Increases lightning and shock damage by <b>3 × level</b>."
 
-### TAGS SYSTEM
+### TAGS RULES
 - **Required:** exactly one of `"positive"` or `"negative"`
-- **Optional:** `"scaling"` if maxLevel ≥ 2
+- **Optional:** 
+  - `"scaling"` if maxLevel ≥ 2
+  - `"unreliable"` if description lacks crucial info or the effect is not comfirmed/not working as the description says (that is the description is correct, but effect is bugged in game)
+    - Except for missing/extremely lacking descriptions, the `"unreliable"` tag will by mainly added by me, as I test a lot of stuff manually ingame.
 - Decision based on overall effect benefit/harm
+
+### SOURCE RULES
+- Might be called "Cause" on some sites, we use "Source"
+- Supports HTML formatting: `<b>` (bold), `<i>` (italic), `<u>` (underline), `<br>` (line break)
+- Sources must be divided by comma, short, and readable. 
+- Example of well written source: 
+- Use `<i>` for: mod names
+- Use "<i>To be added.</i>" if I didn't provide you source of the source yet, and "<i>Unavailable.<i> if you can't find it where it should be.
+- If source of some effect is Potion of X and Arrow of X, add "Charm" to it, and make it a single entry like this: "Potion/Arrow/Charm of X"
+  - i.e. "Potion/Arrow/Charm of Ancient Knowledge,"
+- Used for cross-mod references, e.g., "Dungeons and Combat weapons made of Ice Dragonsteel from <i>Ice and Fire</i> mod."
 
 ### AUTOMATED MCMOD.CN WORKFLOW
 

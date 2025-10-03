@@ -4,18 +4,11 @@ Script to scrape individual effect pages from mcmod.cn
 Extracts effect information from item-text, table-scroll, and comment-floor sections
 """
 
-import requests
 import sys
-from bs4 import BeautifulSoup
 import re
 import json
 
-
-def clean_text(text):
-    """Clean up text by removing extra whitespace and newlines"""
-    if not text:
-        return ""
-    return re.sub(r"\s+", " ", text.strip())
+from common import fetch_page, clean_text
 
 
 def extract_effect_name(soup):
@@ -271,18 +264,7 @@ def determine_effect_type(item_info, comments):
 def scrape_effect_page(url):
     """Main function to scrape an effect page"""
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-        }
-
-        response = requests.get(url, headers=headers, timeout=30)
-        response.encoding = "utf-8"
-
-        if response.status_code != 200:
-            print(f"Failed to fetch {url}: HTTP {response.status_code}")
-            return None
-
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup = fetch_page(url, timeout=30)
 
         # Extract all information
         name_info = extract_effect_name(soup)

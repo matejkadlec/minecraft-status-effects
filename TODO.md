@@ -118,53 +118,7 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-005: Enhanced Tags and Filters
-**Priority:** Medium  
-**Labels:** tags, filters, categorization  
-**Story:** As a user, I want more detailed categorization of effects through additional tags and filters so I can find specific types of effects more easily.
-
-**New Tags to Add:**
-- **DRAFT** - Effects lacking crucial information in descriptions
-- **NEUTRAL** - Effects that can be positive or negative depending on situation
-- **MOVEMENT** - Movement-impairing effects
-- **COMBAT** - Combat-related effects  
-- **SPELL** - Spell-related effects
-- **WEAK/MEDIUM/STRONG** - Effect strength classification (or as separate column)
-
-**Acceptance Criteria:**
-- Update effects.json with new tag categories
-- Add corresponding quick filter checkboxes to sidebar
-- Filter state persists in localStorage
-- All existing filters continue to work correctly
-- Update validation script to recognize new tags
-
-**Implementation Notes:**
-- Decision needed: strength as tags vs. separate column
-- Review all effects to assign appropriate new tags
-- Update CSS for new badge styles if needed
-
----
-
-### MSE-006: Missing Formula Warning Icon
-**Priority:** Low  
-**Labels:** ui, data-quality, tooltip  
-**Story:** As a user, I want to know when effect formulas are incomplete so I understand data limitations.
-
-**Acceptance Criteria:**
-- Warning icon (⚠️) appears at end of description for effects with unknown formulas
-- Cursor changes to help pointer on hover
-- Tooltip shows "Exact formula is missing."
-- Icon styling matches current design theme
-- No impact on table layout or performance
-
-**Implementation Notes:**
-- Define criteria for "missing formula" (e.g., descriptions without `<b>` formula tags)
-- Add icon during table rendering in render.js
-- Implement lightweight tooltip functionality
-
----
-
-### MSE-007: Wiki Scraping Tools
+### MSE-005: Wiki Scraping Tools
 **Priority:** Low  
 **Labels:** automation, scraping, data-collection  
 **Story:** As a developer, I want automated tools to scrape Fandom wiki pages for effect information so I can efficiently collect data from multiple sources.
@@ -187,7 +141,7 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-008: Automated Testing Suite
+### MSE-006: Automated Testing Suite
 **Priority:** Medium  
 **Labels:** testing, quality-assurance, ci-cd  
 **Story:** As a developer, I want comprehensive automated tests so I can maintain code quality and prevent regressions.

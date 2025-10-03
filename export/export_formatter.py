@@ -41,9 +41,9 @@ class ExportFormatter:
         "mod": 25,  # 200px ≈ 25 Excel units
         "effect": 21,  # 170px ≈ 21 Excel units
         "maxLevel": 8,  # 50px ≈ 8 Excel units
-        "description": 114,  # 100% width ≈ 914px ≈ 114 Excel units
+        "description": 125,  # 1000px ≈ 125 Excel units
         "tags": 18,  # 145px ≈ 18 Excel units
-        "source": 15,  # 120px ≈ 15 Excel units
+        "source": 114,  # 910px ≈ 114 Excel units
     }
 
     def __init__(self, theme: str):
@@ -59,13 +59,14 @@ class ExportFormatter:
         """Format effects as CSV."""
         output = io.StringIO()
 
-        headers = ["Mod", "Effect", "Max", "Description", "Tags"]
+        headers = ["Mod", "Effect", "Max", "Description", "Tags", "Source"]
         writer = csv.writer(output)
         writer.writerow(headers)
 
         for effect in effects:
-            # Strip HTML from description for CSV
+            # Strip HTML from description and source for CSV
             description = self._strip_html(effect["description"])
+            source = self._strip_html(effect.get("source", ""))
             tags = ", ".join(effect["tags"])
 
             writer.writerow(
@@ -75,6 +76,7 @@ class ExportFormatter:
                     effect["maxLevel"],
                     description,
                     tags,
+                    source,
                 ]
             )
 
@@ -87,7 +89,7 @@ class ExportFormatter:
         ws.title = "Status Effects"
 
         # Headers
-        headers = ["Mod", "Effect", "Max", "Description", "Tags"]
+        headers = ["Mod", "Effect", "Max", "Description", "Tags", "Source"]
         ws.append(headers)
 
         # Style header row
@@ -105,6 +107,7 @@ class ExportFormatter:
                     effect["maxLevel"],
                     effect["description"],  # Keep HTML for styling
                     tags,
+                    effect.get("source", ""),  # Keep HTML for styling
                 ]
             )
 
@@ -156,22 +159,28 @@ class ExportFormatter:
         fill = PatternFill(start_color=bg_color, end_color=bg_color, fill_type="solid")
 
         font = Font(name="Arial", color=self.colors["text"], size=10)
-        alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
 
         for col in range(1, col_count + 1):
             cell = ws.cell(row=row_num, column=col)
             cell.fill = fill
             cell.font = font
-            cell.alignment = alignment
 
-            # Special handling for description column (HTML formatting)
-            if col == 4:  # Description column
+            # Special handling for description and source columns (HTML formatting)
+            if col in [4, 6]:  # Description and Source columns
                 self._format_description_cell(cell)
-
+                # Set alignment with wrap_text for description/source columns
+                cell.alignment = Alignment(
+                    horizontal="left", vertical="center", wrap_text=True
+                )
             # Center align Max Level and Tags columns
-            if col in [3, 5]:  # Max Level and Tags
+            elif col in [3, 5]:  # Max Level and Tags
                 cell.alignment = Alignment(
                     horizontal="center", vertical="center", wrap_text=True
+                )
+            # Left align for Mod and Effect columns
+            else:  # Columns 1 and 2 (Mod and Effect)
+                cell.alignment = Alignment(
+                    horizontal="left", vertical="center", wrap_text=True
                 )
 
         # Set row height
@@ -226,6 +235,7 @@ class ExportFormatter:
             self.COLUMN_WIDTHS["maxLevel"],
             self.COLUMN_WIDTHS["description"],
             self.COLUMN_WIDTHS["tags"],
+            self.COLUMN_WIDTHS["source"],
         ]
 
         for i, width in enumerate(widths, start=1):

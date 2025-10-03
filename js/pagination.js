@@ -100,7 +100,121 @@
 
     // Rebuild navigation to reflect which mods are visible
     if (MCSE.buildNav) MCSE.buildNav();
+
+    // Adjust description and source column widths dynamically
+    adjustDescriptionColumnWidth();
+    adjustSourceColumnWidth();
   };
+
+  function adjustDescriptionColumnWidth() {
+    const MAX_WIDTH = 800;
+    const descriptionCells = document.querySelectorAll(
+      "#effects-table tbody td:nth-child(4)"
+    );
+    const headerCell = document.querySelector(
+      "#effects-table thead th:nth-child(4)"
+    );
+
+    if (!descriptionCells.length) return;
+
+    // Get all visible description cells on the current page
+    const visibleCells = Array.from(descriptionCells).filter((cell) => {
+      const row = cell.parentElement;
+      return row && row.style.display !== "none" && row.id !== "no-results-row";
+    });
+
+    if (!visibleCells.length) return;
+
+    // Remove all width constraints and wrapping to measure natural width
+    [headerCell, ...descriptionCells].forEach((cell) => {
+      if (cell) {
+        cell.style.width = "";
+        cell.style.minWidth = "";
+        cell.style.maxWidth = "";
+        cell.classList.remove("wrap-description");
+      }
+    });
+
+    // Measure the natural width of each visible cell
+    let maxNaturalWidth = 0;
+    visibleCells.forEach((cell) => {
+      const width = cell.scrollWidth;
+      if (width > maxNaturalWidth) {
+        maxNaturalWidth = width;
+      }
+    });
+
+    // Determine if we need to wrap (content exceeds 800px)
+    const needsWrap = maxNaturalWidth > MAX_WIDTH;
+    const targetWidth = needsWrap ? MAX_WIDTH : maxNaturalWidth;
+
+    // Apply the calculated width to all cells
+    [headerCell, ...descriptionCells].forEach((cell) => {
+      if (cell) {
+        cell.style.width = `${targetWidth}px`;
+        cell.style.minWidth = `${targetWidth}px`;
+        cell.style.maxWidth = `${targetWidth}px`;
+        if (needsWrap) {
+          cell.classList.add("wrap-description");
+        }
+      }
+    });
+  }
+
+  function adjustSourceColumnWidth() {
+    const MAX_WIDTH = 900;
+    const sourceCells = document.querySelectorAll(
+      "#effects-table tbody td:nth-child(6)"
+    );
+    const headerCell = document.querySelector(
+      "#effects-table thead th:nth-child(6)"
+    );
+
+    if (!sourceCells.length) return;
+
+    // Get all visible source cells on the current page
+    const visibleCells = Array.from(sourceCells).filter((cell) => {
+      const row = cell.parentElement;
+      return row && row.style.display !== "none" && row.id !== "no-results-row";
+    });
+
+    if (!visibleCells.length) return;
+
+    // Remove all width constraints and wrapping to measure natural width
+    [headerCell, ...sourceCells].forEach((cell) => {
+      if (cell) {
+        cell.style.width = "";
+        cell.style.minWidth = "";
+        cell.style.maxWidth = "";
+        cell.classList.remove("wrap-source");
+      }
+    });
+
+    // Measure the natural width of each visible cell
+    let maxNaturalWidth = 0;
+    visibleCells.forEach((cell) => {
+      const width = cell.scrollWidth;
+      if (width > maxNaturalWidth) {
+        maxNaturalWidth = width;
+      }
+    });
+
+    // Determine if we need to wrap (content exceeds 900px)
+    const needsWrap = maxNaturalWidth > MAX_WIDTH;
+    const targetWidth = needsWrap ? MAX_WIDTH : maxNaturalWidth;
+
+    // Apply the calculated width to all cells
+    [headerCell, ...sourceCells].forEach((cell) => {
+      if (cell) {
+        cell.style.width = `${targetWidth}px`;
+        cell.style.minWidth = `${targetWidth}px`;
+        cell.style.maxWidth = `${targetWidth}px`;
+        if (needsWrap) {
+          cell.classList.add("wrap-source");
+        }
+      }
+    });
+  }
 
   function buildPagination(current, totalPages) {
     // Clear pagination
@@ -220,15 +334,25 @@
   MCSE.applyTypeFilters = function wrappedTypeFilters() {
     originalApplyTypeFilters();
     storeBaseVisibility();
-    MCSE.pagination.page = 1;
+    // Keep current page, updatePagination will adjust if page no longer exists
     MCSE.updatePagination();
+    // Reset scroll position to top-left
+    const wrap = document.querySelector(".table-scroll");
+    if (wrap) {
+      wrap.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
   };
   const originalApplySearchFilter = MCSE.applySearchFilter;
   MCSE.applySearchFilter = function wrappedSearch() {
     originalApplySearchFilter();
     storeBaseVisibility();
-    MCSE.pagination.page = 1;
+    // Keep current page, updatePagination will adjust if page no longer exists
     MCSE.updatePagination();
+    // Reset scroll position to top-left
+    const wrap = document.querySelector(".table-scroll");
+    if (wrap) {
+      wrap.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
   };
   const originalRenderTable = MCSE.renderTable;
   MCSE.renderTable = function wrappedRender(data) {

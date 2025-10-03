@@ -1,0 +1,45 @@
+{
+  "_comment": "This file is reserved for effects that we have some info about, but not enough to put them in the main effects list.",
+  "draftEffects": [
+    {
+      "mod": "",
+      "id": "burning",
+      "effect": "Burning",
+      "maxLevel": "",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "",
+      "source": "Potion/Arrow/Charm/Bamboo Spikes of Burning"
+    },
+    {
+      "mod": "",
+      "id": "chemical",
+      "effect": "Chemical",
+      "maxLevel": "",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "",
+      "source": "Potion/Arrow/Charm/Bamboo Spikes of Chemical"
+    },
+    {
+      "mod": "",
+      "id": "frenzy",
+      "effect": "Frenzy",
+      "maxLevel": "",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "",
+      "source": "Potion/Arrow/Charm/Bamboo Spikes of Frenzy"
+    },
+    {
+      "mod": "",
+      "id": "spore",
+      "effect": "Spore",
+      "maxLevel": "",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "",
+      "source": "Potion/Arrow/Charm/Bamboo Spikes of Spore"
+    }
+  ]
+}

@@ -26,6 +26,14 @@
       tdMax.textContent = item.maxLevel ?? "";
       const tdDesc = document.createElement("td");
       let rawDesc = item.description || "";
+
+      // Add unreliable warning emoji if the effect has unreliable tag
+      if (item.tags?.includes("unreliable")) {
+        rawDesc =
+          '<span class="unreliable-warning" title="This effect might not work as described.">⚠️</span> ' +
+          rawDesc;
+      }
+
       // Replace ^level with exponent looking sup tag
       rawDesc = rawDesc.replace(/\^level/g, '<sup class="lvl-sup">level</sup>');
       // Normalize arrow glyphs to avoid row height expansion due to font metrics
@@ -33,12 +41,15 @@
       rawDesc = rawDesc
         .replace(/→/g, '<span class="arrow" aria-hidden="true">→</span>')
         .replace(
-          /-&gt;|->/g,
+          /-&gt;(?![^<]*>)|->/g,
           '<span class="arrow" aria-hidden="true">→</span>'
         );
       tdDesc.innerHTML = rawDesc;
       const tdTags = document.createElement("td");
       (item.tags || []).forEach((t) => {
+        // Skip unreliable tag as it's shown as emoji in description
+        if (t === "unreliable") return;
+
         const span = document.createElement("span");
         span.className = `badge ${
           t === "positive" ? "pos" : t === "negative" ? "neg" : t
@@ -47,9 +58,8 @@
         tdTags.appendChild(span);
       });
       const tdSource = document.createElement("td");
-      tdSource.textContent = item.source || "";
+      tdSource.innerHTML = item.source || "";
       tdSource.className = "source-column";
-      tdSource.style.display = "none"; // Hidden by default - TO UNHIDE SOURCE COLUMN: Remove this line
       tr.append(tdMod, tdEffect, tdMax, tdDesc, tdTags, tdSource);
       tbody.appendChild(tr);
       MCSE.rows.push(tr);

@@ -75,6 +75,9 @@
 
     const scrollWrap = document.querySelector(".table-scroll");
     if (scrollWrap) {
+      // Reset horizontal scroll to left
+      scrollWrap.scrollLeft = 0;
+
       const header = scrollWrap.querySelector("thead th");
       const headerHeight = header ? header.getBoundingClientRect().height : 0;
       const targetOffset = targetRow.offsetTop;

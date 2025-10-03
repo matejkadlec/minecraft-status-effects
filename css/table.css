@@ -125,7 +125,6 @@
  *--------------------*/
 #effects-table {
   width: 100%;
-  min-width: 1594px; /* Minimum width to trigger horizontal scroll on smaller screens */
   border-collapse: separate;
   border-spacing: 0;
   background: var(--bg-alt);
@@ -212,9 +211,10 @@
   color: var(--black);
 }
 #effects-table tbody td {
-  padding: 0.6rem 0.75rem;
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--border);
-  vertical-align: top;
+  vertical-align: middle;
   font-size: 0.9rem;
 }
 #effects-table tbody tr {
@@ -239,6 +239,16 @@
   color: var(--header);
   font-weight: 600;
 }
+#effects-table tbody td i {
+  font-style: italic;
+}
+#effects-table tbody td u {
+  text-decoration: underline;
+}
+.unreliable-warning {
+  cursor: help;
+  user-select: none;
+}
 #effects-table tbody td.unverified {
   color: var(--text-dim);
   font-style: italic;
@@ -257,7 +267,6 @@
   min-width: 200px;
   max-width: 200px;
   width: 200px;
-  overflow: hidden;
 }
 #effects-table thead th:nth-child(2),
 #effects-table tbody td:nth-child(2) {
@@ -265,7 +274,6 @@
   min-width: 170px;
   max-width: 170px;
   width: 170px;
-  overflow: hidden;
 }
 #effects-table thead th:nth-child(3),
 #effects-table tbody td:nth-child(3) {
@@ -273,34 +281,50 @@
   min-width: 50px;
   max-width: 50px;
   width: 50px;
-  overflow: hidden;
   text-align: center;
 }
 #effects-table thead th:nth-child(4),
 #effects-table tbody td:nth-child(4) {
   box-sizing: content-box;
-  width: 100%;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: clip;
 }
-/* Tags column (5th column) */
+/* When the column needs to wrap (set via JS), allow it */
+#effects-table thead th:nth-child(4).wrap-description,
+#effects-table tbody td:nth-child(4).wrap-description {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: visible;
+}
 #effects-table thead th:nth-child(5),
 #effects-table tbody td:nth-child(5) {
+  max-width: 150px;
   box-sizing: content-box;
-  max-width: 145px;
-  min-width: 145px;
-  width: 145px;
+  text-wrap: nowrap;
   overflow: hidden;
   text-align: center;
 }
-/* Source column (6th column, currently hidden) */
+/* Allow wrapping only when there are 3+ badges */
+#effects-table tbody td:nth-child(5):has(.badge:nth-child(3)) {
+  text-wrap: wrap;
+  overflow: visible;
+}
 #effects-table thead th:nth-child(6),
 #effects-table tbody td:nth-child(6) {
   box-sizing: content-box;
-  min-width: 120px;
-  max-width: 120px;
-  width: 120px;
+  white-space: nowrap;
   overflow: hidden;
-  display: none; /* Currently hidden */
+  text-overflow: clip;
+}
+/* When the column needs to wrap (set via JS), allow it */
+#effects-table thead th:nth-child(6).wrap-source,
+#effects-table tbody td:nth-child(6).wrap-source {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: visible;
 }
 
 /*---------------*

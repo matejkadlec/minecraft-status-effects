@@ -63,12 +63,14 @@
       const showVanilla = MCSE.filterVanilla
         ? MCSE.filterVanilla.checked
         : true;
+
       MCSE.rows.forEach((r) => {
         if (r.id === "no-results-row") return;
         const type = r.getAttribute("data-type");
         const mod = r.getAttribute("data-mod");
         const isVanilla = mod === "Minecraft";
         const hasScaling = r.hasAttribute("data-scaling");
+
         if (!type) {
           r.style.display = "";
           return;
@@ -77,6 +79,7 @@
           r.style.display = "none";
           return;
         }
+
         const visibleByType =
           (type === "positive" && showPos) || (type === "negative" && showNeg);
         const visibleByScaling = hasScaling ? showScaling : true;

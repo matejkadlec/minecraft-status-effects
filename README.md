@@ -17,6 +17,7 @@ Interactive website for browsing vanilla and modded Minecraft status effects wit
 - 🌓 **Theme Switching**: Light and dark modes
 - 🎯 **Quick Navigation**: Jump to specific mods/effects
 - 🔎 **Real-time Search**: Search effects and mods instantly
+- 📋 **Source Information**: Effect sources displayed in dedicated column
 
 ## Run Local Server 💻
 
@@ -158,4 +159,4 @@ Export effects data in multiple formats with theme-aware styling. Supports expor
 - ⚡ **Pre-generated files** - Instant downloads for complete dataset
 - 🎯 **Dynamic generation** - On-demand creation for filtered results
 
-Exported files contain: Mod, Effect Name, Level, Description, and Tags. All formats strip HTML from descriptions except Excel which preserves formatting structure.
+Exported files contain: Mod, Effect Name, Level, Description, Tags, and Source. All formats strip HTML from descriptions and source except Excel which preserves formatting structure.

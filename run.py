@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from bottle import Bottle, static_file, run, HTTPError, redirect, request, response
 from export.export_handler import ExportHandler
@@ -182,7 +183,20 @@ def serve_any(requested: str):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
+    # Accept optional port argument: python run.py [port]
+    # Default to port 8000 if not provided
+    default_port = 8000
+    if len(sys.argv) > 1:
+        try:
+            port = int(sys.argv[1])
+        except ValueError:
+            print(
+                f"Error: Invalid port '{sys.argv[1]}'. Using default port {default_port}."
+            )
+            port = default_port
+    else:
+        port = int(os.environ.get("PORT", default_port))
+
     debug = os.environ.get("DEBUG", "true").lower() == "true"
     # Disable reloader in production-like runs
     run(app, host="0.0.0.0", port=port, debug=debug, reloader=debug)
