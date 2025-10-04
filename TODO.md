@@ -141,7 +141,12 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-006: Automated Testing Suite
+### MSE-006: Search term in URL, clickable logo, displayed Minecraft version
+- Description of this task to be specified.
+
+---
+
+### MSE-007: Automated Testing Suite
 **Priority:** Medium  
 **Labels:** testing, quality-assurance, ci-cd  
 **Story:** As a developer, I want comprehensive automated tests so I can maintain code quality and prevent regressions.
@@ -166,3 +171,4 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 - Set up test data fixtures
 - Integrate with existing GitHub Actions workflow
 - Add pre-commit hooks for critical tests
+

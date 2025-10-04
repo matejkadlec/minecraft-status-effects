@@ -6,24 +6,29 @@
   line-height: 1.2;
   color: var(--text-dim);
 }
+
 .table-note {
   display: none !important;
   margin: 0;
 }
+
 #contribution {
   margin: 0;
   margin-bottom: 1rem;
   font-weight: 500;
 }
+
 #contribution a {
   transition: 0.3s;
   color: var(--header);
   text-decoration: none;
 }
+
 #contribution a:hover {
   transition: 0.3s;
   color: var(--header-alt);
 }
+
 :root.dark #contribution a:hover {
   color: #e4c969;
 }
@@ -43,16 +48,20 @@
   justify-self: flex-end;
   line-height: 1.25;
 }
+
 :root.dark #copyright {
   font-weight: 400;
 }
+
 #copyright .legal-links {
   white-space: nowrap;
 }
+
 #copyright a {
   transition: 0.3s;
   display: inline;
 }
+
 :root.dark #copyright a:hover {
   transition: 0.3s;
   color: #e4c969;

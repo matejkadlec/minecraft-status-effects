@@ -11,17 +11,11 @@
   --border: #c8d6e5;
   --highlight: #ffffff;
   --row-fade-color: rgba(0, 59, 121, 0.6);
-
-  /* Common colors */
   --white: #ffffff;
   --black: #000000;
-
-  /* Light mode blue gradient palette */
-  --blue-1: #4f85c4; /* light */
-  --blue-2: #2366b8; /* mid */
-  --blue-3: #1b4f8d; /* dark */
-
-  /* Background overlays */
+  --blue-1: #4f85c4;
+  --blue-2: #2366b8;
+  --blue-3: #1b4f8d;
   --bg-overlay-main: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.2),
@@ -40,17 +34,11 @@
   --border: #3a3f45;
   --highlight: #494f55;
   --row-fade-color: rgba(255, 255, 255, 0.32);
-
-  /* Common colors (same in dark mode) */
   --white: #ffffff;
   --black: #000000;
-
-  /* Dark mode gold gradient palette */
-  --gold-1: #f2d777; /* light */
-  --gold-2: #cfa93a; /* mid */
-  --gold-3: #9d7d22; /* dark */
-
-  /* Background overlays */
+  --gold-1: #f2d777;
+  --gold-2: #cfa93a;
+  --gold-3: #9d7d22;
   --bg-overlay-main: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.6),
@@ -68,6 +56,7 @@
   gap: 0.6rem;
   z-index: 500;
 }
+
 .theme-toggle button {
   width: 36px;
   height: 36px;
@@ -84,30 +73,36 @@
   line-height: 1;
   transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
 }
+
 .theme-toggle button.active {
   background: var(--header);
   color: var(--white);
   border-color: var(--header-alt);
   cursor: default;
 }
+
 .theme-toggle button:not(.active):hover {
   transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
   transform: translateY(-2px);
   background: var(--header-alt);
   color: var(--white);
 }
+
 :root.dark .theme-toggle button {
   background: var(--bg-accent);
 }
+
 :root.dark .theme-toggle button.active {
   background: var(--header);
   color: var(--black);
   border-color: var(--header-alt);
 }
+
 :root.dark .theme-toggle button:not(.active):hover {
   background: var(--header-alt);
   color: var(--white);
 }
+
 .theme-toggle button.active:hover {
   transform: none;
 }
@@ -118,17 +113,21 @@
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-alt);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--header);
   border-radius: 5px;
   transition: 0.3s;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--header-alt);
 }
+
 * {
   scrollbar-color: var(--header) var(--bg-alt);
   scrollbar-width: thin;

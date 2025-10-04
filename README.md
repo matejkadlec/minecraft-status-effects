@@ -17,6 +17,7 @@ Interactive website for browsing vanilla and modded Minecraft status effects wit
 - 🌓 **Theme Switching**: Light and dark modes
 - 🎯 **Quick Navigation**: Jump to specific mods/effects
 - 🔎 **Real-time Search**: Search effects and mods instantly
+- 📥 **Data Export**: CSV, Excel, JSON with theme-aware styling
 - 📋 **Source Information**: Effect sources displayed in dedicated column
 
 ## Run Local Server 💻

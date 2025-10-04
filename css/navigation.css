@@ -13,16 +13,15 @@ aside#nav {
   height: 100vh;
   overflow-y: auto;
 }
+
 :root.dark aside#nav {
   border-color: var(--border);
 }
 
-/* Nav background gradient */
 #nav.bg-gradient {
   background: var(--bg-nav-gradient);
 }
 
-/* Nav title gradient text */
 :root #nav .nav-title {
   background-image: linear-gradient(
     180deg,
@@ -34,6 +33,7 @@ aside#nav {
   background-clip: text;
   color: transparent;
 }
+
 :root.dark #nav .nav-title {
   background-image: linear-gradient(
     180deg,
@@ -45,18 +45,21 @@ aside#nav {
   background-clip: text;
   color: transparent;
 }
-/* Logo and divider theme switching */
+
 .nav-logo {
   transition: opacity 0.3s ease;
 }
+
 .logo-dark,
 .divider-dark {
   display: none;
 }
+
 :root.dark .logo-light,
 :root.dark .divider-light {
   display: none;
 }
+
 :root.dark .logo-dark,
 :root.dark .divider-dark {
   display: block;
@@ -66,6 +69,7 @@ aside#nav {
   margin: 0.85rem 0;
   transition: opacity 0.3s ease;
 }
+
 #nav h1 {
   margin: 0;
   font-size: 1.1rem;
@@ -73,9 +77,11 @@ aside#nav {
   letter-spacing: 0.5px;
   margin-bottom: 0.85rem;
 }
+
 #nav h1:nth-of-type(1) {
   margin-bottom: calc(0.6rem - 1.111px);
 }
+
 #nav .quick-filters {
   margin-bottom: calc(0.25rem + 1.111px);
   display: flex;
@@ -100,6 +106,7 @@ hr {
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .filter {
   font-size: 0.8rem;
   font-weight: 500;
@@ -116,9 +123,11 @@ hr {
   justify-content: left;
   transition: 0.3s;
 }
+
 .filter input {
   accent-color: var(--header);
 }
+
 .filter:hover {
   cursor: pointer;
   transition: 0.3s;
@@ -132,11 +141,10 @@ hr {
   padding: 0;
   display: flex;
   flex-direction: column;
-  min-height: 363.98px; /* Match nav-loading height for consistency */
+  min-height: 363.98px;
   position: relative;
 }
 
-/* Navigation list items */
 #mod-nav li a {
   display: block;
   padding: 0.25rem;
@@ -151,17 +159,18 @@ hr {
   transition: background-color 0.3s, color 0.3s, border-color 0.3s, opacity 0.3s;
   opacity: 1;
 }
+
 #mod-nav li a:focus-visible {
   outline: 2px solid var(--header);
   outline-offset: 2px;
 }
+
 #mod-nav li a:hover {
   background: var(--bg-accent);
   color: var(--header);
   border-color: var(--border);
 }
 
-/* Unavailable mod styling */
 #mod-nav li a[data-available="false"] {
   opacity: 0.6;
   cursor: default;
@@ -173,7 +182,6 @@ hr {
   border-color: transparent;
 }
 
-/* Loading placeholder inside nav */
 .nav-loading {
   width: 226px;
   height: 363.98px;
@@ -182,18 +190,22 @@ hr {
   justify-content: center;
   padding: 0;
 }
+
 .nav-loading img {
   width: 64px;
   height: 64px;
   image-rendering: auto;
   image-rendering: -webkit-optimize-contrast;
 }
+
 .nav-loading .spinner-dark {
   display: none;
 }
+
 :root.dark .nav-loading .spinner-light {
   display: none;
 }
+
 :root.dark .nav-loading .spinner-dark {
   display: block;
 }

@@ -13,6 +13,7 @@
    * Persist quick filter state *
    *----------------------------*/
   const FILTER_STORAGE_KEY = "mcse-filters";
+
   function loadStoredFilters() {
     try {
       const raw = localStorage.getItem(FILTER_STORAGE_KEY);
@@ -31,6 +32,7 @@
       });
     } catch (e) {}
   }
+
   function saveFilters() {
     try {
       const payload = {
@@ -42,6 +44,7 @@
       localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(payload));
     } catch (e) {}
   }
+
   loadStoredFilters();
 
   MCSE.getNoResultsRow = () => document.getElementById("no-results-row");

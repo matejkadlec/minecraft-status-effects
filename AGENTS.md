@@ -1,14 +1,6 @@
 # AGENT INSTRUCTIONS
 
-## ⚠### 6. NO CHANGE COMMENTS
-- NEVER add comments like "Changed...", "Added...", "Removed..." to code files
-- Only add production-quality comments that help understand the code
-
-### 💡 **CRITICAL: DOCUMENTATION MAINTENANCE**
-- **ALWAYS update both AGENTS.md and README.md when adding new features**
-- This includes: new functionality, API changes, column additions, validation rules
-- Keep feature lists, tech descriptions, and usage instructions current
-- Update project structure diagrams when files/folders changeRITICAL RULES - NEVER IGNORE THESE ⚠️
+## ⚠️ CRITICAL RULES - NEVER IGNORE THESE ⚠️
 
 ### 1. PROMPT PRIORITY
 - **User prompts ALWAYS override these instructions**
@@ -38,12 +30,12 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 
 ### 5. ENVIRONMENT SETUP
 - Working directory: `/home/matej/projects/minecraft-status-effects/` (project root)
-- Before running other commands, use `source venv/bin/activate` to activate venv.
-- To run local sever for testing, user `python run.py 8001` (do not use just `python run.py`, that will use port 8000, which is used by me)
-- A new terminal always opens in the root, so you don't need to use full path like `/home/matej/projects/minecraft-status-effects/venv/bin/python`
-- Use `rm` to delete files that are no longer needed
-- Stop the local server after done with testing, so the port is freed.
-- **Development workflow**: When making changes to JS/CSS/HTML files, user can simply refresh the browser (Ctrl+F5 for hard refresh) without stopping/restarting the server. The server serves static files directly, so changes are immediately visible on refresh.
+- Before running commands, use `source venv/bin/activate` to activate venv
+- To run local server for testing: `python run.py 8001` (port 8000 is reserved)
+- Terminals always open in project root - no need for full paths
+- Use `rm` to delete obsolete files
+- Stop local server after testing to free the port
+- **Development workflow**: JS/CSS/HTML changes are visible immediately on browser refresh (Ctrl+F5) - no server restart needed
 
 ### 6. COMPONENT INTEGRATION - CRITICAL FOR UI CHANGES
 - **Test cross-component compatibility**: When modifying navigation, filters, search, or pagination, verify all components work together seamlessly
@@ -73,9 +65,11 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 - 📖 **Pagination** with customizable page sizes
 - 🌓 **Theme switching** (light/dark modes)
 - 🎯 **Navigation** (jump to specific mods/effects)
-- 📤 **Data export** (CSV, Excel, JSON with theme-aware styling)
+- � **Real-time search** (effects and mods)
+- �📤 **Data export** (CSV, Excel, JSON with theme-aware styling)
+- 📋 **Source information** (displayed in dedicated column)
 
-**Tech stack:** HTML, CSS, JavaScript, Python (Bottle framework), Docker (production only)
+**Tech stack:** HTML, CSS, JavaScript (vanilla), Python 3.12 (Bottle framework), Docker (production only)
 
 **Key files:**
 - `index.html` - main page with effects table
@@ -278,8 +272,8 @@ Your initial → Corrected version
   - README.md
 
 ### sitemap.xml - SEO MAINTENANCE
-- **ALWAYS update lastmod date** when making changes that affects the main page
-- Update to current date format: `YYYY-MM-DD` (e.g., `2025-09-25`)
+- **ALWAYS update lastmod date** when making changes that affect the main page
+- Update to current date format: `YYYY-MM-DD`
 - Update when:
   - Adding new pages to the website
   - Making major content changes to existing pages
@@ -289,9 +283,6 @@ Your initial → Corrected version
   - Main page: priority="1.0", changefreq="daily"
   - Legal pages: priority="0.3", changefreq="yearly"
   - Other content pages: priority="0.7", changefreq="monthly"
-- Our current pace is 1-2 commit&push/day, and each push is automatically deployed, so main page is currently set to changefreq="daily"
-  - Keep track og this once a day, the first time each day you are reading this, check the lastmod of the main page
-  - If it's older than 3 days, change it to "weekly" and delete this text (lines 250-252)
 
 ### CSS Comments Format
 ```css
@@ -351,6 +342,66 @@ Your initial → Corrected version
 
 ---
 
+## AUTOMATED DOCUMENTATION UPDATE WORKFLOW
+
+**Trigger:** User prompt contains `"update arm"` (case insensitive, can be part of larger request)
+
+**Process:**
+1. Review entire codebase for changes since last documentation update
+2. Update AGENTS.md:
+   - Verify and update PROJECT OVERVIEW (features, tech stack, key files)
+   - Update PROJECT STRUCTURE if files/folders added or removed
+   - Add/update any important workflows or instructions discovered
+   - Remove redundant or outdated information
+   - Improve clarity and organization for AI agents
+3. Update README.md:
+   - Keep human-friendly, collaborator-focused style
+   - Update feature lists to match current implementation
+   - Verify installation/setup instructions are current
+   - Maintain short, to-the-point descriptive style
+   - Update dependencies and version badges if needed
+4. Provide summary of changes made to both files
+
+**Note:** This workflow ensures documentation stays synchronized with codebase evolution.
+
+---
+
+## AUTOMATED CLEANUP WORKFLOW
+
+**Trigger:** User prompt contains `"do cleanup"` (case insensitive, can be part of larger request)
+
+**Process:**
+1. **CSS Cleanup:**
+   - Remove redundant/overwritten styles (keep only the final/effective style)
+   - Remove unnecessary comments (keep only structural/functional comments)
+   - Identify and remove unused CSS classes
+   
+2. **JavaScript Cleanup:**
+   - Remove unused functions, variables, and constants
+   - Remove redundant comments (keep only functional documentation)
+   - Check for dead code and unused imports
+   
+3. **Python Cleanup:**
+   - Remove unused functions and imports
+   - Clean up redundant comments
+   - Verify all dependencies in requirements.txt are used
+   
+4. **Configuration Files:**
+   - Check .yml workflow files for legacy/unused steps
+   - Review run_tests.sh for outdated logic
+   - Verify .gitignore covers all necessary patterns
+   
+5. **Optimization (optional):**
+   - Identify poorly structured code
+   - Suggest or implement performance improvements
+   - Consolidate duplicate logic
+
+6. Provide summary of all cleanup actions taken
+
+**Note:** This workflow maintains code quality and removes technical debt. DO NOT modify .md, .html, .json, or .txt files during cleanup.
+
+---
+
 ## QUALITY CONTROL CHECKLIST
 
 Before completing any effects.json modification:
@@ -363,7 +414,4 @@ Before completing any effects.json modification:
 - [ ] Summary provided in exact required format
 
 **If validation fails:** Fix issues immediately, don't proceed without clean validation.
-- [ ] Validation script executed successfully
-- [ ] Summary provided in exact required format
 
-**If validation fails:** Fix issues immediately, don't proceed without clean validation.

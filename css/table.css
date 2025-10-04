@@ -6,6 +6,7 @@
   position: relative;
   width: 280px;
 }
+
 .search-wrapper #search {
   width: 100%;
   padding: 0.55rem 6rem 0.55rem 0.7rem;
@@ -15,9 +16,11 @@
   color: var(--text);
   transition: 0.3s;
 }
+
 #search:focus {
   outline: none;
 }
+
 #search-clear {
   position: absolute;
   top: 50%;
@@ -33,6 +36,7 @@
   display: none;
   transition: 0.3s;
 }
+
 #search-clear:hover {
   color: var(--header);
   background: transparent;
@@ -58,12 +62,14 @@
   justify-content: flex-end;
   margin: 0;
 }
+
 .export-wrapper {
   margin-top: 1px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
 .export-wrapper label {
   margin-top: 1px;
   display: flex;
@@ -73,10 +79,12 @@
   font-size: 0.8rem;
   cursor: pointer;
 }
+
 .export-wrapper input[type="checkbox"] {
   accent-color: var(--header);
   margin: 0;
 }
+
 #export-format {
   padding: 0.2rem 0.3rem;
   background: var(--bg-accent);
@@ -88,9 +96,11 @@
   min-width: 140px;
   transition: 0.3s;
 }
+
 #export-format:hover {
   border-color: var(--header);
 }
+
 #export-format:focus {
   outline: none;
   border-color: var(--header);
@@ -104,10 +114,11 @@
   flex: 1;
   min-height: 0;
 }
+
 .table-scroll {
   flex: 1;
   overflow-x: auto;
-  overflow-y: scroll; /* Always reserve space for vertical scrollbar */
+  overflow-y: scroll;
   border-radius: 2px;
   background: var(--bg-alt);
   min-height: 0;
@@ -115,6 +126,7 @@
     0 2px 6px -2px rgba(0, 0, 0, 0.08);
   transition: 0.3s;
 }
+
 .table-scroll #effects-table {
   border: 0;
   border-radius: 0;
@@ -129,6 +141,7 @@
   border-spacing: 0;
   background: var(--bg-alt);
 }
+
 #effects-table thead th {
   position: sticky;
   top: 0;
@@ -140,6 +153,7 @@
   z-index: 5;
   box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.25), 0 1px 0 0 var(--border);
 }
+
 :root #effects-table thead th {
   background: linear-gradient(
     105deg,
@@ -149,6 +163,7 @@
   );
   color: var(--white);
 }
+
 :root.dark #effects-table thead th {
   background: linear-gradient(
     105deg,
@@ -168,8 +183,6 @@
   justify-content: space-between;
   width: 100%;
 }
-
-/* All headers use default left alignment for consistency and proper arrow spacing */
 
 .sort-arrows {
   display: flex;
@@ -210,6 +223,7 @@
 :root.dark .sorting-enabled .sort-arrow.active {
   color: var(--black);
 }
+
 #effects-table tbody td {
   line-height: 1.5;
   padding: 0.5rem 0.75rem;
@@ -217,42 +231,53 @@
   vertical-align: middle;
   font-size: 0.9rem;
 }
+
 #effects-table tbody tr {
   background: var(--bg-alt);
   transition: 0.3s;
 }
+
 #effects-table.zebra tbody tr.odd {
   background: var(--bg-accent);
 }
+
 #effects-table.zebra tbody tr.even {
   background: var(--bg-alt);
 }
+
 #effects-table a {
   color: var(--header);
   text-decoration: none;
   transition: 0.3s;
 }
+
 #effects-table a:hover {
   text-decoration: underline;
 }
+
 #effects-table tbody td b {
   color: var(--header);
   font-weight: 600;
 }
+
 #effects-table tbody td i {
   font-style: italic;
 }
+
 #effects-table tbody td u {
   text-decoration: underline;
 }
+
 .unreliable-warning {
   cursor: help;
   user-select: none;
 }
+
 #effects-table tbody td.unverified {
   color: var(--text-dim);
   font-style: italic;
 }
+
 #effects-table tbody tr#no-results-row td.no-results {
   text-align: center;
   font-size: 1rem;
@@ -268,6 +293,7 @@
   max-width: 200px;
   width: 200px;
 }
+
 #effects-table thead th:nth-child(2),
 #effects-table tbody td:nth-child(2) {
   box-sizing: content-box;
@@ -275,6 +301,7 @@
   max-width: 170px;
   width: 170px;
 }
+
 #effects-table thead th:nth-child(3),
 #effects-table tbody td:nth-child(3) {
   box-sizing: content-box;
@@ -283,6 +310,7 @@
   width: 50px;
   text-align: center;
 }
+
 #effects-table thead th:nth-child(4),
 #effects-table tbody td:nth-child(4) {
   box-sizing: content-box;
@@ -290,7 +318,7 @@
   overflow: hidden;
   text-overflow: clip;
 }
-/* When the column needs to wrap (set via JS), allow it */
+
 #effects-table thead th:nth-child(4).wrap-description,
 #effects-table tbody td:nth-child(4).wrap-description {
   white-space: normal;
@@ -298,6 +326,7 @@
   overflow-wrap: break-word;
   overflow: visible;
 }
+
 #effects-table thead th:nth-child(5),
 #effects-table tbody td:nth-child(5) {
   max-width: 150px;
@@ -306,11 +335,12 @@
   overflow: hidden;
   text-align: center;
 }
-/* Allow wrapping only when there are 3+ badges */
+
 #effects-table tbody td:nth-child(5):has(.badge:nth-child(3)) {
   text-wrap: wrap;
   overflow: visible;
 }
+
 #effects-table thead th:nth-child(6),
 #effects-table tbody td:nth-child(6) {
   box-sizing: content-box;
@@ -318,7 +348,7 @@
   overflow: hidden;
   text-overflow: clip;
 }
-/* When the column needs to wrap (set via JS), allow it */
+
 #effects-table thead th:nth-child(6).wrap-source,
 #effects-table tbody td:nth-child(6).wrap-source {
   white-space: normal;
@@ -342,14 +372,17 @@
   margin-left: 0.4rem;
   transition: 0.3s;
 }
+
 .badge.pos {
   background: linear-gradient(135deg, #2e5f2e, #1f3d1f);
   color: #c9f7c9;
 }
+
 .badge.neg {
   background: linear-gradient(135deg, #5f2e2e, #3d1f1f);
   color: #f7c9c9;
 }
+
 .badge.scaling {
   background: linear-gradient(135deg, #ff9800, #ffb347);
   color: #2b1a00;
@@ -365,13 +398,16 @@
   color: inherit;
   font-weight: 600;
 }
+
 .legend p {
   width: fit-content;
   margin: 2px 0;
 }
+
 .legend .flash {
   position: relative;
 }
+
 .legend .flash::after {
   content: "";
   position: absolute;
@@ -391,6 +427,7 @@
 .highlight {
   position: relative;
 }
+
 .highlight::after {
   content: "";
   position: absolute;
@@ -400,6 +437,7 @@
   background: var(--row-fade-color);
   animation: row-fade-highlight 1.2s ease-out 1;
 }
+
 @keyframes row-fade-highlight {
   0% {
     opacity: 0;
@@ -424,6 +462,7 @@
   line-height: 1;
   font-weight: 600;
 }
+
 td .arrow {
   display: inline-block;
   line-height: 1;
@@ -441,6 +480,7 @@ td .arrow {
   position: relative;
   min-height: 682.19px;
 }
+
 .table-scroll.loading::before {
   content: "";
   position: absolute;
@@ -448,9 +488,11 @@ td .arrow {
   background: rgba(50, 50, 50, 0.2);
   z-index: 6;
 }
+
 :root.dark .table-scroll.loading::before {
   background: rgba(50, 50, 50, 0.6);
 }
+
 .table-scroll.loading::after {
   content: "";
   position: absolute;
@@ -463,12 +505,15 @@ td .arrow {
   image-rendering: auto;
   z-index: 7;
 }
+
 :root.dark .table-scroll.loading::after {
   background-image: url("../img/loading-dark.gif");
 }
+
 .table-scroll.loading table thead {
   visibility: visible;
 }
+
 .table-scroll.loading table tbody {
   display: none;
 }
@@ -487,15 +532,18 @@ td .arrow {
   font-size: 0.9rem;
   flex-wrap: nowrap;
 }
+
 .table-footer .table-info {
   flex: 0 0 300px; /* Fixed width to prevent pagination shifting */
   text-align: left;
   color: var(--white);
   width: 300px;
 }
+
 :root.dark .table-footer .table-info {
   color: rgba(255, 255, 255, 0.6);
 }
+
 .pagination {
   display: flex;
   gap: 0.35rem;
@@ -503,15 +551,18 @@ td .arrow {
   justify-content: center;
   flex: 1 1 auto; /* Takes remaining space and stays centered */
 }
+
 .table-footer .table-length {
   flex: 0 0 300px; /* Fixed width to match table-info */
   text-align: right;
   width: 300px;
   color: var(--white);
 }
+
 :root.dark .table-footer .table-length {
   color: rgba(255, 255, 255, 0.6);
 }
+
 .table-footer .table-length select {
   background: var(--bg-accent);
   color: var(--text);
@@ -520,6 +571,7 @@ td .arrow {
   padding: 2px 6px;
   font-size: 0.75rem;
 }
+
 .pagination button,
 .pagination .page-num {
   display: inline-flex;
@@ -539,37 +591,45 @@ td .arrow {
   transition: 0.3s;
   opacity: 1;
 }
+
 .pagination button[disabled]:not(.arrow-btn) {
   opacity: 1;
   cursor: default;
 }
+
 .pagination button:not([disabled]):not(.current):hover,
 .pagination .page-num:not(.current):hover {
   background: var(--white);
   transition: 0.3s;
 }
+
 .pagination .current {
   cursor: default;
 }
+
 :root .pagination .page-num.current {
   background: #007acc;
   color: var(--white);
   border-color: #005fa3;
 }
+
 :root.dark .pagination .page-num.current {
   background: var(--header);
   color: var(--black);
   border-color: var(--header-alt);
 }
+
 :root.dark .pagination button,
 :root.dark .pagination .page-num {
   background: var(--bg-accent);
   color: var(--text);
 }
+
 :root.dark .pagination button:not([disabled]):not(.current):hover,
 :root.dark .pagination .page-num:not(.current):hover {
   background: var(--highlight);
 }
+
 .pagination .ellipsis {
   padding: 0 2px;
   color: var(--text-dim);
@@ -586,17 +646,18 @@ td .arrow {
   padding: 0;
   font-size: 0.9rem;
 }
+
 .pagination .arrow-btn[disabled] {
   opacity: 0.4;
   cursor: default;
 }
+
 .pagination .arrow-btn:not([disabled]):hover {
   color: var(--highlight);
   background: transparent !important;
   border: none !important;
 }
 
-/* Smooth logo swap */
 #nav-logo {
   transition: opacity 0.3s ease;
 }

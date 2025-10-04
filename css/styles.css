@@ -41,6 +41,7 @@ aside#nav,
 #banner {
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
+
 #effects-table tbody tr {
   transition: none;
 }
@@ -63,6 +64,7 @@ main#content {
   display: flex;
   flex-direction: column;
 }
+
 main#content > section {
   display: flex;
   flex-direction: column;
@@ -76,10 +78,12 @@ main#content > section {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 #content.bg-overlay {
   transition: 0.3s;
   position: relative;
 }
+
 #content.bg-overlay::before {
   transition: 0.3s;
   content: "";
@@ -88,6 +92,7 @@ main#content > section {
   pointer-events: none;
   background: var(--bg-overlay-main);
 }
+
 #content.bg-overlay > * {
   position: relative;
   z-index: 1;
@@ -102,6 +107,7 @@ main h1 {
   align-items: center;
   gap: 0.4rem;
 }
+
 main h1 span {
   margin-top: 1.5px;
   font-size: 0.85rem;
@@ -115,6 +121,7 @@ main h1 span {
   display: flex;
   flex-direction: column;
 }
+
 .intro-bar .intro-text {
   font-weight: 500;
   margin: 0;
