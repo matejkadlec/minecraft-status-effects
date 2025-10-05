@@ -17,8 +17,8 @@ Thumbs.db
 # Export files
 export/files/
 
-# Scraping results
-scraping/*.txt
+# MCMod effect URLs
+mcmod/effect_urls/*.txt
 
 # Untracked files
 untracked/

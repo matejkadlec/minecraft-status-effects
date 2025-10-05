@@ -10,7 +10,7 @@ Allow: /img/
 Disallow: *.py
 Disallow: *.md
 Disallow: /logs/
-Disallow: /scraping/
+Disallow: /mcmod/
 Disallow: /scripts/
 Disallow: Dockerfile
 Disallow: requirements.txt

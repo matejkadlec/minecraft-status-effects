@@ -39,7 +39,7 @@ jobs:
         if: success()
         run: |
           echo "## ✅ Effects JSON Validation Passed" >> $GITHUB_STEP_SUMMARY
-          echo "All 5 checks passed: ordering, duplicates, formula formatting, description length, tags validation." >> $GITHUB_STEP_SUMMARY
+          echo "All 10 checks passed: no empty fields, text formatting, no duplicates, ordering, max level format, description HTML tags, tags validation, source potion grouping, source HTML tags, source special terms." >> $GITHUB_STEP_SUMMARY
           echo "### Log Excerpt" >> $GITHUB_STEP_SUMMARY
           echo '\n\n' >> $GITHUB_STEP_SUMMARY
           sed 's/^/`/; s/$/`/' logs/validation.log | head -n 30 >> $GITHUB_STEP_SUMMARY

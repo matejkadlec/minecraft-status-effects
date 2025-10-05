@@ -2,13 +2,38 @@
 """
 Script to scrape individual effect pages from mcmod.cn
 Extracts effect information from item-text, table-scroll, and comment-floor sections
+
+Note: Comments are loaded dynamically via JavaScript, so this script uses Selenium
+to wait for them to load. You need Chrome/Chromium installed for this to work.
 """
 
+import requests
 import sys
+from bs4 import BeautifulSoup
 import re
 import json
+import time
 
-from common import fetch_page, clean_text
+
+# Optional Selenium support for loading dynamic comments
+try:
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.chrome.options import Options
+    from selenium.common.exceptions import TimeoutException
+
+    SELENIUM_AVAILABLE = True
+except ImportError:
+    SELENIUM_AVAILABLE = False
+
+
+def clean_text(text):
+    """Clean up text by removing extra whitespace and newlines"""
+    if not text:
+        return ""
+    return re.sub(r"\s+", " ", text.strip())
 
 
 def extract_effect_name(soup):
@@ -154,7 +179,7 @@ def extract_table_info(soup):
 
 
 def extract_comments(soup):
-    """Extract user comments from comment-floor"""
+    """Extract user comments from comment-floor (static HTML fallback)"""
     comments = []
 
     comment_floor = soup.find("ul", class_="comment-floor")
@@ -185,6 +210,84 @@ def extract_comments(soup):
             comments.append(comment_data)
 
     return comments
+
+
+def extract_comments_with_selenium(url, timeout=10):
+    """Extract comments using Selenium to wait for JavaScript to load them
+
+    Optimized for speed with minimal wait times and disabled unnecessary features.
+    """
+    if not SELENIUM_AVAILABLE:
+        print(
+            "Warning: Selenium not available, skipping dynamic comment loading",
+            file=sys.stderr,
+        )
+        return []
+
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--disable-extensions")
+    chrome_options.add_argument("--disable-software-rasterizer")
+    # Disable images for faster loading
+    prefs = {"profile.managed_default_content_settings.images": 2}
+    chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_argument(
+        "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    )
+
+    try:
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(url)
+
+        # Wait for the comment block to appear (reduced timeout)
+        try:
+            comment_block = WebDriverWait(driver, timeout).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "common-comment-block"))
+            )
+
+            # Scroll to the comment block to trigger lazy loading
+            driver.execute_script("arguments[0].scrollIntoView(true);", comment_block)
+
+            # Wait for comment-floor with explicit check (faster than time.sleep)
+            WebDriverWait(driver, timeout).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "comment-floor"))
+            )
+
+            # Check if comments are actually present
+            # If comment-floor exists but has no comment-row children, return immediately
+            try:
+                # Wait briefly for at least one comment to appear
+                WebDriverWait(driver, 2).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, "comment-row"))
+                )
+                # Comments found, give them a moment to fully render
+                time.sleep(0.5)
+            except TimeoutException:
+                # No comments found after 2 seconds, return immediately with empty list
+                driver.quit()
+                return []
+
+        except TimeoutException:
+            print("Warning: Timed out waiting for comments to load", file=sys.stderr)
+
+        # Get the page source after JavaScript execution
+        page_source = driver.page_source
+        driver.quit()
+
+        # Parse with BeautifulSoup
+        soup = BeautifulSoup(page_source, "html.parser")
+        return extract_comments(soup)
+
+    except Exception as e:
+        print(f"Warning: Error using Selenium: {e}", file=sys.stderr)
+        try:
+            driver.quit()
+        except:
+            pass
+        return []
 
 
 def determine_max_level(table_info, item_info, comments):
@@ -261,16 +364,39 @@ def determine_effect_type(item_info, comments):
     return "negative"  # Most mod effects tend to be negative/debuffs
 
 
-def scrape_effect_page(url):
-    """Main function to scrape an effect page"""
+def scrape_effect_page(url, use_selenium=True):
+    """Main function to scrape an effect page
+
+    Args:
+        url: The URL of the effect page to scrape
+        use_selenium: If True, use Selenium to load dynamic comments (recommended)
+    """
     try:
-        soup = fetch_page(url, timeout=30)
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+
+        response = requests.get(url, headers=headers, timeout=30)
+        response.encoding = "utf-8"
+
+        if response.status_code != 200:
+            print(f"Failed to fetch {url}: HTTP {response.status_code}")
+            return None
+
+        soup = BeautifulSoup(response.text, "html.parser")
 
         # Extract all information
         name_info = extract_effect_name(soup)
         item_info = extract_item_text_info(soup)
         table_info = extract_table_info(soup)
-        comments = extract_comments(soup)
+
+        # Try to load comments with Selenium (since they're loaded dynamically)
+        comments = []
+        if use_selenium and SELENIUM_AVAILABLE:
+            comments = extract_comments_with_selenium(url)
+        else:
+            # Fallback: try static HTML parsing (likely won't work for dynamic comments)
+            comments = extract_comments(soup)
 
         # Determine max level and type
         max_level = determine_max_level(table_info, item_info, comments)
@@ -295,7 +421,7 @@ def scrape_effect_page(url):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python mcmod_effect.py <effect_url>")
+        print("Usage: python scrape_effect.py <effect_url>")
         sys.exit(1)
 
     url = sys.argv[1]

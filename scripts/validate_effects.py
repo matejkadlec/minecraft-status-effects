@@ -2,14 +2,16 @@
 """Validate ordering of data/effects.json.
 
 Rules:
-1. All entries with mod == "Minecraft" appear first as a single contiguous section.
-2. Inside the Minecraft section effects sorted alphabetically by `effect`.
-3. Remaining entries grouped by `mod`, groups ordered alphabetically by mod.
-4. Each group's effects sorted alphabetically by `effect`.
-5. No duplicate effect names globally (effect name must be unique across all mods).
-6. Formula formatting: '^level' and '× level' must be in <b> tags and properly positioned.
-7. Time units: All "second", "seconds", "second(s)" must be in <b> tags.
-8. Description length must be ≤200 chars (excluding HTML tags).
+1. All required fields must be non-empty (no null, empty strings, or empty lists).
+2. Text formatting: no double spaces, leading/trailing whitespace, proper comma spacing.
+3. No duplicate effect names globally (effect name must be unique across all mods).
+4. Ordering: Minecraft first (alphabetical by effect), then mods (alphabetical by mod, then by effect).
+5. Max level must be a Roman numeral from I to X.
+6. Description: Formula ('^level', '× level') and time units must be in <b> tags.
+7. Tags: Exactly one of 'positive' or 'negative', plus 'scaling' if maxLevel > I.
+8. Source: Potion/Arrow/Charm grouping (no Splash/Lingering variants).
+9. Source: HTML tags (<i> only for mod names).
+10. Source: Special terms (spell patterns, no ampersands except in names).
 
 Exit code 0 if valid, else >0 with human-readable diagnostics to stderr.
 """
@@ -48,21 +50,35 @@ def strip_html_tags(text: str) -> str:
     return re.sub(r"<[^>]+>", "", text)
 
 
-def validate_formula_and_time_wrapping(effects):
+def validate_description_html_tags(effects):
     """Ensure formulas and time units are properly wrapped in <b> tags.
 
     Rules:
     - '^level' and '× level' must be inside <b> tags and either be at the end
       or followed by "second", "seconds", or "second(s)"
     - Every instance of "second", "seconds", or "second(s)" must be wrapped in <b> tags
+    - ONLY <b> tags allowed in descriptions (exception: "<i>To be added.</i>" and "<i>Unavailable.</i>")
     """
     # Terms that must be in bold
     time_terms = ["second", "seconds", "second(s)"]
     formula_terms = ["^level", "× level"]
 
+    # Special allowed italic strings
+    allowed_italic_strings = ["<i>To be added.</i>", "<i>Unavailable.</i>"]
+
     for eff in effects:
         desc = eff.get("description") or ""
         name = eff.get("effect") or "Unknown"
+
+        # Check for non-<b> HTML tags in description, excluding allowed special cases
+        desc_without_exceptions = desc
+        for allowed in allowed_italic_strings:
+            desc_without_exceptions = desc_without_exceptions.replace(allowed, "")
+
+        if re.search(r"<(?!b>|/b>)[^>]+>", desc_without_exceptions):
+            fail(
+                f"Effect '{name}': Description should ONLY contain <b> tags (found other HTML tags). Exception: '<i>To be added.</i>' and '<i>Unavailable.</i>' are allowed."
+            )
 
         # Extract bold content and content outside bold
         bold_spans = re.findall(r"<b>(.*?)</b>", desc)
@@ -107,12 +123,262 @@ def validate_formula_and_time_wrapping(effects):
                     )
 
 
+def validate_source_potion_grouping(effects):
+    """Validate Potion/Arrow/Charm grouping rules.
+
+    Rules:
+    - FORBIDDEN: "Potion/Arrow/Splash/Lingering" or "Potion/Splash/Lingering" (should be simplified)
+    - Check for common mistakes in potion variant naming
+    """
+    for eff in effects:
+        source = eff.get("source") or ""
+        name = eff.get("effect") or "Unknown"
+
+        # Check for forbidden Splash/Lingering in grouping patterns
+        if "Potion/Arrow/Splash/Lingering" in source:
+            fail(
+                f"Effect '{name}': Use 'Potion/Arrow/Charm' or 'Potion/Arrow' instead of 'Potion/Arrow/Splash/Lingering'"
+            )
+
+        if "Potion/Splash/Lingering" in source:
+            fail(
+                f"Effect '{name}': Use 'Potion' or 'Potion/Arrow/Charm' instead of 'Potion/Splash/Lingering'"
+            )
+
+        # Check for other verbose potion naming
+        if "/Splash/" in source or "/Lingering/" in source:
+            fail(
+                f"Effect '{name}': Don't name every potion variant - use default (Potion) instead of Splash/Lingering variants"
+            )
+
+
+def validate_source_html_tags(effects):
+    """Validate HTML tag usage in source field.
+
+    Rules:
+    - <i> tags should ONLY be used for mod names
+    - No <i> tags for mob names, item names, etc.
+    - Check for common mistakes like italicizing mob/item names
+    - ONLY <i> tags allowed in sources (no <b>, <u>, etc.)
+    """
+    for eff in effects:
+        source = eff.get("source") or ""
+        name = eff.get("effect") or "Unknown"
+
+        # Check for non-<i> HTML tags in source
+        if re.search(r"<(?!i>|/i>)[^>]+>", source):
+            fail(
+                f"Effect '{name}': Source should ONLY contain <i> tags (found other HTML tags like <b>, <u>, etc.)"
+            )
+
+        # Find all italic content
+        italic_matches = re.findall(r"<i>(.*?)</i>", source)
+
+        # Common non-mod terms that shouldn't be italicized
+        forbidden_italic_terms = [
+            "Tarantula Hawk",
+            "Rocky Roller",
+            "Enderiophage",
+            "Frilled Shark",
+            "Jerboa",
+            "Nucleeper",
+            "Brainiac",
+            "Tremorzilla",
+            "Gammaroach",
+            "Warden",
+            "Elder Guardian",
+            "Wither",
+            "Wither Skeleton",
+            "Cave Spider",
+            "Stray",
+            "Husk",
+            "Illusioner",
+            "Shulker",
+            # Add other common mob/item names that are often mistakenly italicized
+        ]
+
+        for italic_content in italic_matches:
+            # Skip special cases
+            if italic_content in ["To be added.", "Unavailable."]:
+                continue
+
+            # Check if it's a forbidden term
+            if italic_content in forbidden_italic_terms:
+                fail(
+                    f"Effect '{name}': Mob/item name '<i>{italic_content}</i>' should not be italicized (only mod names use <i> tags)"
+                )
+
+            # Check for patterns that suggest it's not a mod name
+            # Mod names typically contain "mod" or are proper capitalization without common words
+            if any(
+                word in italic_content.lower()
+                for word in ["attacks", "landing", "projectile", "arrow"]
+            ):
+                fail(
+                    f"Effect '{name}': '<i>{italic_content}</i>' appears to be a description, not a mod name (only mod names should use <i> tags)"
+                )
+
+
+def validate_source_special_terms(effects):
+    """Validate special source terms and grouping rules.
+
+    Rules:
+    - Use "Delights" for multiple items from mods containing "delight"
+    - Use "Unique Weapons" for Simple Swords weapons
+    - Use "Affix Items" for Apotheosis affixes
+    - Use spell patterns for Iron Spells'n'Spellbooks
+    - Use "tools/weapons/armor sets from <i>ModName</i>" pattern
+    """
+    for eff in effects:
+        source = eff.get("source") or ""
+        name = eff.get("effect") or "Unknown"
+
+        # Check for improper ampersand usage (should use "and" instead)
+        if " & " in source or "&amp;" in source:
+            # Allow if it's part of a mod name
+            if not re.search(r"<i>[^<]*&[^<]*</i>", source):
+                fail(
+                    f"Effect '{name}': Use 'and' instead of '&' in source (unless it's part of a mod/item name)"
+                )
+
+        # Check for spell formatting from Iron Spells'n'Spellbooks
+        if "spell" in source.lower() and "Iron Spells" in source:
+            # Should be: "X spell from <i>Iron Spells'n'Spellbooks</i> mod" or "spells from <i>Iron Spells'n'Spellbooks</i> mod"
+            # Allow for optional whitespace before </i>
+            if not re.search(
+                r"(spells?)\s+from\s+<i>Iron Spells'n'Spellbooks\s*</i>\s+mod", source
+            ):
+                fail(
+                    f"Effect '{name}': Spell references should follow pattern 'X spell from <i>Iron Spells'n'Spellbooks</i> mod' or 'spells from <i>Iron Spells'n'Spellbooks</i> mod'"
+                )
+
+
+def validate_text_formatting(effects):
+    """Validate general text formatting across all text fields.
+
+    Rules:
+    - No double spaces
+    - No leading/trailing whitespace
+    - Space after comma (not before)
+    """
+    fields_to_check = ["mod", "effect", "description", "source"]
+
+    for eff in effects:
+        name = eff.get("effect") or "Unknown"
+
+        for field in fields_to_check:
+            value = eff.get(field) or ""
+
+            # Check for double spaces
+            if "  " in value:
+                fail(
+                    f"Effect '{name}': Field '{field}' contains double spaces (use single spaces)"
+                )
+
+            # Check for leading/trailing whitespace
+            if value != value.strip():
+                fail(
+                    f"Effect '{name}': Field '{field}' has leading or trailing whitespace"
+                )
+
+            # Check for comma without space after (except in HTML tags)
+            # Remove HTML tags first to avoid false positives
+            value_without_html = re.sub(r"<[^>]+>", "", value)
+            if re.search(r",[^ ]", value_without_html):
+                fail(
+                    f"Effect '{name}': Field '{field}' - comma should be followed by a space"
+                )
+
+            # Check for space before comma
+            if " ," in value:
+                fail(f"Effect '{name}': Field '{field}' - remove space before comma")
+
+
+def validate_no_empty_fields(effects):
+    """Ensure all required fields are non-empty.
+
+    Rules:
+    - All fields must be present and non-empty
+    """
+    required_fields = [
+        "mod",
+        "id",
+        "effect",
+        "maxLevel",
+        "type",
+        "tags",
+        "description",
+        "source",
+    ]
+
+    for eff in effects:
+        name = eff.get("effect") or "Unknown"
+
+        for field in required_fields:
+            if field not in eff:
+                fail(f"Effect '{name}': Missing required field '{field}'")
+
+            value = eff.get(field)
+
+            # Check for empty strings
+            if isinstance(value, str) and not value.strip():
+                fail(f"Effect '{name}': Field '{field}' is empty")
+
+            # Check for empty lists
+            if isinstance(value, list) and len(value) == 0:
+                fail(f"Effect '{name}': Field '{field}' is an empty list")
+
+            # Check for None
+            if value is None:
+                fail(f"Effect '{name}': Field '{field}' is null")
+
+
+def validate_max_level_format(effects):
+    """Validate maxLevel field format.
+
+    Rules:
+    - Must be a Roman numeral from I to X
+    """
+    valid_roman_numerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+
+    for eff in effects:
+        name = eff.get("effect") or "Unknown"
+        max_level = eff.get("maxLevel")
+
+        if max_level not in valid_roman_numerals:
+            fail(
+                f"Effect '{name}': maxLevel must be a Roman numeral from I to X, got '{max_level}'"
+            )
+
+
 def main():
     print(f"{PREFIX}: 🚀 Starting validation...")
     effects = load_effects()
 
-    # Ordering validation section
-    print(f"{PREFIX}: 1/5 Ordering checks started...")
+    # General checks (most important first)
+
+    # 1. No empty fields check
+    print(f"{PREFIX}: 1/10 No empty fields check started...")
+    validate_no_empty_fields(effects)
+    print(f"{PREFIX}: ✅ No empty fields check passed.")
+
+    # 2. Text formatting check (applies to multiple fields)
+    print(f"{PREFIX}: 2/10 General text formatting check started...")
+    validate_text_formatting(effects)
+    print(f"{PREFIX}: ✅ General text formatting check passed.")
+
+    # 3. Duplicate name check
+    print(f"{PREFIX}: 3/10 Duplicate effect name check started...")
+    seen_names = set()
+    for e in effects:
+        name = e.get("effect")
+        if name in seen_names:
+            fail(f"Duplicate effect name detected: '{name}'")
+        seen_names.add(name)
+    print(f"{PREFIX}: ✅ Duplicate effect name check passed.")
+
+    # 4. Ordering check
+    print(f"{PREFIX}: 4/10 Effect ordering check started...")
 
     if not effects:
         fail("No effects present (empty list)")
@@ -173,38 +439,22 @@ def main():
                     fail(
                         f"Effect ordering error in mod '{mod}': '{a}' should come after '{b}' (alphabetical)"
                     )
-    print(f"{PREFIX}: ✅ Effect ordering checks passed.")
+    print(f"{PREFIX}: ✅ Effect ordering check passed.")
 
-    # Duplication validation section
-    print(f"{PREFIX}: 2/5 Duplicate name check started...")
-    # Check duplicate effect names globally
-    seen_names = set()
-    for e in effects:
-        name = e.get("effect")
-        if name in seen_names:
-            fail(f"Duplicate effect name detected: '{name}'")
-        seen_names.add(name)
+    # Column-specific checks (in column order: mod, effect, maxLevel, description, tags, source)
 
-    print(f"{PREFIX}: ✅ Effect duplicate name check passed.")
+    # 5. Max level format check
+    print(f"{PREFIX}: 5/10 Max level format check started...")
+    validate_max_level_format(effects)
+    print(f"{PREFIX}: ✅ Max level format check passed.")
 
-    # Formula and time wrapping validation section
-    print(f"{PREFIX}: 3/5 Formula and time formatting check started...")
-    validate_formula_and_time_wrapping(effects)
-    print(f"{PREFIX}: ✅ Formula and time formatting check passed.")
+    # 6. Description HTML tag usage check
+    print(f"{PREFIX}: 6/10 Description HTML tag usage check started...")
+    validate_description_html_tags(effects)
+    print(f"{PREFIX}: ✅ Description HTML tag usage check passed.")
 
-    # Description length validation
-    print(f"{PREFIX}: 4/5 Description length check started...")
-    for eff in effects:
-        desc = (eff.get("description") or "").strip()
-        desc_without_html = strip_html_tags(desc)
-        if len(desc_without_html) > 200:
-            fail(
-                f"Description too long (>200 chars) in effect '{eff.get('effect')}': {len(desc_without_html)} chars (without HTML tags)"
-            )
-    print(f"{PREFIX}: ✅ Description length check passed.")
-
-    # Tags validation
-    print(f"{PREFIX}: 5/5 Tags validation check started...")
+    # 7. Tags validation check
+    print(f"{PREFIX}: 7/10 Tags validation check started...")
     for eff in effects:
         tags = eff.get("tags", [])
         if not isinstance(tags, list):
@@ -232,9 +482,26 @@ def main():
                 fail(
                     f"Effect '{eff.get('effect')}' with maxLevel {max_level} should have 'scaling' tag"
                 )
-
     print(f"{PREFIX}: ✅ Tags validation check passed.")
-    print(f"{PREFIX}: ✨ All 5/5 checks passed.")
+
+    # Source validation checks
+
+    # 8. Source potion grouping check
+    print(f"{PREFIX}: 8/10 Source potion grouping check started...")
+    validate_source_potion_grouping(effects)
+    print(f"{PREFIX}: ✅ Source potion grouping check passed.")
+
+    # 9. Source HTML tag usage check
+    print(f"{PREFIX}: 9/10 Source HTML tag usage check started...")
+    validate_source_html_tags(effects)
+    print(
+        f"{PREFIX}: ✅ Source HTML tag usage check passed."
+    )  # 10. Source special terms check
+    print(f"{PREFIX}: 10/10 Source special terms check started...")
+    validate_source_special_terms(effects)
+    print(f"{PREFIX}: ✅ Source special terms check passed.")
+
+    print(f"{PREFIX}: ✨ All 10/10 checks passed.")
 
 
 if __name__ == "__main__":

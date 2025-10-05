@@ -65,8 +65,8 @@ Open http://localhost:8000 in your browser.
 You can trigger an automated scraping + insert flow by issuing a prompt that contains the word `add` and at least one `mcmod.cn` list URL (e.g. `Add https://www.mcmod.cn/item/list/3468-6.html`).
 
 Flow summary:
-1. Scrapes list page(s) with `python scraping/mcmod_effect_list.py <url>` producing `scraping/<mod>.txt` of item detail URLs.
-2. Scrapes each individual effect page with `python scraping/mcmod_effect.py <effect_url>` to extract detailed information.
+1. Scrapes list page(s) with `python mcmod/scrape_effect_list.py <url>` producing `mcmod/<mod>.txt` of item detail URLs.
+2. Scrapes each individual effect page with `python mcmod/scrape_effect.py <effect_url>` to extract detailed information.
 3. Fetch each effect page, extract English name (in parentheses), potency (max level), description (compressed), formulas, type and tags.
 4. Build `id` (`mod-name-effect-name` lowercase, hyphen separated) and enforce description length ≤200 chars.
 5. Insert (or update) effects in `data/effects.json` maintaining ordering rules and uniqueness.
