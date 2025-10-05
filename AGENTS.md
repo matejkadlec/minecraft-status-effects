@@ -205,40 +205,65 @@ Your initial → Corrected version
 - Decision based on overall effect benefit/harm
 
 ### SOURCE RULES
-- Might be called "Cause" on some sites, we use "Source"
-- Supports HTML italic tags `<i>` (`<b>`, `<u>` and `<br>` are supported as well, but currently unused)
-- Sources must be divided by comma, short, and readable. 
-- Use `<i>` for mod names; do not use HTML tags for anything else
-- Use "<i>To be added.</i>" if I didn't provide you source of the source yet, and "<i>Unavailable.<i> if you can't find it where it should be.
+- Supports HTML italic tags `<i>` (only for mod names in cross-references)
+- Use "<i>To be added.</i>" if source data not provided yet, "<i>Unavailable.</i>" if unfindable
+- Sources comma-separated, concise, readable
 
-**Saving space is crucial:**
-- Group everything you can, while maintaning readability.
-- If there are more items names ending with same string, i.e. "of Strength", use "Item1/Item2/Item3 of Strength".
-- If there are more items names starting with same string, i.e. "Blessed, use "Blessed Item1/Item2/Item3".
-- If source of some effect is Potion of X and Arrow of X, add "Charm" to it, and group it: "Potion/Arrow/Charm of X".
-- If the effect can be obtained via two or more different Potions/Arrow/Charms, it will look like this: "Potion/Arrow/Charm of X/Y/Z".
-  - With the exceptions of powerful Potions that give multiple effects, i.e. Potion of Divinite from Dungeons and Combat mod, these don't have charm variants
-- Don't name every item type for effect, just use the default variant; "Potion/Splash/Lingering of Strength" → "Potion of Strength".
-  - This mostly applies to Potions and Arrows, but can apply to anything
-- If the effect can be obtained via two or more items from any mod which name contains string "delight", do not list any of them and use "Delights" instead
-- If the effect can be obtained via two or more unique weapons from Simple Swords mod, do not list any of them and use "Unique Weapons" instead
-- If the effect can be obtained via Apothesis affix, use "Affix Items"
-- If the effect can be obtained via Apotheosis jewel/gem, use it without the "Cracked/Chipped/Flawed/Flawless/Perfect" prefix, just use the name of the jewel/gem.
-- If the effect can be obtained via single magic mod spell, use "{spell_name} spell from <i>{magic mod name}</i> mod"
-- If the effect can be obtained via two or more magic mod spells, use "spells from <i>{magic mod name}</i> mod"
-  - Optionally, if the spells have common prefix, add it: "Poison spells from <i>{magic mod name}</i> mod"
-- If the effect can be obtained via two or more tools/weapons/armor sets from a single mod, do not list any of them and use "tools/weapons/armor sets from <i>{mod_name}</i>" instead
-- DO NOT add "from <i>{mod name}</it> mod" to the sources if whatever is before the "from" is from the same mod that the effect is, only use "from <i>{mod name}</it> mod" for cross references/integrations between mods. If the item/entity is from the same mod as the effect, just name it, don't add the "from mod" part.
-  - With the exceptions of Spells, Rituals, and similar unique mechanics. Unique item or entity is not a mechanics.
+**Mod Reference Rules:**
+- **Same-mod items/entities**: Never add "from mod" → just name them directly
+- **Same-mod spells/rituals**: Use "from the mod" → `"Angel Wings spell from the mod"`
+- **Cross-mod references**: Use full mod name → `"Blessed items from <i>Dungeons and Combat</i> mod"`
 
-**Examples of various long, well written sources:**
+**Grouping patterns (space-saving is crucial):**
+- Shared suffix: `"Item1/Item2/Item3 of Strength"` not `"Item1 of Strength, Item2 of Strength..."`
+- Shared prefix: `"Blessed Item1/Item2/Item3"` not `"Blessed Item1, Blessed Item2..."`
+- Potion variants: `"Potion/Arrow/Charm of X"` (omit Splash/Lingering - implied)
+- Multiple potion types: `"Potion/Arrow/Charm of X/Y/Z"` (exception: unique potions like Divinite)
+- Delight items: `"Delights"` (if ≥2 items from mods containing "delight")
+- Simple Swords weapons: `"Unique Weapons"` (if ≥2 unique weapons)
+- Apotheosis affixes: `"Affix Items"`
+- Apotheosis gems: omit quality prefix (Cracked/Chipped/Flawed/Flawless/Perfect)
+- Mod armor/tools/weapons: `"armor sets from <i>{mod_name}</i>"` (if ≥2 from same mod)
+
+**Spell/Ritual patterns:**
+- Single same-mod spell: `"{spell_name} spell from the mod"`
+- Multiple same-mod spells: `"spells from the mod"` or `"{prefix} spells from the mod"` (if common prefix)
+- Single same-mod ritual: `"{ritual_name} ritual from the mod"`
+- Multiple same-mod rituals: `"rituals from the mod"`
+- Mixed same-mod: `"Rituals/Spells from the mod"`
+- Cross-mod spell: `"{spell_name} spell from <i>{mod_name}</i> mod"`
+
+**Examples:**
 1. Potion/Arrow/Charm/Bamboo Spikes of Slowness, Potion/Arrow of the Turtle Master/Gigant, Alchemy Flask/Vial, Delights, Affix Items, Withering Dross, Rotten Hammer, Stray's arrow, Earthquake spell from <i>Iron Spells'n'Spellbooks</i> mod, Suspicious Stew
 2. Potion/Arrow/Charm of Haste, Potion/Arrow of Divinite, Affix Items, Unique Weapons, Delights, Mask of Rage, Blessed items from <i>Dungeons and Combat</i> mod, Beacon, Suspicious Stew
 3. Potion/Arrow/Charm of Night Vision, Alchemy Flask/Vial, Delights, Luminous Jelly, Glittering Grenadine, Neptunium armor set (only while in water), Forlorn Harbinger armor set's ability, Suspicious Stew
 
 ### AUTOMATED MCMOD.CN WORKFLOW
 
-**Trigger:** User says "add" + mcmod.cn URL
+**Triggers:** 
+1. User says "add" + mcmod.cn URL (can be more URLs at one time)
+2. User says exactly "add {number} mods", where number can be any number from 1 up to 10.
+- In that case, go throught the `data/effect-list-urls.json`, from top to bottom, and scrape every "url" of a record with "status": "TODO" or "WIP"
+- The "url" must contain string "mcmod.cn", since there can be different source URLs other than mcmod.cn
+- Set the "status" of scraped records to "DONE" after succefully scraped and added into `data/effects.json`
+- When you scrape {number} of URLs, or no URLs are left to scrape, stop and give summary in list format like this:
+  - {modA name}: {x} effect added
+    - {modA effectA name}
+    - {modA effectB name}
+    - ...
+    - {modA effectX name}
+  - {modB name}: {x} effect added
+    - {modB effectA name}
+    - {modB effectB name}
+    - ...
+    - {modB effectX name}
+  - ...
+  - {modX name}: {x} effect added
+    - {modX effectA name}
+    - {modX effectB name}
+    - ...
+    - {modX effectX name}
+
 
 **Process:**
 1. Activate venv `source venv/bin/activate`

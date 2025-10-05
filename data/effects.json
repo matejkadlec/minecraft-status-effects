@@ -199,7 +199,7 @@
       "type": "negative",
       "tags": ["negative", "scaling"],
       "description": "Deals <b>1</b> every <b>1.25/level seconds</b> (1.25 / 0.625 / 0.417 / 0.3125) but cannot kill (leaves entity at half a heart).",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Poison, Alchemy Flask/Vial, Delights, Cave Spider, Bee, Pufferfish, Poison spells from <i>Iron Spells'n'Spellbooks </i> mod, Suspicious Stew"
+      "source": "Potion/Arrow/Charm/Bamboo Spikes of Poison, Alchemy Flask/Vial, Delights, Cave Spider, Bee, Pufferfish, Poison spells from <i>Iron Spells'n'Spellbooks</i> mod, Suspicious Stew"
     },
     {
       "mod": "Minecraft",
@@ -209,7 +209,7 @@
       "type": "positive",
       "tags": ["positive", "scaling"],
       "description": "Restores <b>0.4</b> every <b>2.5/level seconds</b> (2.5 / 1.25 / 0.83 / 0.625 / 0.5).",
-      "source": "Potion/Arrow/Charm of Regeneration, Potion/Arrow of Divinite, Alchemy Flask/Vial, Affix Items, Delights, Golden Apple, Enchanted Golden Apple, Celestial Chant spell from <i>Iron Spells'n'Spellbooks </i> mod, Beacon, Suspicious Stew"
+      "source": "Potion/Arrow/Charm of Regeneration, Potion/Arrow of Divinite, Alchemy Flask/Vial, Affix Items, Delights, Golden Apple, Enchanted Golden Apple, Celestial Chant spell from <i>Iron Spells'n'Spellbooks</i> mod, Beacon, Suspicious Stew"
     },
     {
       "mod": "Minecraft",
@@ -329,7 +329,7 @@
       "type": "negative",
       "tags": ["negative", "scaling"],
       "description": "Prevents natural regeneration. <b>Level II+</b> additionally deals <b>1 damage</b> each <b>10 seconds</b> / <b>5 seconds</b> / <b>2.5 seconds</b>.",
-      "source": "Nuclear Furnace/Bomb explosions, holding radioactive items (Radrock Uranium Ore, Waste Drum, Unrefined Waste, Uranium, Fissile Core, Charred Remnant), eating Radgill, Raygun blast/Gamma Ray enchantment, Nucleeper/Brainiac/Tremorzilla/Gammaroach attacks"
+      "source": "Nuclear Furnace/Bomb explosions, holding radioactive items, eating Radgill, Raygun blast/Gamma Ray enchantment, Nucleeper/Brainiac/Tremorzilla/Gammaroach attacks"
     },
     {
       "mod": "Alex's Caves",
@@ -669,7 +669,7 @@
       "type": "positive",
       "tags": ["positive", "scaling"],
       "description": "Negates fall damage and bounces entity upward upon landing (higher level → more momentum upon landing).",
-      "source": "Spells from <i>Ars Nouveau</i> mod"
+      "source": "Spells from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -679,7 +679,7 @@
       "type": "negative",
       "tags": ["negative"],
       "description": "Prevents casting summoning spells.",
-      "source": "Performing summons from <i>Ars Nouveau</i> mod"
+      "source": "Performing summons from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -689,7 +689,7 @@
       "type": "positive",
       "tags": ["positive"],
       "description": "Grants creative flight and prevents fall damage.",
-      "source": "Rituals from <i>Ars Nouveau</i> mod"
+      "source": "Rituals from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -709,7 +709,7 @@
       "type": "positive",
       "tags": ["positive"],
       "description": "Allows Elytra-like gliding.",
-      "source": "Spells from <i>Ars Nouveau</i> mod"
+      "source": "Spells from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -719,7 +719,7 @@
       "type": "negative",
       "tags": ["negative"],
       "description": "Greatly increases fall speed, doubles fall damage, limits flight height.",
-      "source": "Spells from <i>Ars Nouveau</i> mod"
+      "source": "Spells from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -729,7 +729,7 @@
       "type": "positive",
       "tags": ["positive"],
       "description": "Highlights nearby magic mobs with a glowing outline.",
-      "source": "Rituals/Spells from <i>Ars Nouveau</i> mod"
+      "source": "Rituals/Spells from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -739,7 +739,7 @@
       "type": "positive",
       "tags": ["positive", "scaling"],
       "description": "Increases mana regeneration rate by <b>10 × level</b>.",
-      "source": "Potion/Arrow/Charm of Mana Regen, Source Berry foods"
+      "source": "Potion/Arrow/Charm of Mana Regen, Source Berry meals"
     },
     {
       "mod": "Ars Nouveau",
@@ -759,7 +759,7 @@
       "type": "positive",
       "tags": ["positive"],
       "description": "Highlights vertical position of nearby budding amethyst.",
-      "source": "Rituals from <i>Ars Nouveau</i> mod"
+      "source": "Rituals from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -779,7 +779,7 @@
       "type": "negative",
       "tags": ["negative", "scaling"],
       "description": "Increases lightning and shock damage by <b>3 × level</b>.",
-      "source": "Lightning spells from <i>Ars Nouveau</i> mod"
+      "source": "Lightning spells from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -789,7 +789,7 @@
       "type": "negative",
       "tags": ["negative"],
       "description": "Severely restricts movement and jumping.",
-      "source": "Spells from <i>Ars Nouveau</i> mod"
+      "source": "Spells from the mod"
     },
     {
       "mod": "Ars Nouveau",
@@ -800,6 +800,16 @@
       "tags": ["positive", "scaling"],
       "description": "Increases spell damage by <b>1.5 × level</b>.",
       "source": "Potion/Arrow/Charm of Spell Damage"
+    },
+    {
+      "mod": "Blue Skies",
+      "id": "blue-skies-deadly-venom",
+      "effect": "Deadly Venom",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Functions like <b>Poison</b> but can kill the affected entity.",
+      "source": "Arachnarch's projectile/poison cloud, Nested Spider attack"
     },
     {
       "mod": "Cataclysm",
@@ -920,6 +930,116 @@
       "tags": ["negative", "scaling"],
       "description": "<b>-5% movement speed × level</b> and increases lightning damage taken by <b>20% × level</b>.",
       "source": "Wave Barrage/Tidal Crystals attacks"
+    },
+    {
+      "mod": "Deep Aether",
+      "id": "deep-aether-moa-bonus-jumps",
+      "effect": "Moa Bonus Jumps",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants <b>1</b> additional Moa wing flap.",
+      "source": "Feeding Moa with Moa Fodder"
+    },
+    {
+      "mod": "Deep Aether",
+      "id": "deep-aether-valkyries-grace",
+      "effect": "Valkyries' Grace",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Limits damage from undead mobs to <b>0.5</b> per hit.",
+      "source": "Wearing Medal of Honor"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-burrow-gut",
+      "effect": "Burrow Gut",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Corrupts <b>Haste</b> effect, rapidly drains hunger. Breaking blocks restores hunger based on hardness, <b>5% chance</b> to gain <b>Ravenous Rush</b>.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-decisive",
+      "effect": "Decisive",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Corrupts <b>Strength</b> effect, attacks have chance to deal <b>1.5×</b> damage as critical hit.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-exudation",
+      "effect": "Exudation",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Corrupts <b>Absorption</b>, converts absorption hearts to exudation health (<b>4 × level</b>) which takes <b>1.25×</b> damage but explodes for <b>4</b> when hit.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-feral-bite",
+      "effect": "Feral Bite",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Attacks apply <b>Serrated</b> for <b>8 seconds</b> to targets.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-pouncing",
+      "effect": "Pouncing",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Corrupts <b>Jump Boost</b>, enables wall climbing while sneaking and increases movement speed by <b>5% × level</b>.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-ravenous-rush",
+      "effect": "Ravenous Rush",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Increases movement speed by <b>30%</b> and attack speed by <b>10%</b>, with additional effects based on active corrupted effects.",
+      "source": "Delights, Foul Cleaver, Foul Machete (when fully charged)"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-serrated",
+      "effect": "Serrated",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Deals <b>1</b> true damage every <b>0.5 seconds</b>.",
+      "source": "Serrated Strike enchantment, Feral Bite effect"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-tenacity",
+      "effect": "Tenacity",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Corrupts <b>Comfort</b>, health regeneration inversely proportional to hunger level, prevents starvation damage.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "id": "dungeons-delight-voracity",
+      "effect": "Voracity",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Corrupts <b>Nourishment</b>, rapidly drains hunger. Attacking restores hunger proportional to damage, killing grants <b>Ravenous Rush</b> for <b>5 seconds</b>.",
+      "source": "Delights"
     },
     {
       "mod": "Dungeons and Combat",
@@ -1192,14 +1312,54 @@
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Vulnerability"
     },
     {
+      "mod": "Ender's Delight",
+      "id": "enders-delight-ender-phasing",
+      "effect": "Ender Phasing",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Grants Enderman traits: randomly teleports entity nearby when damaged and inflicts damage when touching water.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Farmer's Delight",
+      "id": "farmer-delight-comfort",
+      "effect": "Comfort",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Allows the player to maintain natural regeneration even if they're too hungry to do so normally.",
+      "source": "Delights, any meal considered a soup or stew"
+    },
+    {
       "mod": "Farmer's Delight",
       "id": "farmer-delight-nourishment",
       "effect": "Nourishment",
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Prevents hunger loss from exhausting actions.",
-      "source": "<i>To be added.</i>"
+      "description": "Prevents hunger loss from exhausting actions, such as running, jumping and attacking mob. Also fully negates the <b>Hunger</b> effect.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-abyssal-shroud",
+      "effect": "Abyssal Shroud",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants immunity to all damage except void and /kill command, and dodges attacks by <b>1 block</b> while facing attacker.",
+      "source": "Abyssal Shroud spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-airborne",
+      "effect": "Airborne",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Applies knockback effect, pushing entity away.",
+      "source": "Telekinesis spell from the mod"
     },
     {
       "mod": "Iron Spells'n'Spellbooks",
@@ -1208,8 +1368,418 @@
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Gain wings of holy energy, acting like an Elytra for the duration.",
-      "source": "<i>To be added.</i>"
+      "description": "Grants gliding ability identical to <b>Elytra</b>, with golden translucent wings appearing on player's back.",
+      "source": "Angel Wings spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-anti-gravity",
+      "effect": "Anti-Gravity",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Applies strong levitation effect, stronger than vanilla <b>Levitation</b>.",
+      "source": "Telekinesis spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-ascension",
+      "effect": "Ascension",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Reduces gravity (higher level → less gravity, can become negative causing vertical ascension).",
+      "source": "Ascension spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-aspect-of-the-spider",
+      "effect": "Aspect of the Spider",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases damage to poisoned entities by <b>5% × level</b>.",
+      "source": "Aspect of the Spider spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-blighted",
+      "effect": "Blighted",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Reduces healing received by <b>10% × level</b> and damage dealt by <b>5% × level</b>.",
+      "source": "Blight spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-charged",
+      "effect": "Charged",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases movement speed, attack damage and spell power (higher level → stronger effects), with lightning effect on body.",
+      "source": "Charge spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-evasion",
+      "effect": "Evasion",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Grants immunity to <b>level</b> instances of damage, teleporting to nearby random location each time.",
+      "source": "Potion/Arrow of Evasion, Ender Step spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-fortified",
+      "effect": "Fortified",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Grants temporary absorption hearts (higher level → more hearts).",
+      "source": "Fortify spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-gluttony",
+      "effect": "Gluttony",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Eating food restores mana based on hunger value provided by the food (saturation is ignored).",
+      "source": "Gluttony spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-guided",
+      "effect": "Guided",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Applies glowing outline and attracts nearby projectiles (including spell projectiles) to entity.",
+      "source": "Guiding Bolt spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-hastened",
+      "effect": "Hastened",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases attack speed, movement speed and mining speed (higher level → stronger effects).",
+      "source": "Haste spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-heartstop",
+      "effect": "Heartstop",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants immunity to all damage during effect, but deals <b>50%</b> of accumulated damage when effect expires.",
+      "source": "Heartstop spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-instant-mana",
+      "effect": "Instant Mana",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Instantly restores mana (higher level → more mana restored).",
+      "source": "Mana Potion"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-oakskin",
+      "effect": "Oakskin",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Reduces incoming damage by <b>15%</b> plus <b>5% × level</b>, but also reduces movement speed by <b>20%</b>.",
+      "source": "Potion/Arrow of Oakskin, Oakskin spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-planar-sight",
+      "effect": "Planar Sight",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Highlights all entities within view range, making them visible through walls (higher level → longer duration).",
+      "source": "Planar Sight spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-rend",
+      "effect": "Rend",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Reduces armor value by <b>5% × level</b>.",
+      "source": "Acid Spray, Flame Burst spells from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-slowed",
+      "effect": "Slowed",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Reduces movement speed (higher level → slower movement).",
+      "source": "Slow spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-summoned-dead",
+      "effect": "Summoned Dead",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Indicates presence of summoned undead, with duration matching their natural existence time. Drinking milk removes effect but summoned entities persist.",
+      "source": "Raise Dead spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-summoned-horse",
+      "effect": "Summoned Horse",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Indicates presence of summoned spectral steed, with duration matching its natural existence time. Drinking milk removes effect but summoned entity persists.",
+      "source": "Summon Horse spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-summoned-polar-bear",
+      "effect": "Summoned Polar Bear",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Indicates presence of summoned polar bear, with duration matching its natural existence time. Drinking milk removes effect but summoned entity persists.",
+      "source": "Summon Polar Bear spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-summoned-vexes",
+      "effect": "Summoned Vexes",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Indicates presence of summoned vexes, with duration matching their natural existence time. Drinking milk removes effect but summoned entities persist.",
+      "source": "Summon Vex spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-true-invisibility",
+      "effect": "True Invisibility",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Makes entity invisible, hiding armor and held items. Effect ends when near hostile mobs, dealing damage or receiving damage.",
+      "source": "Potion/Arrow of Invisibility, Invisibility spell from the mod"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "id": "iron-spells-n-spellbooks-vigor",
+      "effect": "Vigor",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases max health by <b>level</b>.",
+      "source": "Blood Slash spell from the mod"
+    },
+    {
+      "mod": "My Nether's Delight",
+      "id": "my-nethers-delight-pungent-beneficial",
+      "effect": "Pungent (beneficial)",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "When health is not full, being near fire ignites player, restoring <b>1</b> per burn. Auto-extinguishes when fully healed (higher level → faster healing). Requires fire resistance or at least 1 fire protection armor piece.",
+      "source": "Delights"
+    },
+    {
+      "mod": "My Nether's Delight",
+      "id": "my-nethers-delight-pungent-harmful",
+      "effect": "Pungent (harmful)",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Ignites player when near fire source without contact (higher level → larger trigger range). Converts to beneficial variant if player has fire resistance or wears at least 1 fire protection armor piece.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Quark",
+      "id": "quark-blueberry",
+      "effect": "Blueberry",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Makes player skin appear more blue. Visible to other players.",
+      "source": "Blue Glow Shroom"
+    },
+    {
+      "mod": "Quark",
+      "id": "quark-curse",
+      "effect": "Curse",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Spawns hostile mobs within <b>64 block</b> radius ignoring all conditions for <b>20 minutes</b>. Cannot be removed by milk.",
+      "source": "Wandering Soul Bead"
+    },
+    {
+      "mod": "Quark",
+      "id": "quark-dangersight",
+      "effect": "DangerSight",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Displays spawn areas with red-black particles.",
+      "source": "Potion of DangerSight"
+    },
+    {
+      "mod": "Quark",
+      "id": "quark-darkening",
+      "effect": "Darkening",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Makes player skin appear darker. Visible to other players.",
+      "source": "Black Glow Shroom"
+    },
+    {
+      "mod": "Quark",
+      "id": "quark-resilience",
+      "effect": "Resilience",
+      "maxLevel": "II",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Reduces knockback by <b>50%</b> at level I and completely negates knockback at level II.",
+      "source": "Potion of Resilience"
+    },
+    {
+      "mod": "Quark",
+      "id": "quark-whitening",
+      "effect": "Whitening",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Makes player skin slightly lighter. When combined with <b>Blueberry</b> or <b>Darkening</b>, weakens their visual effects. Visible to other players.",
+      "source": "White Glow Shroom"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-abyssal-strike",
+      "effect": "Abyssal Strike",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases critical hit chance by <b>6% × level</b> and critical damage by <b>4% × level</b>. <b>50% chance</b> on hit to apply <b>Abyssal Curse</b> to nearby enemies.",
+      "source": "Shadow Miasma spell from the mod"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-blackout",
+      "effect": "Blackout",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Applies continuous <b>Darkness III</b> and prevents right-click item usage, including casting Iron Spells'n'Spellbooks spells.",
+      "source": "Anti-Magic Barrier from Spellbreaker Barrier spell from the mod"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-flare-vacuum",
+      "effect": "Flare Vacuum",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Entities with effect attract each other within <b>7×7</b> area. When effect expires, triggers fire spray dealing <b>level - 1</b> damage.",
+      "source": "Spiral Slash spell from the mod (requires Infernal Decimator level 2+)"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-floodgate",
+      "effect": "Floodgate",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Caps single-instance damage at <b>30%</b> of max health. Excess damage triggers tidal wave dealing <b>level - 1</b> damage and applying <b>Wet I</b> for <b>10 seconds</b>.",
+      "source": "Floodgate spell from the mod"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-frozen-sight",
+      "effect": "Frozen Sight",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Increases gravity by <b>200% × level</b> and reduces movement speed by <b>100% × level</b>. Cannot be removed with milk.",
+      "source": "Death Laser spell from the mod"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-psychic-control",
+      "effect": "Psychic Control",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Forces entity to attack nearby non-player entities (including passive mobs and armor stands), attacking players only when no other targets exist.",
+      "source": "Psychic Missiles spell from the mod"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-replenish",
+      "effect": "Replenish",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases mana regeneration by <b>10% × level</b>. Stacks duration and increases level when reapplied.",
+      "source": "Torrent Slash, Tidal Slash spells from the mod"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-sunstrike",
+      "effect": "Sunstrike",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Periodically spawns solar flares at hostile mob positions within range, dealing <b>2</b> and igniting them (higher level → larger range and faster interval).",
+      "source": "Solar Flare spell from the mod"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-tidal-slash",
+      "effect": "Tidal Slash",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Normal attacks with Eternal Vortex's Trident release weakened slashes dealing <b>12 + 2 × level</b> damage and applying <b>Wet I</b> for <b>1 second</b>.",
+      "source": "Tidal Slash spell from the mod (requires Eternal Vortex's Trident level 2+)"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-tidal-torment",
+      "effect": "Tidal Torment",
+      "maxLevel": "V",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Reduces movement speed by <b>10% × level</b>. When hit by Eternal Vortex's Trident throw, all affected entities in <b>11×11</b> area take <b>50%</b> damage and lose effect.",
+      "source": "Vortex created by Eternal Vortex's Trident hitting blocks"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "id": "to-magic-n-extras-vigor-siphon",
+      "effect": "Vigor Siphon",
+      "maxLevel": "V",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Creates life link with summon: summon damage heals player, player damage heals summon. If player dies, summon sacrifices itself to revive player with <b>4</b>.",
+      "source": "Vigor Siphon spell from the mod"
     },
     {
       "mod": "T.O Magic 'n Extras",
@@ -1219,27 +1789,37 @@
       "type": "negative",
       "tags": ["negative", "scaling"],
       "description": "Reduces frost spell resistance by <b>2.5% × level</b> and lightning spell resistance by <b>5% × level</b>.",
-      "source": "<i>To be added.</i>"
+      "source": "Source Flow spells from the mod"
     },
     {
-      "mod": "The Aether: Redux",
-      "id": "the-aether-redux-inebriation",
+      "mod": "The Aether",
+      "id": "the-aether-inebriation",
       "effect": "Inebriation",
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Deals light periodic damage and causes random movement inputs.",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Inebriation"
+      "description": "Deals <b>0.4</b> every <b>1.25 seconds</b>, causes random movement inputs, and can kill. Cured by White Apple or Skyroot Remedy Bucket.",
+      "source": "Cockatrice/Poison Dart attacks, Inebriated Arrow, Skyroot Poison Bucket"
+    },
+    {
+      "mod": "The Aether",
+      "id": "the-aether-remedy",
+      "effect": "Remedy",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants immunity to <b>Inebriation</b> and removes existing <b>Inebriation</b> effect.",
+      "source": "Skyroot Remedy Bucket, White Apple"
     },
     {
       "mod": "The Twilight Forest",
-      "id": "the-twilight-forest-frosted",
-      "effect": "Frosted",
-      "maxLevel": "III",
+      "id": "the-twilight-forest-frosty",
+      "effect": "Frosty",
+      "maxLevel": "IV",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Slows movement and renders small ice chunks; higher levels intensify the slow.",
-      "source": "<i>To be added.</i>"
+      "description": "Reduces movement speed by <b>15% × level</b> and encases entity in ice blocks. Stacks multiplicatively with <b>Slowness</b>. Accelerates freezing damage for players.",
+      "source": "Biome protection charms, Frost Bomb, Winter Wolf/Snow Queen frost breath, Yeti ice throw, Yeti armor effect, Chill Aura enchantment, Frost Bow/Sword"
     },
     {
       "mod": "The Undergarden",
@@ -1263,13 +1843,53 @@
     },
     {
       "mod": "Twilight's Flavors & Delight",
-      "id": "twilight-flavors-delight-aurora-glowing",
+      "id": "twilights-flavors-delight-aurora-glowing",
       "effect": "Aurora Glowing",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Outlines player and all visible entities and items with rainbow-colored glow. Causes performance issues and frame drops.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Twilight's Flavors & Delight",
+      "id": "twilights-flavors-delight-fire-range",
+      "effect": "Fire Range",
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "Applies a rainbow glowing outline to all entities in sight through walls.",
-      "source": "<i>To be added.</i>"
+      "description": "Grants fire immunity and ignites all hostile mobs within <b>8 block</b> radius.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Twilight's Flavors & Delight",
+      "id": "twilights-flavors-delight-frozen-range",
+      "effect": "Frozen Range",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants <b>Frozen</b> immunity and applies <b>Frozen V</b> to all hostile mobs within <b>8 block</b> radius. Converts certain drops when frozen.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Twilight's Flavors & Delight",
+      "id": "twilights-flavors-delight-poison-range",
+      "effect": "Poison Range",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants <b>Poison</b> immunity and applies stronger <b>Poison</b> to all hostile mobs within <b>8 block</b> radius.",
+      "source": "Delights"
+    },
+    {
+      "mod": "Twilight's Flavors & Delight",
+      "id": "twilights-flavors-delight-temporal-sadness",
+      "effect": "Temporal Sadness",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Reduces attack damage by <b>5</b> and decreases movement speed.",
+      "source": "Delights, Fulfillment Drink, Trial Items 110/113"
     }
   ]
 }

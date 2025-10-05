@@ -18,7 +18,6 @@ Interactive website for browsing vanilla and modded Minecraft status effects wit
 - 🎯 **Quick Navigation**: Jump to specific mods/effects
 - 🔎 **Real-time Search**: Search effects and mods instantly
 - 📥 **Data Export**: CSV, Excel, JSON with theme-aware styling
-- 📋 **Source Information**: Effect sources displayed in dedicated column
 
 ## Run Local Server 💻
 
@@ -62,7 +61,18 @@ Open http://localhost:8000 in your browser.
 
 ## Automated Effect Ingestion (mcmod.cn) ⬇️
 
-You can trigger an automated scraping + insert flow by issuing a prompt that contains the word `add` and at least one `mcmod.cn` list URL (e.g. `Add https://www.mcmod.cn/item/list/3468-6.html`).
+Trigger automated scraping in two ways:
+
+### Single URL Method
+Issue a prompt containing `add` + one or more `mcmod.cn` list URLs (e.g. `Add https://www.mcmod.cn/item/list/3468-6.html`).
+
+### Batch Processing Method
+Use `add {number} mods` (1-10) to process multiple mods from the queue in `data/effect-list-urls.json`. The system:
+- Processes URLs with `"status": "TODO"` or `"WIP"` from top to bottom
+- Only scrapes mcmod.cn URLs
+- Updates status to `"DONE"` after successful ingestion
+- Stops after processing {number} mods or exhausting the queue
+- Provides detailed summary grouped by mod
 
 Flow summary:
 1. Scrapes list page(s) with `python mcmod/scrape_effect_list.py <url>` producing `mcmod/<mod>.txt` of item detail URLs.
@@ -79,49 +89,33 @@ Edge handling:
 - Network/parse failure for a page → skipped with reason.
 - Max level absent → defaults to I (no scaling tag).
 
-This logic is documented in more detail in `.github/copilot-instructions.md`.
+This logic is documented in more detail in `AGENTS.md`.
 
 ## Data Integrity Test ✅
 
-Five automated validations run against `data/effects.json`.
+Ten automated validations run against `data/effects.json` to ensure data quality and consistency.
 
-### 1. Effects Order
+**General Checks:**
+1. **No Empty Fields** - All required fields must be present and non-empty
+2. **Text Formatting** - Proper spacing, no trailing/leading whitespace, correct comma placement
+3. **Duplicate Effects** - Effect names must be globally unique across all mods
+4. **Effects Ordering** - Minecraft effects first (alphabetical), then mods (alphabetical by mod, then by effect)
 
-Enforces deterministic ordering for readability and minimal diff noise.
-- All `Minecraft` effects first (one contiguous block), alphabetically by effect name.
-- Then each mod section ordered by mod name (A → Z).
-- Inside every mod, effects ordered alphabetically by effect name.
+**Column-Specific Checks:**
+5. **Max Level Format** - Must be valid Roman numerals (I-X)
+6. **Description HTML Tags** - Formulas and time units must be wrapped in `<b>` tags
+7. **Tags Validation** - Exactly one type tag (positive/negative), scaling tag when maxLevel > I
+8. **Source Potion Grouping** - Simplified format (`Potion/Arrow/Charm of X`)
+9. **Source HTML Tags** - `<i>` for mod names, no other tags are allowed
+10. **Source Special Terms** - Ensures proper source text formatting
 
-If an ordering slip occurs during manual edits you can re-normalize ordering:
+If ordering issues occur, re-normalize with:
 
 ```bash
 python scripts/sort_effects.py --check    # Verify
 python scripts/sort_effects.py            # Rewrite in-place
 python scripts/validate_effects.py        # Final confirmation
 ```
-
-### 2. Duplicate Effects
-
-Effect names must be globally unique across ALL mods (not just within a mod). Adding an effect whose name already exists anywhere fails the check.
-
-### 3. Formula Formatting
-
-Any description containing scaling patterns must format them consistently:
-- The substrings `^level` and `× level` (including the multiplication sign, not a plain 'x') must appear only inside a `<b>...</b>` span.
-- The bold span must END with that substring (e.g. `<b>0.3^level</b>`, `<b>5 × level</b>`).
-- These substrings must never appear outside bold formatting.
-- Time units like "second", "seconds", and "second(s)" must always be wrapped in `<b>` tags.
-
-### 4. Description Length
-
-Descriptions are limited to 200 characters (excluding HTML tags) to ensure readability while allowing sufficient detail for complex effects. The table uses horizontal scrolling when needed to prevent text wrapping.
-
-### 5. Tags Validation
-
-Ensures proper tag structure for every effect:
-- Each effect must have exactly one of either "positive" or "negative" tag (not both, not neither)
-- The "scaling" tag must be present when maxLevel > 1 (i.e., effects that can have multiple levels)
-- Tags must be properly formatted as an array of strings
 
 ### Run Locally
 

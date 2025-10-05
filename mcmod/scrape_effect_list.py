@@ -38,6 +38,7 @@ def extract_mod_name_from_nav(soup: BeautifulSoup) -> str:
 
     The text is in format: "中文名 (English Name)" or "[PREFIX] 中文名 (English Name)"
     We extract the English name from parentheses.
+    If no parentheses, use the raw text.
     """
     nav_div = soup.find("div", class_="common-nav")
     if not nav_div:
@@ -62,15 +63,20 @@ def extract_mod_name_from_nav(soup: BeautifulSoup) -> str:
     if not text:
         raise ValueError("Mod name text is empty")
 
-    # Extract English name from parentheses: "神化 (Apotheosis)" -> "Apotheosis"
+    # Try to extract English name from parentheses: "神化 (Apotheosis)" -> "Apotheosis"
     match = re.search(r"\(([^)]+)\)$", text)
-    if not match:
-        raise ValueError(f"Could not extract English name from: {text}")
-
-    mod_name = match.group(1).strip()
+    if match:
+        mod_name = match.group(1).strip()
+    else:
+        # No parentheses, use raw text
+        mod_name = text
 
     # Remove [XXX] prefix if present (e.g., "[ISS] Iron's Spells'n'Spellbooks")
     mod_name = PREFIX_RE.sub("", mod_name).strip()
+
+    # Remove hyphen and everything to the right (e.g., "TO Magic 'n Extras - Iron's Spells Addon" -> "TO Magic 'n Extras")
+    if " - " in mod_name:
+        mod_name = mod_name.split(" - ")[0].strip()
 
     return mod_name
 

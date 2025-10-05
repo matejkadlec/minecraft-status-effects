@@ -98,19 +98,12 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-004: Help/Legend Modal
-**Priority:** Medium  
-**Labels:** ui, help, modal  
-**Story:** As a user, I want to access explanatory information about the effects table through a help button so I understand what the data means and how to use the website.
-
-**Acceptance Criteria:**
+### MSE-004: Help/Legend Modals
 - "?" icon button positioned near searchbar or top-right of table
 - Button opens modal dialog that covers entire window with grey overlay
 - Modal contains current legend content plus additional explanations
 - Clicking overlay or "OK" button closes the modal
 - Modal is keyboard accessible (ESC key closes, focus management)
-
-**Implementation Notes:**
 - Repurpose existing hidden #legend content
 - Create modal component with proper a11y attributes
 - Add smooth open/close animations matching theme
@@ -118,35 +111,23 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-005: Wiki Scraping Tools
-**Priority:** Low  
-**Labels:** automation, scraping, data-collection  
-**Story:** As a developer, I want automated tools to scrape Fandom wiki pages for effect information so I can efficiently collect data from multiple sources.
-
-**Acceptance Criteria:**
-- Python script to scrape Fandom wiki effects list pages
-- Python script to scrape individual effect detail pages  
-- Scripts handle common wiki template formats
-- Error handling for network failures and parsing issues
-- Output format compatible with existing effects.json structure
-
-**Alternative Implementation:**
-- Add informational text below intro: "Before you start browsing, read important info here" (with "here" as link to help modal)
-- Emphasizes importance of understanding mod-pack dependent max levels and other caveats
-
-**Implementation Notes:**
-- Research common Fandom wiki structures across different mod wikis
-- Implement respectful scraping with rate limiting
-- Consider legal/ethical implications of automated scraping
-
----
-
-### MSE-006: Search term in URL, clickable logo, displayed Minecraft version
+### MSE-005-006: Search term in URL and saved in localStorage; Clickable logo and Minecraft version at the bottom right;
+- Disable "Vanilla" quick filter by default.
+- Make navigation mods scrollable, instead of the whole navigation panel.
 - Description of this task to be specified.
+- Update index.html description, to something like: "{big} library of modded Minecraft status effects. {something about features usage maybe}"
 
 ---
 
-### MSE-007: Automated Testing Suite
+### Possible Future Upgrades
+- Group left menu mods by common name (i.e. Aether mods, Delightful mods), as a dropdown that shows all the child mods
+- Use group "Other" for mods with <3 effects
+- Add something like [show more]/[show less] or [expand]/[collapse] to 2-lines long description/source texts, so it's all rendered on single line initially
+- Add "guide" on first visit OR add >>> gif as a table overlay when page is loaded, to hint user the table is horinzotally scrolalble
+
+---
+
+### MSE-00X: Automated Testing Suite
 **Priority:** Medium  
 **Labels:** testing, quality-assurance, ci-cd  
 **Story:** As a developer, I want comprehensive automated tests so I can maintain code quality and prevent regressions.

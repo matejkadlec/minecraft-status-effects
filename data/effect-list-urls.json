@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "effectListURLs": [
+    {
+      "mod": "Minecraft",
+      "url": "https://minecraft.wiki/w/Effect",
+      "status": "DONE"
+    },
+    {
+      "mod": "Alex's Caves",
+      "url": "https://alexscaves.wiki.gg/wiki/Potion_Effects",
+      "status": "DONE"
+    },
+    {
+      "mod": "Alex's Mobs",
+      "url": "https://alexs-mobs-unofficial.fandom.com/wiki/Status_Effects",
+      "status": "DONE"
+    },
+    {
+      "mod": "The Aether",
+      "url": "https://www.mcmod.cn/item/list/94-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Deep Aether",
+      "url": "https://www.mcmod.cn/item/list/10145-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Apotheosis",
+      "url": "https://www.mcmod.cn/item/list/1708-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Ars Nouveau",
+      "url": "https://www.mcmod.cn/item/list/3468-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Cataclysm",
+      "url": "https://www.mcmod.cn/item/list/5214-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Dungeons and Combat",
+      "url": "https://imgur.com/a/dungeons-combat-mod-guide-HwjVnbo",
+      "status": "DONE"
+    },
+    {
+      "mod": "Eidolon: Repraised",
+      "url": "https://www.mcmod.cn/item/list/15864-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Farmer's Delight",
+      "url": "https://farmersdelight.fandom.com/wiki/Effects",
+      "status": "DONE"
+    },
+    {
+      "mod": "Dungeon's Delight",
+      "url": "https://www.mcmod.cn/item/list/19620-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Ender's Delight",
+      "url": "https://www.mcmod.cn/item/list/9387-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "My Nether's Delight",
+      "url": "https://www.mcmod.cn/item/list/14698-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Twilight's Flavors & Delight",
+      "url": "https://www.mcmod.cn/item/list/10610-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Quark",
+      "url": "https://www.mcmod.cn/item/list/527-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Iron Spells'n'Spellbooks",
+      "url": "https://www.mcmod.cn/item/list/10175-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "T.O Magic 'n Extras",
+      "url": "https://www.mcmod.cn/item/list/15945-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "The Twilight Forest",
+      "url": "https://www.mcmod.cn/item/list/61-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Blue Skies",
+      "url": "https://www.mcmod.cn/item/list/1563-6.html",
+      "status": "DONE"
+    }
+  ]
+}
