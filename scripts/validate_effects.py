@@ -4,11 +4,11 @@
 Rules:
 1. All required fields must be non-empty (no null, empty strings, or empty lists).
 2. Text formatting: no double spaces, leading/trailing whitespace, proper comma spacing.
-3. No duplicate effect names globally (effect name must be unique across all mods).
+3. No duplicate effect names within each mod (cross-mod duplicates allowed if descriptions differ).
 4. Ordering: Minecraft first (alphabetical by effect), then mods (alphabetical by mod, then by effect).
 5. Max level must be a Roman numeral from I to X.
-6. Description: Formula ('^level', '× level') and time units must be in <b> tags.
-7. Tags: Exactly one of 'positive' or 'negative', plus 'scaling' if maxLevel > I.
+6. Description: Formula ('^level', '× level'), time units, and ALL '+' symbols must be in <b> tags. Effects with maxLevel 'I' cannot contain 'higher level' or 'level'.
+7. Tags: Exactly one of 'positive' or 'negative'. 'scaling' tag required for maxLevel > I, forbidden for maxLevel I.
 8. Source: Potion/Arrow/Charm grouping (no Splash/Lingering variants).
 9. Source: HTML tags (<i> only for mod names).
 10. Source: Special terms (spell patterns, no ampersands except in names).
@@ -57,24 +57,23 @@ def validate_description_html_tags(effects):
     - '^level' and '× level' must be inside <b> tags and either be at the end
       or followed by "second", "seconds", or "second(s)"
     - Every instance of "second", "seconds", or "second(s)" must be wrapped in <b> tags
+    - Every instance of '+' must be wrapped in <b> tags (all plus symbols)
+    - Effects with maxLevel 'I' cannot contain 'higher level' in description
+    - Effects with maxLevel 'I' cannot contain 'level' in description (always level 1)
     - ONLY <b> tags allowed in descriptions (exception: "<i>To be added.</i>" and "<i>Unavailable.</i>")
+    - Note: Duplicate effect names across mods are allowed if descriptions differ
     """
     # Terms that must be in bold
     time_terms = ["second", "seconds", "second(s)"]
     formula_terms = ["^level", "× level"]
 
-    # Special allowed italic strings
-    allowed_italic_strings = ["<i>To be added.</i>", "<i>Unavailable.</i>"]
-
     for eff in effects:
         desc = eff.get("description") or ""
         name = eff.get("effect") or "Unknown"
+        max_level = eff.get("maxLevel") or ""
 
         # Check for non-<b> HTML tags in description, excluding allowed special cases
         desc_without_exceptions = desc
-        for allowed in allowed_italic_strings:
-            desc_without_exceptions = desc_without_exceptions.replace(allowed, "")
-
         if re.search(r"<(?!b>|/b>)[^>]+>", desc_without_exceptions):
             fail(
                 f"Effect '{name}': Description should ONLY contain <b> tags (found other HTML tags). Exception: '<i>To be added.</i>' and '<i>Unavailable.</i>' are allowed."
@@ -93,6 +92,35 @@ def validate_description_html_tags(effects):
         for term in time_terms:
             if term in outside:
                 fail(f"Time unit '{term}' must be in <b> tags in effect '{name}'")
+
+        # Check for '+' outside bold (ALL '+' symbols must be in bold)
+        if "+" in outside:
+            fail(f"Plus symbol '+' must be in <b> tags in effect '{name}'")
+
+        # Check for 'higher level' in non-scaling effects
+        if max_level == "I" and "higher level" in desc:
+            fail(
+                f"Effect '{name}' with maxLevel 'I' cannot contain 'higher level' in description (non-scaling effect)"
+            )
+
+        # Check for effect 'level' references in non-scaling effects
+        # Look for patterns that suggest effect level: "× level", "^level", "level", but exclude "hunger level", "water level", etc.
+        if max_level == "I":
+            # Check for mathematical level references
+            level_patterns = [
+                r"\blevel\b(?!\s+(of|in|at|on|from|to|with))",  # "level" not followed by prepositions
+                r"by\s+<b>level</b>",  # "by level"
+                r"<b>level</b>",  # "level" in bold tags
+            ]
+            for pattern in level_patterns:
+                if (
+                    re.search(pattern, desc)
+                    and "hunger level" not in desc
+                    and "water level" not in desc
+                ):
+                    fail(
+                        f"Effect '{name}' with maxLevel 'I' cannot contain effect 'level' references in description (always level 1)"
+                    )
 
         # Check formula placement within bold spans
         for span in bold_spans:
@@ -113,6 +141,7 @@ def validate_description_html_tags(effects):
             if "× level" in span and "^level" not in span:
                 valid_endings = [
                     "× level",
+                    "× level)",
                     "× level second",
                     "× level seconds",
                     "× level second(s)",
@@ -367,14 +396,17 @@ def main():
     validate_text_formatting(effects)
     print(f"{PREFIX}: ✅ General text formatting check passed.")
 
-    # 3. Duplicate name check
+    # 3. Duplicate name check (within each mod)
     print(f"{PREFIX}: 3/10 Duplicate effect name check started...")
-    seen_names = set()
+    mod_to_effect_names = {}
     for e in effects:
+        mod = e.get("mod")
         name = e.get("effect")
-        if name in seen_names:
-            fail(f"Duplicate effect name detected: '{name}'")
-        seen_names.add(name)
+        if mod not in mod_to_effect_names:
+            mod_to_effect_names[mod] = set()
+        if name in mod_to_effect_names[mod]:
+            fail(f"Duplicate effect name detected within mod '{mod}': '{name}'")
+        mod_to_effect_names[mod].add(name)
     print(f"{PREFIX}: ✅ Duplicate effect name check passed.")
 
     # 4. Ordering check
@@ -470,17 +502,19 @@ def main():
                 f"Effect '{eff.get('effect')}' cannot have both 'positive' and 'negative' tags"
             )
 
-        # Check if scaling tag is present when maxLevel > 1
+        # Check scaling tag requirements
         max_level = eff.get("maxLevel")
-        if isinstance(max_level, str) and max_level not in ("I", "1", 1):
-            if "scaling" not in tags:
+        if max_level == "I":
+            # Effects with maxLevel "I" cannot have scaling tag
+            if "scaling" in tags:
                 fail(
-                    f"Effect '{eff.get('effect')}' with maxLevel '{max_level}' should have 'scaling' tag"
+                    f"Effect '{eff.get('effect')}' with maxLevel 'I' cannot have 'scaling' tag (non-scaling effect)"
                 )
-        elif isinstance(max_level, int) and max_level > 1:
+        else:
+            # Effects with maxLevel > "I" must have scaling tag
             if "scaling" not in tags:
                 fail(
-                    f"Effect '{eff.get('effect')}' with maxLevel {max_level} should have 'scaling' tag"
+                    f"Effect '{eff.get('effect')}' with maxLevel '{max_level}' must have 'scaling' tag"
                 )
     print(f"{PREFIX}: ✅ Tags validation check passed.")
 

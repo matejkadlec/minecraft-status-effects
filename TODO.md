@@ -99,7 +99,11 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 ---
 
 ### MSE-004: Help/Legend Modals
-- "?" icon button positioned near searchbar or top-right of table
+- Start by deleting everything about current legend (it's hidden now, but I want it gone)
+    - That is whole div class="note table-note legend" id="legend", then these sups: "sup class="fn-ref" data-target="legend-3", and all other stuff in `index.html` tied to the legend/help. Then all CSS and JS tied to that as well, all mentions, everything.
+- "?" icon buttons similar to the theme swapping icons
+- 1st will be next to the description (to the right side) text in header of the table
+- 2nd will be next to the source (to the right side) text in header of the table
 - Button opens modal dialog that covers entire window with grey overlay
 - Modal contains current legend content plus additional explanations
 - Clicking overlay or "OK" button closes the modal
@@ -111,17 +115,39 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-005-006: Search term in URL and saved in localStorage; Clickable logo and Minecraft version at the bottom right;
-- Disable "Vanilla" quick filter by default.
+### MSE-005: Navigation Update ✅
+- Disable "Vanilla" quick filter by default (currently enabled by default)
 - Make navigation mods scrollable, instead of the whole navigation panel.
-- Description of this task to be specified.
+    - The breakpoint when the navigation becames scrollable is >15 mod names (including group names, more about that below), and that is >364px on FHD
+    - There is a placeholder object of the mod nav block, which's height needs to be the exact height of the nav after it's loaded, that is exactly 363.98px on FHD
+    - If you would find a way to make this height dynamical, in i.e. rem or combination of px and rem, that would keep it precise still, it would be awesome, but the nav height is based on several factors and oen of them is font-size of our specific font Monstserrat, and also by the design of how rem works, this would be hard to hit exactly the 363.98px, but again, its some kinda big flaw we currently have, so if you fix that in this task, it would be great
+- Group left menu (navigation) mods by common name (i.e. "The Ather Mods", "Delight Mods"), and only show the group name until expanded
+    - Logic is either simple like this:
+        - mod name contains "Aether" -> goes into "The Ather Mods" group, mod name contains "Delight" -> goes into "Delight Mods" group
+    - Or a bit more complex. i.e. Ars Noveau, Blood Magic, Iron Spells'n'Spellbooks and T.O Magic 'n Extras are all magic mods, so we will group them under "Magic Mods"
+    - Same can apply for combat mods, boss/dungeons mods, new dimension mods, etc., but for now, only add these: "The Ather Mods", "Delight Mods, "Magic Mods"
+- Alphabeticall order will apply to the mod names inside the group, same as for the 1st layer mod names
+- Add arrow down symbol (same as we have for col orders) to the of the group name, aligned to the very right of the box inside which the group name is
+    - Wll change to arrow up when expanded (classic expand/collapse switch)
+    - Add short animation to it, slideDown, slideUp
+- These groups will do the expand/collapse when clicked, it wont find first effect of first mod or anything like that
+- Group naems will be same as 1st layer mod names, except that the color will be brighter on dark mode, and darker on light mode, to be visually telling that it is a group (lighter on dark and darker on light will make the groups a bit highlighted)
+- Grouped mod names (shown when expanded) will have "font-size: 0.8rem" instead of 0.85rem and "text-align: right" (within the group)
+- Other than that, they will behave exactly the same like 1st layer effects: hover, find 1st effect on click, greyed out when not in the filtered table
+- Additionally, use group "Other" for mods with <3 effects, but ONLY if they are not in other group already, i.e. "My Nether's Delight" mod only adds 2 effects, but it will be under the "Delight Mods", because it contains the word "Delight", so to summarize; grouping by common thing > grouping by not enough effects.
+- The whoule group expand/collapse add functionality will be basically better and fancier dropdown, with animation that pushes elements below down on expand, and up on collapse
+
+---
+
+### MSE-NEXT: 
+- Search term in URL and saved in localStorage
+- Clickable logo and Minecraft version at the bottom right
 - Update index.html description, to something like: "{big} library of modded Minecraft status effects. {something about features usage maybe}"
+- Responsiveness
 
 ---
 
 ### Possible Future Upgrades
-- Group left menu mods by common name (i.e. Aether mods, Delightful mods), as a dropdown that shows all the child mods
-- Use group "Other" for mods with <3 effects
 - Add something like [show more]/[show less] or [expand]/[collapse] to 2-lines long description/source texts, so it's all rendered on single line initially
 - Add "guide" on first visit OR add >>> gif as a table overlay when page is loaded, to hint user the table is horinzotally scrolalble
 

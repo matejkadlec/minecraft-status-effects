@@ -1,0 +1,28 @@
+## List of mods that were confirmed to not add any new status effect to the game.
+
+- Aether Delight
+- Aquamirae
+- Better Combat
+- Bosses of Mass Destruction
+- Delightful
+- EEEAB's Mobs
+- Eldritch End
+- Enderman Overhaul
+- Forbidden and Arcanus
+- Ice and Fire: Dragons
+- Ice and Fire: Spellbooks
+- Nyctophobia
+- Ocean's Delight
+- Realm RPG: Fallen Adventurers
+- Realm RPG: Imps & Demons
+- Realm RPG: Sea Dwellers
+- Relics
+- Simply Swords
+- Survive
+- The Graveyard
+- Tome of Blood: Rebirth
+- Too Many Bows
+- True Ending ~ Ender Dragon Overhaul
+- VillagersPlus
+- Whisperwoods
+- Wizard's Reborn 

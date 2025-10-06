@@ -42,7 +42,7 @@ Open http://localhost:8000 in your browser.
 1. Clone this repository
 
    ```bash
-   git clone https://github.com/matejkadlec/minecraft-status-effects.git`
+   git clone https://github.com/matejkadlec/minecraft-status-effects.git
    ```
 
 2. Create and activate venv, then install dependencies
@@ -51,13 +51,13 @@ Open http://localhost:8000 in your browser.
    python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
    ```
 
-3. Start the server
+3. Start the server (defaults to port 8000; pass a port number to override)
 
    ```bash
-   `python run.py`
+   python run.py
    ```
 
-Open http://localhost:8000 in your browser.
+Open http://localhost:8000 in your browser (or the port you specified).
 
 ## Automated Effect Ingestion (mcmod.cn) ⬇️
 
@@ -75,7 +75,7 @@ Use `add {number} mods` (1-10) to process multiple mods from the queue in `data/
 - Provides detailed summary grouped by mod
 
 Flow summary:
-1. Scrapes list page(s) with `python mcmod/scrape_effect_list.py <url>` producing `mcmod/<mod>.txt` of item detail URLs.
+1. Scrapes list page(s) with `python mcmod/scrape_effect_list.py <url>` producing `mcmod/effect_urls/<mod_name>.txt` of item detail URLs.
 2. Scrapes each individual effect page with `python mcmod/scrape_effect.py <effect_url>` to extract detailed information.
 3. Fetch each effect page, extract English name (in parentheses), potency (max level), description (compressed), formulas, type and tags.
 4. Build `id` (`mod-name-effect-name` lowercase, hyphen separated) and enforce description length ≤200 chars.
@@ -98,7 +98,7 @@ Ten automated validations run against `data/effects.json` to ensure data quality
 **General Checks:**
 1. **No Empty Fields** - All required fields must be present and non-empty
 2. **Text Formatting** - Proper spacing, no trailing/leading whitespace, correct comma placement
-3. **Duplicate Effects** - Effect names must be globally unique across all mods
+3. **Duplicate Effects** - Effect names must be unique within each mod (cross-mod duplicates allowed if descriptions differ)
 4. **Effects Ordering** - Minecraft effects first (alphabetical), then mods (alphabetical by mod, then by effect)
 
 **Column-Specific Checks:**

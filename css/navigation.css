@@ -137,12 +137,62 @@ hr {
 /* Mod navigation list */
 #mod-nav {
   margin: 0;
+  margin-left: -8px;
   list-style: none;
   padding: 0;
   display: flex;
   flex-direction: column;
   min-height: 363.98px;
+  max-height: 363.98px;
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  direction: rtl;
+}
+
+#mod-nav > li {
+  direction: ltr;
+}
+
+/* Scrollbar styling for mod navigation */
+#mod-nav::-webkit-scrollbar {
+  width: 8px;
+}
+
+#mod-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#mod-nav::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+}
+
+:root #mod-nav::-webkit-scrollbar-thumb {
+  background: var(--blue-2);
+}
+
+:root.dark #mod-nav::-webkit-scrollbar-thumb {
+  background: var(--gold-2);
+}
+
+:root #mod-nav::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-1);
+}
+
+:root.dark #mod-nav::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-1);
+}
+
+/* Firefox scrollbar */
+:root #mod-nav {
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue-2) transparent;
+}
+
+:root.dark #mod-nav {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-2) transparent;
 }
 
 #mod-nav li a {
@@ -158,6 +208,7 @@ hr {
   position: relative;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s, opacity 0.3s;
   opacity: 1;
+  text-align: left;
 }
 
 #mod-nav li a:focus-visible {
@@ -180,6 +231,133 @@ hr {
   background: transparent;
   color: var(--text-dim);
   border-color: transparent;
+}
+
+/* Mod group headers */
+#mod-nav li.mod-group > .group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem;
+  justify-content: flex-start;
+  text-align: left;
+  text-decoration: none;
+  color: var(--text-dim);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.05;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, opacity 0.3s;
+  opacity: 1;
+}
+
+:root #mod-nav li.mod-group > .group-header {
+  color: #555555;
+}
+
+:root.dark #mod-nav li.mod-group > .group-header {
+  color: #bebebe;
+}
+
+#mod-nav li.mod-group > .group-header:hover {
+  background: var(--bg-accent);
+  border-color: var(--border);
+}
+
+:root #mod-nav li.mod-group > .group-header:hover {
+  color: var(--header);
+}
+
+:root.dark #mod-nav li.mod-group > .group-header:hover {
+  color: var(--header);
+}
+
+#mod-nav li.mod-group > .group-header .group-arrow {
+  margin-top: 2px;
+  font-size: 0.6rem;
+  transition: transform 0.3s ease;
+}
+
+#mod-nav li.mod-group.expanded > .group-header .group-arrow {
+  transform: rotate(180deg);
+}
+
+#mod-nav li.mod-group > .group-header .group-name {
+  flex: 1;
+}
+
+/* Nested mod items within groups */
+#mod-nav li.mod-group > .group-children {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s ease;
+}
+
+#mod-nav li.mod-group.expanded > .group-children {
+  height: auto;
+}
+
+#mod-nav li.mod-group > .group-children a {
+  display: block;
+  padding: 0.25rem;
+  margin-left: 0.95rem;
+  text-decoration: none;
+  color: var(--text-dim);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.05;
+  text-align: left;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s,
+    opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition-delay: calc(var(--child-index, 0) * 45ms);
+}
+
+#mod-nav li.mod-group > .group-children a:hover {
+  background: var(--bg-accent);
+  color: var(--header);
+  border-color: var(--border);
+}
+
+#mod-nav li.mod-group > .group-children a[data-available="false"] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+#mod-nav li.mod-group > .group-children a[data-available="false"]:hover {
+  background: transparent;
+  color: var(--text-dim);
+  border-color: transparent;
+}
+
+#mod-nav li.mod-group.group-disabled > .group-header {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+
+#mod-nav li.mod-group.group-disabled > .group-header:hover {
+  background: transparent;
+  border-color: transparent;
+}
+
+#mod-nav li.mod-group.expanded:not(.collapsing) > .group-children a,
+#mod-nav li.mod-group.expanding > .group-children a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#mod-nav li.mod-group.collapsing > .group-children a {
+  transition-delay: calc(
+    (var(--child-count, 1) - var(--child-index, 0) - 1) * 45ms
+  );
+  opacity: 0;
+  transform: translateY(-6px);
 }
 
 .nav-loading {

@@ -17,7 +17,7 @@
       "effect": "Bad Luck",
       "maxLevel": "I",
       "type": "negative",
-      "tags": ["negative", "scaling"],
+      "tags": ["negative"],
       "description": "Worsens the quality and quantity of loot from mob drops and chests.",
       "source": "Suspicious Stew"
     },
@@ -198,7 +198,7 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Deals <b>1</b> every <b>1.25/level seconds</b> (1.25 / 0.625 / 0.417 / 0.3125) but cannot kill (leaves entity at half a heart).",
+      "description": "Deals <b>1 damage</b> every <b>1.25/level seconds</b> (1.25 / 0.625 / 0.417 / 0.3125) but cannot kill (leaves entity at half a heart).",
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Poison, Alchemy Flask/Vial, Delights, Cave Spider, Bee, Pufferfish, Poison spells from <i>Iron Spells'n'Spellbooks</i> mod, Suspicious Stew"
     },
     {
@@ -288,7 +288,7 @@
       "maxLevel": "II",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Deals <b>1</b> every <b>2 seconds</b> at level I, and every <b>second</b> at level II. Unlike Poison, can kill.",
+      "description": "Deals <b>1 damage</b> every <b>2 seconds</b> at level I, and every <b>second</b> at level II. Unlike Poison, can kill.",
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Wither/Decay, Withering Dross, Ebony weapons and tools from <i>Dungeons and Combat</i> mod, Wither Assault Shoulder Weapon, Wither, Wither Skeleton, Wither Rose, Suspicious Stew"
     },
     {
@@ -359,7 +359,7 @@
       "type": "negative",
       "tags": ["negative"],
       "description": "Prevents movement and attacks.",
-      "source": "Being hit by Primitive Club, eating Stinky Fish"
+      "source": "Being hit by Primitive Club, eating Stinky Fish, Whirlwind spell from the <i>Goety</i> mod"
     },
     {
       "mod": "Alex's Caves",
@@ -695,11 +695,11 @@
       "mod": "Ars Nouveau",
       "id": "ars-nouveau-freezing",
       "effect": "Freezing",
-      "maxLevel": "I",
+      "maxLevel": "III",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Immobilizes and applies slowing/frost effects.",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Freezing, Frostaya Papaya"
+      "description": "Prevents movement and deals periodic frost damage, scaling with level. Additionaly, the player's hearths and screen edges will frost over.",
+      "source": "Potion/Arrow/Charm/Bamboo Spikes of Freezing, Frostaya Papaya, Frost Blade, Chill Hide and Frosty Aura from <i>Goety</i> mod, Witch throwing Potion of Freezing, Powder Snow"
     },
     {
       "mod": "Ars Nouveau",
@@ -802,6 +802,66 @@
       "source": "Potion/Arrow/Charm of Spell Damage"
     },
     {
+      "mod": "Blood Magic",
+      "id": "blood-magic-boost",
+      "effect": "Boost",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Increases jump height and allows auto-climbing blocks up to 1 block high.",
+      "source": "Alchemy potions from the mod"
+    },
+    {
+      "mod": "Blood Magic",
+      "id": "blood-magic-deafness",
+      "effect": "Deafness",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Reduces sound output.",
+      "source": "Alchemy potions from the mod"
+    },
+    {
+      "mod": "Blood Magic",
+      "id": "blood-magic-inhibit",
+      "effect": "Inhibit",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Temporarily removes sigil effects from Living Armor.",
+      "source": "Elemental Spirit attack"
+    },
+    {
+      "mod": "Blood Magic",
+      "id": "blood-magic-planar-binding",
+      "effect": "Planar Binding",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents endermen from teleporting and blocks players from using ender pearls.",
+      "source": "Alchemy potions from the mod"
+    },
+    {
+      "mod": "Blood Magic",
+      "id": "blood-magic-soul-fray",
+      "effect": "Soul Fray",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Reduces Life Essence gained from Sacrificial Dagger by <b>90%</b>.",
+      "source": "Respawning after death, returning from the End"
+    },
+    {
+      "mod": "Blood Magic",
+      "id": "blood-magic-soul-harden",
+      "effect": "Soul Harden",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Absorbs a portion of incoming damage.",
+      "source": "Alchemy potions from the mod"
+    },
+    {
       "mod": "Blue Skies",
       "id": "blue-skies-deadly-venom",
       "effect": "Deadly Venom",
@@ -810,6 +870,16 @@
       "tags": ["negative"],
       "description": "Functions like <b>Poison</b> but can kill the affected entity.",
       "source": "Arachnarch's projectile/poison cloud, Nested Spider attack"
+    },
+    {
+      "mod": "Brewin' And Chewin'",
+      "id": "brewin-and-chewin-tipsy",
+      "effect": "Tipsy",
+      "maxLevel": "X",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Level I has no effect. <b>Level II+</b> applies <b>Nausea</b> with intensity <b>12 - level</b>. <b>Level V+</b> causes random movement. Level X adds <b>Poison</b>. Drinking milk removes one level.",
+      "source": "Alcoholic beverages from the mod"
     },
     {
       "mod": "Cataclysm",
@@ -952,6 +1022,16 @@
       "source": "Wearing Medal of Honor"
     },
     {
+      "mod": "Deeper and Darker",
+      "id": "deeper-and-darker-sculk-affinity",
+      "effect": "Sculk Affinity",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Player actions are not detected by Sculk Sensors and Warden tendrils. Non-player vibrations (dropped items) are still detected.",
+      "source": "Potion/Arrow of Sculk Affinity"
+    },
+    {
       "mod": "Dungeon's Delight",
       "id": "dungeons-delight-burrow-gut",
       "effect": "Burrow Gut",
@@ -1018,7 +1098,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Deals <b>1</b> true damage every <b>0.5 seconds</b>.",
+      "description": "Deals <b>1 true damage</b> every <b>0.5 seconds</b>.",
       "source": "Serrated Strike enchantment, Feral Bite effect"
     },
     {
@@ -1078,7 +1158,7 @@
       "maxLevel": "III",
       "type": "negative",
       "tags": ["negative", "scaling"],
-      "description": "Deals periodic damage <b>equal to level</b> that ignores armor every <b>2 seconds</b>.",
+      "description": "Deals periodic true damage <b>equal to level</b> every <b>2 seconds</b>.",
       "source": "Affix Items, Sanguine Scepter's Primary Ability, attacks with Crimson weapons and tools"
     },
     {
@@ -1237,8 +1317,8 @@
       "effect": "Scarlet Restoration",
       "maxLevel": "I",
       "type": "positive",
-      "tags": ["positive", "scaling"],
-      "description": "Using Sanguine Scepter's Secondary Ability while you have this effect will consume it, restoring <b>5 × level</b> hearts.",
+      "tags": ["positive"],
+      "description": "Using Sanguine Scepter's Secondary Ability while you have this effect will consume it, restoring <b>5</b> hearts.",
       "source": "<i>Unavailable.</i>"
     },
     {
@@ -1340,6 +1420,346 @@
       "tags": ["positive"],
       "description": "Prevents hunger loss from exhausting actions, such as running, jumping and attacking mob. Also fully negates the <b>Hunger</b> effect.",
       "source": "Delights"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-acid-venom",
+      "effect": "Acid Venom",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Deals <b>1 damage</b> every <b>1.25 seconds</b>, leaving entity alive at half a heart. Unlike <b>Poison</b>, affects undead mobs.",
+      "source": "Servant attacks while wearing Wild Robe"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-blazing-storm",
+      "effect": "Blazing Storm",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Sets blocks near entity on fire.",
+      "source": "Volcanic Eruption spell from the mod"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-bottling",
+      "effect": "Bottling",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Increases brewing stand bottle output by <b>1</b>.",
+      "source": "Potion/Arrow/Charm of Bottling"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-chill-hide",
+      "effect": "Chill Hide",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Increases armor by <b>3</b>. When hit by melee attack, applies <b>Freezing II</b> for <b>3 seconds</b> to attacker.",
+      "source": "Calm Focus spell from the mod"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-corpse-eater",
+      "effect": "Corpse Eater",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Killing mobs restores <b>0.2 × mob max health</b> hunger points, with the minimum of <b>2</b> hunger points. Excess hunger points will be converted into saturation instead.",
+      "source": "Potion/Arrow/Charm of Corpse Eater"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-crippled",
+      "effect": "Crippled",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Reduces movement speed by <b>75%</b>, attack damage by <b>50%</b>, and attack speed. Removed after healing <b>80%</b> of max health.",
+      "source": "Illager servants revived via Ominous Totem"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-doom",
+      "effect": "Doom",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "When effect expires, instantly kills entity if health below <b>5%</b> of max health.",
+      "source": "Haunted attacks"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-electrified",
+      "effect": "Electrified",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Every <b>4 seconds</b>, shocks up to <b>2</b> nearby targets for <b>4 damage</b> with strong knockback.",
+      "source": "Enchanted Ender Emissary: Distorted Eye"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-ender-flux",
+      "effect": "Ender Flux",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Entity with this effect will be randomly teleported within <b>9</b> blocks radius after being hit.",
+      "source": "Potion/Arrow/Charm of Ender Flux"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-evil-eye",
+      "effect": "Evil Eye",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Spawns hostile mobs within <b>16 blocks</b> radius until <b>16</b> hostiles present. Cannot be removed with milk.",
+      "source": "Potion/Arrow/Charm of Evil Eye"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-fiery-aura",
+      "effect": "Fiery Aura",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Creates aura with <b>2.5</b> blocks radius that ignites nearby non-fire-immune entities.",
+      "source": "Potion/Arrow/Charm of Fiery Aura"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-fire-trail",
+      "effect": "Fire Trail",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Leaves fire trail where entity walks. Does not grant fire resistance.",
+      "source": "Potion/Arrow/Charm of Fire Trail"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-flame-hands",
+      "effect": "Flame Hands",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Melee attacks ignite target for <b>5 seconds</b>.",
+      "source": "Potion/Arrow/Charm of Flame Hands"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-flimsy",
+      "effect": "Flimsy",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Increases knockback received by <b>100%</b>.",
+      "source": "Potion/Arrow/Charm of Flimsy"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-fortunate",
+      "effect": "Fortunate",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Functions like and stack with <b>Fortune</b> enchantment.",
+      "source": "Potion/Arrow/Charm of Fortunate"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-frog-leg",
+      "effect": "Frog Leg",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Allows <b>1</b> additional mid-air jump before landing.",
+      "source": "Potion/Arrow/Charm of Frog Leg"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-frosty-aura",
+      "effect": "Frosty Aura",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Creates aura with <b>2.5</b> blocks radius that applies <b>Freezing</b> to nearby entities.",
+      "source": "Potion/Arrow/Charm of Frosty Aura"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-gold-touched",
+      "effect": "Gold Touched",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Affected entity will drop gold nuggets on death.",
+      "source": "Gold Touched spell from the mod, being hit by Sage's Staff"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-insight",
+      "effect": "Insight",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Multiplies experience drops by <b>3</b>.",
+      "source": "Potion/Arrow/Charm of Insight"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-iron-hide",
+      "effect": "Iron Hide",
+      "maxLevel": "VI",
+      "type": "positive",
+      "tags": ["positive", "scaling"],
+      "description": "Increases armor by <b>4 × level</b>.",
+      "source": "Iron Skin Focus spell from the mod"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-photosynthesis",
+      "effect": "Photosynthesis",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Restores health while in sunlight.",
+      "source": "Potion/Arrow/Charm of Photosynthesis"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-primed",
+      "effect": "Primed",
+      "maxLevel": "IV",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "When effect expires, creates explosion without damaging holder (higher level → more damage).",
+      "source": "Potion/Arrow/Charm of Primed"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-repulsive",
+      "effect": "Repulsive",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Knocks back the attacker when being hit.",
+      "source": "Potion/Arrow/Charm of Repulsive"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-save-effects",
+      "effect": "Save Effects",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Upon death, this effect is removed while preserving all other status effects. Does not work in Hardcore mode.",
+      "source": "Potion/Arrow/Charm of Save Effects"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-shadow-walk",
+      "effect": "Shadow Walk",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants full invisibility including armor and increases attack by <b>1.5</b>. Ends early if the player performs any action other than movement. When effect expires, the player will be teleported back to where the effect was obrainted.",
+      "source": "Ender Walk Focus spell from the mod"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-soul-hunger",
+      "effect": "Soul Hunger",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Drains soul energy and prevents soul energy regeneration.",
+      "source": "Necro Set helm's Soul Consuming ability"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-spasms",
+      "effect": "Spasms",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Deals <b>1 damage</b> every <b>1.25 seconds</b> and pushes the entity randomly.",
+      "source": "Storm Staff spell hits from the mod"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-storms-wrath",
+      "effect": "Storm's Wrath",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Affected entity will be periodically struck by lightnings.",
+      "source": "Potion/Arrow/Charm of Storm's Wrath"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-swift-swim",
+      "effect": "Swift Swim",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Increases swim speed and applies <b>Speed</b> while swimming.",
+      "source": "Potion/Arrow/Charm of Swift Swim"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-tangled",
+      "effect": "Tangled",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents any movement.",
+      "source": "Tangled Focus spell's roots from the mod"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-venomous-hands",
+      "effect": "Venomous Hands",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Melee attacks apply <b>Poison</b> for <b>10 seconds</b> to target. Extends to <b>30 seconds</b> when using Venomous Dagger.",
+      "source": "Potion/Arrow/Charm of Venomous Hands, Venomous Dagger"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-void-touched",
+      "effect": "Void Touched",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Next non-void damage dealt to entity is multiplied by <b>3</b>, then effect is removed. Negated by Void Robe.",
+      "source": "Void Block, Liquid Void, Broken Void Container, Rift Focus spell explosion from the mod"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-wild-rage",
+      "effect": "Wild Rage",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Non-player entities will randomly attack all nearby entities. No effect on players.",
+      "source": "Potion/Arrow/Charm of Wild Rage"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-wounded",
+      "effect": "Wounded",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents illager servants from being revived by Ominous Totem.",
+      "source": "Illager servants successfully revived via Ominous Totem"
     },
     {
       "mod": "Iron Spells'n'Spellbooks",
@@ -1592,13 +2012,43 @@
       "source": "Blood Slash spell from the mod"
     },
     {
+      "mod": "Mowzie's Mobs",
+      "id": "mowzies-mobs-frozen",
+      "effect": "Frozen",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Prevents player from rotating camera view.",
+      "source": "Frostmaw's ice ball or ice breath attack"
+    },
+    {
+      "mod": "Mowzie's Mobs",
+      "id": "mowzies-mobs-geomancy",
+      "effect": "Geomancy",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Allows levitating ground blocks by right-clicking them and launching them by left-clicking (hold right-click to charge for larger platforms).",
+      "source": "Earth Talisman in inventory"
+    },
+    {
+      "mod": "Mowzie's Mobs",
+      "id": "mowzies-mobs-suns-blessing",
+      "effect": "Sun's Blessing",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "Grants 3 abilities: Sunstrike (orbital strike), Solar Beam (sustained laser), and Supernova (explosion that consumes effect).",
+      "source": "Sun's Blessing item (right-click to activate)"
+    },
+    {
       "mod": "My Nether's Delight",
       "id": "my-nethers-delight-pungent-beneficial",
       "effect": "Pungent (beneficial)",
       "maxLevel": "I",
       "type": "positive",
       "tags": ["positive"],
-      "description": "When health is not full, being near fire ignites player, restoring <b>1</b> per burn. Auto-extinguishes when fully healed (higher level → faster healing). Requires fire resistance or at least 1 fire protection armor piece.",
+      "description": "When health is not full, being near fire ignites player, restoring <b>1 heart</b> per burn. Auto-extinguishes when fully healed. Requires fire resistance or at least 1 fire protection armor piece.",
       "source": "Delights"
     },
     {
@@ -1608,7 +2058,7 @@
       "maxLevel": "I",
       "type": "negative",
       "tags": ["negative"],
-      "description": "Ignites player when near fire source without contact (higher level → larger trigger range). Converts to beneficial variant if player has fire resistance or wears at least 1 fire protection armor piece.",
+      "description": "Ignites player when near fire source without contact. Converts to beneficial variant if player has fire resistance or wears at least 1 fire protection armor piece.",
       "source": "Delights"
     },
     {
@@ -1670,6 +2120,46 @@
       "tags": ["negative"],
       "description": "Makes player skin slightly lighter. When combined with <b>Blueberry</b> or <b>Darkening</b>, weakens their visual effects. Visible to other players.",
       "source": "White Glow Shroom"
+    },
+    {
+      "mod": "Sons Of Sins",
+      "id": "sons-of-sins-mental-illness",
+      "effect": "Mental Illness",
+      "maxLevel": "II",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "Causes severe screen shaking, flesh-colored filter, loud sounds, and applies <b>Slowness III</b>. Triggered within 5 blocks of any Seven Sins mob.",
+      "source": "Being near Seven Sins mobs from the mod"
+    },
+    {
+      "mod": "Sons Of Sins",
+      "id": "sons-of-sins-very-bad-omen",
+      "effect": "Very Bad Omen",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Spawns one hostile mob from the mod when effect expires.",
+      "source": "Adam's Apple from the mod"
+    },
+    {
+      "mod": "Stalwart Dungeons",
+      "id": "stalwart-dungeons-burning",
+      "effect": "Burning",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Deals <b>0.5</b> periodically. Cannot be removed by entering water.",
+      "source": "Walking on Igniter blocks from the mod"
+    },
+    {
+      "mod": "Stalwart Dungeons",
+      "id": "stalwart-dungeons-spore",
+      "effect": "Spore",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "Spawns Nether Wart Cocoon around entity when effect expires, trapping them.",
+      "source": "Spore Bottle, Spore Sprayer"
     },
     {
       "mod": "T.O Magic 'n Extras",
@@ -1758,7 +2248,7 @@
       "maxLevel": "V",
       "type": "positive",
       "tags": ["positive", "scaling"],
-      "description": "Normal attacks with Eternal Vortex's Trident release weakened slashes dealing <b>12 + 2 × level</b> damage and applying <b>Wet I</b> for <b>1 second</b>.",
+      "description": "Normal attacks with Eternal Vortex's Trident release weakened slashes dealing <b>12 + (2 × level)</b> damage and applying <b>Wet I</b> for <b>1 second</b>.",
       "source": "Tidal Slash spell from the mod (requires Eternal Vortex's Trident level 2+)"
     },
     {
@@ -1830,16 +2320,6 @@
       "tags": ["negative", "scaling"],
       "description": "Increases damage taken (higher level → more damage).",
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Brittleness"
-    },
-    {
-      "mod": "The Undergarden",
-      "id": "the-undergarden-featherweight",
-      "effect": "Featherweight",
-      "maxLevel": "II",
-      "type": "negative",
-      "tags": ["negative", "scaling"],
-      "description": "<i>Unavailable.</i>",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Featherweight"
     },
     {
       "mod": "Twilight's Flavors & Delight",

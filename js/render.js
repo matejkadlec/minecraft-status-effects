@@ -125,6 +125,53 @@
       if (mod) availableMods.add(mod);
     });
 
+    // Count effects per mod
+    const modEffectCounts = {};
+    MCSE.rows.forEach((r) => {
+      if (r.id === "no-results-row") return;
+      const mod = r.getAttribute("data-mod");
+      if (mod) {
+        modEffectCounts[mod] = (modEffectCounts[mod] || 0) + 1;
+      }
+    });
+
+    // Grouping logic
+    const MOD_GROUPS = {
+      "The Aether Mods": (mod) => mod.toLowerCase().includes("aether"),
+      "Delight Mods": (mod) => mod.toLowerCase().includes("delight"),
+      "Magic Mods": (mod) =>
+        [
+          "Ars Nouveau",
+          "Blood Magic",
+          "Iron Spells'n'Spellbooks",
+          "T.O Magic 'n Extras",
+        ].includes(mod),
+    };
+
+    function getModGroup(mod) {
+      // Check named groups first
+      for (const [groupName, matcher] of Object.entries(MOD_GROUPS)) {
+        if (matcher(mod)) return groupName;
+      }
+      // "Other" group for mods with <3 effects (only if not in another group)
+      if (modEffectCounts[mod] < 3) return "Other";
+      return null; // Not in any group
+    }
+
+    // Organize mods into groups
+    const grouped = {};
+    const ungrouped = [];
+
+    allMods.forEach(({ mod, id }) => {
+      const group = getModGroup(mod);
+      if (group) {
+        if (!grouped[group]) grouped[group] = [];
+        grouped[group].push({ mod, id });
+      } else {
+        ungrouped.push({ mod, id });
+      }
+    });
+
     // Helper function to determine mod order (Minecraft first, then alphabetical)
     const shouldComeBefore = (modA, modB) => {
       if (modA === "Minecraft" && modB !== "Minecraft") return true;
@@ -132,13 +179,28 @@
       return modA < modB;
     };
 
-    // Sort all mods
-    allMods.sort((a, b) => (shouldComeBefore(a.mod, b.mod) ? -1 : 1));
+    // Sort items within each group
+    Object.keys(grouped).forEach((groupName) => {
+      grouped[groupName].sort((a, b) =>
+        shouldComeBefore(a.mod, b.mod) ? -1 : 1
+      );
+    });
+
+    // Sort ungrouped mods
+    ungrouped.sort((a, b) => (shouldComeBefore(a.mod, b.mod) ? -1 : 1));
+
+    // Combine into final list: ungrouped first, then groups (alphabetically, but "Other" always last)
+    const groupNames = Object.keys(grouped).sort((a, b) => {
+      if (a === "Other") return 1;
+      if (b === "Other") return -1;
+      return a < b ? -1 : 1;
+    });
 
     // Clear and rebuild navigation
     navList.innerHTML = "";
 
-    allMods.forEach(({ mod, id }) => {
+    // Add ungrouped mods
+    ungrouped.forEach(({ mod, id }) => {
       const li = document.createElement("li");
       const isAvailable = availableMods.has(mod);
 
@@ -153,6 +215,76 @@
 
       li.innerHTML = `<a href="#${targetId}" data-mod="${mod}" data-available="${isAvailable}">${mod}</a>`;
       navList.appendChild(li);
+    });
+
+    // Add grouped mods
+    groupNames.forEach((groupName) => {
+      const mods = grouped[groupName];
+      const li = document.createElement("li");
+      li.className = "mod-group";
+
+      // Check if any mod in group is available
+      const groupHasAvailable = mods.some(({ mod }) => availableMods.has(mod));
+
+      // Create group header
+      const header = document.createElement("div");
+      header.className = "group-header";
+      header.innerHTML = `<span class="group-arrow">▼</span><span>${groupName}</span>`;
+
+      // Create children container
+      const children = document.createElement("div");
+      children.className = "group-children";
+
+      // Add mods to group
+      mods.forEach(({ mod, id }) => {
+        const isAvailable = availableMods.has(mod);
+
+        // Find first visible effect for this mod to link to
+        let targetId = id;
+        if (isAvailable) {
+          const firstVisibleEffect = visibleRows.find(
+            (r) => r.getAttribute("data-mod") === mod
+          );
+          if (firstVisibleEffect) targetId = firstVisibleEffect.id;
+        }
+
+        const link = document.createElement("a");
+        link.href = `#${targetId}`;
+        link.setAttribute("data-mod", mod);
+        link.setAttribute("data-available", isAvailable);
+        link.textContent = mod;
+
+        // Prevent clicks on child links from toggling the group
+        link.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+
+        children.appendChild(link);
+      });
+
+      li.appendChild(header);
+      li.appendChild(children);
+      navList.appendChild(li);
+
+      // Add click handler for expand/collapse (only on header, not on child links)
+      header.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        li.classList.toggle("expanded");
+      });
+    });
+
+    // Check if scrollbar is needed and adjust padding
+    requestAnimationFrame(() => {
+      const navEl = document.getElementById("mod-nav");
+      if (navEl) {
+        const hasScrollbar = navEl.scrollHeight > navEl.clientHeight;
+        if (hasScrollbar) {
+          navEl.style.paddingLeft = "0";
+        } else {
+          navEl.style.paddingLeft = "8px";
+        }
+      }
     });
   };
 })(window.MCSE);

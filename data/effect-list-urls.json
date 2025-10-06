@@ -7,6 +7,11 @@
       "status": "DONE"
     },
     {
+      "mod": "Advent of Ascension",
+      "url": "https://www.mcmod.cn/item/list/b40-1269-6.html",
+      "status": "TODO"
+    },
+    {
       "mod": "Alex's Caves",
       "url": "https://alexscaves.wiki.gg/wiki/Potion_Effects",
       "status": "DONE"
@@ -57,6 +62,11 @@
       "status": "DONE"
     },
     {
+      "mod": "Goety",
+      "url": "https://www.mcmod.cn/item/list/7635-6.html",
+      "status": "DONE"
+    },
+    {
       "mod": "Dungeon's Delight",
       "url": "https://www.mcmod.cn/item/list/19620-6.html",
       "status": "DONE"
@@ -99,6 +109,36 @@
     {
       "mod": "Blue Skies",
       "url": "https://www.mcmod.cn/item/list/1563-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Blood Magic",
+      "url": "https://www.mcmod.cn/item/list/219-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Brewin' And Chewin'",
+      "url": "https://www.mcmod.cn/item/list/6829-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Deeper and Darker",
+      "url": "https://www.mcmod.cn/item/list/7369-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Mowzie's Mobs",
+      "url": "https://www.mcmod.cn/item/list/984-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Sons Of Sins",
+      "url": "https://www.mcmod.cn/item/list/6220-6.html",
+      "status": "DONE"
+    },
+    {
+      "mod": "Stalwart Dungeons",
+      "url": "https://www.mcmod.cn/item/list/4647-6.html",
       "status": "DONE"
     }
   ]

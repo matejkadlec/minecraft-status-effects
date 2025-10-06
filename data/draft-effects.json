@@ -2,44 +2,174 @@
   "_comment": "This file is reserved for effects that we have some info about, but not enough to put them in the main effects list.",
   "draftEffects": [
     {
-      "mod": "",
-      "id": "burning",
+      "mod": "?",
+      "id": "?-burning",
       "effect": "Burning",
-      "maxLevel": "",
+      "maxLevel": "?",
       "type": "negative",
       "tags": ["negative"],
-      "description": "",
+      "description": "?",
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Burning"
     },
     {
-      "mod": "",
-      "id": "chemical",
+      "mod": "?",
+      "id": "?-chemical",
       "effect": "Chemical",
-      "maxLevel": "",
+      "maxLevel": "?",
       "type": "negative",
       "tags": ["negative"],
-      "description": "",
+      "description": "?",
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Chemical"
     },
     {
-      "mod": "",
-      "id": "frenzy",
+      "mod": "?",
+      "id": "?-frenzy",
       "effect": "Frenzy",
-      "maxLevel": "",
+      "maxLevel": "?",
       "type": "positive",
       "tags": ["positive"],
-      "description": "",
+      "description": "?",
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Frenzy"
     },
     {
-      "mod": "",
-      "id": "spore",
+      "mod": "?",
+      "id": "?-spore",
       "effect": "Spore",
-      "maxLevel": "",
+      "maxLevel": "?",
       "type": "negative",
       "tags": ["negative"],
-      "description": "",
+      "description": "?",
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Spore"
+    },
+    {
+      "mod": "Blood Magic",
+      "id": "blood-magic-reciprocation",
+      "effect": "Reciprocation",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "?",
+      "source": "Alchemy potions from the mod"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-altruistic",
+      "effect": "Altruistic",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-deflective",
+      "effect": "Deflective",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-gravity-pulse",
+      "effect": "Gravity Pulse",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-impaired",
+      "effect": "Impaired",
+      "maxLevel": "I",
+      "type": "negative",
+      "tags": ["negative"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-leeching",
+      "effect": "Leeching",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-radiance",
+      "effect": "Radiance",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-rallied",
+      "effect": "Rallied",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-rallying",
+      "effect": "Rallying",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-shielded",
+      "effect": "Shielded",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-shielding",
+      "effect": "Shielding",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "Goety",
+      "id": "goety-swirling",
+      "effect": "Swirling",
+      "maxLevel": "I",
+      "type": "positive",
+      "tags": ["positive"],
+      "description": "?",
+      "source": "?"
+    },
+    {
+      "mod": "The Undergarden",
+      "id": "the-undergarden-featherweight",
+      "effect": "Featherweight",
+      "maxLevel": "II",
+      "type": "negative",
+      "tags": ["negative", "scaling"],
+      "description": "?",
+      "source": "Potion/Arrow/Charm/Bamboo Spikes of Featherweight"
     }
   ]
 }

@@ -20,8 +20,10 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 - **Updated**:
   - Effect Name (Mod Name)
     - Field (OLD: "old value", NEW: "new value")
+- **Drafted**:
+  - Effect Name (Mod Name) - reason (e.g., "unknown description")
 - **Skipped**:
-  - Effect Name (Mod Name)
+  - Effect Name (Mod Name) - reason (e.g., "duplicate with similar description")
 ```
 
 ### 4. NO CHANGE COMMENTS
@@ -31,7 +33,7 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 ### 5. ENVIRONMENT SETUP
 - Working directory: `/home/matej/projects/minecraft-status-effects/` (project root)
 - Before running commands, use `source venv/bin/activate` to activate venv
-- To run local server for testing: `python run.py 8001` (port 8000 is reserved)
+- To run local server for testing: `python run.py` (defaults to port 8000; pass a port number to override)
 - Terminals always open in project root - no need for full paths
 - Use `rm` to delete obsolete files
 - Stop local server after testing to free the port
@@ -73,7 +75,9 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 **Key files:**
 - `index.html` - main page with effects table
 - `data/effects.json` - effects database (CRITICAL FILE)
-- `data/links.json` - mod links/sources
+- `data/draft-effects.json` - incomplete effects (unknown descriptions)
+- `data/effect-list-urls.json` - mod scraping queue with status tracking
+- `data/blacklist.md` - mods confirmed to have no status effects
 - `scripts/validate_effects.py` - validation script (RUN AFTER CHANGES)
 - `TODO.md` - feature requests and development roadmap (JIRA-style tickets)
 - `.github/workflows/` - CI/CD workflows
@@ -92,30 +96,50 @@ minecraft-status-effects/
 │       ├── deploy.yml
 │       └── validate-effects.yml
 ├── css/ (stylesheets)
+│   ├── legal.css
+│   ├── navigation.css
+│   ├── note.css
+│   ├── styles.css
+│   ├── table.css
+│   └── theme.css
 ├── data/
-│   ├── draft-effects.json  
-│   ├── effects.json ⚠️ CRITICAL
-│   └── links.json
+│   ├── blacklist.md (mods confirmed to have no status effects)
+│   ├── draft-effects.json (effects lacking crucial info like description)
+│   ├── effect-list-urls.json (mod scraping queue with status)
+│   └── effects.json ⚠️ CRITICAL
 ├── export/ (theme-aware export functionality)
+│   ├── __init__.py
 │   ├── export_handler.py
 │   ├── export_formatter.py
 │   ├── generate_static.py
 │   └── files/ (pre-generated export files)
 ├── img/ (icons, logos, loading gifs)
 ├── js/ (modular JavaScript files)
+│   ├── core.js
+│   ├── data.js
+│   ├── exports.js
+│   ├── filters.js
+│   ├── navigation.js
+│   ├── pagination.js
+│   ├── render.js
+│   ├── sort.js
+│   └── theme.js
 ├── license/ & privacy-policy/ (legal pages)
 ├── mcmod/ (mcmod.cn scraping scripts)
-│   ├── scrape_effect (scrapes individual effect page)
-│   ├── scrape_effect_list (scrapes effects list page)
+│   ├── scrape_effect.py (scrapes individual effect page)
+│   ├── scrape_effect_list.py (scrapes effects list page)
 │   └── effect_urls/ (generated .txt files with URLs)
 ├── scripts/
 │   ├── sort_effects.py
 │   └── validate_effects.py ⚠️ CRITICAL
+├── untracked/ (development/experimental scripts)
 ├── index.html (main page)
 ├── run.py (Python server)
+├── run_tests.sh (test runner script)
 ├── sitemap.xml ⚠️ KEEP UPDATED
 ├── robots.txt (SEO)
-└── [config files]
+├── Dockerfile (production deployment)
+└── [config files: requirements.txt, LICENSE.md, etc.]
 ```
 
 **Update this section when adding/removing files or folders.**
@@ -137,8 +161,14 @@ minecraft-status-effects/
    - Mod1 - EffectA will be before Mod1 - EffectB
    - Mod1 - EffectZ will be before Mod2 - EffectA
    
-2. **GLOBAL UNIQUENESS**: Effect names must be unique across ALL mods
-   - If duplicate found, SKIP and report in summary, with the exception for Apotheosis mod, in that case, remove the Apotheosis record and put the effect under the new mod group
+2. **EFFECT NAME UNIQUENESS RULES**:
+   - **Within a mod**: Effect names must be unique (can't have 2x "Strength" from same mod)
+   - **Across mods**: Duplicate names allowed IF descriptions/functionality differ
+   - **Duplicate detection logic**:
+     - If effect name exists in database → compare descriptions
+     - Similar/identical descriptions → SKIP (same effect already exists)
+     - Different descriptions → ADD (different effect, name coincidence)
+   - **Special case**: If duplicate is from Apotheosis mod, remove Apotheosis record and use the new mod's version
    - Can update existing effects with better data
 
 3. **MANDATORY VALIDATION**: Run `python scripts/validate_effects.py` after ANY change
@@ -158,6 +188,9 @@ minecraft-status-effects/
 ```
 
 ### GENERAL RULES
+- **Unknown descriptions**: If effect description is completely unknown (not just missing source), add to `data/draft-effects.json` instead of `data/effects.json`. Source can be unknown (`"<i>To be added.</i>"`), but description cannot.
+- If possible, make sure the effect is present in Minecraft version 1.20.1, that can be from description or from comments, i.e. effect "Curse" from "Biomes O' Plenty" mod has this text in its description: "Removed in version 8.0.0.164-1.13.2.", so you would not add that. 
+  - If Minecraft version is not mentioned anywhere, assume the effect exists in 1.20.1
 - Never update existing maxLevel to lower value, different mods makes the maxLevel different for an effect, and we care about the highest level possible in survival, so if somehow we got i.e. "EffectX" maxLevel is "V", it will stay "V", even if some page says max is IV.
   - I.e. our "Strength" effect maxLevel is "III", even though vanilla MC wiki says "II"
   - That's because some mod can increase the vanilla effects maxLevel, and we cary about the modded version, not vanilla.
@@ -171,6 +204,9 @@ minecraft-status-effects/
 - Always wrap time intervals in `<b>`, e.g., "every <b>2 seconds</b>" or "every <b>second</b>"
 - Formulas: `<b>2 × level</b>` (linear) or `<b>2^level</b>` (exponential)
   - If the multiplier is 1, write simply as `level`, not `1 × level`
+  - For addition formulas like "9 + 3 × level", use parentheses for clarity: `<b>9 + (3 × level)</b>`
+  - For simple addition like "level + 2", write as: `<b>level + 2</b>`
+  - ALL '+' symbols must always be inside `<b>` tags (including "Level II+", formulas, etc.)
 - For exponential, add actual values: `<b>2^level</b> (2 / 4 / 8)`
 - Multiple benefits: separate with " and " (not bold)
 - Avoid using "You" or other pronouns; "Causes you to move faster" -> "Causes [entity, player, mob] to move faster"
@@ -242,6 +278,7 @@ Your initial → Corrected version
 
 **Triggers:** 
 1. User says "add" + mcmod.cn URL (can be more URLs at one time)
+- If not present in the file already, add the mod name, effect list url and status: "DONE" to `data/effect-list-urls.json` after effects from the mod are added.
 2. User says exactly "add {number} mods", where number can be any number from 1 up to 10.
 - In that case, go throught the `data/effect-list-urls.json`, from top to bottom, and scrape every "url" of a record with "status": "TODO" or "WIP"
 - The "url" must contain string "mcmod.cn", since there can be different source URLs other than mcmod.cn
@@ -267,8 +304,8 @@ Your initial → Corrected version
 
 **Process:**
 1. Activate venv `source venv/bin/activate`
-2. Run `python mcmod/effects_lists/scrape_effect_list.py <url>` to extract individual effect URLs → saves to `mcmod/effect_urls/<mod_name>.txt`
-3. Run `python mcmod/effects/scrape_effect.py <effect_url>` for each URL to extract:
+2. Run `python mcmod/scrape_effect_list.py <url>` to extract individual effect URLs → saves to `mcmod/effect_urls/<mod_name>.txt`
+3. Run `python mcmod/scrape_effect.py <effect_url>` for each URL to extract:
    - English name from text inside parenthesis in <a> of 5th <li> of <ul> inside <div class="common-nav">
    - Effect description from item-text section
    - Command information and mod namespace
@@ -281,14 +318,19 @@ Your initial → Corrected version
    - Create formatted source following SOURCE RULES
    - Set type (positive/negative) and tags
    - Build ID: `mod-name-effect-name` (lowercase, hyphens)
-5. Check for duplicates (skip if effect name exists)
-6. Insert maintaining alphabetical order
-7. Run validator once at end
-8. Provide exact summary format
+5. Check for duplicates:
+   - If effect name exists in database → compare descriptions
+   - Similar/identical descriptions → SKIP (same effect already exists)
+   - Different descriptions → ADD (different effect, name coincidence)
+6. If no description available → add to `data/draft-effects.json` instead
+7. Insert maintaining alphabetical order
+8. Run validator once at end
+9. Provide exact summary format
 
 **Quality checks before summary:**
 - Ordering preserved
-- No duplicate effect names  
+- No duplicate effect names within each mod
+- Effects with unknown descriptions go to draft-effects.json, not effects.json
 - Descriptions formatted correctly and ≤200 chars
 - Tags include type + optional scaling
 - Summary uses exact format
@@ -303,11 +345,29 @@ Your initial → Corrected version
 
 ## OTHER IMPORTANT FILES
 
-### data/links.json
-- Mod name → effects source URL mapping
+### data/draft-effects.json
+- Temporary storage for effects with unknown/missing descriptions
+- Effects must have known description to be in effects.json
+- Source can be unknown (`"<i>To be added.</i>"`), but description cannot
+- When description becomes available, move effect from draft-effects.json to effects.json
+- Format: Same structure as effects.json, but description field can be empty string
+- Purpose: Track discovered effects while waiting for complete information
+
+### data/effect-list-urls.json
+- Mod name → effects source URL mapping with "status"
 - Same ordering as effects.json (Minecraft first, then alphabetical)
-- Update when adding new mods
+- Update when adding new mods by any means (direct prompt, automated workflow)
 - Update links to reflect the latest "effects sitemap" page used
+- Update status to reflect the current state of the mod
+  - In most cases it will be from TODO to DONE directly, WIP is for cases where we are only partially done and we know it, which won't happen often
+- Structure:
+  ```json
+  {
+    "mod": "{mod name in display format}",
+    "url": "{url to the mod effect list/sitemap}",
+    "status": "[TODO|WIP|DONE]"
+  }
+  ```
 
 ### scripts/validate_effects.py  
 - **CRITICAL:** Run after every effects.json change
@@ -330,8 +390,9 @@ Your initial → Corrected version
      - Function: `validate_text_formatting()`
   
   3. **Duplicate effect name check**
-     - Effect names must be globally unique across all mods
-     - Prevents conflicts in table rendering and navigation
+     - Effect names must be unique within each mod (no 2x "Strength" from same mod)
+     - Duplicate names across different mods are allowed (different effects can share names)
+     - Prevents conflicts within mod groupings
      - Inline check in `main()`
   
   4. **Effect ordering check**
@@ -405,6 +466,7 @@ Your initial → Corrected version
 
 ### sitemap.xml - SEO MAINTENANCE
 - **ALWAYS update lastmod date** when making changes that affect the main page
+- That is any `data/effects.json` change (because new/update effect will appear in the main table), JS changes, CSS changes, and of course `index.html` changes
 - Update to current date format: `YYYY-MM-DD`
 - Update when:
   - Adding new pages to the website
@@ -538,7 +600,7 @@ Your initial → Corrected version
 
 Before completing any effects.json modification:
 - [ ] Alphabetical ordering maintained
-- [ ] No duplicate effect names globally
+- [ ] No duplicate effect names within each mod (cross-mod duplicates OK if descriptions differ)
 - [ ] All descriptions ≤200 characters
 - [ ] Formulas, effect names and ticking speed properly wrapped in `<b>`
 - [ ] Tags include exactly one type + optional scaling

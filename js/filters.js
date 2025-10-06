@@ -17,7 +17,7 @@
   function loadStoredFilters() {
     try {
       const raw = localStorage.getItem(FILTER_STORAGE_KEY);
-      if (!raw) return;
+      if (!raw) return false;
       const obj = JSON.parse(raw);
       [
         ["filterPositive", MCSE.filterPositive],
@@ -30,7 +30,10 @@
           el.checked = !!obj[key];
         }
       });
-    } catch (e) {}
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   function saveFilters() {
@@ -45,7 +48,11 @@
     } catch (e) {}
   }
 
-  loadStoredFilters();
+  const hadStoredFilters = loadStoredFilters();
+
+  if (!hadStoredFilters && MCSE.filterVanilla) {
+    MCSE.filterVanilla.checked = false;
+  }
 
   MCSE.getNoResultsRow = () => document.getElementById("no-results-row");
 
