@@ -91,6 +91,9 @@
         scroll.classList.remove("loading");
         const tbody = scroll.querySelector("table tbody");
         if (tbody) tbody.style.display = ""; // restore display
+        if (typeof MCSE.schedulePostLoadAdjustments === "function") {
+          MCSE.schedulePostLoadAdjustments();
+        }
       }
     };
     if (remaining > 0) setTimeout(finalize, remaining);

@@ -108,6 +108,8 @@
 
   function adjustDescriptionColumnWidth() {
     const MAX_WIDTH = 800;
+    const scrollWrap = document.querySelector(".table-scroll.loading");
+    if (scrollWrap) return; // Wait until table is visible to measure widths
     const descriptionCells = document.querySelectorAll(
       "#effects-table tbody td:nth-child(4)"
     );
@@ -163,6 +165,8 @@
 
   function adjustSourceColumnWidth() {
     const MAX_WIDTH = 900;
+    const scrollWrap = document.querySelector(".table-scroll.loading");
+    if (scrollWrap) return; // Wait until table is visible to measure widths
     const sourceCells = document.querySelectorAll(
       "#effects-table tbody td:nth-child(6)"
     );
@@ -360,5 +364,12 @@
     storeBaseVisibility();
     MCSE.pagination.page = 1;
     MCSE.updatePagination();
+  };
+
+  MCSE.schedulePostLoadAdjustments = function schedulePostLoadAdjustments() {
+    requestAnimationFrame(() => {
+      adjustDescriptionColumnWidth();
+      adjustSourceColumnWidth();
+    });
   };
 })(window.MCSE);

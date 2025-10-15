@@ -136,10 +136,27 @@
  * Effects table core *
  *--------------------*/
 #effects-table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   background: var(--bg-alt);
+}
+
+#effects-table col.col-mod {
+  width: 200px;
+}
+
+#effects-table col.col-effect {
+  width: 170px;
+}
+
+#effects-table col.col-max {
+  width: 50px;
+}
+
+#effects-table col.col-tags {
+  width: 150px;
 }
 
 #effects-table thead th {
@@ -182,6 +199,14 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-width: 0;
+}
+
+.sort-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sort-arrows {
@@ -189,6 +214,7 @@
   flex-direction: column;
   gap: 1px;
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .sort-arrow {
@@ -308,7 +334,6 @@
   min-width: 50px;
   max-width: 50px;
   width: 50px;
-  text-align: center;
 }
 
 #effects-table thead th:nth-child(4),
@@ -333,6 +358,10 @@
   box-sizing: content-box;
   text-wrap: nowrap;
   overflow: hidden;
+}
+
+#effects-table tbody td:nth-child(3),
+#effects-table tbody td:nth-child(5) {
   text-align: center;
 }
 
