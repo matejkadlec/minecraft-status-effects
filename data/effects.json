@@ -697,7 +697,7 @@
       "effect": "Freezing",
       "maxLevel": "III",
       "type": "negative",
-      "tags": ["negative"],
+      "tags": ["negative", "scaling"],
       "description": "Prevents movement and deals periodic frost damage, scaling with level. Additionaly, the player's hearths and screen edges will frost over.",
       "source": "Potion/Arrow/Charm/Bamboo Spikes of Freezing, Frostaya Papaya, Frost Blade, Chill Hide and Frosty Aura from <i>Goety</i> mod, Witch throwing Potion of Freezing, Powder Snow"
     },

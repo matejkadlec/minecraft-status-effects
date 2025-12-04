@@ -9,7 +9,12 @@ app = Bottle()
 ROOT_DIR = "."  # Public web root (keep sensitive files outside this if possible)
 
 # Files in the root directory we explicitly never want to serve
-SENSITIVE_ROOT_FILES = {"Dockerfile", "docker-compose.yml", "requirements.txt"}
+SENSITIVE_ROOT_FILES = {
+    "Dockerfile",
+    "docker-compose.yml",
+    "requirements.txt",
+    "run_tests.sh",
+}
 
 # Forbidden extensions anywhere
 FORBIDDEN_EXTS = {
@@ -17,6 +22,18 @@ FORBIDDEN_EXTS = {
     ".markdown",
     ".py",
     ".sh",
+    ".yml",
+    ".yaml",
+}
+
+# Forbidden directories - block access to entire folders
+FORBIDDEN_DIRS = {
+    ".github",
+    "scripts",
+    "mcmod",
+    "untracked",
+    "export",
+    "__pycache__",
 }
 
 
@@ -29,8 +46,9 @@ def is_forbidden_path(requested: str) -> bool:
     Rules:
       1. No path traversal (..)
       2. No hidden/dot path segments (".git", ".env", etc.)
-      3. No sensitive root files (Dockerfile, requirements.txt, etc.)
-      4. No markdown or python source files
+      3. No forbidden directories (.github, scripts, mcmod, etc.)
+      4. No sensitive root files (Dockerfile, requirements.txt, etc.)
+      5. No markdown, python source, shell, or yaml files
     """
 
     # Normalize path to remove redundant separators / up-level references
@@ -40,9 +58,15 @@ def is_forbidden_path(requested: str) -> bool:
     if norm.startswith(".."):
         return True
 
-    # Split into segments and check dotfiles
+    # Split into segments and check dotfiles and forbidden directories
     segments = [s for s in norm.split("/") if s and s not in (".",)]
+
+    # Block hidden/dot files and folders
     if any(seg.startswith(".") for seg in segments):
+        return True
+
+    # Block access to forbidden directories (anywhere in path)
+    if any(seg in FORBIDDEN_DIRS for seg in segments):
         return True
 
     # Block sensitive files only if requested directly from root

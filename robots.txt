@@ -6,12 +6,18 @@ Allow: /css/
 Allow: /js/
 Allow: /img/
 
-# Block access to server files and development files  
+# Block access to development and backend files
 Disallow: *.py
+Disallow: *.sh
+Disallow: *.yml
+Disallow: *.yaml
 Disallow: *.md
-Disallow: /logs/
-Disallow: /mcmod/
+Disallow: /.github/
 Disallow: /scripts/
+Disallow: /mcmod/
+Disallow: /export/
+Disallow: /untracked/
+Disallow: /logs/
 Disallow: Dockerfile
 Disallow: requirements.txt
 Disallow: run_tests.sh
