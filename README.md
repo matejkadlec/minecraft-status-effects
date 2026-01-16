@@ -4,7 +4,6 @@
 ![Stack HTML | CSS | JS](https://img.shields.io/badge/Stack-HTML/CSS/JS-red)
 ![Python | 3.12.3](https://img.shields.io/badge/Python-3.12.3-blue)
 ![Bottle | 0.13.4](https://img.shields.io/badge/Bottle-0.13.4-blueviolet)
-![Docker](https://img.shields.io/badge/Docker-Supported-yellow)
 
 Interactive website for browsing vanilla and modded Minecraft status effects with detailed descriptions, multi-column sorting, filtering, and pagination.
 
@@ -19,45 +18,123 @@ Interactive website for browsing vanilla and modded Minecraft status effects wit
 - 🔎 **Real-time Search**: Search effects and mods instantly
 - 📥 **Data Export**: CSV, Excel, JSON with theme-aware styling
 
-## Run Local Server 💻
+## Deployment & Running 🚀
 
-### Option 1: Docker (Recommended)
-
-1. Clone this repository
-
-   ```bash
-   git clone https://github.com/matejkadlec/minecraft-status-effects.git
-   ```
-
-2. Build and run with Docker
-
-   ```bash
-   docker build -t minecraft-status-effects . && docker run -d -p 8000:8000 --name minecraft-status-effects minecraft-status-effects
-   ```
-
-Open http://localhost:8000 in your browser.
-
-### Option 2: Local Python Environment
+### 1. Run Locally (Development)
 
 1. Clone this repository
-
    ```bash
    git clone https://github.com/matejkadlec/minecraft-status-effects.git
+   cd minecraft-status-effects
    ```
 
 2. Create and activate venv, then install dependencies
-
    ```bash
-   python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
    ```
 
-3. Start the server (defaults to port 8000; pass a port number to override)
-
+3. Start the server
    ```bash
    python run.py
    ```
+   Open http://localhost:8000 in your browser.
 
-Open http://localhost:8000 in your browser (or the port you specified).
+### 2. Deploy on DigitalOcean / Ubuntu VPS (Production)
+
+This guide assumes you have a fresh Ubuntu server (e.g. $4/mo Droplet).
+
+1. **Setup System**
+   ```bash
+   sudo apt update
+   sudo apt install python3-pip python3-venv git nginx certbot python3-certbot-nginx
+   
+   # Setup 1GB swap file (CRITICAL for 512MB RAM servers)
+   sudo fallocate -l 1G /swapfile
+   sudo chmod 600 /swapfile
+   sudo mkswap /swapfile
+   sudo swapon /swapfile
+   echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+   ```
+
+2. **Clone & Install**
+   ```bash
+   cd /opt
+   # Clone repo
+   sudo git clone https://github.com/matejkadlec/minecraft-status-effects.git
+   cd minecraft-status-effects
+   
+   # Create environment
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+3. **Setup Systemd Service (Internal Port 8000)**
+   Create `sudo nano /etc/systemd/system/mse.service`:
+   
+   ```ini
+   [Unit]
+   Description=Minecraft Status Effects Web Server
+   After=network.target
+
+   [Service]
+   User=root
+   WorkingDirectory=/opt/minecraft-status-effects
+   ExecStart=/opt/minecraft-status-effects/venv/bin/python run.py 8000
+   Restart=always
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+   
+   Start it:
+   ```bash
+   sudo systemctl daemon-reload
+   sudo systemctl enable mse
+   sudo systemctl start mse
+   ```
+
+4. **Setup Nginx (Reverse Proxy & HTTPS)**
+   Create site config: `sudo nano /etc/nginx/sites-available/mse`
+   ```nginx
+   server {
+       listen 80;
+       server_name yourdomain.com www.yourdomain.com;
+
+       location / {
+           proxy_pass http://127.0.0.1:8000;
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+       }
+   }
+   ```
+   Enable and secure with SSL:
+   ```bash
+   ln -s /etc/nginx/sites-available/mse /etc/nginx/sites-enabled/
+   rm /etc/nginx/sites-enabled/default
+   systemctl reload nginx
+   certbot --nginx -d yourdomain.com -d www.yourdomain.com
+   ```
+
+### 3. Continuous Deployment (Github Actions)
+
+Deployments are automated on push to `master`.
+
+1. **Prerequisites**:
+   - Generate an SSH keypair: `ssh-keygen -t ed25519 -f gh_deploy_key`
+   - Add public key to server: `cat gh_deploy_key.pub >> ~/.ssh/authorized_keys`
+   - Add private key to Github Secrets (`DO_SSH_KEY`)
+   - Add Droplet IP to Github Secrets (`DO_HOST`)
+
+2. **Workflow**:
+   - Tests run (`run_tests.sh`)
+   - If tests pass, code is pulled to server via SSH
+   - `pip install` runs to check for new dependencies
+   - Service restarts (`systemctl restart mse`)
 
 ## Automated Effect Ingestion (mcmod.cn) ⬇️
 
@@ -131,7 +208,7 @@ python scripts/validate_effects.py
 
 - You will most likely need to run `chmod +x run_tests.sh` first.
 
-GitHub Actions runs the integration test on every push / PR that touches `effects.json`.
+GitHub Actions runs the integration test on every push / PR.
 
 
 ## Table Export 📤

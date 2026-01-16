@@ -23,4 +23,4 @@ Disallow: requirements.txt
 Disallow: run_tests.sh
 
 # Sitemap location
-Sitemap: https://minecraftstatuseffects.com/sitemap.xml
+Sitemap: https://minecraftstatuseffects.com/sitemap.xmlSitemap: https://minecraftstatuseffects.com/sitemap.xml

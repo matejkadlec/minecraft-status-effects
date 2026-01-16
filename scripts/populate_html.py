@@ -103,15 +103,27 @@ def inject_seo_data(html_content, table_html, jsonld):
         flags=re.DOTALL,
     )
 
-    # 2. Inject ItemList JSON-LD after the existing WebSite JSON-LD
-    # Find the end of the first </script> tag after "Structured Data (JSON-LD)"
-    jsonld_insertion = f"""    <script type="application/ld+json">
+    # 2. Inject ItemList JSON-LD
+
+    # First, remove ANY existing ItemList JSON-LD blocks to ensure idempotency
+    # This prevents the "duplicate block" bug if script is run multiple times
+    html_content = re.sub(
+        r'\s*<script type="application/ld\+json">\s*\{\s*"@context": "https://schema\.org",\s*"@type": "ItemList".*?</script>',
+        "",
+        html_content,
+        flags=re.DOTALL,
+    )
+
+    # Prepare the new JSON-LD block
+    jsonld_insertion = f"""
+    <script type="application/ld+json">
       {jsonld}
     </script>"""
 
-    # Insert after the WebSite JSON-LD script tag
-    pattern = r"(<!-- Structured Data \(JSON-LD\) -->.*?</script>)"
-    replacement = r"\1\n" + jsonld_insertion
+    # Insert after the WebSite JSON-LD script tag (which we assume is static and correct)
+    # We look for the closing </script> of the first block (WebSite)
+    pattern = r'(<script type="application/ld\+json">\s*\{\s*"@context": "https://schema\.org",\s*"@type": "WebSite".*?</script>)'
+    replacement = r"\1" + jsonld_insertion
     html_content = re.sub(pattern, replacement, html_content, flags=re.DOTALL)
 
     return html_content

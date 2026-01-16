@@ -70,7 +70,7 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 - 🔍 **Real-time search** (anything in the table)
 - 📥 **Data export** (CSV, Excel, JSON with theme-aware styling)
 
-**Tech stack:** HTML, CSS, JavaScript (vanilla), Python 3.12 (Bottle framework), Docker (production only)
+**Tech stack:** HTML, CSS, JavaScript (vanilla), Python 3.12 (Bottle framework), DigitalOcean/VPS (deployment)
 
 **Key files:**
 - `index.html` - main page with effects table
@@ -80,7 +80,7 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 - `data/blacklist.md` - mods confirmed to have no status effects
 - `scripts/validate_effects.py` - validation script (RUN AFTER CHANGES)
 - `TODO.md` - feature requests and development roadmap (JIRA-style tickets)
-- `.github/workflows/` - CI/CD workflows
+- `.github/workflows/` - CI workflows
 
 **Legal pages:** `license/index.html`, `privacy-policy/index.html` (separate, no JS)
 
@@ -93,7 +93,7 @@ When modifying `data/effects.json`, provide this summary at the end of your resp
 minecraft-status-effects/
 ├── .github/
 │   └── workflows/
-│       ├── deploy.yml
+│       ├── ci.yml
 │       └── validate-effects.yml
 ├── css/ (stylesheets)
 │   ├── legal.css
@@ -138,7 +138,6 @@ minecraft-status-effects/
 ├── run_tests.sh (test runner script)
 ├── sitemap.xml ⚠️ KEEP UPDATED
 ├── robots.txt (SEO)
-├── Dockerfile (production deployment)
 └── [config files: requirements.txt, LICENSE.md, etc.]
 ```
 
