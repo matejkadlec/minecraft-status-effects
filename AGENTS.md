@@ -30,7 +30,6 @@ public/                  Everything served as static files (and nothing else is)
 tests/                   pytest (data rules, pages, API, exports), js/ (node --test)
 tests/effect_rules.py    The writing rules for records; also a CLI linter
 run.sh                   Runs everything without activating the venv (see "Running")
-TODO.md                  Feature backlog (JIRA-style tickets)
 ```
 
 ## Running
