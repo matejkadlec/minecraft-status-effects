@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 1,
+  "mods": [
+    {
+      "name": "Minecraft",
+      "url": "https://minecraft.wiki/w/Effect"
+    },
+    {
+      "name": "Advent of Ascension",
+      "url": "https://modrinth.com/mod/adventofascension",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "AdventureZ",
+      "url": "https://modrinth.com/mod/adventurez",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Alex's Caves",
+      "url": "https://modrinth.com/mod/alexs-caves"
+    },
+    {
+      "name": "Alex's Mobs",
+      "url": "https://modrinth.com/mod/alexs-mobs"
+    },
+    {
+      "name": "Ancient Aether",
+      "url": "https://modrinth.com/mod/ancient-aether",
+      "group": "The Aether Mods"
+    },
+    {
+      "name": "Apothic Attributes",
+      "url": "https://modrinth.com/mod/apothic-attributes"
+    },
+    {
+      "name": "Aquamirae",
+      "url": "https://modrinth.com/mod/aquamirae"
+    },
+    {
+      "name": "Archers",
+      "url": "https://modrinth.com/mod/archers",
+      "group": "RPG Series"
+    },
+    {
+      "name": "Ars Nouveau",
+      "url": "https://modrinth.com/mod/ars-nouveau",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Ars Nouveau's Flavors and Delight",
+      "url": "https://modrinth.com/mod/arsdelight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Artifacts",
+      "url": "https://modrinth.com/mod/artifacts"
+    },
+    {
+      "name": "Atmospheric",
+      "url": "https://modrinth.com/mod/atmospheric",
+      "group": "Abnormals Mods"
+    },
+    {
+      "name": "Autumnity",
+      "url": "https://modrinth.com/mod/autumnity",
+      "group": "Abnormals Mods"
+    },
+    {
+      "name": "BetterEnd",
+      "url": "https://modrinth.com/mod/betterend",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "Blood Magic",
+      "url": "https://modrinth.com/mod/blood-magic",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Blue Skies",
+      "url": "https://modrinth.com/mod/blue-skies",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "Born in Chaos",
+      "url": "https://modrinth.com/mod/borninchaos"
+    },
+    {
+      "name": "Botania",
+      "url": "https://modrinth.com/mod/botania",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Bountiful Fares",
+      "url": "https://modrinth.com/mod/bountiful-fares"
+    },
+    {
+      "name": "Brewin' And Chewin'",
+      "url": "https://modrinth.com/mod/brewin-and-chewin",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "CoFH Core",
+      "url": "https://modrinth.com/mod/cofh-core",
+      "group": "Tech Mods"
+    },
+    {
+      "name": "Create Crafts and Additions",
+      "url": "https://modrinth.com/mod/createaddition",
+      "group": "Tech Mods"
+    },
+    {
+      "name": "Create: New Age",
+      "url": "https://modrinth.com/mod/create-new-age",
+      "group": "Tech Mods"
+    },
+    {
+      "name": "Deep Aether",
+      "url": "https://modrinth.com/mod/deep-aether",
+      "group": "The Aether Mods"
+    },
+    {
+      "name": "Deeper and Darker",
+      "url": "https://modrinth.com/mod/deeperdarker",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "Dungeon's Delight",
+      "url": "https://modrinth.com/mod/dungeons_delight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Dungeons and Combat",
+      "url": "https://modrinth.com/mod/dungeons-and-combat"
+    },
+    {
+      "name": "Ecologics",
+      "url": "https://modrinth.com/mod/ecologics"
+    },
+    {
+      "name": "EEEAB's Mobs",
+      "url": "https://modrinth.com/mod/eeeab-s-mobs",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Eidolon: Repraised",
+      "url": "https://modrinth.com/mod/eidolonrepraised",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Eldritch End",
+      "url": "https://modrinth.com/mod/eldritch-end",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "Ender's Delight",
+      "url": "https://modrinth.com/mod/enders-delight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Enigmatic Legacy",
+      "url": "https://modrinth.com/mod/enigmatic-legacy"
+    },
+    {
+      "name": "Environmental",
+      "url": "https://modrinth.com/mod/environmental",
+      "group": "Abnormals Mods"
+    },
+    {
+      "name": "Epic Fight",
+      "url": "https://modrinth.com/mod/epic-fight"
+    },
+    {
+      "name": "Farmer's Delight",
+      "url": "https://modrinth.com/mod/farmers-delight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Forbidden and Arcanus",
+      "url": "https://modrinth.com/mod/forbidden-arcanus"
+    },
+    {
+      "name": "Friends and Foes",
+      "url": "https://modrinth.com/mod/friends-and-foes",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Frostiful",
+      "url": "https://modrinth.com/mod/frostiful"
+    },
+    {
+      "name": "Galosphere",
+      "url": "https://modrinth.com/mod/galosphere",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "Gensokyo Delight",
+      "url": "https://modrinth.com/mod/gensokyo-delight-youkais-feasts",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Goety",
+      "url": "https://modrinth.com/mod/goety",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Goety: Revelation",
+      "url": "https://modrinth.com/mod/goety-revelation",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Hybrid Aquatic",
+      "url": "https://modrinth.com/mod/hybrid-aquatic",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Illage and Spillage: Respillaged",
+      "url": "https://modrinth.com/mod/illage-and-spillage-respillaged",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Immersive Engineering",
+      "url": "https://modrinth.com/mod/immersiveengineering",
+      "group": "Tech Mods"
+    },
+    {
+      "name": "Immortalers Delight",
+      "url": "https://modrinth.com/mod/immortalers-delight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Iron's Spells 'n Spellbooks",
+      "url": "https://modrinth.com/mod/irons-spells-n-spellbooks",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Jaden's Nether Expansion",
+      "url": "https://modrinth.com/mod/jadens-nether-expansion"
+    },
+    {
+      "name": "Kaleidoscope Chinese Food",
+      "url": "https://modrinth.com/mod/kaleidoscopechinesefood",
+      "group": "Kaleidoscope Mods"
+    },
+    {
+      "name": "Kaleidoscope Cookery",
+      "url": "https://modrinth.com/mod/kaleidoscope-cookery",
+      "group": "Kaleidoscope Mods"
+    },
+    {
+      "name": "Kaleidoscope World Liquor",
+      "url": "https://modrinth.com/mod/kaleidoscope-world-liquor",
+      "group": "Kaleidoscope Mods"
+    },
+    {
+      "name": "L2 Complements",
+      "url": "https://modrinth.com/mod/l2-complements",
+      "group": "L2 Mods"
+    },
+    {
+      "name": "L2 Hostility",
+      "url": "https://modrinth.com/mod/l2hostility",
+      "group": "L2 Mods"
+    },
+    {
+      "name": "L_Ender's Cataclysm",
+      "url": "https://modrinth.com/mod/l_enders-cataclysm"
+    },
+    {
+      "name": "Legendary Monsters",
+      "url": "https://modrinth.com/mod/legendary-monsters",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Let's Do Bakery",
+      "url": "https://modrinth.com/mod/lets-do-bakery-farmcharm-compat",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Let's Do Beachparty",
+      "url": "https://modrinth.com/mod/lets-do-beachparty",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Let's Do Brewery",
+      "url": "https://modrinth.com/mod/lets-do-brewery-farmcharm-compat",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Let's Do Candlelight",
+      "url": "https://modrinth.com/mod/lets-do-candlelight-farmcharm-compat",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Let's Do Farm and Charm",
+      "url": "https://modrinth.com/mod/lets-do-farm-charm",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Let's Do HerbalBrews",
+      "url": "https://modrinth.com/mod/lets-do-herbalbrews",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Let's Do NetherVinery",
+      "url": "https://modrinth.com/mod/lets-do-nethervinery",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Let's Do Vinery",
+      "url": "https://modrinth.com/mod/lets-do-vinery",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Let's Do WilderNature",
+      "url": "https://modrinth.com/mod/lets-do-wildernature",
+      "group": "Let's Do Mods"
+    },
+    {
+      "name": "Mahou Tsukai",
+      "url": "https://modrinth.com/mod/mahou-tsukai",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Malum",
+      "url": "https://modrinth.com/mod/malum",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Mana and Artifice",
+      "url": "https://modrinth.com/mod/mana-and-artifice",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Marium's Soulslike Weaponry",
+      "url": "https://modrinth.com/mod/mariums-soulslike-weaponry"
+    },
+    {
+      "name": "Mine Cells",
+      "url": "https://modrinth.com/mod/minecells",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Mischief Illagers",
+      "url": "https://modrinth.com/mod/mischief-illagers",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Modular Golems",
+      "url": "https://modrinth.com/mod/modular-golems"
+    },
+    {
+      "name": "Mowzie's Mobs",
+      "url": "https://modrinth.com/mod/mowzies-mobs"
+    },
+    {
+      "name": "Mutant Monsters",
+      "url": "https://modrinth.com/mod/mutant-monsters",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "My Nether's Delight",
+      "url": "https://modrinth.com/mod/my-nethers-delight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Naturalist",
+      "url": "https://modrinth.com/mod/naturalist",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Neapolitan",
+      "url": "https://modrinth.com/mod/neapolitan",
+      "group": "Abnormals Mods"
+    },
+    {
+      "name": "Nether Depths Upgrade",
+      "url": "https://modrinth.com/mod/nether-depths-upgrade"
+    },
+    {
+      "name": "Occultism",
+      "url": "https://modrinth.com/mod/occultism",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Paladins and Priests",
+      "url": "https://modrinth.com/mod/paladins-and-priests",
+      "group": "RPG Series"
+    },
+    {
+      "name": "Paragliders",
+      "url": "https://modrinth.com/mod/paragliders"
+    },
+    {
+      "name": "ParCool!",
+      "url": "https://modrinth.com/mod/parcool"
+    },
+    {
+      "name": "Quark",
+      "url": "https://modrinth.com/mod/quark"
+    },
+    {
+      "name": "Ranged Weapon API",
+      "url": "https://modrinth.com/mod/ranged-weapon-api",
+      "group": "RPG Series"
+    },
+    {
+      "name": "Relics",
+      "url": "https://modrinth.com/mod/relics-mod"
+    },
+    {
+      "name": "Rotten Creatures",
+      "url": "https://modrinth.com/mod/rottencreatures",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Simply Swords",
+      "url": "https://modrinth.com/mod/simply-swords"
+    },
+    {
+      "name": "Sons of Sins",
+      "url": "https://modrinth.com/mod/sons-of-sins"
+    },
+    {
+      "name": "Species",
+      "url": "https://modrinth.com/mod/species",
+      "group": "Mob Mods"
+    },
+    {
+      "name": "Spectrum",
+      "url": "https://modrinth.com/mod/spectrum",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "Spell Engine",
+      "url": "https://modrinth.com/mod/spell-engine",
+      "group": "RPG Series"
+    },
+    {
+      "name": "Spell Power Attributes",
+      "url": "https://modrinth.com/mod/spell-power",
+      "group": "RPG Series"
+    },
+    {
+      "name": "Stalwart Dungeons",
+      "url": "https://modrinth.com/mod/stalwart-dungeons"
+    },
+    {
+      "name": "Sunflower Delight",
+      "url": "https://modrinth.com/mod/sunflower-delight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Superb Warfare",
+      "url": "https://modrinth.com/mod/superb-warfare",
+      "group": "Tech Mods"
+    },
+    {
+      "name": "Supplementaries",
+      "url": "https://modrinth.com/mod/supplementaries"
+    },
+    {
+      "name": "T.O Magic 'n Extras",
+      "url": "https://www.curseforge.com/minecraft/mc-mods/to-tweaks-irons-spells",
+      "group": "Magic Mods"
+    },
+    {
+      "name": "The Aether",
+      "url": "https://modrinth.com/mod/aether",
+      "group": "The Aether Mods"
+    },
+    {
+      "name": "The Broken Script",
+      "url": "https://modrinth.com/mod/the-broken-script"
+    },
+    {
+      "name": "The Bumblezone",
+      "url": "https://modrinth.com/mod/the-bumblezone",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "The Twilight Forest",
+      "url": "https://www.curseforge.com/minecraft/mc-mods/the-twilight-forest",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "The Undergarden",
+      "url": "https://modrinth.com/mod/the-undergarden",
+      "group": "Dimension Mods"
+    },
+    {
+      "name": "Tinkers' Construct",
+      "url": "https://modrinth.com/mod/tinkers-construct",
+      "group": "Tech Mods"
+    },
+    {
+      "name": "Twilight's Flavors & Delight",
+      "url": "https://modrinth.com/mod/twilight-delight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Undergarden Delight",
+      "url": "https://modrinth.com/mod/undergarden-delight",
+      "group": "Delight Mods"
+    },
+    {
+      "name": "Upgrade Aquatic",
+      "url": "https://modrinth.com/mod/upgrade-aquatic",
+      "group": "Abnormals Mods"
+    },
+    {
+      "name": "Wizards",
+      "url": "https://modrinth.com/mod/wizards",
+      "group": "RPG Series"
+    },
+    {
+      "name": "Youkai's Homecoming",
+      "url": "https://modrinth.com/mod/youkaishomecoming"
+    },
+    {
+      "name": "YUNG's Cave Biomes",
+      "url": "https://modrinth.com/mod/yungs-cave-biomes"
+    }
+  ],
+  "referencedMods": [
+    "Apotheosis",
+    "Ars Elemental",
+    "Create",
+    "Curios API",
+    "Ice and Fire",
+    "Oreganized"
+  ]
+}

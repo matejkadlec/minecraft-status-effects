@@ -1,0 +1,607 @@
+/*-------------------------*
+ * Table shell & scrolling *
+ *-------------------------*/
+.table-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.table-scroll {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 2px;
+  background: var(--bg-alt);
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s;
+}
+
+.table-scroll:focus {
+  outline: none;
+}
+
+/*-----------------------------------------------------------------*
+ * Effects table: fixed layout, so column widths only depend on    *
+ * the available width and never change while filtering or paging *
+ *-----------------------------------------------------------------*/
+.effects-table {
+  width: 100%;
+  min-width: 720px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-alt);
+}
+
+.col-mod {
+  width: 11%;
+}
+
+.col-effect {
+  width: 12%;
+}
+
+.col-max {
+  width: 5.5rem;
+}
+
+.col-tags {
+  width: 11rem;
+}
+
+.col-source {
+  width: 26%;
+}
+
+/* Medium widths: badges stack, so the description keeps a readable width */
+@container content (max-width: 1399px) {
+  .col-mod {
+    width: 11%;
+  }
+
+  .col-effect {
+    width: 11.5%;
+  }
+
+  .col-max {
+    width: 5rem;
+  }
+
+  .col-tags {
+    width: 8.25rem;
+  }
+
+  .col-source {
+    width: 24%;
+  }
+}
+
+@container content (max-width: 1100px) {
+  .effects-table tbody td {
+    font-size: 0.85rem;
+  }
+
+  .cell-source {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Header */
+.effects-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 0;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+  background: linear-gradient(105deg, var(--accent-1) 0%, var(--accent-2) 10%, var(--accent-3) 90%);
+  background-attachment: local;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.25), 0 1px 0 0 var(--border);
+}
+
+.th-inner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.sort-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0.6rem 0.9rem;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: left;
+  user-select: none;
+}
+
+th[data-column="maxLevel"] .sort-button {
+  padding-inline: 0.6rem;
+}
+
+.sort-button:focus-visible {
+  outline-color: var(--on-accent);
+  outline-offset: -3px;
+}
+
+.sort-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sort-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  line-height: 1;
+}
+
+.sort-arrows > span {
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+:root.dark .sort-arrows > span {
+  opacity: 0.25;
+}
+
+th[aria-sort="ascending"] .sort-up,
+th[aria-sort="descending"] .sort-down {
+  opacity: 1 !important;
+}
+
+.sort-priority {
+  font-size: 0.6rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.help-button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  margin-right: 0.45rem;
+  padding: 0;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.75;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.help-button:hover,
+.help-button:focus-visible {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Body */
+.effects-table tbody td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  background: var(--row-bg, var(--bg-alt));
+  transition: background-color 0.3s;
+}
+
+.effects-table tbody tr:nth-child(odd) {
+  --row-bg: var(--bg-accent);
+}
+
+.effects-table tbody tr:nth-child(even) {
+  --row-bg: var(--bg-alt);
+}
+
+.cell-max,
+.cell-tags {
+  text-align: center;
+}
+
+.effects-table tbody td b {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.effects-table tbody td i {
+  font-style: italic;
+}
+
+.cell-source {
+  font-size: 0.85rem !important;
+}
+
+.since {
+  display: inline-block;
+  margin-left: 0.2rem;
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1.4;
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+
+.unreliable {
+  cursor: help;
+  user-select: none;
+}
+
+.no-results td {
+  padding: 1rem 0.75rem !important;
+  color: var(--text-dim);
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Highlight after jumping to a mod from the navigation */
+.effects-table tbody tr.flash > td {
+  animation: row-flash 1.4s ease-out 1;
+}
+
+@keyframes row-flash {
+  0% {
+    box-shadow: inset 0 0 0 100vmax transparent;
+  }
+  18% {
+    box-shadow: inset 0 0 0 100vmax var(--row-flash);
+  }
+  100% {
+    box-shadow: inset 0 0 0 100vmax transparent;
+  }
+}
+
+/*---------------*
+ * Badges & tags *
+ *---------------*/
+.badge {
+  display: inline-block;
+  margin: 2px 0.2rem;
+  padding: 3px 6px;
+  border-radius: 12px;
+  font-size: 0.7em;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge.pos {
+  background: var(--badge-pos-bg);
+  color: var(--badge-pos-text);
+}
+
+.badge.neg {
+  background: var(--badge-neg-bg);
+  color: var(--badge-neg-text);
+}
+
+.badge.scaling {
+  background: var(--badge-scaling-bg);
+  color: var(--badge-scaling-text);
+  font-weight: 600;
+}
+
+/*-----------------------*
+ * Superscripts & arrows *
+ *-----------------------*/
+.lvl-sup {
+  font-size: 0.6em;
+  font-weight: 600;
+  line-height: 0;
+}
+
+.arrow {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: baseline;
+  font-variant-ligatures: none;
+}
+
+/*---------------*
+ * Loading state *
+ *---------------*/
+.table-loading {
+  display: none;
+}
+
+.table-scroll.is-loading .table-loading {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  background: rgba(50, 50, 50, 0.25) var(--spinner) center / 120px 120px no-repeat;
+  animation: fade-in 0.2s 0.25s both;
+}
+
+:root.dark .table-scroll.is-loading .table-loading {
+  background-color: rgba(20, 20, 20, 0.5);
+}
+
+/* While the script starts, the server-rendered rows stay hidden so the first page appears in one go */
+:root.js:not(.app-ready) #effects-body {
+  visibility: hidden;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*----------------------*
+ * Footer & pagination  *
+ *----------------------*/
+.table-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  min-height: 28px;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--text-on-image);
+}
+
+:root.dark .table-footer {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.table-info {
+  margin: 0;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.table-length {
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.table-length .select {
+  height: 26px;
+  margin-left: 0.25rem;
+  padding: 0 1.5rem 0 0.4rem;
+  background-position: right 0.45rem center;
+  font-size: 0.75rem;
+}
+
+.page-num,
+.page-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.page-num {
+  min-width: 32px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--page-button);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.page-num:hover:not([aria-current="page"]) {
+  background: var(--highlight);
+}
+
+:root:not(.dark) .page-num:hover:not([aria-current="page"]) {
+  background: #ffffff;
+}
+
+.page-num[aria-current="page"] {
+  background: var(--page-current);
+  border-color: var(--page-current-border);
+  color: var(--on-accent);
+  cursor: default;
+}
+
+.page-arrow {
+  width: 28px;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.9rem;
+  transition: color 0.3s, opacity 0.3s;
+}
+
+.page-arrow:hover:not(:disabled) {
+  color: var(--highlight);
+}
+
+:root.dark .page-arrow:hover:not(:disabled) {
+  color: var(--accent);
+}
+
+.page-arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ellipsis {
+  padding: 0 2px;
+  color: var(--text-dim);
+  user-select: none;
+}
+
+:root:not(.dark) .ellipsis {
+  color: #ffffff;
+}
+
+/*------------------------------------------------*
+ * Narrow content (phones, small windows): cards  *
+ *------------------------------------------------*/
+@container content (max-width: 760px) {
+  .table-scroll {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .effects-table,
+  .effects-table tbody,
+  .effects-table tr,
+  .effects-table td {
+    display: block;
+    width: auto;
+    min-width: 0;
+  }
+
+  .effects-table {
+    background: transparent;
+  }
+
+  .effects-table thead,
+  .effects-table colgroup {
+    display: none;
+  }
+
+  .effects-table tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "effect tags"
+      "mod max"
+      "desc desc"
+      "source source";
+    gap: 0.15rem 0.75rem;
+    margin-bottom: 0.6rem;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--row-bg);
+    box-shadow: var(--shadow);
+  }
+
+  .effects-table tbody td {
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: left;
+  }
+
+  .effects-table tbody tr.flash {
+    animation: row-flash 1.4s ease-out 1;
+  }
+
+  .effects-table tbody tr.flash > td {
+    animation: none;
+  }
+
+  .cell-effect {
+    grid-area: effect;
+    font-size: 1rem !important;
+    font-weight: 600;
+  }
+
+  .cell-tags {
+    grid-area: tags;
+    justify-self: end;
+    text-align: right !important;
+  }
+
+  .cell-mod {
+    grid-area: mod;
+    color: var(--text-dim);
+    font-size: 0.8rem !important;
+  }
+
+  .cell-max {
+    grid-area: max;
+    justify-self: end;
+    color: var(--text-dim);
+    font-size: 0.8rem !important;
+  }
+
+  .cell-max::before {
+    content: "Max ";
+  }
+
+  .cell-desc {
+    grid-area: desc;
+    margin-top: 0.3rem;
+  }
+
+  .cell-source {
+    grid-area: source;
+    margin-top: 0.3rem;
+    color: var(--text-dim);
+  }
+
+  .cell-source::before {
+    content: "Source: ";
+    font-weight: 600;
+  }
+
+  .no-results {
+    display: block !important;
+  }
+
+  .table-footer {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "pages pages"
+      "info length";
+    gap: 0.5rem;
+  }
+
+  .pagination {
+    grid-area: pages;
+  }
+
+  .table-info {
+    grid-area: info;
+    font-size: 0.8rem;
+  }
+
+  .table-length {
+    grid-area: length;
+    font-size: 0.8rem;
+  }
+}

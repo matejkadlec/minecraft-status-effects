@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "_head.html" %}
+    <title>{% block title %}{% endblock %} | {{ config.SITE_NAME }}</title>
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="robots" content="{% block robots %}index, follow{% endblock %}" />
+    {% if canonical %}<link rel="canonical" href="{{ canonical }}" />{% endif %}
+    <link rel="stylesheet" href="{{ asset('css/fonts.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/legal.css') }}" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <a class="page-logo" href="/">
+          <img class="logo-light" src="{{ asset('img/logo-light.webp') }}" width="756" height="347" alt="Minecraft Status Effects" />
+          <img class="logo-dark" src="{{ asset('img/logo-dark.webp') }}" width="756" height="347" alt="Minecraft Status Effects" />
+        </a>
+        <h1>{% block heading %}{% endblock %}</h1>
+        <p class="home-link"><a href="/">← Back to the effects</a></p>
+      </header>
+      <article class="content">
+        {% block content %}{% endblock %}
+      </article>
+      <footer class="site-footer">
+        <p>
+          © 2025–{{ year() }} {{ config.AUTHOR }} ·
+          <a href="/license/">License</a> · <a href="/privacy-policy/">Privacy Policy</a> ·
+          <a href="{{ config.REPOSITORY_URL }}" rel="noopener">Source code</a>
+        </p>
+        <p class="disclaimer">
+          NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

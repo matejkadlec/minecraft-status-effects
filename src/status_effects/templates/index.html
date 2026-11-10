@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "_head.html" %}
+    <title>{{ texts.title }}</title>
+    <meta name="description" content="{{ texts.description }}" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="{{ canonical }}" />
+    <meta name="application-name" content="{{ config.SITE_NAME }}" />
+    <meta property="og:site_name" content="{{ config.SITE_NAME }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ canonical }}" />
+    <meta property="og:title" content="{{ texts.title }}" />
+    <meta property="og:description" content="{{ texts.description }}" />
+    <meta property="og:image" content="{{ config.SITE_URL }}/img/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Minecraft Status Effects logo" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ texts.title }}" />
+    <meta name="twitter:description" content="{{ texts.description }}" />
+    <meta name="twitter:image" content="{{ config.SITE_URL }}/img/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Minecraft Status Effects logo" />
+    <link rel="stylesheet" href="{{ asset('css/fonts.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/toolbar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/table.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/dialog.css') }}" />
+    {% for item in json_ld %}
+    <script type="application/ld+json">{{ item|tojson }}</script>
+    {% endfor %}
+  </head>
+  <body>
+    <a class="skip-link" href="#effects">Skip to the effects table</a>
+    <div class="layout">
+      <aside id="sidebar" class="sidebar" aria-label="Mods and filters">
+        <button id="sidebar-toggle" class="icon-button sidebar-toggle" type="button" aria-controls="sidebar"
+                aria-expanded="true" aria-label="Collapse the sidebar" title="Collapse the sidebar (Ctrl+B)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 5.5 9 12l6.5 6.5" /></svg>
+        </button>
+        <div class="sidebar-inner">
+          <h1 class="logo">
+            <a href="/" id="home-link" title="Reset the search and go to the top">
+              <img class="logo-light" src="{{ asset('img/logo-light.webp') }}" width="756" height="347"
+                   alt="Minecraft Status Effects" />
+              <img class="logo-dark" src="{{ asset('img/logo-dark.webp') }}" width="756" height="347"
+                   alt="Minecraft Status Effects" />
+            </a>
+          </h1>
+          <div class="divider" aria-hidden="true"></div>
+          <h2 class="sidebar-title" id="mods-title">Available Mods</h2>
+          <nav class="mod-nav" aria-labelledby="mods-title">
+            <ul id="mod-nav">
+              {% for item in nav %}
+              {% if item.group %}
+              <li class="mod-group" data-group="{{ item.group }}">
+                <button class="group-header" type="button" aria-expanded="false">
+                  <span class="group-arrow" aria-hidden="true">▼</span>
+                  <span class="group-name">{{ item.group }}</span>
+                </button>
+                <div class="group-children">
+                  <ul>
+                    {% for mod in item.mods %}
+                    <li><a href="#{{ mod.target }}" data-mod="{{ mod.mod }}">{{ mod.mod }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+              {% else %}
+              <li><a href="#{{ item.target }}" data-mod="{{ item.mod }}">{{ item.mod }}</a></li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </nav>
+          <div class="divider" aria-hidden="true"></div>
+          <h2 class="sidebar-title">Quick Filters</h2>
+          <div class="quick-filters">
+            <label class="filter"><input type="checkbox" id="filter-vanilla" /> <span>Vanilla</span></label>
+            <label class="filter"><input type="checkbox" id="filter-scaling" checked /> <span>Scaling</span></label>
+            <label class="filter"><input type="checkbox" id="filter-positive" checked /> <span>Positive</span></label>
+            <label class="filter"><input type="checkbox" id="filter-negative" checked /> <span>Negative</span></label>
+          </div>
+          <div class="divider" aria-hidden="true"></div>
+          <p class="note contribution">
+            Found an inaccuracy, want to report a bug or to contribute?<br />
+            Contact me on <a href="{{ config.CONTACT_URL }}" target="_blank" rel="noopener">Discord</a>.
+          </p>
+          <footer class="sidebar-footer">
+            <div class="theme-toggle" role="group" aria-label="Color theme">
+              <button id="theme-light" class="theme-button" type="button" aria-pressed="false" title="Light mode">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 1.8v2.6M12 19.6v2.6M4.8 4.8l1.8 1.8M17.4 17.4l1.8 1.8M1.8 12h2.6M19.6 12h2.6M4.8 19.2l1.8-1.8M17.4 6.6l1.8-1.8" /></svg>
+                <span class="visually-hidden">Light mode</span>
+              </button>
+              <button id="theme-dark" class="theme-button" type="button" aria-pressed="false" title="Dark mode">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 14.6A8.6 8.6 0 0 1 9.4 3.7a8.6 8.6 0 1 0 10.9 10.9Z" /></svg>
+                <span class="visually-hidden">Dark mode</span>
+              </button>
+            </div>
+            <p class="note copyright">
+              © 2025–{{ year() }} {{ config.AUTHOR }}<br />
+              <a href="/license/">License</a> | <a href="/privacy-policy/">Privacy Policy</a>
+            </p>
+          </footer>
+        </div>
+      </aside>
+      <div id="sidebar-backdrop" class="sidebar-backdrop" hidden></div>
+
+      <main id="content" class="content">
+        <p class="intro-text">
+          Searchable database of <strong>{{ "{:,}".format(texts.total) }}</strong> vanilla and modded Minecraft status
+          effects ({{ texts.mods }} mods, Minecraft 1.20–{{ versions[-1].major }}) with exact formulas, max levels and
+          where to get each effect.
+        </p>
+
+        <div class="toolbar">
+          <div class="toolbar-start">
+            <button id="menu-toggle" class="icon-button menu-toggle" type="button" aria-controls="sidebar"
+                    aria-expanded="false" aria-label="Show mods and filters" title="Mods and filters (Ctrl+B)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h16" /></svg>
+            </button>
+            <div class="search-wrapper">
+              <input id="search" type="search" placeholder="Search effects or mods..." autocomplete="off"
+                     spellcheck="false" aria-label="Search effects" maxlength="100" />
+              <button id="search-clear" class="search-clear" type="button" aria-label="Clear the search"
+                      title="Clear the search" hidden>×</button>
+            </div>
+            <label class="select-label version-picker" title="Minecraft version">
+              <span class="visually-hidden">Minecraft version</span>
+              <select id="version" class="select" data-default="{{ config.DEFAULT_VERSION }}">
+                {% for v in versions %}
+                <option value="{{ v.id }}"{% if v.id == version %} selected{% endif %}>Minecraft {{ v.id }}</option>
+                {% endfor %}
+              </select>
+            </label>
+            <label class="select-label card-sort">
+              <span class="visually-hidden">Sort by</span>
+              <select id="card-sort" class="select">
+                <option value="mod">Sort: Mod</option>
+                <option value="effect">Sort: Effect</option>
+                <option value="maxLevel">Sort: Max level</option>
+                <option value="tags">Sort: Tags</option>
+              </select>
+            </label>
+          </div>
+          <div class="export-controls">
+            <label class="checkbox-label" title="Export all effects of the selected version">
+              <input type="checkbox" id="ignore-filters" /> Ignore filters
+            </label>
+            <label class="select-label">
+              <span class="visually-hidden">Export</span>
+              <select id="export-format" class="select">
+                <option value="" selected>Export as...</option>
+                <option value="csv">CSV</option>
+                <option value="xlsx">Excel (XLSX)</option>
+                <option value="json">JSON</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-shell">
+          <div id="table-scroll" class="table-scroll" tabindex="-1">
+            <table id="effects" class="effects-table">
+              <caption class="visually-hidden">Minecraft {{ version }} status effects</caption>
+              <colgroup>
+                <col class="col-mod" />
+                <col class="col-effect" />
+                <col class="col-max" />
+                <col class="col-desc" />
+                <col class="col-tags" />
+                <col class="col-source" />
+              </colgroup>
+              <thead>
+                <tr>
+                  {% for column, label, help in [("mod", "Mod", None), ("effect", "Effect", None), ("maxLevel", "Max", None),
+                                                  ("description", "Description", "help-description"), ("tags", "Tags", None),
+                                                  ("source", "Source", "help-source")] %}
+                  <th scope="col" data-column="{{ column }}"{% if column == "mod" or column == "effect" %} aria-sort="ascending"{% endif %}>
+                    <div class="th-inner">
+                      <button class="sort-button" type="button" title="Sort by {{ label|lower }} (Shift+click to add)">
+                        <span class="sort-text">{{ label }}</span>
+                        <span class="sort-arrows" aria-hidden="true"><span class="sort-up">▲</span><span class="sort-down">▼</span></span>
+                      </button>
+                      {% if help %}
+                      <button class="help-button" type="button" data-dialog="{{ help }}" aria-label="Help: {{ label }} column"
+                              title="What does this column mean?">?</button>
+                      {% endif %}
+                    </div>
+                  </th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody id="effects-body">
+                {% for e in effects %}
+                <tr id="{{ e.id }}">
+                  <td class="cell-mod">{{ e.mod }}</td>
+                  <td class="cell-effect">{{ e.effect }}{% if e.since %} <span class="since" title="Added in Minecraft {{ e.since }}">{{ e.since }}+</span>{% endif %}</td>
+                  <td class="cell-max">{{ e.max_level }}</td>
+                  <td class="cell-desc">{% if e.unreliable %}<span class="unreliable" role="img" aria-label="Unreliable" title="This effect might not work as described.">⚠️</span> {% endif %}{{ e.description|rich }}</td>
+                  <td class="cell-tags"><span class="badge {{ 'pos' if e.type == 'positive' else 'neg' }}">{{ e.type }}</span>{% if e.scaling %}<span class="badge scaling">scaling</span>{% endif %}</td>
+                  <td class="cell-source">{{ e.source|rich }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <div class="table-loading" aria-hidden="true"></div>
+          </div>
+          <div class="table-footer">
+            <p id="table-info" class="table-info" aria-live="polite">Showing 1 to {{ effects|length }} of {{ effects|length }} records</p>
+            <nav id="pagination" class="pagination" aria-label="Table pages"></nav>
+            <div class="table-length">
+              <label for="page-length">Rows per page:</label>
+              <select id="page-length" class="select">
+                {% for n in (25, 50, 75, 100) %}
+                <option value="{{ n }}"{% if n == 25 %} selected{% endif %}>{{ n }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <dialog id="help-description" class="dialog" aria-labelledby="help-description-title">
+      <form method="dialog" class="dialog-card">
+        <h2 id="help-description-title">Reading the descriptions</h2>
+        <div class="dialog-body">
+          <ul>
+            <li><strong>level</strong> is the effect level: <b>I</b> = 1, <b>II</b> = 2 and so on. <b>2 × level</b>
+              is 2 at level I, 4 at level II…; <b>2<sup class="lvl-sup">level</sup></b> grows exponentially, the
+              actual values follow in brackets.</li>
+            <li>Highlighted numbers and names are the important values: amounts, intervals and other effects.</li>
+            <li>Damage is in game points (<b>1 damage</b> = half a heart); healing is in hearts.</li>
+            <li><strong>Max</strong> is the highest level you can get in survival. It can differ with the mods in
+              your modpack (some mods raise vanilla limits), so the highest known value is shown.</li>
+            <li>When an effect has no exact numbers, the formula couldn't be found in the mod; “higher level →
+              stronger” means the effect scales with its level.</li>
+            <li><span role="img" aria-label="Warning">⚠️</span> marks effects that are buggy or whose behaviour
+              isn't confirmed.</li>
+            <li>A badge like <span class="since">1.20.5+</span> next to an effect name means it exists only from that
+              patch of the selected version.</li>
+            <li>Some effects are added by several mods; the table shows the most popular one.</li>
+          </ul>
+        </div>
+        <div class="dialog-actions"><button class="button" value="ok" autofocus>OK</button></div>
+      </form>
+    </dialog>
+
+    <dialog id="help-source" class="dialog" aria-labelledby="help-source-title">
+      <form method="dialog" class="dialog-card">
+        <h2 id="help-source-title">Reading the sources</h2>
+        <div class="dialog-body">
+          <ul>
+            <li><b>Potion/Arrow/Charm of X</b> means the potion, its splash and lingering versions, tipped arrows
+              and the Apotheosis potion charm. <b>Bamboo Spikes</b> are Supplementaries' spikes tipped with the
+              potion.</li>
+            <li><b>Affix Items</b> are Apotheosis items with an affix that applies the effect.</li>
+            <li><b>Delights</b> are meals and drinks from Farmer's Delight and its addons.</li>
+            <li><b>Unique Weapons</b> are the unique weapons from Simply Swords.</li>
+            <li>Items, mobs and spells of the effect's own mod are named directly (“spells from the mod”); other
+              mods are written in <i>italics</i>.</li>
+            <li><i>To be added.</i> means the sources haven't been researched yet, <i>Unavailable.</i> that the effect
+              can't be obtained in survival.</li>
+          </ul>
+        </div>
+        <div class="dialog-actions"><button class="button" value="ok" autofocus>OK</button></div>
+      </form>
+    </dialog>
+
+    <script id="app-data" type="application/json">{{ payload|tojson }}</script>
+    <script type="module" src="{{ asset('js/app.js') }}"></script>
+  </body>
+</html>

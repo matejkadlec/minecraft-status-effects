@@ -1,175 +1,222 @@
 {
-  "_comment": "This file is reserved for effects that we have some info about, but not enough to put them in the main effects list.",
-  "draftEffects": [
+  "_comment": "Effects that exist in a mod but whose behaviour couldn't be verified yet. They are not shown on the site. Move a draft to effects.json (with an id, all fields and the writing rules applied) once its description is known.",
+  "drafts": [
     {
-      "mod": "?",
-      "id": "?-burning",
-      "effect": "Burning",
-      "maxLevel": "?",
+      "mod": "Blood Magic",
+      "effect": "Fire Fuse",
+      "registryId": "bloodmagic:firefuse",
+      "versions": [
+        "1.20.x"
+      ],
+      "maxLevel": "I",
       "type": "negative",
-      "tags": ["negative"],
-      "description": "?",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Burning"
-    },
-    {
-      "mod": "?",
-      "id": "?-chemical",
-      "effect": "Chemical",
-      "maxLevel": "?",
-      "type": "negative",
-      "tags": ["negative"],
-      "description": "?",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Chemical"
-    },
-    {
-      "mod": "?",
-      "id": "?-frenzy",
-      "effect": "Frenzy",
-      "maxLevel": "?",
-      "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Frenzy"
-    },
-    {
-      "mod": "?",
-      "id": "?-spore",
-      "effect": "Spore",
-      "maxLevel": "?",
-      "type": "negative",
-      "tags": ["negative"],
-      "description": "?",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Spore"
+      "description": "Explodes at the end of the effect (explosion power <b>level</b>, destroys blocks if mob griefing is enabled).",
+      "source": "Serenade of the Nether ritual",
+      "notes": "No lang entry in the jar. PotionFireFuse: explode(radius=amp+1) when duration<=3 ticks; mode TNT if mobGriefing. Applied for 5 s by Serenade of the Nether with Vengeful Will."
     },
     {
       "mod": "Blood Magic",
-      "id": "blood-magic-reciprocation",
-      "effect": "Reciprocation",
+      "effect": "Plant Leech",
+      "registryId": "bloodmagic:plantleech",
+      "versions": [
+        "1.20.x"
+      ],
       "maxLevel": "I",
       "type": "negative",
-      "tags": ["negative"],
-      "description": "?",
-      "source": "Alchemy potions from the mod"
+      "description": "Every <b>0.5 seconds</b> grows plants around the mob and deals <b>0.5 × 3/(level + 2)</b> damage per grown plant.",
+      "source": "Ritual of the Green Grove",
+      "notes": "No lang entry in the jar. BMPotionUtils.damageMobAndGrowSurroundingPlants(entity, 2+amp, 1, 0.5*3/(amp+3), 25*(1+amp)). Applied 10 s. Description formula unchecked against the wording rules."
     },
     {
-      "mod": "Goety",
-      "id": "goety-altruistic",
-      "effect": "Altruistic",
-      "maxLevel": "I",
-      "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
-    },
-    {
-      "mod": "Goety",
-      "id": "goety-deflective",
-      "effect": "Deflective",
-      "maxLevel": "I",
-      "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
-    },
-    {
-      "mod": "Goety",
-      "id": "goety-gravity-pulse",
-      "effect": "Gravity Pulse",
-      "maxLevel": "I",
-      "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
-    },
-    {
-      "mod": "Goety",
-      "id": "goety-impaired",
-      "effect": "Impaired",
+      "mod": "Blood Magic",
+      "effect": "Sacrificial Lamb",
+      "registryId": "bloodmagic:sacrificallamb",
+      "versions": [
+        "1.20.x"
+      ],
       "maxLevel": "I",
       "type": "negative",
-      "tags": ["negative"],
-      "description": "?",
-      "source": "?"
+      "description": "Makes the animal attack nearby monsters and explode (power <b>2</b>) when it reaches its target.",
+      "source": "Ritual of the Shepherd",
+      "notes": "No lang entry in the jar. Explosion power 2+1.5*amp, no block damage; applied 60 s."
     },
     {
-      "mod": "Goety",
-      "id": "goety-leeching",
-      "effect": "Leeching",
+      "mod": "Blood Magic",
+      "effect": "Soul Snare",
+      "registryId": "bloodmagic:soulsnare",
+      "versions": [
+        "1.20.x"
+      ],
       "maxLevel": "I",
       "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
+      "description": "Monsters that die with the effect drop a Monster Soul (demon will).",
+      "source": "Soul Snare",
+      "notes": "No lang entry in the jar. WillHandler: on drops, will = random*(amp+1)^2*4+1; applies to Mobs or any entity on Peaceful. Applied for 15 s by the thrown Soul Snare."
     },
     {
-      "mod": "Goety",
-      "id": "goety-radiance",
-      "effect": "Radiance",
+      "mod": "Born in Chaos",
+      "effect": "Block Break",
+      "registryId": "born_in_chaos_v1:block_break",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
+      "maxLevel": "I",
+      "type": "negative",
+      "description": "Disables the entity's shield for <b>5 seconds</b>.",
+      "source": "Dark Warblade hits on shield mobs, Detonation, Dark Splash, various mob attacks",
+      "notes": "Hidden effect (client extension isVisibleInGui/Inventory false). onEffectStarted: puts shield in offhand (or main hand) on a 100 tick cooldown for players. Applied for 60-500 ticks by many mob attack procedures."
+    },
+    {
+      "mod": "Born in Chaos",
+      "effect": "Cursed Mark",
+      "registryId": "born_in_chaos_v1:cursed_mark",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
+      "maxLevel": "I",
+      "type": "negative",
+      "description": "Marks the entity as cursed; no gameplay effect of its own was found.",
+      "source": "<i>To be added.</i>",
+      "notes": "Class has no logic and no code in the mod reads hasEffect(CURSED_MARK) except being applied (Fallen Chaos Knight attack on players not blocking, 3400 ticks; Spiritual Easter Egg hit 100 ticks). Possibly used by datapack/other mods. Left in drafts."
+    },
+    {
+      "mod": "Born in Chaos",
+      "effect": "Stunning Strike",
+      "registryId": "born_in_chaos_v1:stunning_strike",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
+      "maxLevel": "I",
+      "type": "negative",
+      "description": "After about <b>1 second</b> hits entities within <b>4.5</b> blocks for <b>9 damage</b> and Stun for <b>2 seconds</b>.",
+      "source": "Missionary attacks",
+      "notes": "Hidden in GUI. Counter 'stunningstrike' 20 ticks then AoE (inflate 4.5): hurt(GENERIC, 9) and Stun 40 ticks, adds Block Break 500 ticks to the user, removes itself. Mob-only mechanic (Missionary)."
+    },
+    {
+      "mod": "Born in Chaos",
+      "effect": "Sweet Madness",
+      "registryId": "born_in_chaos_v1:sweet_madness",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
       "maxLevel": "I",
       "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
+      "description": "Turns into a random effect combination for <b>5 seconds</b> (e.g. Absorption, Regeneration, Stimulation, Rampage, Fire Resistance, Vampiric Touch with Bone Barrier, or Nausea with Hunger).",
+      "source": "Eternal Candy",
+      "notes": "Hidden in GUI. Eternal Candy applies it for 10 ticks; SweetMadnessKazhdyiTik picks via persistent data flags (random Math.random roll in SweetMadnessPriNalozhenii) one of: protection (Absorption, Resistance, Wither Resistance 100 ticks), treatment (Regeneration + 2 health), energy (Stimulation II), power (Light Rampage), hot (Fire Resistance + Insect Protection), creepy (Vampiric Touch + Bone Barrier), bad (Nausea + Hunger) and removes itself."
     },
     {
-      "mod": "Goety",
-      "id": "goety-rallied",
-      "effect": "Rallied",
+      "mod": "Born in Chaos",
+      "effect": "Terrifying Presence",
+      "registryId": "born_in_chaos_v1:terrifying_presence",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
       "maxLevel": "I",
       "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
+      "description": "Reduces attack damage by <b>40%</b>, grants Resistance III, regenerates and damages entities within <b>7</b> blocks with wither damage.",
+      "source": "Nightmare Stalker at half health",
+      "notes": "Hidden in GUI, mob-only (Nightmare Stalker boss phase, 2000 ticks, no Wither Resistance entities damaged: 2-4 damage by world dayTime). Not read fully."
     },
     {
-      "mod": "Goety",
-      "id": "goety-rallying",
-      "effect": "Rallying",
-      "maxLevel": "I",
-      "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
-    },
-    {
-      "mod": "Goety",
-      "id": "goety-shielded",
-      "effect": "Shielded",
-      "maxLevel": "I",
-      "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
-    },
-    {
-      "mod": "Goety",
-      "id": "goety-shielding",
-      "effect": "Shielding",
-      "maxLevel": "I",
-      "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
-    },
-    {
-      "mod": "Goety",
-      "id": "goety-swirling",
-      "effect": "Swirling",
-      "maxLevel": "I",
-      "type": "positive",
-      "tags": ["positive"],
-      "description": "?",
-      "source": "?"
-    },
-    {
-      "mod": "The Undergarden",
-      "id": "the-undergarden-featherweight",
-      "effect": "Featherweight",
+      "mod": "Born in Chaos",
+      "effect": "Unity With Darkness",
+      "registryId": "born_in_chaos_v1:unity_with_darkness",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
       "maxLevel": "II",
+      "type": "positive",
+      "description": "Increases movement speed by <b>22% × level</b>.",
+      "source": "Nightmare Mask helmet (in light level 4 or lower)",
+      "notes": "Hidden in GUI. MOVEMENT_SPEED +0.22 ADD_MULTIPLIED_BASE per level. NightmareMantleoftheNightKazhdyiTikDliaShliema (helmet armor tick): if light <= 4 gives Unity With Darkness amp 1 (level II) for 20 ticks, no icon. Also used by Nightmare Stalker mob."
+    },
+    {
+      "mod": "Dungeons and Combat",
+      "effect": "Forgotten Entity",
+      "registryId": "dungeons_and_combat:forgotten_entity",
+      "versions": [
+        "1.20.x"
+      ],
+      "maxLevel": "I",
       "type": "negative",
-      "tags": ["negative", "scaling"],
       "description": "?",
-      "source": "Potion/Arrow/Charm/Bamboo Spikes of Featherweight"
+      "source": "Hood Of Shame",
+      "notes": "Decompiled dungeons_and_combat-1.2.2-forge-1.20.1.jar (MCreator mod, closed source, no public repo). Hood Of Shame helmet tick applies it (60 ticks, hidden) but no code anywhere checks for it (no hasEffect, no attribute modifier, no mixin found). Existing description 'increases the range from which mobs detect the player' could not be confirmed. Category NEUTRAL."
+    },
+    {
+      "mod": "Eidolon: Repraised",
+      "effect": "Soul Harvest",
+      "registryId": "eidolon:soul_harvest",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
+      "maxLevel": "I",
+      "type": "positive",
+      "description": "Increases Soul Shard drops from Reaper Scythe and ritual kills and gives <b>25%</b> more experience from kills.",
+      "source": "Red Candy, Grape Candy, Soul Harvest Incense",
+      "notes": "Registered (SHarvestEffect) but has no lang entry in 1.20/1.21 so the jar scan did not list it (raw key shown in game). Events: +2 looting for soul shard drop, xp x1.25. Promote if a name is acceptable. registryId is eidolon_repraised:soul_harvest in 1.21."
+    },
+    {
+      "mod": "Jaden's Nether Expansion",
+      "effect": "Fogsight",
+      "registryId": "netherexp:fogsight",
+      "versions": [
+        "1.20.x"
+      ],
+      "maxLevel": "I",
+      "type": "positive",
+      "description": "?",
+      "source": "<i>Unavailable.</i>",
+      "notes": "1.20 jar registers FogSightEffect (plain MobEffect, BENEFICIAL, no logic) and no code references it; the brewing recipe is commented out in JNEPotionRecipe. Appears unfinished/unused. Removed in 1.21."
+    },
+    {
+      "mod": "Legendary Monsters",
+      "effect": "Fear",
+      "registryId": "legendary_monsters:fear",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
+      "maxLevel": "I",
+      "type": "negative",
+      "description": "?",
+      "source": "Skeletosaurus roar attack",
+      "notes": "Registered as a bare FastFalling effect (no attribute, no tick logic) and nothing in the code checks hasEffect(FEAR); SkeletosaurusEntity applies it in an arc for a duration variable. Seems to be purely cosmetic/unused."
+    },
+    {
+      "mod": "Mana and Artifice",
+      "effect": "Possession",
+      "registryId": "mna:possession",
+      "versions": [
+        "1.20.x"
+      ],
+      "maxLevel": "III",
+      "type": "positive",
+      "description": "Possessed mobs lose their AI. The possessing player cannot move or attack and controls the mob (<b>Level III</b>: permanent, player is invisible at the mob).",
+      "source": "Possession spell from the mod",
+      "notes": "Not fully verified: EffectPossession disables mob AI (level I on the target), caster gets level II (possession) or III (greater possession) which disables movement and attacks; the control mechanism itself lives in client/network code not read. Undead faction spell."
+    },
+    {
+      "mod": "Simply Swords",
+      "effect": "Soul Tether",
+      "registryId": "simplyswords:soul_tether",
+      "versions": [
+        "1.20.x",
+        "1.21.x"
+      ],
+      "maxLevel": "I",
+      "type": "positive",
+      "description": "Gives the player knockback resistance and reduces damage taken by <b>50%</b>.",
+      "source": "Soul Pyre",
+      "notes": "Registered in EffectRegistry (attribute knockback resistance +1) and applied by SoulPyreAbilityManager (duration of the pyre + 2 ticks), LivingEntityMixin multiplies damage by 0.5, matching the Soul Pyre tooltip. But there is no effect.simplyswords.soul_tether lang entry in en_us.json (it was not in the jar scan), so the in-game name is the raw key; I could not take an English name from the lang file."
     }
   ]
 }

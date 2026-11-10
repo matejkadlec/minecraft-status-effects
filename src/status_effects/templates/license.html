@@ -1,0 +1,35 @@
+{% extends "_legal_base.html" %}
+{% block title %}License{% endblock %}
+{% block description %}License of the Minecraft Status Effects website, its source code and its effect data (PolyForm Shield License 1.0.0).{% endblock %}
+{% block heading %}License{% endblock %}
+{% block content %}
+<p>
+  The website's source code and its data – the effect descriptions, sources and the exports – are licensed under the
+  <a href="https://polyformproject.org/licenses/shield/1.0.0" rel="noopener">PolyForm Shield License 1.0.0</a>.
+  The full text is also in
+  <a href="{{ config.REPOSITORY_URL }}/blob/master/LICENSE.md" rel="noopener"><code>LICENSE.md</code></a> in the repository.
+</p>
+
+<h2>In short</h2>
+<ul>
+  <li><strong>You may</strong> use, copy, change and share the code and the data for any purpose – for example in your
+    modpack's documentation, a guide, a video or your own tools.</li>
+  <li><strong>You may not</strong> use them to provide a product or service that competes with this website
+    (for example another Minecraft status effects database).</li>
+  <li><strong>Keep the notices:</strong> when you share a copy or a substantial part, include the license (or its URL) and
+    these lines:
+    <pre><code>Required Notice: Copyright {{ config.AUTHOR }} ({{ config.AUTHOR_URL }})
+Required Notice: Source: {{ config.REPOSITORY_URL }}</code></pre>
+    A link back to <a href="/">{{ config.SITE_URL.removeprefix("https://") }}</a> is appreciated.</li>
+  <li><strong>No warranty:</strong> everything is provided as is. The effect data is researched carefully, but mods
+    change; check the mod itself when it matters.</li>
+</ul>
+<p>This summary is for convenience only; the license text is what applies.</p>
+
+<h2>Third parties</h2>
+<ul>
+  <li>Minecraft is a trademark of Mojang Synergies AB. The effect, item, mob and mod names belong to their respective
+    authors; this site only describes them.</li>
+  <li>The Montserrat font is used under the <a href="/fonts/OFL.txt">SIL Open Font License 1.1</a>.</li>
+</ul>
+{% endblock %}

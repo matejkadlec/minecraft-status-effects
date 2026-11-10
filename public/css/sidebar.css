@@ -1,0 +1,441 @@
+/*-----------------------------*
+ * Sidebar (mods and filters)  *
+ *-----------------------------*/
+.sidebar {
+  --sidebar-width: 260px;
+  --rail-width: 44px;
+  position: relative;
+  z-index: 20;
+  flex: 0 0 auto;
+  width: var(--sidebar-width);
+  height: 100%;
+  background: var(--nav-gradient);
+  border-right: 2px solid var(--border);
+  transition: width 0.32s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s;
+}
+
+.sidebar-toggle {
+  transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  height: 100%;
+  padding: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+/* Collapse button: a round tab on the sidebar's right edge */
+.sidebar-toggle {
+  position: absolute;
+  top: 1.1rem;
+  right: -14px;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+}
+
+.sidebar-toggle svg {
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-collapsed .sidebar {
+  width: var(--rail-width);
+}
+
+.sidebar-collapsed .sidebar-inner {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.sidebar-collapsed .sidebar-toggle {
+  right: 8px;
+}
+
+.sidebar-collapsed .sidebar-toggle svg {
+  transform: rotate(180deg);
+}
+
+/* Logo */
+.logo {
+  margin: 0;
+  line-height: 0;
+}
+
+.logo a {
+  display: block;
+  border-radius: 6px;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+.logo-dark,
+:root.dark .logo-light {
+  display: none !important;
+}
+
+:root.dark .logo-dark {
+  display: block !important;
+}
+
+/* Divider image (theme aware) */
+.divider {
+  flex: 0 0 auto;
+  height: 17px;
+  margin: 0.85rem 0;
+  background: var(--divider) center / contain no-repeat;
+}
+
+.sidebar-title {
+  flex: 0 0 auto;
+  margin: 0 0 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-image: linear-gradient(180deg, var(--accent-1) 0%, var(--accent-2) 45%, var(--accent-3) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/*----------------*
+ * Mod navigation *
+ *----------------*/
+.mod-nav {
+  flex: 1 1 auto;
+  min-height: 7.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#mod-nav {
+  flex: 1 1 0;
+  min-height: 0;
+  margin: 0 0 0 -8px;
+  padding: 0;
+  list-style: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  /* Puts the scrollbar on the left edge, away from the content */
+  direction: rtl;
+}
+
+#mod-nav > li {
+  direction: ltr;
+}
+
+#mod-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#mod-nav::-webkit-scrollbar {
+  width: 8px;
+}
+
+#mod-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#mod-nav {
+  scrollbar-color: var(--accent-2) transparent;
+}
+
+#mod-nav a,
+#mod-nav .group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.05;
+  text-align: left;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, opacity 0.3s;
+}
+
+#mod-nav a:hover,
+#mod-nav .group-header:hover {
+  background: var(--bg-accent);
+  border-color: var(--border);
+  color: var(--accent);
+}
+
+#mod-nav a[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+#mod-nav a[aria-disabled="true"]:hover {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-dim);
+}
+
+#mod-nav a[aria-current="true"] {
+  color: var(--accent);
+}
+
+/* Groups */
+#mod-nav .group-header {
+  color: var(--group-header);
+}
+
+#mod-nav .group-arrow {
+  margin-top: 2px;
+  font-size: 0.6rem;
+  transition: transform 0.3s ease;
+}
+
+#mod-nav .group-name {
+  flex: 1;
+}
+
+#mod-nav .expanded > .group-header .group-arrow {
+  transform: rotate(180deg);
+}
+
+#mod-nav .group-disabled > .group-header {
+  opacity: 0.55;
+  cursor: default;
+}
+
+#mod-nav .group-disabled > .group-header:hover {
+  background: transparent;
+  border-color: transparent;
+  color: var(--group-header);
+}
+
+/* Smooth expand/collapse without measuring heights: a grid row animated from 0fr to 1fr */
+#mod-nav .group-children {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#mod-nav .group-children > ul {
+  min-height: 0;
+  overflow: hidden;
+}
+
+#mod-nav .expanded > .group-children {
+  grid-template-rows: 1fr;
+}
+
+#mod-nav .group-children a {
+  width: calc(100% - 0.95rem);
+  margin-left: 0.95rem;
+  font-size: 0.8rem;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, opacity 0.25s ease, transform 0.25s ease;
+}
+
+#mod-nav .expanded > .group-children a {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s, 0s, 0s, calc(var(--i, 0) * 25ms + 60ms), calc(var(--i, 0) * 25ms + 60ms);
+}
+
+#mod-nav .expanded > .group-children a[aria-disabled="true"] {
+  opacity: 0.55;
+}
+
+/* Without JavaScript the groups are always open */
+:root:not(.js) #mod-nav .group-children {
+  grid-template-rows: 1fr;
+}
+
+:root:not(.js) #mod-nav .group-children a {
+  opacity: 1;
+  transform: none;
+}
+
+/*---------------*
+ * Quick filters *
+ *---------------*/
+.quick-filters {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-accent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+
+.filter:hover {
+  background: var(--highlight);
+}
+
+.filter input {
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/*----------------*
+ * Sidebar footer *
+ *----------------*/
+.contribution {
+  flex: 0 0 auto;
+  margin: 0 0 1rem;
+  font-weight: 500;
+}
+
+.sidebar-footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+.theme-toggle {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-alt);
+  color: var(--text-dim);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+:root.dark .theme-button {
+  background: var(--bg-accent);
+}
+
+.theme-button svg {
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.theme-button[aria-pressed="true"] {
+  background: var(--accent) !important;
+  border-color: var(--accent-strong);
+  color: var(--on-accent);
+  cursor: default;
+}
+
+.theme-button[aria-pressed="false"]:hover {
+  transform: translateY(-2px);
+  background: var(--accent-strong);
+  color: #ffffff;
+}
+
+.copyright {
+  flex: 1;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+}
+
+:root.dark .copyright {
+  font-weight: 400;
+}
+
+/*-------------------------------*
+ * Small screens: drawer sidebar *
+ *-------------------------------*/
+.sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .sidebar,
+  .sidebar-collapsed .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(var(--sidebar-width), 85vw);
+    box-shadow: var(--shadow);
+    transform: translateX(-105%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar-inner,
+  .sidebar-collapsed .sidebar-inner {
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .sidebar-open .sidebar {
+    transform: none;
+  }
+
+  .sidebar-toggle,
+  .sidebar-collapsed .sidebar-toggle {
+    top: 0.6rem;
+    right: 0.6rem;
+  }
+
+  .sidebar-collapsed .sidebar-toggle svg {
+    transform: none;
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    background: var(--dialog-backdrop);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .sidebar-backdrop[hidden] {
+    display: none;
+  }
+
+  .sidebar-open .sidebar-backdrop {
+    opacity: 1;
+  }
+}
