@@ -98,7 +98,9 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-004: Help/Legend Modals
+### MSE-004: Help/Legend Modals [WIP]
+_Implemented in the 2.0 rework (native `<dialog>` modals next to Description and Source, the old hidden legend removed); waiting for testing._
+
 - Start by deleting everything about current legend (it's hidden now, but I want it gone)
     - That is whole div class="note table-note legend" id="legend", then these sups: "sup class="fn-ref" data-target="legend-3", and all other stuff in `index.html` tied to the legend/help. Then all CSS and JS tied to that as well, all mentions, everything.
 - "?" icon buttons similar to the theme swapping icons
@@ -139,7 +141,9 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 
 ---
 
-### MSE-NEXT: 
+### MSE-NEXT: [WIP]
+_Implemented in the 2.0 rework: search (and version) in the URL and localStorage, clickable logo (resets the search), new intro text, responsive layout (cards and a drawer sidebar on small screens). The Minecraft version moved into the version dropdown next to the search. Waiting for testing._
+
 - Search term in URL and saved in localStorage
 - Clickable logo and Minecraft version at the bottom right
 - Update index.html description, to something like: "{big} library of modded Minecraft status effects. {something about features usage maybe}"
@@ -148,12 +152,16 @@ This file tracks upcoming features and improvements for the Minecraft Status Eff
 ---
 
 ### Possible Future Upgrades
+_Both are obsolete since 2.0: descriptions and sources wrap and the table fits the screen without horizontal scrolling._
+
 - Add something like [show more]/[show less] or [expand]/[collapse] to 2-lines long description/source texts, so it's all rendered on single line initially
 - Add "guide" on first visit OR add >>> gif as a table overlay when page is loaded, to hint user the table is horinzotally scrolalble
 
 ---
 
-### MSE-00X: Automated Testing Suite
+### MSE-00X: Automated Testing Suite [WIP]
+_Implemented in the 2.0 rework: pytest (data rules, pages, API, exports) and Node tests for the table logic, run by `./run.sh test` and GitHub Actions. Not done: coverage thresholds, browser/visual tests, pre-commit hooks._
+
 **Priority:** Medium  
 **Labels:** testing, quality-assurance, ci-cd  
 **Story:** As a developer, I want comprehensive automated tests so I can maintain code quality and prevent regressions.

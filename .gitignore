@@ -1,25 +1,20 @@
-# Python virtual environment
+# Python
 venv/
-
-# Python cache and bytecode
+.venv/
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.pytest_cache/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
 
-# Editor/OS files
+# Editors and OS files
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 
-# Export files
-export/files/
-
-# MCMod effect URLs
-mcmod/effect_urls/*.txt
-
-# Untracked files
+# Local scratch files
 untracked/
-/TODO.md
+*.log

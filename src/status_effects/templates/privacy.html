@@ -1,0 +1,61 @@
+{% extends "_legal_base.html" %}
+{% block title %}Privacy Policy{% endblock %}
+{% block description %}Privacy policy of the Minecraft Status Effects website: no cookies, no tracking, no third-party requests.{% endblock %}
+{% block heading %}Privacy Policy{% endblock %}
+{% block content %}
+<p><strong>Last updated:</strong> November 10, 2026</p>
+
+<h2>1. Overview</h2>
+<p>
+  This website (“the Site”) is an interactive reference of Minecraft status effects. It doesn't use cookies, analytics,
+  advertising or any other tracking, and it doesn't load anything from third-party servers: fonts, icons and scripts are
+  all served by the Site itself.
+</p>
+
+<h2>2. Data controller</h2>
+<p>
+  The Site is operated by <strong>{{ config.AUTHOR }}</strong>. Contact:
+  <a href="{{ config.CONTACT_URL }}" rel="noopener" target="_blank">Discord</a>.
+</p>
+
+<h2>3. Data stored in your browser</h2>
+<p>
+  To remember your settings, the Site saves these keys in your browser's local storage. They never leave your device
+  and you can delete them at any time by clearing the site data in your browser:
+</p>
+<ul>
+  <li><code>se-theme</code> – light or dark mode</li>
+  <li><code>se-sidebar</code> – whether the sidebar is collapsed</li>
+  <li><code>se-version</code> – the selected Minecraft version</li>
+  <li><code>se-search</code> – your last search</li>
+  <li><code>se-filters</code> – the quick filters</li>
+  <li><code>se-page-length</code> – rows per page</li>
+  <li><code>se-ignore-filters</code> – the “Ignore filters” export option</li>
+</ul>
+
+<h2>4. Server logs</h2>
+<p>
+  Like any web server, the server may keep standard access logs (IP address, browser user agent, time and requested
+  page) for security and troubleshooting. They are not used to identify or profile visitors and are deleted
+  automatically after a short time (at most 30 days).
+</p>
+
+<h2>5. Exports</h2>
+<p>
+  When you export the table, your browser sends the selected version, the theme and the list of effects in the table
+  to the server, which generates the file. Nothing of it is stored.
+</p>
+
+<h2>6. Cookies</h2>
+<p>The Site sets no cookies, so there is no cookie banner.</p>
+
+<h2>7. Legal basis and your rights</h2>
+<p>
+  The only personal data processed are the server logs above, based on the legitimate interest in running the Site
+  securely. Under the GDPR you can ask for access to or deletion of data about you; in practice this only concerns
+  server logs, if they still exist. Contact me via the link above.
+</p>
+
+<h2>8. Changes</h2>
+<p>Changes to this policy will update the “Last updated” date above.</p>
+{% endblock %}

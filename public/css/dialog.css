@@ -1,0 +1,93 @@
+/*---------------------------------*
+ * Help dialogs (native <dialog>)  *
+ *---------------------------------*/
+.dialog {
+  width: min(36rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-alt);
+  color: var(--text);
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease, overlay 0.2s allow-discrete, display 0.2s allow-discrete;
+}
+
+.dialog[open] {
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .dialog[open] {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+.dialog::backdrop {
+  background: var(--dialog-backdrop);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.2s ease, overlay 0.2s allow-discrete, display 0.2s allow-discrete;
+}
+
+.dialog[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.dialog-card {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 2rem);
+  margin: 0;
+  padding: 1.25rem 1.4rem 1.1rem;
+}
+
+.dialog h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  background-image: linear-gradient(180deg, var(--accent-1) 0%, var(--accent-2) 45%, var(--accent-3) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dialog-body {
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.dialog-body ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.dialog-body li + li {
+  margin-top: 0.45rem;
+}
+
+.dialog-body b {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+:root.dialog-open {
+  overflow: hidden;
+}
