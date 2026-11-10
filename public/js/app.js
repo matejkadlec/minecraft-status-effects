@@ -204,11 +204,49 @@ function jumpToMod(mod) {
   jumpToIndex(view.findIndex((effect) => effect.mod === mod));
 }
 
-function jumpToHash() {
-  const id = decodeURIComponent(location.hash.slice(1));
-  if (!id) return;
-  const index = view.findIndex((effect) => effect.id === id);
-  if (index !== -1) jumpToIndex(index);
+/** Clears the search and turns on the quick filters that hide `effect`. */
+function showHiddenEffect(effect) {
+  const filters = { ...state.filters, [effect.type]: true };
+  if (effect.mod === "Minecraft") filters.vanilla = true;
+  if (effect.scaling) filters.scaling = true;
+  state.filters = filters;
+  writeJSON("filters", filters);
+  for (const [name, input] of Object.entries(elements.filters)) input.checked = filters[name];
+  if (filterEffects([effect], { query: state.search, filters }).length === 0) {
+    state.search = "";
+    elements.search.value = "";
+    elements.searchClear.hidden = true;
+    write("search", "");
+  }
+  compute();
+  render();
+}
+
+function hashId() {
+  try {
+    return decodeURIComponent(location.hash.slice(1));
+  } catch {
+    return "";
+  }
+}
+
+/** Shows the linked effect (the URL hash), whatever the visitor's search, filters and stored version are. */
+async function jumpToHash(id = hashId()) {
+  if (!id || !current) return;
+  const has = (data) => data.effects.some((effect) => effect.id === id);
+  if (!has(current)) {
+    // A link without ?version= means the default version, but a returning visitor starts on their stored one.
+    const other = [...cache.values()].find(has);
+    if (!other) return;
+    await setVersion(other.version);
+    if (current !== other) return;
+  }
+  let index = view.findIndex((effect) => effect.id === id);
+  if (index === -1) {
+    showHiddenEffect(current.effects.find((effect) => effect.id === id));
+    index = view.findIndex((effect) => effect.id === id);
+  }
+  jumpToIndex(index);
 }
 
 /*--------------------------------*
@@ -355,7 +393,7 @@ function initControls() {
     }
   });
 
-  window.addEventListener("hashchange", jumpToHash);
+  window.addEventListener("hashchange", () => jumpToHash());
 }
 
 /*--------*
@@ -447,20 +485,19 @@ async function init() {
   cache.set(payload.version, prepare(payload));
   readInitialState(payload.version);
   initControls();
+  const linked = hashId();
 
   if (state.version === payload.version) {
     showVersion(cache.get(payload.version));
     compute();
     render();
     syncUrl({ hash: location.hash.slice(1) });
-    root.classList.add("app-ready");
-    jumpToHash();
   } else {
     // The server rendered another version (e.g. the default): keep its rows hidden while loading.
     await setVersion(state.version);
-    root.classList.add("app-ready");
-    jumpToHash();
   }
+  root.classList.add("app-ready");
+  jumpToHash(linked);
 }
 
 init();
