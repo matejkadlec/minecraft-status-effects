@@ -128,7 +128,7 @@ current="$(read_release "$CURRENT_FILE")"
 if [[ "$operation" == "status" ]]; then
   [[ -n "$current" ]] || die "nothing is deployed yet"
   log "deployed commit: $current"
-  compose "$current" ps --all --format 'table {{.Service}}\t{{.State}}\t{{.Health}}\t{{.Image}}'
+  compose "$current" ps --all --format '{{.Service}}: {{.State}} {{.Health}}'
   exit 0
 fi
 
@@ -209,4 +209,4 @@ docker image prune --force >/dev/null 2>&1 || true
 docker builder prune --force --filter until=168h >/dev/null 2>&1 || true
 
 log "deployed $commit"
-compose "$commit" ps --all --format 'table {{.Service}}\t{{.State}}\t{{.Health}}'
+compose "$commit" ps --all --format '{{.Service}}: {{.State}} {{.Health}}'
