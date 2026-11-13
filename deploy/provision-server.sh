@@ -32,8 +32,10 @@ die() {
 }
 
 (($# == 2)) || die "usage: $0 <status-effects-deploy> <deploy-key.pub>"
-readonly command_source="$1"
-readonly key_source="$2"
+# Absolute, because the account's commands below run from /.
+command_source="$(realpath -- "$1")"
+key_source="$(realpath -- "$2")"
+readonly command_source key_source
 
 #----------------------------------------------------------------------------------------------
 # Preflight: nothing is changed before all of this holds
