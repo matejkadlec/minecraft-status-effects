@@ -55,8 +55,11 @@ def test_api_effects_and_etag(client):
     assert response.status_code == 200
     etag = response.headers["etag"]
     assert response.json()["version"] == "1.21.x"
-    again = client.get("/api/effects", params={"version": "1.21.x"}, headers={"If-None-Match": etag})
-    assert again.status_code == 304
+    for sent in (etag, f"W/{etag}", f'"other", W/{etag}'):
+        again = client.get("/api/effects", params={"version": "1.21.x"}, headers={"If-None-Match": sent})
+        assert again.status_code == 304
+    stale = client.get("/api/effects", params={"version": "1.21.x"}, headers={"If-None-Match": 'W/"other"'})
+    assert stale.status_code == 200
     assert client.get("/api/effects", params={"version": "x"}).status_code == 400
 
 
