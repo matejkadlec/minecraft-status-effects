@@ -17,6 +17,7 @@ def main() -> None:
     parser.add_argument("--reload", action="store_true", help="restart on code changes (development)")
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--proxy-headers", action="store_true", help="trust X-Forwarded-* (behind a reverse proxy)")
+    parser.add_argument("--no-access-log", action="store_true", help="don't log requests (no visitor IPs in the logs)")
     args = parser.parse_args()
     uvicorn.run(
         "status_effects.app:app",
@@ -26,6 +27,7 @@ def main() -> None:
         reload_dirs=[str(config.ROOT_DIR / "src"), str(config.TEMPLATES_DIR)] if args.reload else None,
         workers=None if args.reload else args.workers,
         proxy_headers=args.proxy_headers,
+        access_log=not args.no_access_log,
         forwarded_allow_ips="*" if args.proxy_headers else None,
     )
 

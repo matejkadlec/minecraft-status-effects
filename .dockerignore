@@ -1,0 +1,9 @@
+# Only what the Dockerfile copies enters the build context.
+*
+!requirements.lock
+!src/status_effects
+!public
+!data/effects.json
+!data/mods.json
+**/__pycache__
+**/*.py[cod]

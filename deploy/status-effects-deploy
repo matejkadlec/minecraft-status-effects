@@ -1,0 +1,214 @@
+#!/usr/bin/env bash
+# Deploys one commit of the website on the production host.
+#
+# Installed root-owned as /usr/local/libexec/status-effects-deploy by deploy/provision-server.sh
+# and run by the unprivileged `se-deploy` account with its own rootless Docker daemon.
+#
+# It is the forced command of the GitHub Actions SSH key, which can therefore only ask for:
+#
+#   deploy <40-hex commit>    build and start that commit; it must be on the master branch
+#   status                    print the deployed commit and the state of the containers
+#
+# An administrator can run the same operations on the host, and may name another branch (for a
+# first deployment or a rollback to anything that was pushed):
+#
+#   sudo -u se-deploy /usr/local/libexec/status-effects-deploy deploy <commit> [<branch>]
+#   sudo -u se-deploy /usr/local/libexec/status-effects-deploy status
+#
+# The source always comes from the public repository over HTTPS, never from the SSH client. A
+# release that doesn't become healthy is replaced by the previous one again.
+set -euo pipefail
+umask 077
+export PATH=/usr/local/bin:/usr/bin:/bin
+export LC_ALL=C
+
+readonly ACCOUNT=se-deploy
+readonly REPOSITORY=https://github.com/matejkadlec/status-effects.git
+readonly DEFAULT_BRANCH=master
+readonly ROOT=/srv/status-effects
+readonly TOKEN_FILE=/etc/status-effects/cloudflared-token
+readonly PROJECT=status-effects
+readonly IMAGE=status-effects
+
+log() { printf '[deploy] %s\n' "$*"; }
+die() {
+  printf '[deploy] error: %s\n' "$*" >&2
+  exit 1
+}
+
+[[ "$(id -un)" == "$ACCOUNT" ]] || die "must run as $ACCOUNT"
+
+#----------------------------------------------------------------------------------------------
+# Request: from the SSH client (strict) or from an administrator's arguments
+#----------------------------------------------------------------------------------------------
+
+operation=""
+commit=""
+branch="$DEFAULT_BRANCH"
+automated=false
+
+if (($# == 0)); then
+  automated=true
+  request="${SSH_ORIGINAL_COMMAND:-}"
+  if [[ "$request" == "status" ]]; then
+    operation=status
+  elif [[ "$request" =~ ^deploy\ ([0-9a-f]{40})$ ]]; then
+    operation=deploy
+    commit="${BASH_REMATCH[1]}"
+  else
+    die "expected 'deploy <40-hex commit>' or 'status'"
+  fi
+else
+  operation="$1"
+  case "$operation" in
+    status)
+      (($# == 1)) || die "usage: status"
+      ;;
+    deploy)
+      (($# == 2 || $# == 3)) || die "usage: deploy <40-hex commit> [<branch>]"
+      commit="$2"
+      branch="${3:-$DEFAULT_BRANCH}"
+      [[ "$commit" =~ ^[0-9a-f]{40}$ ]] || die "the commit must be a full lowercase SHA-1"
+      [[ "$branch" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]*$ && "$branch" != *..* ]] || die "invalid branch name"
+      ;;
+    *)
+      die "unknown operation"
+      ;;
+  esac
+fi
+
+#----------------------------------------------------------------------------------------------
+# Environment: the account's rootless Docker daemon, git without any user configuration
+#----------------------------------------------------------------------------------------------
+
+export HOME="/home/$ACCOUNT"
+XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export XDG_RUNTIME_DIR
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null GIT_TERMINAL_PROMPT=0
+cd "$ROOT"
+
+readonly GIT_DIR_PATH="$ROOT/repository"
+readonly RELEASES="$ROOT/releases"
+readonly CURRENT_FILE="$ROOT/state/current-release"
+readonly PREVIOUS_FILE="$ROOT/state/previous-release"
+
+read_release() {
+  local value=""
+  [[ -f "$1" ]] && value="$(<"$1")"
+  [[ "$value" =~ ^[0-9a-f]{40}$ ]] && printf '%s' "$value"
+  return 0
+}
+
+# compose <release> <arguments...>: Docker Compose on that release's compose.yml. The tunnel
+# connector is part of the stack only once the owner has stored its token.
+compose() {
+  local release="$1"
+  shift
+  local profile=()
+  [[ -s "$TOKEN_FILE" ]] && profile=(--profile tunnel)
+  RELEASE="$release" docker compose \
+    --project-name "$PROJECT" \
+    --project-directory "$RELEASES/$release" \
+    --file "$RELEASES/$release/compose.yml" \
+    "${profile[@]}" "$@"
+}
+
+start() { compose "$1" up --detach --wait --wait-timeout 180 --remove-orphans; }
+
+exec 9>"$ROOT/state/deploy.lock"
+flock --nonblock 9 || die "another deployment is running"
+
+current="$(read_release "$CURRENT_FILE")"
+
+#----------------------------------------------------------------------------------------------
+# status
+#----------------------------------------------------------------------------------------------
+
+if [[ "$operation" == "status" ]]; then
+  [[ -n "$current" ]] || die "nothing is deployed yet"
+  log "deployed commit: $current"
+  compose "$current" ps --all --format '{{.Service}}: {{.State}} {{.Health}}'
+  exit 0
+fi
+
+#----------------------------------------------------------------------------------------------
+# deploy: fetch the branch, check the commit, unpack it
+#----------------------------------------------------------------------------------------------
+
+[[ -d "$GIT_DIR_PATH/objects" ]] || git init --quiet --bare "$GIT_DIR_PATH"
+git_repository() { git --git-dir "$GIT_DIR_PATH" "$@"; }
+
+log "fetching $branch"
+git_repository fetch --quiet --no-tags --force "$REPOSITORY" "refs/heads/$branch:refs/deploy/branch"
+git_repository cat-file -e "$commit^{commit}" 2>/dev/null || die "commit $commit is not on $branch"
+git_repository merge-base --is-ancestor "$commit" refs/deploy/branch || die "commit $commit is not on $branch"
+
+# Two pushes in quick succession can arrive out of order; automation never goes back in history.
+if $automated && [[ -n "$current" && "$commit" != "$current" ]] &&
+  git_repository merge-base --is-ancestor "$commit" "$current" 2>/dev/null; then
+  log "a newer commit ($current) is already deployed; nothing to do"
+  exit 0
+fi
+
+incoming=""
+cleanup() { [[ -z "$incoming" ]] || rm -rf -- "$incoming"; }
+trap cleanup EXIT
+
+if [[ ! -d "$RELEASES/$commit" ]]; then
+  # The private (0700) directory protects the release on the host; the files inside keep the
+  # usual 0644/0755 modes, because the image build copies the modes and the app runs unprivileged.
+  incoming="$(mktemp -d "$RELEASES/.incoming.XXXXXXXX")"
+  git_repository -c tar.umask=0022 archive --format=tar "$commit" |
+    tar -x -C "$incoming" --no-same-owner --preserve-permissions
+  [[ -f "$incoming/compose.yml" && -f "$incoming/Dockerfile" ]] || die "the commit has no compose.yml or Dockerfile"
+  mv -- "$incoming" "$RELEASES/$commit"
+  incoming=""
+fi
+
+#----------------------------------------------------------------------------------------------
+# deploy: build, start, keep the previous release when the new one isn't healthy
+#----------------------------------------------------------------------------------------------
+
+log "building $commit"
+compose "$commit" build web
+
+log "starting $commit"
+if ! start "$commit"; then
+  log "the new release did not become healthy; its last log lines:"
+  compose "$commit" logs --no-color --tail 40 web >&2 || true
+  if [[ -n "$current" && "$current" != "$commit" && -d "$RELEASES/$current" ]]; then
+    log "restoring $current"
+    start "$current" || die "the previous release could not be restored"
+    rm -rf -- "${RELEASES:?}/$commit"
+    docker image rm "$IMAGE:$commit" >/dev/null 2>&1 || true
+    die "deployment failed; $current is running again"
+  fi
+  die "deployment failed"
+fi
+
+if [[ "$commit" != "$current" ]]; then
+  [[ -z "$current" ]] || printf '%s\n' "$current" >"$PREVIOUS_FILE"
+  printf '%s\n' "$commit" >"$CURRENT_FILE.new"
+  mv -- "$CURRENT_FILE.new" "$CURRENT_FILE"
+fi
+previous="$(read_release "$PREVIOUS_FILE")"
+
+#----------------------------------------------------------------------------------------------
+# deploy: keep only the running release and the one before it
+#----------------------------------------------------------------------------------------------
+
+for directory in "$RELEASES"/*/; do
+  name="$(basename "$directory")"
+  [[ "$name" =~ ^[0-9a-f]{40}$ ]] || continue
+  [[ "$name" == "$commit" || "$name" == "$previous" ]] || rm -rf -- "$directory"
+done
+while read -r tag; do
+  [[ "$tag" =~ ^[0-9a-f]{40}$ ]] || continue
+  [[ "$tag" == "$commit" || "$tag" == "$previous" ]] || docker image rm "$IMAGE:$tag" >/dev/null 2>&1 || true
+done < <(docker image ls --format '{{.Tag}}' "$IMAGE")
+docker image prune --force >/dev/null 2>&1 || true
+docker builder prune --force --filter until=168h >/dev/null 2>&1 || true
+
+log "deployed $commit"
+compose "$commit" ps --all --format '{{.Service}}: {{.State}} {{.Health}}'

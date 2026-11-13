@@ -36,3 +36,37 @@ jobs:
 
       - name: JavaScript tests (table logic)
         run: node --test "tests/js/*.test.mjs"
+
+  image:
+    name: Production image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy scripts (shellcheck)
+        run: shellcheck deploy/status-effects-deploy deploy/provision-server.sh
+
+      - name: Build and start the app
+        run: docker compose up --build --detach --wait web
+
+      - name: Smoke test (unprivileged user, pages, canonical URLs)
+        run: |
+          docker compose exec -T web python - <<'EOF'
+          import json, os, urllib.request
+
+          def get(path):
+              with urllib.request.urlopen("http://127.0.0.1:8000" + path, timeout=10) as response:
+                  return response.read().decode()
+
+          site = os.environ["SITE_URL"]
+          assert os.getuid() != 0, "the app must not run as root"
+          assert json.loads(get("/health"))["status"] == "ok"
+          assert f'<link rel="canonical" href="{site}/" />' in get("/")
+          assert f"<loc>{site}/license/</loc>" in get("/sitemap.xml")
+          assert f"Sitemap: {site}/sitemap.xml" in get("/robots.txt")
+          assert get("/css/theme.css") and get("/api/export/csv")
+          EOF
+
+      - name: Container logs
+        if: failure()
+        run: docker compose logs --no-color

@@ -133,12 +133,20 @@ def index_html(request: Request):
     return RedirectResponse(f"/{query}", status_code=301)
 
 
+def _etag_matches(if_none_match: str | None, etag: str) -> bool:
+    """Weak comparison of If-None-Match: a proxy that compresses the body sends the ETag back as `W/"..."`."""
+    if not if_none_match:
+        return False
+    candidates = {value.strip().removeprefix("W/") for value in if_none_match.split(",")}
+    return "*" in candidates or etag in candidates
+
+
 @app.api_route("/api/effects", methods=["GET", "HEAD"])
 def api_effects(request: Request, version: VersionParam = None):
     selected = _resolve_version(version)
     dataset = get_dataset()
     etag = f'"{dataset.fingerprint}-{selected}"'
-    if request.headers.get("if-none-match") == etag:
+    if _etag_matches(request.headers.get("if-none-match"), etag):
         return Response(status_code=304, headers={"ETag": etag})
     return JSONResponse(pages.payload(dataset, selected), headers={"ETag": etag})
 
