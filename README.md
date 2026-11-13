@@ -9,6 +9,8 @@
 An interactive database of vanilla and modded Minecraft status effects – exact formulas, max
 levels and where to get each effect – for every major version from 1.20 to 26.3.
 
+**Live at [effects.matejkadlec.cz](https://effects.matejkadlec.cz).**
+
 ![Minecraft Status Effects in dark mode](.github/preview.jpg)
 
 ## Features
@@ -39,6 +41,9 @@ levels and where to get each effect – for every major version from 1.20 to 26.
 ```
 
 Requires Python 3.12+; Node.js 22+ only for the JavaScript tests.
+
+Production runs the Docker image (`Dockerfile`, `compose.yml`) behind a Cloudflare Tunnel and
+is deployed automatically from `master`; see "Deployment" in [`AGENTS.md`](AGENTS.md).
 
 ## Data
 

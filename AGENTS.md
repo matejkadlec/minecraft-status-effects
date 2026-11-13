@@ -1,8 +1,8 @@
 # Agent Information
 
 Minecraft Status Effects (project name `status-effects`): an interactive database of vanilla
-and modded Minecraft status effects (mob effects) per Minecraft version, meant for
-https://minecraftstatuseffects.com. A FastAPI app renders the page and serves a small JSON
+and modded Minecraft status effects (mob effects) per Minecraft version, live at
+https://effects.matejkadlec.cz. A FastAPI app renders the page and serves a small JSON
 API and the exports; the frontend is plain HTML, CSS and vanilla JavaScript (ES modules)
 without a build step.
 
@@ -30,6 +30,9 @@ public/                  Everything served as static files (and nothing else is)
 tests/                   pytest (data rules, pages, API, exports), js/ (node --test)
 tests/effect_rules.py    The writing rules for records; also a CLI linter
 run.sh                   Runs everything without activating the venv (see "Running")
+Dockerfile, compose.yml  Production image and stack (see "Deployment")
+requirements.lock        Exact, hashed dependencies of the production image
+deploy/                  Server provisioning and the forced deploy command
 ```
 
 ## Running
@@ -46,6 +49,8 @@ run.sh                   Runs everything without activating the venv (see "Runni
   automatically when their mtime changes.
 - Python 3.12+, dependencies in `pyproject.toml` (FastAPI, uvicorn, Jinja2, openpyxl; dev:
   pytest, httpx, ruff).
+- `docker compose up --build --wait web` builds and starts the production image alone (no
+  port is published; add `-p`/`ports` yourself to open it in a browser).
 
 ## Versions
 
@@ -180,6 +185,9 @@ run.sh                   Runs everything without activating the venv (see "Runni
 
 ## SEO
 
+- The public address is `config.SITE_URL` (default `https://effects.matejkadlec.cz`, overridable
+  with the `SITE_URL` environment variable); canonical URLs, the sitemap, `robots.txt`, Open
+  Graph tags, JSON-LD and the export metadata are built from it.
 - Canonical URL per version (`/` for the default, `/?version=…` otherwise), title and meta
   description per version, Open Graph/Twitter tags with `img/og-image.jpg` (1200×630),
   JSON-LD `WebSite` + `Dataset` (with CSV/JSON download links). `sitemap.xml` and
@@ -197,8 +205,37 @@ run.sh                   Runs everything without activating the venv (see "Runni
 
 ## Deployment
 
-There is no deploy workflow; `.github/workflows/tests.yml` runs ruff, pytest and the Node
-tests on pushes and pull requests. The live site was previously a Bottle app run by a systemd
-service from `/opt/minecraft-status-effects`; with this version the service should run
-`./run.sh prod` (or `venv/bin/python -m status_effects --host 127.0.0.1 --proxy-headers`)
-behind the reverse proxy.
+Production is https://effects.matejkadlec.cz on `matejkadlec-cz1`, a FORPSI server shared with
+other sites. This project is one tenant there: change only what is listed below and ask the
+owner before anything host-wide (packages, SSH daemon, firewall, other accounts).
+
+- **Tenant**: the locked account `se-deploy` (no sudo, no extra groups) with its own rootless
+  Docker daemon (a user service kept running across reboots by lingering),
+  `/srv/status-effects/` (repository mirror, releases, state) and `/etc/status-effects/`.
+  `deploy/provision-server.sh` creates all of it and can be run again.
+- **Stack** (`compose.yml`): `web` is the image from `Dockerfile` (base image pinned by digest,
+  dependencies from `requirements.lock`, unprivileged user, read-only, no access log, no
+  published port); `cloudflared` (profile `tunnel`) is the connector of the Cloudflare Tunnel
+  `status-effects-production`, whose public hostname `effects.matejkadlec.cz` points to
+  `http://web:8000`. Containers restart on their own (`restart: unless-stopped`).
+- **Secret**: only the tunnel token, in `/etc/status-effects/cloudflared-token` (owner
+  `se-deploy`, mode 0600), mounted as a Compose secret. It never goes into git, GitHub, the
+  image or a chat. The connector is started once that file exists. Cloudflare (tunnel, DNS) is
+  managed by the owner in the dashboard.
+- **Deploy**: a push to `master` runs `tests.yml`; when it passes, `deploy.yml` connects with
+  the SSH key of the GitHub environment `production` (secret `DEPLOY_SSH_PRIVATE_KEY`, variables
+  `DEPLOY_SSH_HOST`, `DEPLOY_SSH_PORT`, `DEPLOY_SSH_USER`, `DEPLOY_SSH_HOST_KEY`; the
+  environment only admits `master`). On the server that key can only run the root-owned
+  `/usr/local/libexec/status-effects-deploy` (a copy of `deploy/status-effects-deploy`) with
+  `deploy <commit>` or `status`. The command fetches the commit from GitHub itself, requires it
+  to be on `master`, builds the image, replaces the containers (a few seconds without the
+  site) and goes back to the previous release when the new one doesn't become healthy.
+- **By hand**: "Run workflow" on the Deploy workflow redeploys `master`. On the host:
+  `sudo -u se-deploy /usr/local/libexec/status-effects-deploy status`, or
+  `... deploy <commit> [<branch>]` to roll back or to deploy a pushed branch.
+- **Changing the deploy command or the key** is deliberately not automated: copy `deploy/` to
+  the host and run `sudo ./provision-server.sh ./status-effects-deploy ./deploy-key.pub`.
+- **Dependencies**: after changing the dependencies in `pyproject.toml` (or to pick up
+  updates) regenerate the lock and commit it:
+  `uv pip compile pyproject.toml --generate-hashes --python-version 3.12 --python-platform x86_64-manylinux_2_28 --no-header -o requirements.lock`.
+  Update the base image and `cloudflared` by changing the tag and the digest together.

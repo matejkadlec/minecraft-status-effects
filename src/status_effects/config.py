@@ -14,7 +14,7 @@ TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
 EFFECTS_FILE = DATA_DIR / "effects.json"
 MODS_FILE = DATA_DIR / "mods.json"
 
-SITE_URL = os.environ.get("SITE_URL", "https://minecraftstatuseffects.com").rstrip("/")
+SITE_URL = os.environ.get("SITE_URL", "https://effects.matejkadlec.cz").rstrip("/")
 SITE_NAME = "Minecraft Status Effects"
 AUTHOR = "Matěj Kadlec"
 AUTHOR_URL = "https://matejkadlec.cz"
