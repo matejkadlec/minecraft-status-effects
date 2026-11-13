@@ -180,6 +180,8 @@ if ! start "$commit"; then
   if [[ -n "$current" && "$current" != "$commit" && -d "$RELEASES/$current" ]]; then
     log "restoring $current"
     start "$current" || die "the previous release could not be restored"
+    rm -rf -- "${RELEASES:?}/$commit"
+    docker image rm "$IMAGE:$commit" >/dev/null 2>&1 || true
     die "deployment failed; $current is running again"
   fi
   die "deployment failed"
